@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hackers TOEIC 700+ — Dictation &amp; Shadowing</title>
+  <?!= include('Stylesheet'); ?>
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- ================= Sidebar ================= -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-icon">🎧</div>
+      <div class="logo-name">Hackers TOEIC</div>
+    </div>
+
+    <nav class="sidebar-nav" id="navList"></nav>
+
+    <div class="sidebar-footer">
+      <button class="btn btn-outline btn-sm ets-open" id="btnETSLibrary" type="button">📚 ETS 2026</button>
+      <button class="btn btn-outline btn-sm review-open" id="btnMistakeReview" type="button">🧠 Ôn từ sai</button>
+      <div class="progress-label"><span>Tiến độ học tập</span><span id="navCount">0 / 0</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="navFill"></div></div>
+      <div class="sidebar-actions">
+        <button class="btn btn-outline btn-sm" id="btnTheme" title="Sáng / Tối">🌙</button>
+        <button class="btn btn-outline btn-sm hidden-sm" id="btnCollapse" onclick="document.querySelector('.sidebar').classList.toggle('collapsed')" title="Thu gọn">«</button>
+      </div>
+      <p class="small-note">Hackers TOEIC 700+ LC Dictation &amp; Shadowing Workbook — 20 DAYs</p>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- ================= Main ================= -->
+  <main class="main">
+    <header class="main-header">
+      <button class="btn btn-outline btn-sm btn-icon hamburger" id="btnSidebar" aria-label="Menu">☰</button>
+      <div>
+        <div class="header-title" id="headerTitle">Home</div>
+        <div class="header-sub" id="headerSub"></div>
+      </div>
+      <div class="header-right">
+        <div class="header-search">
+          <span>🔍</span>
+          <input type="text" placeholder="Tìm DAY / Part…" aria-label="Tìm bài học">
+        </div>
+      </div>
+    </header>
+
+    <div class="main-body">
+      <div class="container">
+
+        <!-- Hero -->
+        <div class="hero">
+          <div class="hero-row">
+            <div>
+              <h1 id="heroTitle">Hackers TOEIC 700+</h1>
+              <p id="heroSub">LC Dictation &amp; Shadowing Workbook — chọn DAY trong menu bên trái để bắt đầu</p>
+            </div>
+            <span class="badge accent" id="heroStatus">🆕 Chưa học</span>
+          </div>
+          <div class="hero-badges">
+            <span class="badge" id="heroDictationBadge">📝 받아쓰기 Dictation</span>
+            <span class="badge" id="heroShadowingBadge">🗣️ 쉐도잉 Shadowing</span>
+            <span class="badge" id="heroBadgeCount">🎧 20 DAYs · 31 track MP3</span>
+          </div>
+        </div>
+
+        <!-- Tabs chế độ -->
+        <div class="mode-tabs">
+          <button class="mode-tab active" data-mode="dictation">📝 Nghe &amp; điền từ <span style="opacity:.6">(Dictation)</span></button>
+          <button class="mode-tab" data-mode="shadowing">🗣️ Luyện nói theo <span style="opacity:.6">(Shadowing)</span></button>
+        </div>
+
+        <!-- Audio Player -->
+        <div class="player-card" id="playerCard">
+          <div class="player-top">
+            <button class="play-main" id="btnPlay" aria-label="Phat/Nghe">▶</button>
+            <div style="flex:1;min-width:0">
+              <div style="font-weight:700; font-size:13px; margin-bottom:4px" id="trackLabel">Audio</div>
+              <div class="player-track-select" id="trackSelect"></div>
+            </div>
+          </div>
+          <div class="seek-wrap">
+            <span id="timeNow">0:00</span>
+            <input class="seek" id="seekBar" type="range" min="0" max="1" step="0.001" value="0">
+            <span id="timeTotal">0:00</span>
+          </div>
+          <div class="player-bottom">
+            <button class="btn btn-outline btn-sm" id="btnReplay">🔁 Phát lại 3 lần</button>
+            <select class="speed-select" id="speedSelect" aria-label="Tốc độ">
+              <option value="0.75">0.75x</option>
+              <option value="1" selected>1.0x</option>
+              <option value="1.25">1.25x</option>
+            </select>
+            <span class="player-hint" id="playHint"></span>
+          </div>
+        </div>
+
+        <!-- Khu nội dung Dictation / Shadowing -->
+        <div id="modeBody"></div>
+
+        <!-- Thanh hành động -->
+        <div class="quiz-footer hidden" id="quizFooter">
+          <button class="btn btn-primary" id="btnCheck" onclick="checkDictation()">✅ Kiểm tra đáp án</button>
+          <button class="btn btn-outline" id="btnShow" onclick="showAnswers()">👁 Xem đáp án &amp; lời dịch</button>
+          <span class="score-chip" id="scoreChip"></span>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<?!= include('ETSLibrary'); ?>
+<?!= include('JavaScript'); ?>
+
+<!-- ===== Recording Engine (khắc phục lỗi micro trên GAS iframe) ===== -->
+<iframe
+  id="reFrame"
+  src=""
+  style="display:none; width:100%; height:520px; border:0; border-radius:12px; margin-top:16px;"
+  allow="microphone"
+  title="TOEIC Recording Engine">
+</iframe>
+
+<script>
+(function () {
+  'use strict';
+
+  var reFrame = document.getElementById('reFrame');
+  var reReady = false;
+  var rePendingQueue = [];
+
+  // Nguồn URL Recording Engine (host trên GitHub Pages / Cloudflare Pages / v.v.)
+  // Thay URL bên dưới bằng URL thực tế sau khi bạn deploy Recording Engine.
+  var RECORDING_ENGINE_URL = '';
+
+  function reLoad() {
+    if (!reFrame) return;
+    if (RECORDING_ENGINE_URL) {
+      reFrame.src = RECORDING_ENGINE_URL;
+    }
+  }
+
+  function reSend(msg) {
+    if (!reFrame || !reFrame.contentWindow) {
+      rePendingQueue.push(msg);
+      return;
+    }
+    if (!reReady) {
+      rePendingQueue.push(msg);
+      return;
+    }
+    reFrame.contentWindow.postMessage(msg, '*');
+    rePendingQueue = [];
+  }
+
+  function reFlushPending() {
+    var q = rePendingQueue.splice(0, rePendingQueue.length);
+    q.forEach(function (m) { reSend(m); });
+  }
+
+  // Lắng nghe RE_ENGINE_READY từ Recording Engine
+  window.addEventListener('message', function (event) {
+    var data = event.data || {};
+    if (data.type === 'RE_ENGINE_READY') {
+      reReady = true;
+      reFlushPending();
+    }
+  });
+
+  // Tự động load khi DOM sẵn sàng
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', reLoad);
+  } else {
+    reLoad();
+  }
+
+  // Expose để core.js gọi
+  window.RE = {
+    load: reLoad,
+    send: reSend,
+    setUrl: function (url) { RECORDING_ENGINE_URL = url; },
+    isReady: function () { return reReady; }
+  };
+})();
+</script>
+</body>
+</html>

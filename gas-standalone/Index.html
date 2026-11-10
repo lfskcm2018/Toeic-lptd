@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LPTD 1–4 — Dictation &amp; Shadowing</title>
+  <?!= include('Styles'); ?>
+</head>
+<body>
+<div class="app-shell">
+  <main class="main">
+    <header class="main-header">
+      <div class="logo-icon">🎧</div>
+      <div style="flex:1;min-width:0">
+        <div class="header-title" id="headerTitle">LPTD 1–4</div>
+        <div class="header-sub" id="headerSub">Listening Practice Through Dictation</div>
+      </div>
+      <div class="header-right">
+        <button type="button" class="btn btn-outline btn-sm" id="btnTheme" title="Sáng / Tối" aria-label="Đổi giao diện sáng tối">🌙</button>
+      </div>
+    </header>
+
+    <div class="main-body">
+      <div class="container">
+
+        <div class="hero">
+          <div class="hero-row">
+            <div>
+              <h1 id="heroTitle">Listening Practice Through Dictation</h1>
+              <p id="heroSub">LPTD 1–4 · 160 unit · Nghe – chép chính tả – shadowing</p>
+            </div>
+            <span class="badge accent" id="heroStatus">⏳ Đang tải</span>
+          </div>
+          <div class="hero-badges">
+            <span class="badge" id="heroDictationBadge">📝 Dictation</span>
+            <span class="badge" id="heroShadowingBadge">🗣️ Shadowing</span>
+            <span class="badge" id="heroBadgeCount">🎧 160 unit · 4 cuốn</span>
+          </div>
+        </div>
+
+        <div id="modeBody">
+          <section class="card lptd-loading">
+            <div class="lptd-loading-icon">🎧</div>
+            <b>Đang tải dữ liệu LPTD…</b>
+            <span class="lptd-muted">160 unit · 4 cuốn · audio phát trực tiếp từ CDN</span>
+          </section>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<?!= include('LptdUI'); ?>
+
+<!-- ===== Recording Engine (dùng popup, không dùng iframe để tránh sandbox) ===== -->
+<script>
+(function () {
+  'use strict';
+
+  // Nguồn URL Recording Engine (host trên GitHub Pages / Cloudflare Pages / v.v.)
+  // Thay URL bên dưới bằng URL thực tế sau khi bạn deploy Recording Engine.
+  // Ví dụ: "https://yourdomain.github.io/toeic-recording-engine/"
+  var RECORDING_ENGINE_URL = '';
+
+  // Biến lưu cửa sổ popup (nếu có)
+  var reWin = null;
+
+  /**
+   * Mở popup chứa Recording Engine.
+   * Nếu đã có popup sẵn, thì focus lại.
+   * @param {string} sessionId - ID phiên ghi âm (dùng để nhận thức trước)
+   * @param {number} itemIndex - Số đơn vị hiện tại (LPTD 1-4, 1-40)
+   */
+  function openRecordingEngine(sessionId, itemIndex) {
+    if (reWin && !reWin.closed) {
+      reWin.focus();
+      return reWin;
+    }
+
+    var url = RECORDING_ENGINE_URL;
+    if (sessionId != null) {
+      url += (url.indexOf('?') === -1 ? '?' : '&') + 'sessionId=' + encodeURIComponent(sessionId);
+    }
+    if (itemIndex != null) {
+      url += (url.indexOf('?') === -1 ? '?' : '&') + 'itemIndex=' + encodeURIComponent(itemIndex);
+    }
+
+    try {
+      reWin = window.open(url, '_blank', 'width=900,height=700,resizable=yes,scrollbars=yes,status=yes');
+    } catch (e) {
+      alert('Không mở được Recording Engine: ' + e.message);
+      return null;
+    }
+
+    // Đợi popup khởi động xong (timeout)
+    setTimeout(function () {
+      if (reWin && !reWin.closed) {
+        reWin.focus();
+        // Gửi lệnh bắt đầu ghi âm ngay sau khi popup xuất hiện
+        setTimeout(function () {
+          if (reWin && !reWin.closed) {
+            reWin.postMessage({
+              type: 'START_RECORDING',
+              sessionId: sessionId,
+              itemIndex: itemIndex
+            }, '*');
+          }
+        }, 600);
+      }
+    }, 400);
+
+    return reWin;
+  }
+
+  // Expose để LptdUI.html / LptdData.gs gọi
+  window.RE = {
+    open: openRecordingEngine,
+    isOpen: function () { return reWin ? !reWin.closed : false; }
+  };
+
+})();
+</script>
+
+<script>
+(function () {
+  'use strict';
+  /* Theme sáng/tối — độc lập, chỉ lưu localStorage trình duyệt. */
+  var KEY = 'toeic_lptd_theme';
+  var btn = document.getElementById('btnTheme');
+  function apply(theme) {
+    if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    else document.documentElement.removeAttribute('data-theme');
+    if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  apply(saved === 'dark' ? 'dark' : 'light');
+  if (btn) {
+    btn.addEventListener('click', function () {
+      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      apply(next);
+      try { localStorage.setItem(KEY, next); } catch (e) {}
+    });
+  }
+})();
+</script>
+</body>
+</html>

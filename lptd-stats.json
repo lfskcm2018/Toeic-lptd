@@ -1,0 +1,71 @@
+{
+  "generatedAt": "2026-11-10T03:52:06.718Z",
+  "source": "Agnes/data/lptd-lessons.json",
+  "cdnBase": "https://toeic-audio.netlify.app/audio/lptd",
+  "totals": {
+    "books": 4,
+    "units": 160,
+    "lines": 1041,
+    "words": 30555
+  },
+  "books": [
+    {
+      "book": 1,
+      "title": "Listening Practice Through Dictation 1",
+      "level": "Beginner",
+      "units": 40,
+      "lines": 311,
+      "words": 5614,
+      "bookPdf": "Listening Practice Through Dictation/Listening Practice Through Dictation 1/Listening Practice Through Dictation 1.pdf",
+      "transcriptPdf": "Listening Practice Through Dictation/Listening Practice Through Dictation 1/Audio + Transcipt/ListeningPracticeThroughDictation_1_Transcripts.pdf",
+      "extraDocs": []
+    },
+    {
+      "book": 2,
+      "title": "Listening Practice Through Dictation 2",
+      "level": "Elementary",
+      "units": 40,
+      "lines": 282,
+      "words": 6817,
+      "bookPdf": "Listening Practice Through Dictation/Listening Practice Through Dictation 2/Listening Practice Through Dictation 2.pdf",
+      "transcriptPdf": "Listening Practice Through Dictation/Listening Practice Through Dictation 2/Audio + Transcipt/LPTD 2_Transcripts.pdf",
+      "extraDocs": []
+    },
+    {
+      "book": 3,
+      "title": "Listening Practice Through Dictation 3",
+      "level": "Intermediate",
+      "units": 40,
+      "lines": 272,
+      "words": 8500,
+      "bookPdf": "Listening Practice Through Dictation/Listening Practice Through Dictation 3/Listening Practice Through Dictation 3.pdf",
+      "transcriptPdf": "Listening Practice Through Dictation/Listening Practice Through Dictation 3/Audio + Transcipt/LPTD 3_transcript.pdf",
+      "extraDocs": [
+        {
+          "label": "Answer Key 3",
+          "file": "Listening Practice Through Dictation/Listening Practice Through Dictation 3/LPTD_3_Answer_key.pdf"
+        }
+      ]
+    },
+    {
+      "book": 4,
+      "title": "Listening Practice Through Dictation 4",
+      "level": "Upper-intermediate",
+      "units": 40,
+      "lines": 176,
+      "words": 9624,
+      "bookPdf": "",
+      "transcriptPdf": "Listening Practice Through Dictation/Listening Practice Through Dictation 4/Audio + Transcipt/ListeningPracticeThroughDictation_4_transcript.pdf",
+      "extraDocs": [
+        {
+          "label": "Transcript 4 (bản 1)",
+          "file": "Listening Practice Through Dictation/Listening Practice Through Dictation 4/LPTD4.pdf"
+        }
+      ]
+    }
+  ],
+  "quality": {
+    "missingAudioFileNames": 0,
+    "checkedAgainstDisk": true
+  }
+}

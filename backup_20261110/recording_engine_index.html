@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TOEIC Recording Engine</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="re-app">
+    <div class="re-header">
+      <div class="re-title">🎙 TOEIC Recording Engine</div>
+      <div class="re-status" id="reStatus">Sẵn sàng</div>
+    </div>
+
+    <div class="re-controls">
+      <button class="btn btn-primary" id="btnStart" onclick="reStart()">🎙 Bắt đầu ghi âm</button>
+      <button class="btn btn-outline" id="btnStop" onclick="reStop()" disabled>⏹ Dừng</button>
+      <button class="btn btn-outline" id="btnPlay" onclick="rePlay()" disabled>▶ Nghe lại bản ghi</button>
+      <button class="btn btn-outline" id="btnSend" onclick="reSendToParent()" disabled>📤 Gửi về ứng dụng chính</button>
+      <button class="btn btn-outline" id="btnReRecord" onclick="reReRecord()" disabled>🔄 Ghi lại</button>
+    </div>
+
+    <div class="re-waveform" id="reWaveform"></div>
+
+    <div class="re-info" id="reInfo">
+      <div>Chưa có bản ghi nào.</div>
+    </div>
+
+    <div class="re-hint">
+      <p>• Trang này chạy độc lập (không nằm trong iframe GAS) → có quyền truy cập micro đầy đủ.</p>
+      <p>• Sau khi ghi xong, nhấn <b>📤 Gửi về ứng dụng chính</b> để truyền audio về web app TOEIC qua postMessage.</p>
+      <p>• Nếu trang này được nhúng trong iframe, hãy đảm bảo thuộc tính <code>allow="microphone"</code> được đặt trên thẻ iframe.</p>
+    </div>
+  </div>
+
+  <script src="engine.js"></script>
+</body>
+</html>

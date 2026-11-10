@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hackers TOEIC 700+ — Dictation &amp; Shadowing (+ LPTD 1–4)</title>
+  <link rel="stylesheet" href="../app/core.css">
+  <link rel="stylesheet" href="app/lptd-ui.css" data-lptd-css="1">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- ================= Sidebar ================= -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-icon">🎧</div>
+      <div class="logo-name">Hackers TOEIC</div>
+    </div>
+
+    <nav class="sidebar-nav" id="navList"></nav>
+
+    <div class="sidebar-footer">
+      <button class="btn btn-outline btn-sm ets-open" id="btnETSLibrary" type="button">📚 ETS 2026</button>
+      <button class="btn btn-outline btn-sm review-open" id="btnMistakeReview" type="button">🧠 Ôn từ sai</button>
+      <div class="progress-label"><span>Tiến độ học tập</span><span id="navCount">0 / 0</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="navFill"></div></div>
+      <div class="sidebar-actions">
+        <button class="btn btn-outline btn-sm" id="btnTheme" title="Sáng / Tối">🌙</button>
+        <button class="btn btn-outline btn-sm hidden-sm" id="btnCollapse" onclick="document.querySelector('.sidebar').classList.toggle('collapsed')" title="Thu gọn">«</button>
+      </div>
+      <p class="small-note">Hackers TOEIC 700+ LC Dictation &amp; Shadowing Workbook — 20 DAYs</p>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- ================= Main ================= -->
+  <main class="main">
+    <header class="main-header">
+      <button class="btn btn-outline btn-sm btn-icon hamburger" id="btnSidebar" aria-label="Menu">☰</button>
+      <div>
+        <div class="header-title" id="headerTitle">Home</div>
+        <div class="header-sub" id="headerSub"></div>
+      </div>
+      <div class="header-right">
+        <div class="header-search">
+          <span>🔍</span>
+          <input type="text" placeholder="Tìm DAY / Part…" aria-label="Tìm bài học">
+        </div>
+      </div>
+    </header>
+
+    <div class="main-body">
+      <div class="container">
+
+        <!-- Hero -->
+        <div class="hero">
+          <div class="hero-row">
+            <div>
+              <h1 id="heroTitle">Hackers TOEIC 700+</h1>
+              <p id="heroSub">LC Dictation &amp; Shadowing Workbook — chọn DAY trong menu bên trái để bắt đầu</p>
+            </div>
+            <span class="badge accent" id="heroStatus">🆕 Chưa học</span>
+          </div>
+          <div class="hero-badges">
+            <span class="badge" id="heroDictationBadge">📝 받아쓰기 Dictation</span>
+            <span class="badge" id="heroShadowingBadge">🗣️ 쉐도잉 Shadowing</span>
+            <span class="badge" id="heroBadgeCount">🎧 20 DAYs · 31 track MP3</span>
+          </div>
+        </div>
+
+        <!-- Tabs chế độ -->
+        <div class="mode-tabs">
+          <button class="mode-tab active" data-mode="dictation">📝 Nghe &amp; điền từ <span style="opacity:.6">(Dictation)</span></button>
+          <button class="mode-tab" data-mode="shadowing">🗣️ Luyện nói theo <span style="opacity:.6">(Shadowing)</span></button>
+        </div>
+
+        <!-- Audio Player -->
+        <div class="player-card" id="playerCard">
+          <div class="player-top">
+            <button class="play-main" id="btnPlay" aria-label="Phat/Nghe">▶</button>
+            <div style="flex:1;min-width:0">
+              <div style="font-weight:700; font-size:13px; margin-bottom:4px" id="trackLabel">Audio</div>
+              <div class="player-track-select" id="trackSelect"></div>
+            </div>
+          </div>
+          <div class="seek-wrap">
+            <span id="timeNow">0:00</span>
+            <input class="seek" id="seekBar" type="range" min="0" max="1" step="0.001" value="0">
+            <span id="timeTotal">0:00</span>
+          </div>
+          <div class="player-bottom">
+            <button class="btn btn-outline btn-sm" id="btnReplay">🔁 Phát lại 3 lần</button>
+            <select class="speed-select" id="speedSelect" aria-label="Tốc độ">
+              <option value="0.75">0.75x</option>
+              <option value="1" selected>1.0x</option>
+              <option value="1.25">1.25x</option>
+            </select>
+            <span class="player-hint" id="playHint"></span>
+          </div>
+        </div>
+
+        <!-- Khu nội dung Dictation / Shadowing / LPTD -->
+        <div id="modeBody"></div>
+
+        <!-- Thanh hành động -->
+        <div class="quiz-footer hidden" id="quizFooter">
+          <button class="btn btn-primary" id="btnCheck" onclick="checkDictation()">✅ Kiểm tra đáp án</button>
+          <button class="btn btn-outline" id="btnShow" onclick="showAnswers()">👁 Xem đáp án &amp; lời dịch</button>
+          <span class="score-chip" id="scoreChip"></span>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ============ Dữ liệu Hackers / ETS (local) ============ -->
+<script src="../app/ets-data.js"></script>
+<script src="../app/lesson-data.js"></script>
+<script src="../app/data.js"></script>
+
+<!-- ============ Thích ứng đường dẫn khi chạy trong /op/ ============ -->
+<script>
+(function () {
+  'use strict';
+  /* op/index.html nằm trong /op/ còn dữ liệu nằm ở gốc dự án → thêm '../'. */
+  if (typeof encodeAudioPath === 'function') {
+    var origHackersAudio = encodeAudioPath;
+    encodeAudioPath = function (dirParts, fileName) {
+      return '../' + origHackersAudio(dirParts, fileName);
+    };
+  }
+  if (typeof ETS_TESTS !== 'undefined' && Array.isArray(ETS_TESTS)) {
+    ETS_TESTS.forEach(function (test) {
+      (test.clips || []).forEach(function (clip) {
+        if (clip.url && !/^https?:/i.test(clip.url)) clip.url = '../' + clip.url;
+      });
+      (test.materials || []).forEach(function (mat) {
+        if (mat.url && !/^https?:/i.test(mat.url)) mat.url = '../' + mat.url;
+      });
+    });
+  }
+  /* LPTD: file local nằm ở gốc dự án. */
+  window.LPTD_LOCAL_BASE = '../';
+})();
+</script>
+
+<!-- ============ Core app (Hackers + ETS + Ôn từ sai) ============ -->
+<script src="../app/core.js"></script>
+
+<!-- ============ Module LPTD 1–4 ============ -->
+<script src="app/lptd-lessons-data.js"></script>
+<script src="app/lptd-data.js"></script>
+<script src="app/lptd-ui.js"></script>
+</body>
+</html>

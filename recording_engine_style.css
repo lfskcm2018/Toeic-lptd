@@ -1,0 +1,163 @@
+/* =========================================================
+   TOEIC Recording Engine — Style
+   ========================================================= */
+
+:root {
+  --re-primary: #2563eb;
+  --re-primary-dark: #1d4ed8;
+  --re-success: #16a34a;
+  --re-danger: #dc2626;
+  --re-warn: #d97706;
+  --re-bg: #f8fafc;
+  --re-card: #ffffff;
+  --re-text: #0f172a;
+  --re-muted: #64748b;
+  --re-border: #e2e8f0;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; }
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: var(--re-bg);
+  color: var(--re-text);
+  font-size: 14px;
+}
+
+.re-app {
+  max-width: 640px;
+  margin: 32px auto;
+  padding: 24px;
+  background: var(--re-card);
+  border-radius: 16px;
+  border: 1px solid var(--re-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.re-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--re-border);
+}
+
+.re-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--re-primary);
+}
+
+.re-status {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: var(--re-primary);
+}
+
+.re-status.ok { background: #ecfdf5; color: var(--re-success); }
+.re-status.err { background: #fef2f2; color: var(--re-danger); }
+.re-status.warn { background: #fffbeb; color: var(--re-warn); }
+.re-status.rec { background: #fef2f2; color: var(--re-danger); animation: rePulse 1.5s infinite; }
+.re-status.info { background: #eff6ff; color: var(--re-primary); }
+
+@keyframes rePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.re-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--re-border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--re-text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn:hover { background: #f1f5f9; border-color: var(--re-muted); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-primary {
+  background: var(--re-primary);
+  color: #fff;
+  border-color: var(--re-primary);
+}
+.btn-primary:hover { background: var(--re-primary-dark); }
+
+.btn-outline { background: #fff; }
+
+.re-waveform {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 40px;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px dashed var(--re-border);
+}
+
+.re-bar {
+  width: 6px;
+  background: var(--re-primary);
+  border-radius: 2px;
+  animation: reWave 1.2s ease-in-out infinite;
+}
+
+.re-bar:nth-child(2n) { animation-delay: 0.2s; }
+.re-bar:nth-child(3n) { animation-delay: 0.4s; }
+
+@keyframes reWave {
+  0%, 100% { height: 8px; opacity: 0.4; }
+  50% { height: 32px; opacity: 1; }
+}
+
+.re-info {
+  margin-bottom: 20px;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid var(--re-border);
+  font-size: 13px;
+  color: var(--re-muted);
+}
+
+.re-hint {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--re-border);
+}
+
+.re-hint p {
+  margin: 6px 0;
+  font-size: 12px;
+  color: var(--re-muted);
+}
+
+.re-hint code {
+  background: #f1f5f9;
+  padding: 1px 4px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 12px;
+  color: var(--re-primary);
+}

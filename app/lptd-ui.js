@@ -1,0 +1,1272 @@
+/* =========================================================
+   op/app/lptd-ui.js
+   Module UI tự chứa cho "Listening Practice Through Dictation" 1–4.
+
+   Chạy được cả local và Google Apps Script, KHÔNG sửa core.js.
+   Phụ thuộc:
+     - app/core.css                (design system)
+     - op/app/lptd-lessons-data.js (local: window.LPTD_LESSONS_RAW)
+     - op/app/lptd-data.js         (catalog + URL builder: window.LPTD)
+
+   Tính năng:
+     - Tự inject nút "📚 LPTD 1–4" vào sidebar
+     - Thư viện 4 cuốn × 40 unit, tìm kiếm, tiến độ, tài liệu PDF
+     - Player riêng: play/pause, seek, tốc độ, phát lại 3 lần, fallback CDN
+     - Dictation: ô trống tự sinh mỗi 4 từ, kiểm tra, xem đáp án, gợi ý, điểm %
+     - Shadowing: ghi âm từng câu, nghe lại, chấm % bằng Web Speech API
+     - Tiến độ localStorage riêng: toeic_lptd_progress
+     - Từ sai riêng: toeic_lptd_mistakes
+   ========================================================= */
+(function (global) {
+  'use strict';
+
+  var doc = global.document;
+  if (!doc) return;
+
+  var L = global.LPTD;
+  if (!L) {
+    console.error('[LPTD] Thiếu op/app/lptd-data.js — module UI không khởi động.');
+    return;
+  }
+
+  var SELF = doc.currentScript;
+  var SELF_BASE = SELF && SELF.src ? SELF.src.replace(/[^/]*$/, '') : '';
+  var MISTAKE_KEY = 'toeic_lptd_mistakes';
+  var LAST_BOOK_KEY = 'toeic_lptd_last_book';
+
+  var S = {
+    open: false,
+    view: 'library',          // 'library' | 'unit'
+    book: Number(readLS(LAST_BOOK_KEY, 1)) || 1,
+    lesson: null,
+    mode: 'dictation',        // 'dictation' | 'shadowing'
+    query: '',
+    speed: 1,
+    audio: null,
+    audioUrl: '',
+    triedFallback: false,
+    repeatActive: false,
+    repeatLeft: 0,
+    rec: null,
+    recTarget: null,
+    recStream: null,
+    recTimer: null,
+    recBlobs: {},
+    progress: {},
+    mistakes: {},
+    coreHidden: null,
+    hintOn: false,
+    heroBackup: null,
+    busy: false,
+  };
+
+  /* ---------- Helpers ---------- */
+  function q(sel, root) { return (root || doc).querySelector(sel); }
+  function qa(sel, root) { return Array.prototype.slice.call((root || doc).querySelectorAll(sel)); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function escMl(s) { return esc(s).replace(/\n/g, '<br>'); }
+  function pad2(n) { return String(n).padStart(2, '0'); }
+  function fmtTime(sec) {
+    if (!isFinite(sec) || sec < 0) return '0:00';
+    sec = Math.floor(sec);
+    return Math.floor(sec / 60) + ':' + pad2(sec % 60);
+  }
+  function readLS(key, def) {
+    try {
+      var raw = global.localStorage && global.localStorage.getItem(key);
+      return raw == null ? def : raw;
+    } catch (e) { return def; }
+  }
+  function writeLS(key, value) {
+    try { global.localStorage && global.localStorage.setItem(key, value); } catch (e) {}
+  }
+  function normalizeWord(s) {
+    return String(s == null ? '' : s)
+      .toLowerCase()
+      .replace(/[\u2018\u2019\u02BC]/g, "'")
+      .replace(/[^a-z0-9']/g, '');
+  }
+  function splitWords(s) {
+    return String(s == null ? '' : s)
+      .toLowerCase()
+      .replace(/[\u2018\u2019\u02BC]/g, "'")
+      .split(/\s+/)
+      .map(function (w) { return w.replace(/[^a-z0-9']/g, ''); })
+      .filter(Boolean);
+  }
+  function exactMatch(said, target) {
+    var a = splitWords(said), b = splitWords(target);
+    if (!b.length) return 0;
+    var copy = b.slice(), matched = 0;
+    a.forEach(function (w) {
+      var ix = copy.indexOf(w);
+      if (ix !== -1) { matched++; copy.splice(ix, 1); }
+    });
+    return Math.round(matched / b.length * 100);
+  }
+  function scrollTop(smooth) {
+    try { global.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' }); }
+    catch (e) { global.scrollTo(0, 0); }
+  }
+  function closeSidebarMobile() {
+    if (typeof global.closeSidebarMobile === 'function') { global.closeSidebarMobile(); return; }
+    var sidebar = q('.sidebar');
+    var overlay = q('#overlay');
+    if (sidebar) sidebar.classList.remove('open');
+    if (overlay) overlay.classList.remove('show');
+  }
+  function unitLabel(lesson) { return 'LPTD ' + lesson.book + ' · Unit ' + pad2(lesson.unit); }
+
+  /* ---------- CSS tự inject (bản local) ---------- */
+  function ensureCss() {
+    if (L.isGas) return; // GAS: CSS được inline trong LptdUI.html
+    if (q('link[data-lptd-css]') || q('link[href*="lptd-ui.css"]')) return;
+    var link = doc.createElement('link');
+    link.rel = 'stylesheet';
+    link.setAttribute('data-lptd-css', '1');
+    link.href = SELF_BASE + 'lptd-ui.css';
+    doc.head.appendChild(link);
+  }
+
+  /* ---------- Dữ liệu ---------- */
+  function ensureData(cb) {
+    if (L.loaded && L.lessons.length) return cb(null);
+    if (!L.isGas) {
+      return cb(new Error('Chưa nạp dữ liệu LPTD. Hãy nạp op/app/lptd-lessons-data.js trước op/app/lptd-ui.js.'));
+    }
+    var runner = global.google && global.google.script && global.google.script.run;
+    if (!runner) return cb(new Error('Không tìm thấy google.script.run.'));
+    function apply(res) {
+      if (res && Array.isArray(res.lessons)) {
+        if (res.cdnBase) L.CDN_BASE = String(res.cdnBase).replace(/\/+$/, '');
+        if (res.docsCdnBase) L.docsCdnBase = String(res.docsCdnBase).replace(/\/+$/, '');
+        L.setLessons(res.lessons);
+      } else if (Array.isArray(res)) {
+        L.setLessons(res);
+      } else {
+        throw new Error('Dữ liệu LPTD trả về không hợp lệ.');
+      }
+      if (!L.lessons.length) throw new Error('Danh sách LPTD rỗng.');
+      cb(null);
+    }
+    function fallback(err) {
+      /* Tương thích bản GAS cũ chỉ có getLptdLessons(). */
+      try {
+        runner.withSuccessHandler(function (res) {
+          try { apply(res); } catch (e) { cb(e); }
+        }).withFailureHandler(function (e2) {
+          cb(err || e2 || new Error('Không gọi được API LPTD.'));
+        }).getLptdLessons();
+      } catch (e) {
+        cb(err || new Error('Thiếu getLptdBootstrap()/getLptdLessons() trong Apps Script.'));
+      }
+    }
+    try {
+      runner.withSuccessHandler(function (res) {
+        try { apply(res); } catch (e) { cb(e); }
+      }).withFailureHandler(function (err) {
+        fallback(err);
+      }).getLptdBootstrap();
+    } catch (e) {
+      fallback(e);
+    }
+  }
+
+  /* ---------- Sidebar ---------- */
+  function injectSidebarButton() {
+    if (doc.getElementById('btnLPTD')) return;
+    var footer = q('.sidebar-footer');
+    if (!footer) return;
+    var btn = doc.createElement('button');
+    btn.id = 'btnLPTD';
+    btn.type = 'button';
+    btn.className = 'btn btn-outline btn-sm lptd-open';
+    btn.innerHTML = '📚 LPTD 1–4';
+    btn.title = 'Listening Practice Through Dictation';
+    var anchor = doc.getElementById('btnETSLibrary');
+    if (anchor && anchor.parentNode === footer) footer.insertBefore(btn, anchor);
+    else footer.insertBefore(btn, footer.firstChild);
+    btn.addEventListener('click', function () { openLibrary(); });
+  }
+
+  /* ---------- Ẩn / khôi phục UI core ---------- */
+  function hideCoreUI() {
+    var els = [q('#playerCard'), q('.mode-tabs'), q('#quizFooter')];
+    S.coreHidden = els.map(function (el) { return el ? el.classList.contains('hidden') : null; });
+    els.forEach(function (el) { if (el) el.classList.add('hidden'); });
+    var ets = q('#btnETSLibrary'), review = q('#btnMistakeReview');
+    if (ets) ets.classList.remove('active');
+    if (review) review.classList.remove('active');
+    var btn = q('#btnLPTD');
+    if (btn) btn.classList.add('active');
+  }
+
+  function restoreCoreUI() {
+    var els = [q('#playerCard'), q('.mode-tabs'), q('#quizFooter')];
+    els.forEach(function (el, i) {
+      if (!el) return;
+      if (!S.coreHidden || S.coreHidden[i] === false) el.classList.remove('hidden');
+    });
+    S.coreHidden = null;
+    var btn = q('#btnLPTD');
+    if (btn) btn.classList.remove('active');
+  }
+
+  function snapshotHero() {
+    if (S.heroBackup) return;
+    var ids = ['heroTitle', 'heroSub', 'heroStatus', 'heroBadgeCount', 'headerTitle', 'headerSub'];
+    S.heroBackup = {};
+    ids.forEach(function (id) {
+      var el = doc.getElementById(id);
+      if (el) S.heroBackup[id] = el.textContent;
+    });
+  }
+
+  function setHero(title, sub, status, badge, headerTitle, headerSub) {
+    snapshotHero();
+    var map = {
+      heroTitle: title,
+      heroSub: sub,
+      heroStatus: status,
+      heroBadgeCount: badge,
+      headerTitle: headerTitle,
+      headerSub: headerSub,
+    };
+    Object.keys(map).forEach(function (id) {
+      var el = doc.getElementById(id);
+      if (el && map[id] != null) el.textContent = map[id];
+    });
+  }
+
+  function restoreHeroIfNeeded() {
+    /* Chỉ dùng khi module tự đóng mà không có màn hình core nào tiếp quản. */
+    if (!S.heroBackup) return;
+    Object.keys(S.heroBackup).forEach(function (id) {
+      var el = doc.getElementById(id);
+      if (el) el.textContent = S.heroBackup[id];
+    });
+    S.heroBackup = null;
+  }
+
+  /* ---------- Mở / đóng module ---------- */
+  function openLibrary() {
+    if (S.busy) return;
+    S.busy = true;
+    ensureData(function (err) {
+      S.busy = false;
+      if (err) { showFatal(err); return; }
+      if (!S.open) {
+        S.open = true;
+        hideCoreUI();
+      }
+      S.view = 'library';
+      S.lesson = null;
+      stopAudio();
+      stopRecording();
+      S.progress = L.loadProgress();
+      S.mistakes = loadMistakes();
+      S.book = Number(S.book) || 1;
+      setHero(
+        'Listening Practice Through Dictation',
+        'LPTD 1–4 · 160 unit · Nghe – chép chính tả – shadowing',
+        progressSummary(),
+        '🎧 160 unit · 4 cuốn · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
+        'LPTD 1–4',
+        'Listening Practice Through Dictation'
+      );
+      renderLibrary();
+      closeSidebarMobile();
+      scrollTop(false);
+    });
+  }
+
+  function showFatal(err) {
+    if (!S.open) {
+      S.open = true;
+      hideCoreUI();
+    }
+    setHero('Listening Practice Through Dictation', 'Không tải được dữ liệu', '⚠️ Lỗi', '🎧 LPTD', 'LPTD 1–4', 'Listening practice');
+    var host = q('#modeBody');
+    if (host) {
+      host.innerHTML = '<div class="empty-state"><div class="big">⚠️</div><b>Không tải được dữ liệu LPTD</b><br>' +
+        esc(err && err.message ? err.message : String(err)) +
+        '<br><button type="button" class="btn btn-outline btn-sm" id="lptdRetry" style="margin-top:12px">Thử lại</button></div>';
+      var retry = q('#lptdRetry');
+      if (retry) retry.addEventListener('click', openLibrary);
+    }
+  }
+
+  function close() {
+    if (!S.open) return;
+    stopAudio();
+    stopRecording();
+    S.open = false;
+    S.view = 'library';
+    S.lesson = null;
+    S.repeatActive = false;
+    restoreCoreUI();
+    restoreHeroIfNeeded();
+  }
+
+  /* ---------- Điều hướng core → tự đóng LPTD ---------- */
+  function bindLeaveGuards() {
+    doc.addEventListener('click', function (e) {
+      if (!S.open) return;
+      var target = e.target;
+      if (!target || !target.closest) return;
+      var hit = target.closest('#btnETSLibrary, #btnMistakeReview, .nav-item, [data-day], #btnLPTD');
+      if (!hit) return;
+      if (hit.id === 'btnLPTD') return; // chính module xử lý
+      close();
+    }, true);
+  }
+
+  /* Nếu core render lại #modeBody (VD loadLessons xong sau khi bấm LPTD),
+     tự vẽ lại module thay vì để nội dung DAY đè lên. */
+  function watchCoreOverwrite() {
+    var host = q('#modeBody');
+    if (!host || typeof global.MutationObserver === 'undefined') return;
+    var busy = false;
+    var obs = new global.MutationObserver(function () {
+      if (!S.open || busy) return;
+      var current = q('#modeBody');
+      if (!current || current.querySelector('.lptd-app')) return;
+      busy = true;
+      try {
+        if (S.view === 'unit' && S.lesson) {
+          setHero(
+            unitLabel(S.lesson),
+            S.lesson.title,
+            unitProgressText(S.lesson),
+            '🎧 ' + S.lesson.lineCount + ' câu · ' + S.lesson.wordCount + ' từ',
+            'LPTD ' + S.lesson.book + ' · U' + pad2(S.lesson.unit),
+            S.lesson.title
+          );
+          renderUnit();
+        } else {
+          setHero(
+            'Listening Practice Through Dictation',
+            'LPTD 1–4 · 160 unit · Nghe – chép chính tả – shadowing',
+            progressSummary(),
+            '🎧 160 unit · 4 cuốn · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
+            'LPTD 1–4',
+            'Listening Practice Through Dictation'
+          );
+          renderLibrary();
+        }
+      } finally {
+        busy = false;
+      }
+    });
+    obs.observe(host, { childList: true });
+    S.observer = obs;
+  }
+
+  /* ---------- Audio ---------- */
+  function ensureAudio() {
+    if (S.audio) return S.audio;
+    var a = new Audio();
+    a.preload = 'metadata';
+    a.addEventListener('loadedmetadata', function () {
+      var total = q('#lptdTimeTotal');
+      if (total) total.textContent = fmtTime(a.duration);
+      var seek = q('#lptdSeek');
+      if (seek) seek.max = a.duration || 1;
+      updateSeekSupport(a);
+    });
+    /* Server không gửi Content-Length/Range: duration có thể chỉ biết sau khi buffer xong. */
+    ['durationchange', 'canplay', 'progress'].forEach(function (evt) {
+      a.addEventListener(evt, function () { updateSeekSupport(a); });
+    });
+    a.addEventListener('timeupdate', function () {
+      var seek = q('#lptdSeek');
+      var now = q('#lptdTimeNow');
+      if (seek && isFinite(a.duration) && a.duration > 0) seek.value = a.currentTime;
+      if (now) now.textContent = fmtTime(a.currentTime);
+    });
+    a.addEventListener('play', function () { setPlayIcon('⏸'); });
+    a.addEventListener('pause', function () { setPlayIcon('▶'); });
+    a.addEventListener('ended', onAudioEnded);
+    a.addEventListener('error', onAudioError);
+    S.audio = a;
+    return a;
+  }
+
+  function setPlayIcon(icon) {
+    var btn = q('#lptdPlay');
+    if (btn) btn.textContent = icon;
+  }
+
+  function setHint(text, isError) {
+    var hint = q('#lptdHint');
+    if (!hint) return;
+    hint.textContent = text || '';
+    hint.classList.toggle('lptd-error', !!isError);
+  }
+
+  function loadAudio(lesson) {
+    var a = ensureAudio();
+    S.triedFallback = false;
+    S.repeatActive = false;
+    S.audioUrl = L.unitUrl(lesson);
+    a.pause();
+    a.src = S.audioUrl;
+    a.playbackRate = S.speed;
+    a.load();
+    setPlayIcon('▶');
+    var now = q('#lptdTimeNow'), total = q('#lptdTimeTotal'), seek = q('#lptdSeek');
+    if (now) now.textContent = '0:00';
+    if (total) total.textContent = '0:00';
+    if (seek) { seek.value = 0; seek.max = 1; }
+    var fix = q('#lptdFixSeek');
+    if (fix) fix.classList.add('hidden');
+    setHint(audioSourceLabel(), false);
+  }
+
+  /* Server tĩnh không hỗ trợ HTTP Range → audio local không tua được.
+     Hiện nút chuyển nhanh sang CDN (hoặc gợi ý dùng serve-lptd.js). */
+  function updateSeekSupport(a) {
+    var fix = q('#lptdFixSeek');
+    if (!fix || !a) return;
+    var sk = a.seekable;
+    var end = sk && sk.length ? sk.end(sk.length - 1) : 0;
+    /* CDN Netlify luôn trả Range; nguồn nào không tua được thì gợi ý đổi nguồn. */
+    var blocked = a.duration > 0 && end <= 0;
+    fix.classList.toggle('hidden', !blocked);
+    if (blocked) {
+      setHint('Audio không tua được (nguồn thiếu HTTP Range). Dùng op/tools/serve-lptd.js hoặc chuyển sang CDN.', true);
+    }
+  }
+
+  function audioSourceLabel() {
+    var mode = L.audioMode;
+    if (mode === 'local') return 'Nguồn: file local';
+    if (mode === 'cdn') return 'Nguồn: Netlify CDN';
+    return L.isGas ? 'Nguồn: Netlify CDN' : 'Nguồn: file local';
+  }
+
+  function onAudioError() {
+    var a = S.audio;
+    if (!a || !S.lesson) return;
+    if (!S.triedFallback) {
+      var fallback = L.fallbackUrl(S.lesson);
+      if (fallback && fallback !== a.src) {
+        S.triedFallback = true;
+        a.src = fallback;
+        a.load();
+        setHint('Nguồn chính lỗi — đang thử nguồn dự phòng…', false);
+        return;
+      }
+    }
+    var err = a.error;
+    setHint('Lỗi audio (code=' + (err ? err.code : '?') + '). Kiểm tra kết nối hoặc tên file MP3.', true);
+  }
+
+  function onAudioEnded() {
+    if (S.repeatActive && S.repeatLeft > 1 && S.audio) {
+      S.repeatLeft--;
+      try { S.audio.currentTime = 0; S.audio.play(); } catch (e) {}
+      setHint('🔁 Phát lại 3 lần — còn ' + S.repeatLeft + ' lần', false);
+      return;
+    }
+    S.repeatActive = false;
+    setPlayIcon('▶');
+    if (S.lesson && S.mode === 'shadowing') setHint('Hết audio. Bấm 🎙 để ghi âm từng câu.', false);
+  }
+
+  function togglePlay() {
+    var a = ensureAudio();
+    if (!a.src) return;
+    if (a.paused) {
+      a.play().then(function () { setHint(audioSourceLabel(), false); })
+        .catch(function (e) { setHint('Không phát được: ' + (e && e.message ? e.message : 'lỗi không xác định'), true); });
+    } else {
+      a.pause();
+    }
+  }
+
+  function replay3() {
+    var a = ensureAudio();
+    if (!a.src) return;
+    S.repeatActive = true;
+    S.repeatLeft = 3;
+    try { a.currentTime = 0; } catch (e) {}
+    a.play().then(function () { setHint('🔁 Phát lại 3 lần — còn 3 lần', false); })
+      .catch(function (e) { setHint('Không phát được: ' + (e && e.message ? e.message : 'lỗi'), true); });
+  }
+
+  function stopAudio() {
+    if (!S.audio) return;
+    try { S.audio.pause(); } catch (e) {}
+    S.repeatActive = false;
+  }
+
+  /* ---------- Tiến độ ---------- */
+  function progressFor(lesson) {
+    var key = L.unitKey(lesson);
+    return S.progress[key] || (S.progress[key] = {});
+  }
+
+  function unitScore(lesson, mode) {
+    var p = S.progress[L.unitKey(lesson)];
+    return p && p[mode] && p[mode].score != null ? Number(p[mode].score) : null;
+  }
+
+  function unitDone(lesson, mode) {
+    var p = S.progress[L.unitKey(lesson)];
+    return !!(p && p[mode] && p[mode].completed);
+  }
+
+  function bookDone(book) {
+    return L.byBook(book).filter(function (u) { return unitDone(u, 'dictation') || unitDone(u, 'shadowing'); }).length;
+  }
+
+  function progressSummary() {
+    var done = 0;
+    L.lessons.forEach(function (u) { if (unitDone(u, 'dictation') || unitDone(u, 'shadowing')) done++; });
+    return '📚 ' + done + '/' + L.lessons.length + ' unit đã học';
+  }
+
+  function saveDictationProgress(lesson, score) {
+    var p = progressFor(lesson);
+    var prev = p.dictation || {};
+    p.dictation = {
+      score: Math.max(Number(score) || 0, Number(prev.score) || 0),
+      completed: !!prev.completed || score >= 70,
+      updated: Date.now(),
+    };
+    p.viewed = true;
+    L.saveProgress(S.progress);
+  }
+
+  function saveViewed(lesson) {
+    var p = progressFor(lesson);
+    p.viewed = true;
+    L.saveProgress(S.progress);
+  }
+
+  function saveShadowProgress(lesson, lineIndex, pct) {
+    var p = progressFor(lesson);
+    var sh = p.shadowing || (p.shadowing = { lines: {} });
+    sh.lines = sh.lines || {};
+    sh.lines[String(lineIndex)] = Math.max(Number(pct) || 0, Number(sh.lines[String(lineIndex)]) || 0);
+    var vals = Object.keys(sh.lines).map(function (k) { return Number(sh.lines[k]) || 0; });
+    sh.score = vals.length ? Math.round(vals.reduce(function (a, b) { return a + b; }, 0) / vals.length) : 0;
+    sh.completed = sh.score >= 60;
+    sh.updated = Date.now();
+    L.saveProgress(S.progress);
+  }
+
+  /* ---------- Từ sai ---------- */
+  function loadMistakes() {
+    try {
+      var raw = global.localStorage && global.localStorage.getItem(MISTAKE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) { return {}; }
+  }
+
+  function saveMistakes(map) {
+    try { global.localStorage && global.localStorage.setItem(MISTAKE_KEY, JSON.stringify(map || {})); } catch (e) {}
+  }
+
+  function recordMistake(word, context, lesson, lineNo) {
+    var key = normalizeWord(word);
+    if (!key) return;
+    var entry = S.mistakes[key] || { word: word, misses: 0, examples: [] };
+    entry.word = word;
+    entry.misses = (Number(entry.misses) || 0) + 1;
+    entry.lastSeen = Date.now();
+    entry.lastInput = '';
+    entry.examples = entry.examples || [];
+    if (context) {
+      entry.examples.unshift({ sentence: context, book: lesson.book, unit: lesson.unit, no: lineNo });
+      entry.examples = entry.examples.slice(0, 3);
+    }
+    S.mistakes[key] = entry;
+    saveMistakes(S.mistakes);
+  }
+
+  function mistakeCount() { return Object.keys(S.mistakes || {}).length; }
+
+  /* ---------- Render thư viện ---------- */
+  function renderLibrary() {
+    var host = q('#modeBody');
+    if (!host) return;
+    var book = L.bookMeta(S.book) || L.BOOKS[0];
+    var units = L.byBook(book.book);
+    var done = bookDone(book.book);
+    var total = units.length || 40;
+    var pct = total ? Math.round(done / total * 100) : 0;
+
+    var html = '<div class="lptd-app">';
+
+    html += '<section class="card lptd-hero-card">' +
+      '<div class="lptd-hero-row">' +
+      '<div class="lptd-hero-text">' +
+      '<h2 class="lptd-h2">📚 Listening Practice Through Dictation</h2>' +
+      '<p class="lptd-muted">160 unit · 4 cuốn · Nghe – chép chính tả – luyện nói theo</p>' +
+      '</div>' +
+      '<div class="lptd-hero-stats">' +
+      '<span class="badge accent">' + L.stats().units + ' unit</span>' +
+      '<span class="badge">' + L.stats().lines.toLocaleString('vi-VN') + ' câu</span>' +
+      '<span class="badge">' + L.stats().words.toLocaleString('vi-VN') + ' từ</span>' +
+      '</div></div>' +
+      '<div class="lptd-hero-tools">' +
+      '<label class="lptd-field"><span>Nguồn audio</span>' +
+      '<select id="lptdAudioMode" class="speed-select">' +
+      '<option value="auto"' + (L.audioMode === 'auto' ? ' selected' : '') + '>Tự động (khuyến nghị)</option>' +
+      '<option value="cdn"' + (L.audioMode === 'cdn' ? ' selected' : '') + '>Netlify CDN</option>' +
+      '<option value="local"' + (L.audioMode === 'local' ? ' selected' : '') + (L.isGas ? ' disabled' : '') + '>File local</option>' +
+      '</select></label>' +
+      '<span class="lptd-muted lptd-audio-mode-hint">' +
+      (L.isGas ? 'GAS dùng CDN để phát trực tiếp, không phụ thuộc Google Drive.' : 'Bản local ưu tiên file trên đĩa; CDN là nguồn dự phòng.') +
+      '</span>' +
+      '</div></section>';
+
+    html += '<div class="lptd-book-tabs" role="tablist" aria-label="Chọn cuốn">';
+    L.BOOKS.forEach(function (b) {
+      var bdone = bookDone(b.book);
+      var bpct = Math.round(bdone / 40 * 100);
+      html += '<button type="button" class="lptd-book-tab' + (b.book === book.book ? ' active' : '') + '" data-book="' + b.book + '" role="tab" aria-selected="' + (b.book === book.book) + '">' +
+        '<span class="lptd-book-icon" style="--lptd-accent:' + b.accent + '">' + b.icon + '</span>' +
+        '<span class="lptd-book-main"><b>' + esc(b.code) + '</b><small>' + esc(b.level) + '</small></span>' +
+        '<span class="lptd-book-progress"><span class="lptd-mini-bar"><i style="width:' + bpct + '%"></i></span><small>' + bdone + '/40</small></span>' +
+        '</button>';
+    });
+    html += '</div>';
+
+    html += '<section class="card lptd-lib-card">' +
+      '<div class="lptd-lib-toolbar">' +
+      '<input type="search" id="lptdSearch" class="lptd-search" placeholder="🔍 Tìm unit theo tên hoặc số…" value="' + esc(S.query) + '" aria-label="Tìm unit">' +
+      '<span class="lptd-muted" id="lptdLibCount">' + units.length + ' unit</span>' +
+      '<span class="lptd-muted lptd-mistake-count">🧠 Từ sai: <b>' + mistakeCount() + '</b></span>' +
+      '<button type="button" class="btn btn-outline btn-sm" id="lptdClearMistakes"' + (mistakeCount() ? '' : ' disabled') + '>Xóa từ sai</button>' +
+      '</div>' +
+      '<div class="lptd-book-summary">' +
+      '<span class="lptd-book-pill" style="--lptd-accent:' + book.accent + '">' + book.icon + ' ' + esc(book.code) + '</span>' +
+      '<span class="lptd-muted">' + esc(book.title) + ' · ' + esc(book.level) + '</span>' +
+      '<span class="lptd-progress-inline"><span class="lptd-mini-bar"><i style="width:' + pct + '%"></i></span> ' + done + '/' + total + ' unit</span>' +
+      '</div>' +
+      '<div class="lptd-unit-grid" id="lptdUnitGrid">' + unitCardsHtml(units) + '</div>' +
+      '<div class="lptd-empty hidden" id="lptdSearchEmpty">Không tìm thấy unit phù hợp.</div>' +
+      '</section>';
+
+    html += docsHtml(book.book);
+    html += '</div>';
+
+    host.innerHTML = html;
+    bindLibrary(book.book);
+  }
+
+  function unitCardsHtml(units) {
+    return units.map(function (u) {
+      var d = unitScore(u, 'dictation');
+      var sh = unitScore(u, 'shadowing');
+      var done = unitDone(u, 'dictation') || unitDone(u, 'shadowing');
+      var cls = 'lptd-unit-card' + (done ? ' done' : '');
+      return '<button type="button" class="' + cls + '" data-unit="' + u.unit + '" data-title="' + esc((u.title + ' unit ' + u.unit).toLowerCase()) + '">' +
+        '<span class="lptd-unit-top"><span class="lptd-unit-badge">U' + pad2(u.unit) + '</span>' +
+        (done ? '<span class="lptd-done-dot" title="Đã hoàn thành">✓</span>' : '') + '</span>' +
+        '<span class="lptd-unit-title">' + esc(u.title) + '</span>' +
+        '<span class="lptd-unit-meta">' + u.lineCount + ' câu · ' + u.wordCount.toLocaleString('vi-VN') + ' từ</span>' +
+        '<span class="lptd-unit-scores">' +
+        '<span class="lptd-chip' + (d != null && d >= 70 ? ' ok' : '') + '">📝 ' + (d == null ? '—' : d + '%') + '</span>' +
+        '<span class="lptd-chip' + (sh != null && sh >= 60 ? ' ok' : '') + '">🗣 ' + (sh == null ? '—' : sh + '%') + '</span>' +
+        '</span></button>';
+    }).join('');
+  }
+
+  function docsHtml(book) {
+    var docs = L.docsForBook(book);
+    if (!docs.length) return '';
+    var html = '<section class="card lptd-docs"><div class="lptd-docs-title">📄 Tài liệu cuốn ' + book + '</div><div class="lptd-doc-list">';
+    docs.forEach(function (d) {
+      var url = L.docUrl(d);
+      if (url) {
+        html += '<a class="lptd-doc" href="' + esc(url) + '" target="_blank" rel="noopener">' +
+          '<span class="lptd-doc-icon">' + (d.type === 'transcript' ? '📝' : d.type === 'answer' ? '✅' : '📘') + '</span>' +
+          '<span><b>' + esc(d.label) + '</b><small>PDF</small></span></a>';
+      } else {
+        html += '<span class="lptd-doc disabled" title="Bản GAS không phục vụ file PDF tĩnh">' +
+          '<span class="lptd-doc-icon">' + (d.type === 'transcript' ? '📝' : d.type === 'answer' ? '✅' : '📘') + '</span>' +
+          '<span><b>' + esc(d.label) + '</b><small>Chỉ có ở bản local</small></span></span>';
+      }
+    });
+    html += '</div></section>';
+    return html;
+  }
+
+  function bindLibrary(book) {
+    qa('[data-book]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        S.book = Number(btn.dataset.book);
+        writeLS(LAST_BOOK_KEY, String(S.book));
+        S.query = '';
+        renderLibrary();
+      });
+    });
+
+    var search = q('#lptdSearch');
+    if (search) {
+      search.addEventListener('input', function () {
+        S.query = search.value || '';
+        filterUnits();
+      });
+    }
+
+    qa('[data-unit]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var lesson = L.get(book, Number(btn.dataset.unit));
+        if (lesson) openUnit(lesson);
+      });
+    });
+
+    var modeSel = q('#lptdAudioMode');
+    if (modeSel) {
+      modeSel.addEventListener('change', function () {
+        L.setAudioMode(modeSel.value);
+        setHint(audioSourceLabel(), false);
+      });
+    }
+
+    var clear = q('#lptdClearMistakes');
+    if (clear) {
+      clear.addEventListener('click', function () {
+        if (!mistakeCount()) return;
+        if (!global.confirm('Xóa toàn bộ thống kê từ sai LPTD trên trình duyệt này?')) return;
+        S.mistakes = {};
+        saveMistakes({});
+        renderLibrary();
+      });
+    }
+  }
+
+  function filterUnits() {
+    var needle = String(S.query || '').trim().toLowerCase();
+    var shown = 0;
+    qa('#lptdUnitGrid [data-unit]').forEach(function (card) {
+      var hit = !needle || card.dataset.title.indexOf(needle) !== -1;
+      card.classList.toggle('hidden', !hit);
+      if (hit) shown++;
+    });
+    var count = q('#lptdLibCount');
+    if (count) count.textContent = shown + ' unit';
+    var empty = q('#lptdSearchEmpty');
+    if (empty) empty.classList.toggle('hidden', shown !== 0);
+  }
+
+  /* ---------- Render unit ---------- */
+  function openUnit(lesson) {
+    if (!lesson) return;
+    if (!S.open) { S.open = true; hideCoreUI(); }
+    S.lesson = lesson;
+    S.view = 'unit';
+    S.mode = 'dictation';
+    S.recBlobs = {};
+    S.hintOn = false;
+    S.progress = L.loadProgress();
+    setHero(
+      unitLabel(lesson),
+      lesson.title,
+      unitProgressText(lesson),
+      '🎧 ' + lesson.lineCount + ' câu · ' + lesson.wordCount + ' từ',
+      'LPTD ' + lesson.book + ' · U' + pad2(lesson.unit),
+      lesson.title
+    );
+    renderUnit();
+    closeSidebarMobile();
+    loadAudio(lesson);
+    scrollTop(false);
+  }
+
+  function unitProgressText(lesson) {
+    var d = unitScore(lesson, 'dictation'), sh = unitScore(lesson, 'shadowing');
+    return '📝 ' + (d == null ? 'chưa làm' : d + '%') + ' · 🗣 ' + (sh == null ? 'chưa làm' : sh + '%');
+  }
+
+  function renderUnit() {
+    var host = q('#modeBody');
+    if (!host || !S.lesson) return;
+    var u = S.lesson;
+    var book = L.bookMeta(u.book);
+    var idx = L.byBook(u.book).map(function (x) { return x.unit; });
+    var pos = idx.indexOf(u.unit);
+    var prev = pos > 0 ? L.get(u.book, idx[pos - 1]) : null;
+    var next = pos >= 0 && pos < idx.length - 1 ? L.get(u.book, idx[pos + 1]) : null;
+    var docs = L.docsForBook(u.book);
+
+    var html = '<div class="lptd-app">';
+
+    html += '<section class="card lptd-unit-head">' +
+      '<div class="lptd-unit-head-top">' +
+      '<button type="button" class="btn btn-outline btn-sm" id="lptdBack">← Thư viện</button>' +
+      '<div class="lptd-unit-head-actions">' +
+      '<button type="button" class="btn btn-outline btn-sm" id="lptdPrev"' + (prev ? '' : ' disabled') + '>◀</button>' +
+      '<button type="button" class="btn btn-outline btn-sm" id="lptdNext"' + (next ? '' : ' disabled') + '>▶</button>' +
+      '</div></div>' +
+      '<div class="lptd-unit-head-main">' +
+      '<div class="lptd-eyebrow">' + (book ? book.icon + ' ' + esc(book.code) : 'LPTD') + ' · Unit ' + pad2(u.unit) + '</div>' +
+      '<h2 class="lptd-h2">' + esc(u.title) + '</h2>' +
+      '<div class="lptd-muted">' + u.lineCount + ' câu · ' + u.wordCount.toLocaleString('vi-VN') + ' từ · ' + esc(u.audioFileName) + '</div>' +
+      '<div class="lptd-unit-progress" id="lptdUnitProgress">' + esc(unitProgressText(u)) + '</div>' +
+      '</div></section>';
+
+    html += '<section class="player-card lptd-player" id="lptdPlayerCard">' +
+      '<div class="player-top">' +
+      '<button type="button" class="play-main" id="lptdPlay" aria-label="Phát / Dừng">▶</button>' +
+      '<div class="lptd-player-label"><b>LPTD ' + u.book + ' · Unit ' + pad2(u.unit) + '</b><span class="lptd-muted">' + esc(u.title) + '</span></div>' +
+      '<select class="speed-select" id="lptdSpeed" aria-label="Tốc độ">' +
+      '<option value="0.75"' + (S.speed === 0.75 ? ' selected' : '') + '>0.75x</option>' +
+      '<option value="1"' + (S.speed === 1 ? ' selected' : '') + '>1.0x</option>' +
+      '<option value="1.25"' + (S.speed === 1.25 ? ' selected' : '') + '>1.25x</option>' +
+      '</select>' +
+      '</div>' +
+      '<div class="seek-wrap"><span id="lptdTimeNow">0:00</span>' +
+      '<input class="seek" id="lptdSeek" type="range" min="0" max="1" step="0.01" value="0" aria-label="Tua audio">' +
+      '<span id="lptdTimeTotal">0:00</span></div>' +
+      '<div class="player-bottom">' +
+      '<button type="button" class="btn btn-outline btn-sm" id="lptdReplay">🔁 Phát lại 3 lần</button>' +
+      '<button type="button" class="btn btn-outline btn-sm hidden" id="lptdFixSeek">⚡ Chuyển sang CDN</button>' +
+      '<span class="player-hint" id="lptdHint"></span>' +
+      '</div></section>';
+
+    html += '<div class="mode-tabs lptd-modes">' +
+      '<button type="button" class="mode-tab' + (S.mode === 'dictation' ? ' active' : '') + '" data-mode="dictation">📝 Nghe &amp; điền từ <span style="opacity:.6">(Dictation)</span></button>' +
+      '<button type="button" class="mode-tab' + (S.mode === 'shadowing' ? ' active' : '') + '" data-mode="shadowing">🗣️ Luyện nói theo <span style="opacity:.6">(Shadowing)</span></button>' +
+      '</div>';
+
+    html += '<div id="lptdUnitBody"></div>';
+
+    if (docs.length) {
+      html += '<section class="card lptd-docs lptd-docs-compact"><div class="lptd-docs-title">📄 Tài liệu cuốn ' + u.book + '</div><div class="lptd-doc-list">';
+      docs.forEach(function (d) {
+        var url = L.docUrl(d);
+        if (url) html += '<a class="lptd-doc" href="' + esc(url) + '" target="_blank" rel="noopener"><span class="lptd-doc-icon">📄</span><span><b>' + esc(d.label) + '</b><small>PDF</small></span></a>';
+      });
+      html += '</div></section>';
+    }
+
+    html += '</div>';
+    host.innerHTML = html;
+
+    var back = q('#lptdBack');
+    if (back) back.addEventListener('click', function () { stopAudio(); stopRecording(); S.view = 'library'; S.lesson = null; S.progress = L.loadProgress(); openLibraryView(); });
+
+    var prevBtn = q('#lptdPrev');
+    if (prevBtn && prev) prevBtn.addEventListener('click', function () { openUnit(prev); });
+    var nextBtn = q('#lptdNext');
+    if (nextBtn && next) nextBtn.addEventListener('click', function () { openUnit(next); });
+
+    qa('[data-mode]').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        S.mode = tab.dataset.mode;
+        qa('[data-mode]').forEach(function (t) { t.classList.toggle('active', t.dataset.mode === S.mode); });
+        stopRecording();
+        renderUnitBody();
+        if (S.mode === 'shadowing') setHint('Nghe cả unit rồi ghi âm từng câu bên dưới.', false);
+      });
+    });
+
+    var play = q('#lptdPlay');
+    if (play) play.addEventListener('click', togglePlay);
+    var replay = q('#lptdReplay');
+    if (replay) replay.addEventListener('click', replay3);
+    var fixSeek = q('#lptdFixSeek');
+    if (fixSeek) {
+      fixSeek.addEventListener('click', function () {
+        L.setAudioMode('cdn');
+        var modeSel = q('#lptdAudioMode');
+        if (modeSel) modeSel.value = 'cdn';
+        if (S.lesson) loadAudio(S.lesson);
+        setHint('Đã chuyển sang Netlify CDN — tua audio hoạt động bình thường.', false);
+      });
+    }
+    var speed = q('#lptdSpeed');
+    if (speed) speed.addEventListener('change', function () {
+      S.speed = Number(speed.value) || 1;
+      if (S.audio) S.audio.playbackRate = S.speed;
+    });
+    var seek = q('#lptdSeek');
+    if (seek) {
+      seek.addEventListener('input', function () {
+        if (S.audio && isFinite(S.audio.duration) && S.audio.duration > 0) {
+          S.audio.currentTime = Number(seek.value);
+        }
+      });
+    }
+
+    renderUnitBody();
+  }
+
+  function openLibraryView() {
+    /* Mở lại thư viện khi đang trong unit, không gọi lại ensureData. */
+    S.view = 'library';
+    S.lesson = null;
+    stopAudio();
+    stopRecording();
+    setHero(
+      'Listening Practice Through Dictation',
+      'LPTD 1–4 · 160 unit · Nghe – chép chính tả – shadowing',
+      progressSummary(),
+      '🎧 160 unit · 4 cuốn · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
+      'LPTD 1–4',
+      'Listening Practice Through Dictation'
+    );
+    renderLibrary();
+    scrollTop(false);
+  }
+
+  function renderUnitBody() {
+    var body = q('#lptdUnitBody');
+    if (!body || !S.lesson) return;
+    if (S.mode === 'dictation') renderDictation(body);
+    else renderShadowing(body);
+    var prog = q('#lptdUnitProgress');
+    if (prog) prog.textContent = unitProgressText(S.lesson);
+  }
+
+  /* ---------- Dictation ---------- */
+  function makeBlanks(sentence, every) {
+    var everyN = every || 4;
+    var tokens = String(sentence).trim().split(/\s+/);
+    var tw = 0;
+    var out = tokens.map(function (tok) {
+      var bare = tok.replace(/[^A-Za-z'\-]/g, '').replace(/^-+|-+$/g, '');
+      var isBlank = bare && (tw % everyN === everyN - 1);
+      var item = { blank: !!isBlank, token: tok, answer: isBlank ? bare : '' };
+      if (bare) tw++;
+      return item;
+    });
+    if (!out.some(function (x) { return x.blank; })) {
+      for (var i = out.length - 1; i >= 0; i--) {
+        var bare = out[i].token.replace(/[^A-Za-z'\-]/g, '').replace(/^-+|-+$/g, '');
+        if (bare) { out[i].blank = true; out[i].answer = bare; break; }
+      }
+    }
+    return out;
+  }
+
+  function renderBlanks(text, lineIdx) {
+    var inputIndex = 0;
+    return makeBlanks(text).map(function (b) {
+      if (!b.blank) return esc(b.token);
+      var width = Math.max(4, Math.ceil(b.answer.length * 0.95));
+      var id = 'lptd-l' + lineIdx + '-b' + inputIndex;
+      var html = '<input id="' + id + '" class="blank-input lptd-blank" style="--len:' + width + '"' +
+        ' data-answer="' + esc(b.answer) + '" data-line="' + lineIdx + '" data-b="' + (inputIndex++) + '"' +
+        ' autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Ô điền từ">';
+      return html;
+    }).join(' ').replace(/\s+([,.!?;:])/g, '$1');
+  }
+
+  function renderDictation(body) {
+    var u = S.lesson;
+    var html = '<div class="lptd-instruction card">' +
+      '<b>📝 Dictation</b> — nghe audio và điền từ vào ô trống (tự sinh mỗi 4 từ). ' +
+      'Nhấn <kbd>Enter</kbd> để kiểm tra. Điểm đạt: <b>≥ 70%</b>.' +
+      '</div>' +
+      '<div class="card-list lptd-card-list">';
+
+    u.lines.forEach(function (ln, i) {
+      html += '<div class="quiz-card lptd-quiz-card" id="lptd-qc-' + i + '">' +
+        '<div class="q-number">' + (ln.no || i + 1) + '</div>' +
+        '<div class="q-body">' +
+        '<div class="q-sentence">' + spkBadge(ln.speaker) + renderBlanks(ln.text, i) + '</div>' +
+        '<div class="q-status" id="lptd-qs-' + i + '"></div>' +
+        '<div class="q-answer" id="lptd-qa-' + i + '">' +
+        '<div class="ans-en">' + spkBadge(ln.speaker) + escMl(ln.text) + '</div>' +
+        '</div></div></div>';
+    });
+    html += '</div>';
+
+    html += '<div class="quiz-footer lptd-checkbar">' +
+      '<button type="button" class="btn btn-primary" id="lptdCheck">✅ Kiểm tra đáp án</button>' +
+      '<button type="button" class="btn btn-outline" id="lptdShow">👁 Xem đáp án</button>' +
+      '<button type="button" class="btn btn-outline" id="lptdHintBtn">💡 Gợi ý</button>' +
+      '<span class="score-chip" id="lptdScore"></span>' +
+      '</div>';
+
+    body.innerHTML = html;
+
+    var checkBtn = q('#lptdCheck');
+    if (checkBtn) checkBtn.addEventListener('click', checkDictation);
+    var showBtn = q('#lptdShow');
+    if (showBtn) showBtn.addEventListener('click', showAnswers);
+    var hintBtn = q('#lptdHintBtn');
+    if (hintBtn) hintBtn.addEventListener('click', toggleHints);
+
+    qa('.lptd-blank').forEach(function (inp) {
+      inp.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          checkDictation();
+        }
+      });
+    });
+
+    var first = q('.lptd-blank');
+    if (first) first.focus();
+  }
+
+  function spkBadge(sp) {
+    return sp ? '<span class="spk-badge">' + esc(sp) + '</span> ' : '';
+  }
+
+  function checkDictation() {
+    if (!S.lesson) return;
+    var correct = 0, total = 0;
+    qa('#lptdUnitBody .lptd-blank').forEach(function (inp) {
+      total++;
+      var answer = inp.dataset.answer || '';
+      var ok = normalizeWord(inp.value) === normalizeWord(answer) && normalizeWord(inp.value) !== '';
+      inp.classList.toggle('correct', ok);
+      inp.classList.toggle('wrong', !ok);
+      if (ok) correct++;
+      else {
+        var lineIdx = Number(inp.dataset.line);
+        var line = S.lesson.lines[lineIdx];
+        recordMistake(answer, line ? line.text : '', S.lesson, line ? line.no : lineIdx + 1);
+      }
+    });
+
+    var score = total ? Math.round(correct / total * 100) : 0;
+
+    S.lesson.lines.forEach(function (ln, i) {
+      var card = q('#lptd-qc-' + i);
+      var st = q('#lptd-qs-' + i);
+      if (!card || !st) return;
+      var inputs = qa('.lptd-blank', card);
+      if (!inputs.length) { st.className = 'q-status'; st.textContent = ''; return; }
+      var allOk = inputs.every(function (x) { return x.classList.contains('correct'); });
+      st.className = 'q-status ' + (allOk ? 'ok' : 'no');
+      st.textContent = allOk ? '✔ Đúng hết' : '✘ Còn sai — xem đáp án hoặc nghe lại';
+    });
+
+    var chip = q('#lptdScore');
+    if (chip) chip.innerHTML = '<small>Dictation:</small> ' + correct + '/' + total + ' (' + score + '%) ' + (score >= 70 ? '🎉' : '🔁');
+
+    saveDictationProgress(S.lesson, score);
+    S.mistakes = loadMistakes();
+    var prog = q('#lptdUnitProgress');
+    if (prog) prog.textContent = unitProgressText(S.lesson);
+    setHero(unitLabel(S.lesson), S.lesson.title, unitProgressText(S.lesson), '🎧 ' + S.lesson.lineCount + ' câu · ' + S.lesson.wordCount + ' từ', 'LPTD ' + S.lesson.book + ' · U' + pad2(S.lesson.unit), S.lesson.title);
+  }
+
+  function showAnswers() {
+    if (!S.lesson) return;
+    qa('#lptdUnitBody .q-answer').forEach(function (el) { el.classList.add('show'); });
+    qa('#lptdUnitBody .lptd-blank').forEach(function (inp) {
+      inp.readOnly = true;
+      if (!inp.classList.contains('correct') && !inp.classList.contains('wrong')) inp.classList.add('wrong');
+    });
+    var chip = q('#lptdScore');
+    if (chip) chip.innerHTML = '<small>Đáp án:</small> đã mở — nghe lại và tự chấm.';
+    saveViewed(S.lesson);
+    setHint('Đã mở đáp án. Bấm ▶ nghe lại để đối chiếu.', false);
+  }
+
+  function toggleHints() {
+    S.hintOn = !S.hintOn;
+    qa('#lptdUnitBody .lptd-blank').forEach(function (inp) {
+      if (S.hintOn && !inp.value) {
+        var a = inp.dataset.answer || '';
+        inp.placeholder = a ? a.charAt(0) + '…' + a.charAt(a.length - 1) + ' (' + a.length + ')' : '';
+      } else {
+        inp.placeholder = '';
+      }
+    });
+    var btn = q('#lptdHintBtn');
+    if (btn) btn.classList.toggle('active', S.hintOn);
+  }
+
+  /* ---------- Shadowing ---------- */
+  function renderShadowing(body) {
+    var u = S.lesson;
+    var SR = global.SpeechRecognition || global.webkitSpeechRecognition;
+    var html = '<div class="lptd-instruction card">' +
+      '<b>🗣️ Shadowing</b> — 1️⃣ nghe cả unit → 2️⃣ 🎙 ghi âm đọc lại từng câu → 3️⃣ ▶ nghe bản ghi → 4️⃣ 🗣 chấm độ chính xác.' +
+      (SR ? ' <span class="lptd-muted">(Web Speech API — cần Chrome/Edge + mạng)</span>' : ' <b class="lptd-error">Trình duyệt này không hỗ trợ Web Speech API — vẫn ghi âm/nghe lại được, không chấm %.</b>') +
+      '</div>';
+
+    var p = S.progress[L.unitKey(u)] || {};
+    var sh = p.shadowing || {};
+    var lines = sh.lines || {};
+
+    html += '<div class="lptd-shadow-list">';
+    u.lines.forEach(function (ln, i) {
+      var best = lines[String(i)];
+      html += '<div class="shadow-card lptd-shadow-card" id="lptd-sc-' + i + '">' +
+        '<div class="shadow-top">' +
+        '<div class="q-number">' + (ln.no || i + 1) + '</div>' +
+        '<div class="q-body">' +
+        '<div class="shadow-sentence">' + spkBadge(ln.speaker) + escMl(ln.text) + '</div>' +
+        '<div class="lptd-muted lptd-shadow-meta">' + ln.text.split(/\s+/).filter(Boolean).length + ' từ' +
+        (best != null ? ' · tốt nhất: <b>' + best + '%</b>' : '') + '</div>' +
+        '</div></div>' +
+        '<div class="shadow-tools">' +
+        '<button type="button" class="btn btn-outline btn-sm" data-rec="' + i + '">🎙 Ghi âm</button>' +
+        '<button type="button" class="btn btn-outline btn-sm" data-playrec="' + i + '" disabled>▶ Nghe bản ghi</button>' +
+        (SR ? '<button type="button" class="btn btn-outline btn-sm" data-assess="' + i + '">🗣 Chấm %</button>' : '') +
+        '<span class="rec-indicator" data-recind="' + i + '"><span class="rec-dot"></span>Đang ghi…</span>' +
+        '</div>' +
+        '<div class="acc-result" data-acc="' + i + '"></div>' +
+        '</div>';
+    });
+    html += '</div>';
+
+    body.innerHTML = html;
+
+    qa('[data-rec]', body).forEach(function (btn) {
+      btn.addEventListener('click', function () { toggleRecord(Number(btn.dataset.rec), btn); });
+    });
+    qa('[data-playrec]', body).forEach(function (btn) {
+      btn.addEventListener('click', function () { playRecording(Number(btn.dataset.playrec)); });
+    });
+    qa('[data-assess]', body).forEach(function (btn) {
+      btn.addEventListener('click', function () { assessLine(Number(btn.dataset.assess)); });
+    });
+  }
+
+  function stopRecording() {
+    if (S.recTimer) { clearTimeout(S.recTimer); S.recTimer = null; }
+    if (S.rec && S.rec.state === 'recording') { try { S.rec.stop(); } catch (e) {} }
+    if (S.recStream) {
+      try { S.recStream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {}
+      S.recStream = null;
+    }
+  }
+
+  function toggleRecord(line, btn) {
+    if (S.rec && S.rec.state === 'recording' && S.recTarget === line) { S.rec.stop(); return; }
+    if (!global.navigator || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      setHint('Trình duyệt không hỗ trợ ghi âm (getUserMedia).', true);
+      return;
+    }
+    stopRecording();
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+      var chunks = [];
+      var rec;
+      try {
+        rec = new MediaRecorder(stream);
+      } catch (e) {
+        stream.getTracks().forEach(function (t) { t.stop(); });
+        setHint('Không tạo được MediaRecorder: ' + e.message, true);
+        return;
+      }
+      S.rec = rec;
+      S.recStream = stream;
+      S.recTarget = line;
+      rec.ondataavailable = function (e) { if (e.data && e.data.size) chunks.push(e.data); };
+      rec.onstop = function () {
+        try { stream.getTracks().forEach(function (t) { t.stop(); }); } catch (e) {}
+        var blob = new Blob(chunks, { type: rec.mimeType || 'audio/webm' });
+        S.recBlobs[line] = blob;
+        var playBtn = q('[data-playrec="' + line + '"]');
+        if (playBtn) playBtn.disabled = false;
+        var indicator = q('[data-recind="' + line + '"]');
+        if (indicator) indicator.classList.remove('on');
+        var recBtn = q('[data-rec="' + line + '"]');
+        if (recBtn) recBtn.textContent = '🎙 Ghi âm';
+        if (S.recTimer) { clearTimeout(S.recTimer); S.recTimer = null; }
+        S.rec = null;
+        S.recTarget = null;
+        if (S.recStream === stream) S.recStream = null;
+      };
+      rec.start();
+      if (btn) btn.textContent = '⏹ Dừng ghi';
+      var indicator = q('[data-recind="' + line + '"]');
+      if (indicator) indicator.classList.add('on');
+      S.recTimer = setTimeout(function () {
+        if (S.rec === rec && rec.state === 'recording') rec.stop();
+      }, 12000);
+    }).catch(function (e) {
+      setHint('Không truy cập được micro: ' + (e && e.message ? e.message : e), true);
+    });
+  }
+
+  function playRecording(line) {
+    var blob = S.recBlobs[line];
+    if (!blob) return;
+    var url = URL.createObjectURL(blob);
+    var audio = new Audio(url);
+    audio.onended = function () { URL.revokeObjectURL(url); };
+    audio.onerror = function () { URL.revokeObjectURL(url); };
+    audio.play().catch(function () { URL.revokeObjectURL(url); });
+  }
+
+  function assessLine(line) {
+    var SR = global.SpeechRecognition || global.webkitSpeechRecognition;
+    if (!SR || !S.lesson) return;
+    var target = S.lesson.lines[line] ? S.lesson.lines[line].text : '';
+    var box = q('[data-acc="' + line + '"]');
+    if (!box) return;
+    if (S.rec && S.rec.state === 'recording') stopRecording();
+
+    var r = new SR();
+    r.lang = 'en-US';
+    r.interimResults = false;
+    r.maxAlternatives = 1;
+    var done = false;
+
+    box.classList.add('show');
+    box.innerHTML = '<span class="lptd-muted">🗣 Đang nghe… hãy đọc to câu trên.</span>';
+
+    r.onresult = function (e) {
+      done = true;
+      var transcript = e.results[0] && e.results[0][0] ? e.results[0][0].transcript : '';
+      var pct = exactMatch(transcript, target);
+      renderAssessResult(box, pct, transcript);
+      saveShadowProgress(S.lesson, line, pct);
+      var meta = q('#lptd-sc-' + line + ' .lptd-shadow-meta');
+      if (meta) meta.innerHTML = target.split(/\s+/).filter(Boolean).length + ' từ · tốt nhất: <b>' + pct + '%</b>';
+      var prog = q('#lptdUnitProgress');
+      if (prog) prog.textContent = unitProgressText(S.lesson);
+    };
+    r.onerror = function (e) {
+      done = true;
+      box.innerHTML = '<b class="lptd-error">Lỗi nhận giọng nói: ' + esc(e.error) + '</b><br><span class="lptd-muted">Cần Chrome/Edge, micro và kết nối mạng.</span>';
+    };
+    r.onend = function () {
+      if (!done) box.innerHTML = '<span class="lptd-muted">Không nhận được giọng nói. Thử lại và đọc to hơn.</span>';
+    };
+
+    try { r.start(); }
+    catch (e) { box.innerHTML = '<b class="lptd-error">Không mở được micro: ' + esc(e.message) + '</b>'; }
+  }
+
+  function renderAssessResult(box, pct, transcript) {
+    var cls = pct >= 80 ? 'ok' : pct >= 50 ? 'mid' : 'bad';
+    box.className = 'acc-result show ' + cls;
+    box.innerHTML = '<div class="lptd-acc-head"><b>Độ chính xác: ' + pct + '%</b>' +
+      '<span class="lptd-chip ' + (pct >= 60 ? 'ok' : '') + '">' + (pct >= 60 ? 'Đạt' : 'Cần luyện thêm') + '</span></div>' +
+      '<div class="acc-bar"><div class="acc-fill" style="width:' + pct + '%"></div></div>' +
+      '<div class="acc-transcript">Đã nhận: "' + esc(transcript || '') + '"</div>';
+  }
+
+  /* ---------- Khởi động ---------- */
+  function boot() {
+    if (!q('#modeBody')) return;
+    ensureCss();
+    injectSidebarButton();
+    bindLeaveGuards();
+    bindLeaveGuards.installed = true;
+    watchCoreOverwrite();
+    if (!L.loaded && L.isGas) S.progress = {};
+    else S.progress = L.loadProgress();
+    S.mistakes = loadMistakes();
+    global.LPTD_UI = {
+      open: openLibrary,
+      close: close,
+      openUnit: openUnit,
+      state: S,
+      refresh: function () { S.progress = L.loadProgress(); if (S.open) renderLibrary(); },
+    };
+  }
+
+  if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})(typeof window !== 'undefined' ? window : this);
