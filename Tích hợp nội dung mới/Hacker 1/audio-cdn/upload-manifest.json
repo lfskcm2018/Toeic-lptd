@@ -1,0 +1,272 @@
+[
+  {
+    "id": "hacker1-t01-p12",
+    "unit": 1,
+    "title": "TEST 01 · Part 1-2",
+    "audioFileName": "TEST01_Part1-2.mp3",
+    "cdnName": "HACKER1_T01_P12.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST01_Part1-2.mp3",
+    "bytes": 1149189
+  },
+  {
+    "id": "hacker1-t01-p3",
+    "unit": 2,
+    "title": "TEST 01 · Part 3",
+    "audioFileName": "TEST01_Part3.mp3",
+    "cdnName": "HACKER1_T01_P3.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST01_Part3.mp3",
+    "bytes": 1550106
+  },
+  {
+    "id": "hacker1-t01-p4",
+    "unit": 3,
+    "title": "TEST 01 · Part 4",
+    "audioFileName": "TEST01_Part4.mp3",
+    "cdnName": "HACKER1_T01_P4.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST01_Part4.mp3",
+    "bytes": 2185822
+  },
+  {
+    "id": "hacker1-t02-p12",
+    "unit": 4,
+    "title": "TEST 02 · Part 1-2",
+    "audioFileName": "TEST02_Part1-2.mp3",
+    "cdnName": "HACKER1_T02_P12.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST02_Part1-2.mp3",
+    "bytes": 1187951
+  },
+  {
+    "id": "hacker1-t02-p3",
+    "unit": 5,
+    "title": "TEST 02 · Part 3",
+    "audioFileName": "TEST02_Part3.mp3",
+    "cdnName": "HACKER1_T02_P3.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST02_Part3.mp3",
+    "bytes": 1894504
+  },
+  {
+    "id": "hacker1-t02-p4",
+    "unit": 6,
+    "title": "TEST 02 · Part 4",
+    "audioFileName": "TEST02_Part4.mp3",
+    "cdnName": "HACKER1_T02_P4.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST02_Part4.mp3",
+    "bytes": 1679673
+  },
+  {
+    "id": "hacker1-t03-p12",
+    "unit": 7,
+    "title": "TEST 03 · Part 1-2",
+    "audioFileName": "TEST03_Part1-2.mp3",
+    "cdnName": "HACKER1_T03_P12.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST03_Part1-2.mp3",
+    "bytes": 1185443
+  },
+  {
+    "id": "hacker1-t03-p3",
+    "unit": 8,
+    "title": "TEST 03 · Part 3",
+    "audioFileName": "TEST03_Part3.mp3",
+    "cdnName": "HACKER1_T03_P3.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST03_Part3.mp3",
+    "bytes": 2029087
+  },
+  {
+    "id": "hacker1-t03-p4",
+    "unit": 9,
+    "title": "TEST 03 · Part 4",
+    "audioFileName": "TEST03_Part4.mp3",
+    "cdnName": "HACKER1_T03_P4.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST03_Part4.mp3",
+    "bytes": 2100140
+  },
+  {
+    "id": "hacker1-t04-p12",
+    "unit": 10,
+    "title": "TEST 04 · Part 1-2",
+    "audioFileName": "TEST04_Part1-2.mp3",
+    "cdnName": "HACKER1_T04_P12.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST04_Part1-2.mp3",
+    "bytes": 1127766
+  },
+  {
+    "id": "hacker1-t04-p3",
+    "unit": 11,
+    "title": "TEST 04 · Part 3",
+    "audioFileName": "TEST04_Part3.mp3",
+    "cdnName": "HACKER1_T04_P3.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST04_Part3.mp3",
+    "bytes": 2130652
+  },
+  {
+    "id": "hacker1-t04-p4",
+    "unit": 12,
+    "title": "TEST 04 · Part 4",
+    "audioFileName": "TEST04_Part4.mp3",
+    "cdnName": "HACKER1_T04_P4.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST04_Part4.mp3",
+    "bytes": 2168686
+  },
+  {
+    "id": "hacker1-t05-p12",
+    "unit": 13,
+    "title": "TEST 05 · Part 1-2",
+    "audioFileName": "TEST05_Part1-2.mp3",
+    "cdnName": "HACKER1_T05_P12.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST05_Part1-2.mp3",
+    "bytes": 1223479
+  },
+  {
+    "id": "hacker1-t05-p3",
+    "unit": 14,
+    "title": "TEST 05 · Part 3",
+    "audioFileName": "TEST05_Part3.mp3",
+    "cdnName": "HACKER1_T05_P3.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST05_Part3.mp3",
+    "bytes": 1685107
+  },
+  {
+    "id": "hacker1-t05-p4",
+    "unit": 15,
+    "title": "TEST 05 · Part 4",
+    "audioFileName": "TEST05_Part4.mp3",
+    "cdnName": "HACKER1_T05_P4.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST05_Part4.mp3",
+    "bytes": 1859814
+  },
+  {
+    "id": "hacker1-t06-p12",
+    "unit": 16,
+    "title": "TEST 06 · Part 1-2",
+    "audioFileName": "TEST06_Part1-2.mp3",
+    "cdnName": "HACKER1_T06_P12.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST06_Part1-2.mp3",
+    "bytes": 1272380
+  },
+  {
+    "id": "hacker1-t06-p3",
+    "unit": 17,
+    "title": "TEST 06 · Part 3",
+    "audioFileName": "TEST06_Part3.mp3",
+    "cdnName": "HACKER1_T06_P3.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST06_Part3.mp3",
+    "bytes": 1456902
+  },
+  {
+    "id": "hacker1-t06-p4",
+    "unit": 18,
+    "title": "TEST 06 · Part 4",
+    "audioFileName": "TEST06_Part4.mp3",
+    "cdnName": "HACKER1_T06_P4.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST06_Part4.mp3",
+    "bytes": 1771625
+  },
+  {
+    "id": "hacker1-t07-p12",
+    "unit": 19,
+    "title": "TEST 07 · Part 1-2",
+    "audioFileName": "TEST07_Part1-2.mp3",
+    "cdnName": "HACKER1_T07_P12.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST07_Part1-2.mp3",
+    "bytes": 1223479
+  },
+  {
+    "id": "hacker1-t07-p3",
+    "unit": 20,
+    "title": "TEST 07 · Part 3",
+    "audioFileName": "TEST07_Part3.mp3",
+    "cdnName": "HACKER1_T07_P3.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST07_Part3.mp3",
+    "bytes": 2015713
+  },
+  {
+    "id": "hacker1-t07-p4",
+    "unit": 21,
+    "title": "TEST 07 · Part 4",
+    "audioFileName": "TEST07_Part4.mp3",
+    "cdnName": "HACKER1_T07_P4.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST07_Part4.mp3",
+    "bytes": 2028670
+  },
+  {
+    "id": "hacker1-t08-p12",
+    "unit": 22,
+    "title": "TEST 08 · Part 1-2",
+    "audioFileName": "TEST08_Part1-2.mp3",
+    "cdnName": "HACKER1_T08_P12.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST08_Part1-2.mp3",
+    "bytes": 1100181
+  },
+  {
+    "id": "hacker1-t08-p3",
+    "unit": 23,
+    "title": "TEST 08 · Part 3",
+    "audioFileName": "TEST08_Part3.mp3",
+    "cdnName": "HACKER1_T08_P3.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST08_Part3.mp3",
+    "bytes": 1958035
+  },
+  {
+    "id": "hacker1-t08-p4",
+    "unit": 24,
+    "title": "TEST 08 · Part 4",
+    "audioFileName": "TEST08_Part4.mp3",
+    "cdnName": "HACKER1_T08_P4.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST08_Part4.mp3",
+    "bytes": 2197525
+  },
+  {
+    "id": "hacker1-t09-p12",
+    "unit": 25,
+    "title": "TEST 09 · Part 1-2",
+    "audioFileName": "TEST09_Part1-2.mp3",
+    "cdnName": "HACKER1_T09_P12.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST09_Part1-2.mp3",
+    "bytes": 1141977
+  },
+  {
+    "id": "hacker1-t09-p3",
+    "unit": 26,
+    "title": "TEST 09 · Part 3",
+    "audioFileName": "TEST09_Part3.mp3",
+    "cdnName": "HACKER1_T09_P3.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST09_Part3.mp3",
+    "bytes": 1946750
+  },
+  {
+    "id": "hacker1-t09-p4",
+    "unit": 27,
+    "title": "TEST 09 · Part 4",
+    "audioFileName": "TEST09_Part4.mp3",
+    "cdnName": "HACKER1_T09_P4.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST09_Part4.mp3",
+    "bytes": 1719380
+  },
+  {
+    "id": "hacker1-t10-p12",
+    "unit": 28,
+    "title": "TEST 10 · Part 1-2",
+    "audioFileName": "TEST10_Part1-2.mp3",
+    "cdnName": "HACKER1_T10_P12.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST10_Part1-2.mp3",
+    "bytes": 1191714
+  },
+  {
+    "id": "hacker1-t10-p3",
+    "unit": 29,
+    "title": "TEST 10 · Part 3",
+    "audioFileName": "TEST10_Part3.mp3",
+    "cdnName": "HACKER1_T10_P3.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST10_Part3.mp3",
+    "bytes": 1696810
+  },
+  {
+    "id": "hacker1-t10-p4",
+    "unit": 30,
+    "title": "TEST 10 · Part 4",
+    "audioFileName": "TEST10_Part4.mp3",
+    "cdnName": "HACKER1_T10_P4.mp3",
+    "localPath": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)/TEST10_Part4.mp3",
+    "bytes": 2355932
+  }
+]
