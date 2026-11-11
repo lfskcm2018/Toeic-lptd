@@ -1,0 +1,2571 @@
+/**
+ * AUTO-GENERATED from Dictation Part 2 PDF (파트2 출제표현 정리집.pdf)
+ * Source: op/Tích hợp nội dung mới/Dictation Part 2/
+ * Format: LPTD lesson schema
+ */
+
+function LPTD_LESSONS_META() {
+  return {
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-11T08:21:55.652Z",
+  "cdnBase": "https://toeic-audio.netlify.app/audio/dictation-part2",
+  "totals": {
+    "books": 1,
+    "units": 11,
+    "lines": 476,
+    "words": 3166
+  },
+  "books": [
+    {
+      "book": 1,
+      "title": "Dictation Part 2",
+      "level": "TOEIC Part 2",
+      "units": 11,
+      "lines": 476,
+      "words": 3166,
+      "bookPdf": "Dictation Part 2/파트2 출제표현 정리집.pdf",
+      "transcriptPdf": "",
+      "extraDocs": []
+    }
+  ]
+};
+}
+
+function LPTD_LESSONS() {
+  return [
+  {
+    "id": "dp2-1-01",
+    "book": 1,
+    "unit": 1,
+    "title": "When Questions",
+    "slug": "when-questions",
+    "audioFileName": "01. When 의문문.mp3",
+    "cdnName": "DP2-01-When.mp3",
+    "localPath": "Dictation Part 2/MP3/01. When 의문문.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "Q",
+        "text": "When would you like to schedule an interview?"
+      },
+      {
+        "no": 2,
+        "speaker": "A",
+        "text": "Sometime next month."
+      },
+      {
+        "no": 3,
+        "speaker": "Q",
+        "text": "When will the prescription be ready?"
+      },
+      {
+        "no": 4,
+        "speaker": "A",
+        "text": "In about an hour."
+      },
+      {
+        "no": 5,
+        "speaker": "Q",
+        "text": "When could I see the doctor for my dental checkup?"
+      },
+      {
+        "no": 6,
+        "speaker": "A",
+        "text": "How about Friday?"
+      },
+      {
+        "no": 7,
+        "speaker": "Q",
+        "text": "When will the carrier pick up the package?"
+      },
+      {
+        "no": 8,
+        "speaker": "A",
+        "text": "Either May 20th or 21st."
+      },
+      {
+        "no": 9,
+        "speaker": "Q",
+        "text": "When do we get reimbursed for the travel expenses?"
+      },
+      {
+        "no": 10,
+        "speaker": "A",
+        "text": "Once they’ve been approved."
+      },
+      {
+        "no": 11,
+        "speaker": "Q",
+        "text": "When’s the earliest you can meet me for dinner?"
+      },
+      {
+        "no": 12,
+        "speaker": "A",
+        "text": "A little before 7."
+      },
+      {
+        "no": 13,
+        "speaker": "Q",
+        "text": "When can we place the order?"
+      },
+      {
+        "no": 14,
+        "speaker": "A",
+        "text": "When Sylva approves it."
+      },
+      {
+        "no": 15,
+        "speaker": "Q",
+        "text": "When will the packages be delivered?"
+      },
+      {
+        "no": 16,
+        "speaker": "A",
+        "text": "they were sent this morning."
+      },
+      {
+        "no": 17,
+        "speaker": "Q",
+        "text": "When do we get reimbursed for the travel expenses?"
+      },
+      {
+        "no": 18,
+        "speaker": "A",
+        "text": "After the form’s been approved."
+      },
+      {
+        "no": 19,
+        "speaker": "Q",
+        "text": "When will Mr. Paek be back from vacation?"
+      },
+      {
+        "no": 20,
+        "speaker": "A",
+        "text": "He already came back last night."
+      },
+      {
+        "no": 21,
+        "speaker": "Q",
+        "text": "When can I get a copy of the order form?"
+      },
+      {
+        "no": 22,
+        "speaker": "A",
+        "text": "I’ll print it out for you now."
+      },
+      {
+        "no": 23,
+        "speaker": "Q",
+        "text": "When will my dry cleaning be ready?"
+      },
+      {
+        "no": 24,
+        "speaker": "A",
+        "text": "Give me another hour."
+      },
+      {
+        "no": 25,
+        "speaker": "Q",
+        "text": "When are you going to send the budget proposal to the president?"
+      },
+      {
+        "no": 26,
+        "speaker": "A",
+        "text": "Right after I check the numbers."
+      },
+      {
+        "no": 27,
+        "speaker": "Q",
+        "text": "When is the advertisement scheduled to appear?"
+      },
+      {
+        "no": 28,
+        "speaker": "A",
+        "text": "It’ll be in the May issue."
+      },
+      {
+        "no": 29,
+        "speaker": "Q",
+        "text": "When does Jerry take over as director?"
+      },
+      {
+        "no": 30,
+        "speaker": "A",
+        "text": "I didn’t know he got the position."
+      }
+    ],
+    "lineCount": 30,
+    "wordCount": 195
+  },
+  {
+    "id": "dp2-1-02",
+    "book": 1,
+    "unit": 2,
+    "title": "Where Questions",
+    "slug": "where-questions",
+    "audioFileName": "02. Where 의문문.mp3",
+    "cdnName": "DP2-02-Where.mp3",
+    "localPath": "Dictation Part 2/MP3/02. Where 의문문.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "Q",
+        "text": "Where does Ms. Goodman teach Math?"
+      },
+      {
+        "no": 2,
+        "speaker": "A",
+        "text": "At a highschool in New York."
+      },
+      {
+        "no": 3,
+        "speaker": "Q",
+        "text": "Where should we set up the projector?"
+      },
+      {
+        "no": 4,
+        "speaker": "A",
+        "text": "Is the conference room big enough?"
+      },
+      {
+        "no": 5,
+        "speaker": "Q",
+        "text": "Where will you take our clients after the factory tour?"
+      },
+      {
+        "no": 6,
+        "speaker": "A",
+        "text": "to a thai restaurant."
+      },
+      {
+        "no": 7,
+        "speaker": "Q",
+        "text": "Where can I get some staples?"
+      },
+      {
+        "no": 8,
+        "speaker": "A",
+        "text": "Check the supply closet."
+      },
+      {
+        "no": 9,
+        "speaker": "Q",
+        "text": "Where can I hang my jacket?"
+      },
+      {
+        "no": 10,
+        "speaker": "A",
+        "text": "there's space in the closet."
+      },
+      {
+        "no": 11,
+        "speaker": "Q",
+        "text": "Where is the invoice for the new copy machine?"
+      },
+      {
+        "no": 12,
+        "speaker": "A",
+        "text": "I put it in the file drawer."
+      },
+      {
+        "no": 13,
+        "speaker": "Q",
+        "text": "Where are the extra file folders we ordered?"
+      },
+      {
+        "no": 14,
+        "speaker": "A",
+        "text": "Have you looked in the cabinet?"
+      },
+      {
+        "no": 15,
+        "speaker": "Q",
+        "text": "Where should I put this projector after the workshop is over?"
+      },
+      {
+        "no": 16,
+        "speaker": "A",
+        "text": "You should ask the manager."
+      },
+      {
+        "no": 17,
+        "speaker": "Q",
+        "text": "Where is the nearest restaurant?"
+      },
+      {
+        "no": 18,
+        "speaker": "A",
+        "text": "I’ll check the online map."
+      },
+      {
+        "no": 19,
+        "speaker": "Q",
+        "text": "Where did you put the meeting agenda?"
+      },
+      {
+        "no": 20,
+        "speaker": "A",
+        "text": "Isn’t it on the desk?"
+      },
+      {
+        "no": 21,
+        "speaker": "Q",
+        "text": "Where can I purchase a bus ticket?"
+      },
+      {
+        "no": 22,
+        "speaker": "A",
+        "text": "I usually use the website."
+      },
+      {
+        "no": 23,
+        "speaker": "Q",
+        "text": "Where is the business convention being held?"
+      },
+      {
+        "no": 24,
+        "speaker": "A",
+        "text": "I still haven't' heard."
+      },
+      {
+        "no": 25,
+        "speaker": "Q",
+        "text": "Where did you buy your glasses?"
+      },
+      {
+        "no": 26,
+        "speaker": "A",
+        "text": "I bought them over the internet."
+      },
+      {
+        "no": 27,
+        "speaker": "Q",
+        "text": "Where can I find professor Ming’s office?"
+      },
+      {
+        "no": 28,
+        "speaker": "A",
+        "text": "I’m afraid he’s away at a conference."
+      },
+      {
+        "no": 29,
+        "speaker": "Q",
+        "text": "Where can I find a store that sells stationery?"
+      },
+      {
+        "no": 30,
+        "speaker": "A",
+        "text": "Mr. Lee might be able to tell you."
+      }
+    ],
+    "lineCount": 30,
+    "wordCount": 194
+  },
+  {
+    "id": "dp2-1-03",
+    "book": 1,
+    "unit": 3,
+    "title": "Who Questions",
+    "slug": "who-questions",
+    "audioFileName": "03. Who 의문문.mp3",
+    "cdnName": "DP2-03-Who.mp3",
+    "localPath": "Dictation Part 2/MP3/03. Who 의문문.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "Q",
+        "text": "Who does this folder belong to?"
+      },
+      {
+        "no": 2,
+        "speaker": "A",
+        "text": "It looks like mine."
+      },
+      {
+        "no": 3,
+        "speaker": "Q",
+        "text": "Who needs a copy of the report?"
+      },
+      {
+        "no": 4,
+        "speaker": "A",
+        "text": "I think James does."
+      },
+      {
+        "no": 5,
+        "speaker": "Q",
+        "text": "Who is the guest speaker at the symposium?"
+      },
+      {
+        "no": 6,
+        "speaker": "A",
+        "text": "Nobody I’ve heard of."
+      },
+      {
+        "no": 7,
+        "speaker": "Q",
+        "text": "Who is coming to the project meeting tomorrow?"
+      },
+      {
+        "no": 8,
+        "speaker": "A",
+        "text": "the whole design team."
+      },
+      {
+        "no": 9,
+        "speaker": "Q",
+        "text": "Who brought this cake?"
+      },
+      {
+        "no": 10,
+        "speaker": "A",
+        "text": "Susan might know."
+      },
+      {
+        "no": 11,
+        "speaker": "Q",
+        "text": "Who works in room 401?"
+      },
+      {
+        "no": 12,
+        "speaker": "A",
+        "text": "No one for now."
+      },
+      {
+        "no": 13,
+        "speaker": "Q",
+        "text": "Who should I talk to about my lost luggage?"
+      },
+      {
+        "no": 14,
+        "speaker": "A",
+        "text": "What flight were you on?"
+      },
+      {
+        "no": 15,
+        "speaker": "Q",
+        "text": "Who is the head of the marketing department?"
+      },
+      {
+        "no": 16,
+        "speaker": "A",
+        "text": "Mr. Park"
+      },
+      {
+        "no": 17,
+        "speaker": "Q",
+        "text": "Who won the president’s award?"
+      },
+      {
+        "no": 18,
+        "speaker": "A",
+        "text": "Someone from Sales."
+      },
+      {
+        "no": 19,
+        "speaker": "Q",
+        "text": "Who’s been assigned to the project?"
+      },
+      {
+        "no": 20,
+        "speaker": "A",
+        "text": "Mr. Lopez has."
+      },
+      {
+        "no": 21,
+        "speaker": "Q",
+        "text": "Who is in charge of the recent software upgrades?"
+      },
+      {
+        "no": 22,
+        "speaker": "A",
+        "text": "An outside consultant."
+      },
+      {
+        "no": 23,
+        "speaker": "Q",
+        "text": "Who was the man I saw with the manager?"
+      },
+      {
+        "no": 24,
+        "speaker": "A",
+        "text": "I think he’s a new colleague."
+      },
+      {
+        "no": 25,
+        "speaker": "Q",
+        "text": "Who do you think will be the next CEO?"
+      },
+      {
+        "no": 26,
+        "speaker": "A",
+        "text": "No one is sure yet."
+      },
+      {
+        "no": 27,
+        "speaker": "Q",
+        "text": "Who should I call to reserve a conference hall?"
+      },
+      {
+        "no": 28,
+        "speaker": "A",
+        "text": "Ask Joshua to do it."
+      },
+      {
+        "no": 29,
+        "speaker": "Q",
+        "text": "Who should I contact about my order?"
+      },
+      {
+        "no": 30,
+        "speaker": "A",
+        "text": "try calling Shipping Department."
+      },
+      {
+        "no": 31,
+        "speaker": "Q",
+        "text": "Who locked the doors yesterday?"
+      },
+      {
+        "no": 32,
+        "speaker": "A",
+        "text": "the security guard."
+      },
+      {
+        "no": 33,
+        "speaker": "Q",
+        "text": "Who did they hire for the accounting position?"
+      },
+      {
+        "no": 34,
+        "speaker": "A",
+        "text": "Someone from tokyo."
+      },
+      {
+        "no": 35,
+        "speaker": "Q",
+        "text": "Who wants to organize the company picnic this time?"
+      },
+      {
+        "no": 36,
+        "speaker": "A",
+        "text": "I’d be happy to."
+      },
+      {
+        "no": 37,
+        "speaker": "Q",
+        "text": "Who has the key to the meeting room?"
+      },
+      {
+        "no": 38,
+        "speaker": "A",
+        "text": "I’ll see if I can find out."
+      },
+      {
+        "no": 39,
+        "speaker": "Q",
+        "text": "Who will be joining us for dinner tomorrow?"
+      },
+      {
+        "no": 40,
+        "speaker": "A",
+        "text": "I’ve asked Yoko to come."
+      },
+      {
+        "no": 41,
+        "speaker": "Q",
+        "text": "Who left these memos on my desk?"
+      },
+      {
+        "no": 42,
+        "speaker": "A",
+        "text": "I don’t know."
+      },
+      {
+        "no": 43,
+        "speaker": "Q",
+        "text": "Who’s attending the sales meeting in New York?"
+      },
+      {
+        "no": 44,
+        "speaker": "A",
+        "text": "It hasn’t been decided yet."
+      },
+      {
+        "no": 45,
+        "speaker": "Q",
+        "text": "Who will make the hotel reservations?"
+      },
+      {
+        "no": 46,
+        "speaker": "A",
+        "text": "Ms. Park is supposed to."
+      },
+      {
+        "no": 47,
+        "speaker": "Q",
+        "text": "Who called for a taxi?"
+      },
+      {
+        "no": 48,
+        "speaker": "A",
+        "text": "Jimmy said he did."
+      },
+      {
+        "no": 49,
+        "speaker": "Q",
+        "text": "Who’s managing the department while Ms. Kim’s away?"
+      },
+      {
+        "no": 50,
+        "speaker": "A",
+        "text": "It hasn’t been decided yet."
+      },
+      {
+        "no": 51,
+        "speaker": "Q",
+        "text": "Who is the president of your company?"
+      },
+      {
+        "no": 52,
+        "speaker": "A",
+        "text": "I’ll be taking over the position."
+      },
+      {
+        "no": 53,
+        "speaker": "Q",
+        "text": "Who prepared the budget report?"
+      },
+      {
+        "no": 54,
+        "speaker": "A",
+        "text": "Frank worked on it."
+      },
+      {
+        "no": 55,
+        "speaker": "Q",
+        "text": "Who’s already received the security pass?"
+      },
+      {
+        "no": 56,
+        "speaker": "A",
+        "text": "I’ve got mine this morning."
+      },
+      {
+        "no": 57,
+        "speaker": "Q",
+        "text": "Whose office is this?"
+      },
+      {
+        "no": 58,
+        "speaker": "A",
+        "text": "Nobody is using it yet."
+      }
+    ],
+    "lineCount": 58,
+    "wordCount": 326
+  },
+  {
+    "id": "dp2-1-04",
+    "book": 1,
+    "unit": 4,
+    "title": "Why Questions",
+    "slug": "why-questions",
+    "audioFileName": "04. Why 의문문.mp3",
+    "cdnName": "DP2-04-Why.mp3",
+    "localPath": "Dictation Part 2/MP3/04. Why 의문문.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "Q",
+        "text": "Why was the shipment delayed this week?"
+      },
+      {
+        "no": 2,
+        "speaker": "A",
+        "text": "the order was lost."
+      },
+      {
+        "no": 3,
+        "speaker": "Q",
+        "text": "Why did you replace the projector in the conference room?"
+      },
+      {
+        "no": 4,
+        "speaker": "A",
+        "text": "the old one was broken."
+      },
+      {
+        "no": 5,
+        "speaker": "Q",
+        "text": "Why is the cafe closed today?"
+      },
+      {
+        "no": 6,
+        "speaker": "A",
+        "text": "It’s reserved for a private party."
+      },
+      {
+        "no": 7,
+        "speaker": "Q",
+        "text": "Why did you throw away that magazine?"
+      },
+      {
+        "no": 8,
+        "speaker": "A",
+        "text": "It was outdated."
+      },
+      {
+        "no": 9,
+        "speaker": "Q",
+        "text": "Why is it so cold in the meeting room?"
+      },
+      {
+        "no": 10,
+        "speaker": "A",
+        "text": "Someone turned off the heater."
+      },
+      {
+        "no": 11,
+        "speaker": "Q",
+        "text": "Why is the mall on Second Street closing?"
+      },
+      {
+        "no": 12,
+        "speaker": "A",
+        "text": "I heard they’re remodeling."
+      },
+      {
+        "no": 13,
+        "speaker": "Q",
+        "text": "Why was the question and answer session canceled?"
+      },
+      {
+        "no": 14,
+        "speaker": "A",
+        "text": "there wasn’t enough time."
+      },
+      {
+        "no": 15,
+        "speaker": "Q",
+        "text": "Why won’t the microphone turn on?"
+      },
+      {
+        "no": 16,
+        "speaker": "A",
+        "text": "Check the batteries."
+      },
+      {
+        "no": 17,
+        "speaker": "Q",
+        "text": "Why is it so hot in the office?"
+      },
+      {
+        "no": 18,
+        "speaker": "A",
+        "text": "the air conditioner is broken."
+      },
+      {
+        "no": 19,
+        "speaker": "Q",
+        "text": "Why didn’t I see you at the awards ceremony?"
+      },
+      {
+        "no": 20,
+        "speaker": "A",
+        "text": "I had to work late that night."
+      },
+      {
+        "no": 21,
+        "speaker": "Q",
+        "text": "Why did you leave the work early yesterday?"
+      },
+      {
+        "no": 22,
+        "speaker": "A",
+        "text": "I had a meeting with a client."
+      },
+      {
+        "no": 23,
+        "speaker": "Q",
+        "text": "Why did we open another branch office in Seoul?"
+      },
+      {
+        "no": 24,
+        "speaker": "A",
+        "text": "We have a lot of customers there."
+      },
+      {
+        "no": 25,
+        "speaker": "Q",
+        "text": "Why haven’t we begun production?"
+      },
+      {
+        "no": 26,
+        "speaker": "A",
+        "text": "We’re still waiting for some parts."
+      },
+      {
+        "no": 27,
+        "speaker": "Q",
+        "text": "Why is the copy machine being removed?"
+      },
+      {
+        "no": 28,
+        "speaker": "A",
+        "text": "We’re getting a new one."
+      },
+      {
+        "no": 29,
+        "speaker": "Q",
+        "text": "Why was the marketing seminar cancelled?"
+      },
+      {
+        "no": 30,
+        "speaker": "A",
+        "text": "I don’t think it was."
+      },
+      {
+        "no": 31,
+        "speaker": "Q",
+        "text": "Why were so many employees invited to this meeting?"
+      },
+      {
+        "no": 32,
+        "speaker": "A",
+        "text": "So everyone can meet the new staff members."
+      },
+      {
+        "no": 33,
+        "speaker": "Q",
+        "text": "Why did you cancel the slaes workshop?"
+      },
+      {
+        "no": 34,
+        "speaker": "A",
+        "text": "No rooms were available."
+      },
+      {
+        "no": 35,
+        "speaker": "Q",
+        "text": "Why are you using tina’s computer?"
+      },
+      {
+        "no": 36,
+        "speaker": "A",
+        "text": "Mine has a virus."
+      },
+      {
+        "no": 37,
+        "speaker": "Q",
+        "text": "Why are there so many boxes in the hallway?"
+      },
+      {
+        "no": 38,
+        "speaker": "A",
+        "text": "A shipment just arrived."
+      },
+      {
+        "no": 39,
+        "speaker": "Q",
+        "text": "Why did Mr. Ono transfer to the LA branch?"
+      },
+      {
+        "no": 40,
+        "speaker": "A",
+        "text": "to shorten his commute."
+      },
+      {
+        "no": 41,
+        "speaker": "Q",
+        "text": "Why didn’t you switch off the lights in the lounge?"
+      },
+      {
+        "no": 42,
+        "speaker": "A",
+        "text": "I completely forgot."
+      }
+    ],
+    "lineCount": 42,
+    "wordCount": 266
+  },
+  {
+    "id": "dp2-1-05",
+    "book": 1,
+    "unit": 5,
+    "title": "Which Questions",
+    "slug": "which-questions",
+    "audioFileName": "05. Which 의문문.mp3",
+    "cdnName": "DP2-05-Which.mp3",
+    "localPath": "Dictation Part 2/MP3/05. Which 의문문.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "Q",
+        "text": "Which of these cars is yours?"
+      },
+      {
+        "no": 2,
+        "speaker": "A",
+        "text": "the small blue one."
+      },
+      {
+        "no": 3,
+        "speaker": "Q",
+        "text": "Which employees are for transfer to company headquarters?"
+      },
+      {
+        "no": 4,
+        "speaker": "A",
+        "text": "two people from the sales team."
+      },
+      {
+        "no": 5,
+        "speaker": "Q",
+        "text": "Which editor are you working with?"
+      },
+      {
+        "no": 6,
+        "speaker": "A",
+        "text": "Yoko, at Working Press."
+      },
+      {
+        "no": 7,
+        "speaker": "Q",
+        "text": "Which department does John work for?"
+      },
+      {
+        "no": 8,
+        "speaker": "A",
+        "text": "I can’t remember."
+      },
+      {
+        "no": 9,
+        "speaker": "Q",
+        "text": "Which job did you respond to?"
+      },
+      {
+        "no": 10,
+        "speaker": "A",
+        "text": "the one for marketing assistant."
+      },
+      {
+        "no": 11,
+        "speaker": "Q",
+        "text": "Which route did you take to the post office?"
+      },
+      {
+        "no": 12,
+        "speaker": "A",
+        "text": "I went through downtown."
+      },
+      {
+        "no": 13,
+        "speaker": "Q",
+        "text": "Which switch turns up the air conditioner?"
+      },
+      {
+        "no": 14,
+        "speaker": "A",
+        "text": "the one on the right."
+      },
+      {
+        "no": 15,
+        "speaker": "Q",
+        "text": "Which restaurant has the fastest service?"
+      },
+      {
+        "no": 16,
+        "speaker": "A",
+        "text": "Are you in a hurry?"
+      },
+      {
+        "no": 17,
+        "speaker": "Q",
+        "text": "Which cake recipe did you use?"
+      },
+      {
+        "no": 18,
+        "speaker": "A",
+        "text": "the one you recommended."
+      },
+      {
+        "no": 19,
+        "speaker": "Q",
+        "text": "Which performance are you going to?"
+      },
+      {
+        "no": 20,
+        "speaker": "A",
+        "text": "It’s at five P.M."
+      },
+      {
+        "no": 21,
+        "speaker": "Q",
+        "text": "Which pharmaceutical company does Ms. Kwon represent?"
+      },
+      {
+        "no": 22,
+        "speaker": "A",
+        "text": "She works for Cure tech."
+      }
+    ],
+    "lineCount": 22,
+    "wordCount": 122
+  },
+  {
+    "id": "dp2-1-06",
+    "book": 1,
+    "unit": 6,
+    "title": "What Questions",
+    "slug": "what-questions",
+    "audioFileName": "06. What 의문문.mp3",
+    "cdnName": "DP2-06-What.mp3",
+    "localPath": "Dictation Part 2/MP3/06. What 의문문.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "Q",
+        "text": "What’s the name of the nearest grocery store?"
+      },
+      {
+        "no": 2,
+        "speaker": "A",
+        "text": "I believe it’s J1 Mart."
+      },
+      {
+        "no": 3,
+        "speaker": "Q",
+        "text": "What are you going to do after your long trip?"
+      },
+      {
+        "no": 4,
+        "speaker": "A",
+        "text": "I’m starting a new job in Seoul."
+      },
+      {
+        "no": 5,
+        "speaker": "Q",
+        "text": "What was the discussion about?"
+      },
+      {
+        "no": 6,
+        "speaker": "A",
+        "text": "About the benefits package."
+      },
+      {
+        "no": 7,
+        "speaker": "Q",
+        "text": "What will you be doing in London?"
+      },
+      {
+        "no": 8,
+        "speaker": "A",
+        "text": "I am meeting with a potential client."
+      },
+      {
+        "no": 9,
+        "speaker": "Q",
+        "text": "What happened to the weekly meeting?"
+      },
+      {
+        "no": 10,
+        "speaker": "A",
+        "text": "It was cancelled."
+      },
+      {
+        "no": 11,
+        "speaker": "Q",
+        "text": "What is the document on your desk?"
+      },
+      {
+        "no": 12,
+        "speaker": "A",
+        "text": "A report I’m working on."
+      },
+      {
+        "no": 13,
+        "speaker": "Q",
+        "text": "What’s the registration deadline?"
+      },
+      {
+        "no": 14,
+        "speaker": "A",
+        "text": "It’s a week from today."
+      },
+      {
+        "no": 15,
+        "speaker": "Q",
+        "text": "What are the advantages of using a store credit card?"
+      },
+      {
+        "no": 16,
+        "speaker": "A",
+        "text": "You can get special discounts."
+      },
+      {
+        "no": 17,
+        "speaker": "Q",
+        "text": "What do you think about the new accountant?"
+      },
+      {
+        "no": 18,
+        "speaker": "A",
+        "text": "She’s highly qualified."
+      },
+      {
+        "no": 19,
+        "speaker": "Q",
+        "text": "What’s the problem with the cupboard?"
+      },
+      {
+        "no": 20,
+        "speaker": "A",
+        "text": "the door doesn’t shut all the way."
+      },
+      {
+        "no": 21,
+        "speaker": "Q",
+        "text": "What did you think of the movie?"
+      },
+      {
+        "no": 22,
+        "speaker": "A",
+        "text": "It was ok but too long."
+      },
+      {
+        "no": 23,
+        "speaker": "Q",
+        "text": "What was the weather like on your vacation?"
+      },
+      {
+        "no": 24,
+        "speaker": "A",
+        "text": "It was sunny the whole time."
+      },
+      {
+        "no": 25,
+        "speaker": "Q",
+        "text": "What should I do with these boxes?"
+      },
+      {
+        "no": 26,
+        "speaker": "A",
+        "text": "Put them in the storage closet."
+      },
+      {
+        "no": 27,
+        "speaker": "Q",
+        "text": "What are you bringing to the retirement party?"
+      },
+      {
+        "no": 28,
+        "speaker": "A",
+        "text": "I won’t be attending."
+      },
+      {
+        "no": 29,
+        "speaker": "Q",
+        "text": "What are the safety features of this machine?"
+      },
+      {
+        "no": 30,
+        "speaker": "A",
+        "text": "Let me show you the manual."
+      },
+      {
+        "no": 31,
+        "speaker": "Q",
+        "text": "What supplies are we going to need for this project?"
+      },
+      {
+        "no": 32,
+        "speaker": "A",
+        "text": "Some notepads and marking pens."
+      },
+      {
+        "no": 33,
+        "speaker": "Q",
+        "text": "What other colors does this coat come in?"
+      },
+      {
+        "no": 34,
+        "speaker": "A",
+        "text": "It’s only available in blue."
+      },
+      {
+        "no": 35,
+        "speaker": "Q",
+        "text": "What type of insulation did you use in this building?"
+      },
+      {
+        "no": 36,
+        "speaker": "A",
+        "text": "the same kind we always use."
+      },
+      {
+        "no": 37,
+        "speaker": "Q",
+        "text": "What day is Mr. Lang scheduled to begin?"
+      },
+      {
+        "no": 38,
+        "speaker": "A",
+        "text": "I’ll go see."
+      }
+    ],
+    "lineCount": 38,
+    "wordCount": 243
+  },
+  {
+    "id": "dp2-1-07",
+    "book": 1,
+    "unit": 7,
+    "title": "How Questions",
+    "slug": "how-questions",
+    "audioFileName": "07. How 의문문.mp3",
+    "cdnName": "DP2-07-How.mp3",
+    "localPath": "Dictation Part 2/MP3/07. How 의문문.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "Q",
+        "text": "How did the president like your presentation?"
+      },
+      {
+        "no": 2,
+        "speaker": "A",
+        "text": "He liked it a lot."
+      },
+      {
+        "no": 3,
+        "speaker": "Q",
+        "text": "How is the preparation for the event coming along?"
+      },
+      {
+        "no": 4,
+        "speaker": "A",
+        "text": "It’ll be ready on time."
+      },
+      {
+        "no": 5,
+        "speaker": "Q",
+        "text": "How do you like the new product design?"
+      },
+      {
+        "no": 6,
+        "speaker": "A",
+        "text": "Honestly, I’m not sure."
+      },
+      {
+        "no": 7,
+        "speaker": "Q",
+        "text": "How was your commute today?"
+      },
+      {
+        "no": 8,
+        "speaker": "A",
+        "text": "Not bad. there wasn’t much traffic."
+      },
+      {
+        "no": 9,
+        "speaker": "Q",
+        "text": "How was your flight from New York?"
+      },
+      {
+        "no": 10,
+        "speaker": "A",
+        "text": "I slept the whole way."
+      },
+      {
+        "no": 11,
+        "speaker": "Q",
+        "text": "How was the job fair last week?"
+      },
+      {
+        "no": 12,
+        "speaker": "A",
+        "text": "Unfortunately, it was postponed."
+      },
+      {
+        "no": 13,
+        "speaker": "Q",
+        "text": "How do I access my account?"
+      },
+      {
+        "no": 14,
+        "speaker": "A",
+        "text": "I can show you in a minute."
+      },
+      {
+        "no": 15,
+        "speaker": "Q",
+        "text": "How can I make sure Mr. Lee gets this memo?"
+      },
+      {
+        "no": 16,
+        "speaker": "A",
+        "text": "Put it in his mailbox."
+      },
+      {
+        "no": 17,
+        "speaker": "Q",
+        "text": "How did you find out about our job opening?"
+      },
+      {
+        "no": 18,
+        "speaker": "A",
+        "text": "Mr. Lopez in Sales told me."
+      },
+      {
+        "no": 19,
+        "speaker": "Q",
+        "text": "How did you learn to fix the copy machine?"
+      },
+      {
+        "no": 20,
+        "speaker": "A",
+        "text": "I just read the manual."
+      },
+      {
+        "no": 21,
+        "speaker": "Q",
+        "text": "How do I clean the computer monitor?"
+      },
+      {
+        "no": 22,
+        "speaker": "A",
+        "text": "With dry cloth."
+      },
+      {
+        "no": 23,
+        "speaker": "Q",
+        "text": "How do I replace the ink cartridge?"
+      },
+      {
+        "no": 24,
+        "speaker": "A",
+        "text": "Let’s look in the manual."
+      },
+      {
+        "no": 25,
+        "speaker": "Q",
+        "text": "How do we get reimbursed for my travel expenses?"
+      },
+      {
+        "no": 26,
+        "speaker": "A",
+        "text": "Give your receipts to me."
+      },
+      {
+        "no": 27,
+        "speaker": "Q",
+        "text": "How can I get another monitor for my office?"
+      },
+      {
+        "no": 28,
+        "speaker": "A",
+        "text": "You can ask Jake to order one."
+      },
+      {
+        "no": 29,
+        "speaker": "Q",
+        "text": "How did you hear about the job?"
+      },
+      {
+        "no": 30,
+        "speaker": "A",
+        "text": "I saw an advertisement."
+      },
+      {
+        "no": 31,
+        "speaker": "Q",
+        "text": "How can I get to the nearest gas station?"
+      },
+      {
+        "no": 32,
+        "speaker": "A",
+        "text": "turn left at Broad Street."
+      },
+      {
+        "no": 33,
+        "speaker": "Q",
+        "text": "How did you avoid the traffic jam this morning?"
+      },
+      {
+        "no": 34,
+        "speaker": "A",
+        "text": "I took a different route."
+      },
+      {
+        "no": 35,
+        "speaker": "Q",
+        "text": "How many positions do we have to fill?"
+      },
+      {
+        "no": 36,
+        "speaker": "A",
+        "text": "It’ll depend on the budget."
+      },
+      {
+        "no": 37,
+        "speaker": "Q",
+        "text": "How many computers did we sell this month?"
+      },
+      {
+        "no": 38,
+        "speaker": "A",
+        "text": "I will have to look at our records."
+      },
+      {
+        "no": 39,
+        "speaker": "Q",
+        "text": "How long will the return flight form tokyo take?"
+      },
+      {
+        "no": 40,
+        "speaker": "A",
+        "text": "Not very long."
+      },
+      {
+        "no": 41,
+        "speaker": "Q",
+        "text": "How long did the meeting last?"
+      },
+      {
+        "no": 42,
+        "speaker": "A",
+        "text": "It didn’t end until 10."
+      },
+      {
+        "no": 43,
+        "speaker": "Q",
+        "text": "How do you prefer to be contacted?"
+      },
+      {
+        "no": 44,
+        "speaker": "A",
+        "text": "I’ll give you my email address."
+      },
+      {
+        "no": 45,
+        "speaker": "Q",
+        "text": "How late is the store open today?"
+      },
+      {
+        "no": 46,
+        "speaker": "A",
+        "text": "We close at 7."
+      },
+      {
+        "no": 47,
+        "speaker": "Q",
+        "text": "How often do you visit your family?"
+      },
+      {
+        "no": 48,
+        "speaker": "A",
+        "text": "I haven’t had a reason to lately."
+      }
+    ],
+    "lineCount": 48,
+    "wordCount": 310
+  },
+  {
+    "id": "dp2-1-08",
+    "book": 1,
+    "unit": 8,
+    "title": "General Tag Indirect Questions",
+    "slug": "general-tag-indirect-questions",
+    "audioFileName": "08. 일반, 부가. 간접 의문문.mp3",
+    "cdnName": "DP2-08-GeneralTagIndirect.mp3",
+    "localPath": "Dictation Part 2/MP3/08. 일반, 부가. 간접 의문문.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "Q",
+        "text": "Doesn’t the dry cleaner stay open until 7 today?"
+      },
+      {
+        "no": 2,
+        "speaker": "A",
+        "text": "No, only on Saturdays."
+      },
+      {
+        "no": 3,
+        "speaker": "Q",
+        "text": "Did you make sure the microphone in the conference room works?"
+      },
+      {
+        "no": 4,
+        "speaker": "A",
+        "text": "I’ve checked it this morning."
+      },
+      {
+        "no": 5,
+        "speaker": "Q",
+        "text": "Won’t it take too long to go over those samples?"
+      },
+      {
+        "no": 6,
+        "speaker": "A",
+        "text": "Not if we start now."
+      },
+      {
+        "no": 7,
+        "speaker": "Q",
+        "text": "Don’t you have to fill out everything on the form?"
+      },
+      {
+        "no": 8,
+        "speaker": "A",
+        "text": "Only the bottom part."
+      },
+      {
+        "no": 9,
+        "speaker": "Q",
+        "text": "Did you know that the ceremony will be held outdoors?"
+      },
+      {
+        "no": 10,
+        "speaker": "A",
+        "text": "I hope it doesn’t rain."
+      },
+      {
+        "no": 11,
+        "speaker": "Q",
+        "text": "Won’t the guest speakers be here by 6?"
+      },
+      {
+        "no": 12,
+        "speaker": "A",
+        "text": "that’s what I’ve been told."
+      },
+      {
+        "no": 13,
+        "speaker": "Q",
+        "text": "Didn’t you organize last year’s awards ceremony?"
+      },
+      {
+        "no": 14,
+        "speaker": "A",
+        "text": "Actually Mr.Lee was in charge."
+      },
+      {
+        "no": 15,
+        "speaker": "Q",
+        "text": "Aren’t we having dinner with the clients?"
+      },
+      {
+        "no": 16,
+        "speaker": "A",
+        "text": "I’m afraid we had to cancel it."
+      },
+      {
+        "no": 17,
+        "speaker": "Q",
+        "text": "Are you going to the office party?"
+      },
+      {
+        "no": 18,
+        "speaker": "A",
+        "text": "I have to complete the report."
+      },
+      {
+        "no": 19,
+        "speaker": "Q",
+        "text": "Did you change the ink cartridge?"
+      },
+      {
+        "no": 20,
+        "speaker": "A",
+        "text": "No, but Mr. Lee might have."
+      },
+      {
+        "no": 21,
+        "speaker": "Q",
+        "text": "Have you found a new apartment to rent yet?"
+      },
+      {
+        "no": 22,
+        "speaker": "A",
+        "text": "Yes, I just need to sign the contract."
+      },
+      {
+        "no": 23,
+        "speaker": "Q",
+        "text": "Do you know the phone number for the tokyo branch office?"
+      },
+      {
+        "no": 24,
+        "speaker": "A",
+        "text": "No, but I can look it up."
+      },
+      {
+        "no": 25,
+        "speaker": "Q",
+        "text": "Did you listen to the news this morning?"
+      },
+      {
+        "no": 26,
+        "speaker": "A",
+        "text": "Yes, while I was driving to work."
+      },
+      {
+        "no": 27,
+        "speaker": "Q",
+        "text": "Are you planning to take our clients out to dinner?"
+      },
+      {
+        "no": 28,
+        "speaker": "A",
+        "text": "No, they’re leaving this afternoon."
+      },
+      {
+        "no": 29,
+        "speaker": "Q",
+        "text": "Isn’t Mr. Santos out of town?"
+      },
+      {
+        "no": 30,
+        "speaker": "A",
+        "text": "Actually, his trip was canceled."
+      },
+      {
+        "no": 31,
+        "speaker": "Q",
+        "text": "Didn’t you apply for the sales position?"
+      },
+      {
+        "no": 32,
+        "speaker": "A",
+        "text": "I decided not to."
+      },
+      {
+        "no": 33,
+        "speaker": "Q",
+        "text": "Doesn’t this flashlight come with batteries?"
+      },
+      {
+        "no": 34,
+        "speaker": "A",
+        "text": "No, they cost extra."
+      },
+      {
+        "no": 35,
+        "speaker": "Q",
+        "text": "Let’s meet at the fitness center."
+      },
+      {
+        "no": 36,
+        "speaker": "A",
+        "text": "O.K, I’ll see you there."
+      },
+      {
+        "no": 37,
+        "speaker": "Q",
+        "text": "Haven’t we received that invoice yet?"
+      },
+      {
+        "no": 38,
+        "speaker": "A",
+        "text": "No, but let me check on that."
+      },
+      {
+        "no": 39,
+        "speaker": "Q",
+        "text": "Don’t you usually ride a bike to work?"
+      },
+      {
+        "no": 40,
+        "speaker": "A",
+        "text": "Only when the weather’s good"
+      },
+      {
+        "no": 41,
+        "speaker": "Q",
+        "text": "Didn’t you get Mr. Chang's email?"
+      },
+      {
+        "no": 42,
+        "speaker": "A",
+        "text": "When was it sent?"
+      },
+      {
+        "no": 43,
+        "speaker": "Q",
+        "text": "Can’t you fit all the boxes into one container?"
+      },
+      {
+        "no": 44,
+        "speaker": "A",
+        "text": "there’s not enough space."
+      },
+      {
+        "no": 45,
+        "speaker": "Q",
+        "text": "Don’t you want to go to the dinner party?"
+      },
+      {
+        "no": 46,
+        "speaker": "A",
+        "text": "I'm looking forward to it."
+      },
+      {
+        "no": 47,
+        "speaker": "Q",
+        "text": "Did you send out all the invitation letters?"
+      },
+      {
+        "no": 48,
+        "speaker": "A",
+        "text": "I thought you were going to do it."
+      },
+      {
+        "no": 49,
+        "speaker": "Q",
+        "text": "Shouldn’t the fax machine have been fixed by now?"
+      },
+      {
+        "no": 50,
+        "speaker": "A",
+        "text": "they are still waiting for a part."
+      },
+      {
+        "no": 51,
+        "speaker": "Q",
+        "text": "You haven’t seen the newspaper, have you?"
+      },
+      {
+        "no": 52,
+        "speaker": "A",
+        "text": "I thought you had it."
+      },
+      {
+        "no": 53,
+        "speaker": "Q",
+        "text": "It’s supposed to be sunny tomorrow, isn’t it?"
+      },
+      {
+        "no": 54,
+        "speaker": "A",
+        "text": "that's the forecast I heard."
+      },
+      {
+        "no": 55,
+        "speaker": "Q",
+        "text": "We have until noon to submit our timesheets, don’t we?"
+      },
+      {
+        "no": 56,
+        "speaker": "A",
+        "text": "Actually, they were due an hour ago."
+      },
+      {
+        "no": 57,
+        "speaker": "Q",
+        "text": "You want me to reorder supplies, don’t you?"
+      },
+      {
+        "no": 58,
+        "speaker": "A",
+        "text": "If you think we need to."
+      },
+      {
+        "no": 59,
+        "speaker": "Q",
+        "text": "Finishing the project was quite an accomplishment, wasn’t it?"
+      },
+      {
+        "no": 60,
+        "speaker": "A",
+        "text": "I’m glad we met the deadline."
+      },
+      {
+        "no": 61,
+        "speaker": "Q",
+        "text": "thomas has an assistant now, doesn’t he?"
+      },
+      {
+        "no": 62,
+        "speaker": "A",
+        "text": "Not that I know of."
+      },
+      {
+        "no": 63,
+        "speaker": "Q",
+        "text": "that copy machine hasn’t been repaired yet, has it?"
+      },
+      {
+        "no": 64,
+        "speaker": "A",
+        "text": "Really? I thought it had been."
+      },
+      {
+        "no": 65,
+        "speaker": "Q",
+        "text": "All the staff members have registered for the workshop, haven’t they?"
+      },
+      {
+        "no": 66,
+        "speaker": "A",
+        "text": "A few of them still have to."
+      },
+      {
+        "no": 67,
+        "speaker": "Q",
+        "text": "the files for the new client’s account are in this cabinet, aren’t they?"
+      },
+      {
+        "no": 68,
+        "speaker": "A",
+        "text": "I think that’s where they are kept."
+      },
+      {
+        "no": 69,
+        "speaker": "Q",
+        "text": "Do you know who Mr. Lim is meeting with?"
+      },
+      {
+        "no": 70,
+        "speaker": "A",
+        "text": "A new client."
+      },
+      {
+        "no": 71,
+        "speaker": "Q",
+        "text": "Do you know why Ms. Dias isn’t in her office?"
+      },
+      {
+        "no": 72,
+        "speaker": "A",
+        "text": "She is at a meeting."
+      },
+      {
+        "no": 73,
+        "speaker": "Q",
+        "text": "Do you know where the coat room is?"
+      },
+      {
+        "no": 74,
+        "speaker": "A",
+        "text": "At the end of the hallway."
+      }
+    ],
+    "lineCount": 74,
+    "wordCount": 517
+  },
+  {
+    "id": "dp2-1-09",
+    "book": 1,
+    "unit": 9,
+    "title": "Suggestion Offer Questions",
+    "slug": "suggestion-offer-questions",
+    "audioFileName": "09. 권유, 제안 의문문.mp3",
+    "cdnName": "DP2-09-SuggestionOffer.mp3",
+    "localPath": "Dictation Part 2/MP3/09. 권유, 제안 의문문.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "Q",
+        "text": "Would you mind restarting your laptop?"
+      },
+      {
+        "no": 2,
+        "speaker": "A",
+        "text": "Just let me save my work first."
+      },
+      {
+        "no": 3,
+        "speaker": "Q",
+        "text": "Excuse me, do you need assistance?"
+      },
+      {
+        "no": 4,
+        "speaker": "A",
+        "text": "I am already being helped."
+      },
+      {
+        "no": 5,
+        "speaker": "Q",
+        "text": "Should we eat lunch before the meeting?"
+      },
+      {
+        "no": 6,
+        "speaker": "A",
+        "text": "Is there any good place to eat?"
+      },
+      {
+        "no": 7,
+        "speaker": "Q",
+        "text": "Don’t you want to finish reviewing these reports before we leave?"
+      },
+      {
+        "no": 8,
+        "speaker": "A",
+        "text": "Sure, we’re almost done."
+      },
+      {
+        "no": 9,
+        "speaker": "Q",
+        "text": "Should we get permission before ordering the parts?"
+      },
+      {
+        "no": 10,
+        "speaker": "A",
+        "text": "I was going to ask Ms. Reno."
+      },
+      {
+        "no": 11,
+        "speaker": "Q",
+        "text": "I think we should place an advertisement for the open position online."
+      },
+      {
+        "no": 12,
+        "speaker": "A",
+        "text": "On which website?"
+      },
+      {
+        "no": 13,
+        "speaker": "Q",
+        "text": "Why don’t you stop by before 5 if it’s okey?"
+      },
+      {
+        "no": 14,
+        "speaker": "A",
+        "text": "I’ll probably be there around 2."
+      },
+      {
+        "no": 15,
+        "speaker": "Q",
+        "text": "You could ask Mr. Spencer for a second opinion."
+      },
+      {
+        "no": 16,
+        "speaker": "A",
+        "text": "I’ll call him this afternoon."
+      },
+      {
+        "no": 17,
+        "speaker": "Q",
+        "text": "Would you still like me to proofread your article?"
+      },
+      {
+        "no": 18,
+        "speaker": "A",
+        "text": "Oh, I’ve already submitted it."
+      },
+      {
+        "no": 19,
+        "speaker": "Q",
+        "text": "Why don’t we share a cab to the airport?"
+      },
+      {
+        "no": 20,
+        "speaker": "A",
+        "text": "When are you leaving?"
+      },
+      {
+        "no": 21,
+        "speaker": "Q",
+        "text": "I think we should hire Ms. Cho."
+      },
+      {
+        "no": 22,
+        "speaker": "A",
+        "text": "Unfortunately, she withdrew her application."
+      },
+      {
+        "no": 23,
+        "speaker": "Q",
+        "text": "Would you like to subscribe to our magazine?"
+      },
+      {
+        "no": 24,
+        "speaker": "A",
+        "text": "I already signed up last week."
+      },
+      {
+        "no": 25,
+        "speaker": "Q",
+        "text": "You can use my computer while I’m out."
+      },
+      {
+        "no": 26,
+        "speaker": "A",
+        "text": "thanks, but mine’s working again."
+      },
+      {
+        "no": 27,
+        "speaker": "Q",
+        "text": "Don’t you want to take a look at the rest of the samples?"
+      },
+      {
+        "no": 28,
+        "speaker": "A",
+        "text": "Let’s get some food first."
+      },
+      {
+        "no": 29,
+        "speaker": "Q",
+        "text": "Don’t you think we should replace the heating system?"
+      },
+      {
+        "no": 30,
+        "speaker": "A",
+        "text": "If it’s not too expensive."
+      },
+      {
+        "no": 31,
+        "speaker": "Q",
+        "text": "Why don’t I ask my staff what they think?"
+      },
+      {
+        "no": 32,
+        "speaker": "A",
+        "text": "Could you let me know what they decide?"
+      },
+      {
+        "no": 33,
+        "speaker": "Q",
+        "text": "You should write a book about the tourist atractions in Seoul."
+      },
+      {
+        "no": 34,
+        "speaker": "A",
+        "text": "Do you think people would be interested?"
+      },
+      {
+        "no": 35,
+        "speaker": "Q",
+        "text": "Could you look over the financial summary before I submit it?"
+      },
+      {
+        "no": 36,
+        "speaker": "A",
+        "text": "I’m not sure I’ll have time."
+      },
+      {
+        "no": 37,
+        "speaker": "Q",
+        "text": "Don’t forget to backup your files."
+      },
+      {
+        "no": 38,
+        "speaker": "A",
+        "text": "thanks for reminding me."
+      },
+      {
+        "no": 39,
+        "speaker": "Q",
+        "text": "You shoud present your identification as you enter the building."
+      },
+      {
+        "no": 40,
+        "speaker": "A",
+        "text": "Okay. Let me get it from my bag."
+      },
+      {
+        "no": 41,
+        "speaker": "Q",
+        "text": "You can call my cell phone if I am not at the office."
+      },
+      {
+        "no": 42,
+        "speaker": "A",
+        "text": "Is that number on your business card?"
+      },
+      {
+        "no": 43,
+        "speaker": "Q",
+        "text": "Could you extend the project deadline to Monday?"
+      },
+      {
+        "no": 44,
+        "speaker": "A",
+        "text": "that doesn’t leave us much time then."
+      }
+    ],
+    "lineCount": 44,
+    "wordCount": 326
+  },
+  {
+    "id": "dp2-1-10",
+    "book": 1,
+    "unit": 10,
+    "title": "Declarative Sentences",
+    "slug": "declarative-sentences",
+    "audioFileName": "10. 평서문.mp3",
+    "cdnName": "DP2-10-Declarative.mp3",
+    "localPath": "Dictation Part 2/MP3/10. 평서문.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "Q",
+        "text": "the AtM is in the shopping center."
+      },
+      {
+        "no": 2,
+        "speaker": "A",
+        "text": "Which store is it closest to?"
+      },
+      {
+        "no": 3,
+        "speaker": "Q",
+        "text": "Our company grew by 50 percent in the last year."
+      },
+      {
+        "no": 4,
+        "speaker": "A",
+        "text": "We’ll need a larger building soon."
+      },
+      {
+        "no": 5,
+        "speaker": "Q",
+        "text": "the procedure for handling complaints is a little confusing."
+      },
+      {
+        "no": 6,
+        "speaker": "A",
+        "text": "It’s due to be revised soon."
+      },
+      {
+        "no": 7,
+        "speaker": "Q",
+        "text": "I’ve heard everybody is getting a raise."
+      },
+      {
+        "no": 8,
+        "speaker": "A",
+        "text": "Really? I haven’t heard that."
+      },
+      {
+        "no": 9,
+        "speaker": "Q",
+        "text": "the gas station is always very crowded in the afternoon."
+      },
+      {
+        "no": 10,
+        "speaker": "A",
+        "text": "Yes, but the prices are good."
+      },
+      {
+        "no": 11,
+        "speaker": "Q",
+        "text": "We are running out of folders and staples."
+      },
+      {
+        "no": 12,
+        "speaker": "A",
+        "text": "I’ll order supplies today."
+      },
+      {
+        "no": 13,
+        "speaker": "Q",
+        "text": "I have too many text messages in my inbox."
+      },
+      {
+        "no": 14,
+        "speaker": "A",
+        "text": "You should delete some."
+      },
+      {
+        "no": 15,
+        "speaker": "Q",
+        "text": "that was the best movie I’ve seen in years."
+      },
+      {
+        "no": 16,
+        "speaker": "A",
+        "text": "I wonder why the reviews were so bad."
+      },
+      {
+        "no": 17,
+        "speaker": "Q",
+        "text": "I’d like to check a traffic report before we leave."
+      },
+      {
+        "no": 18,
+        "speaker": "A",
+        "text": "there should be an update on the radio shortly."
+      },
+      {
+        "no": 19,
+        "speaker": "Q",
+        "text": "We’d better leave for the airport by 6."
+      },
+      {
+        "no": 20,
+        "speaker": "A",
+        "text": "I was planning to do that."
+      },
+      {
+        "no": 21,
+        "speaker": "Q",
+        "text": "there are no seats left on the express bus."
+      },
+      {
+        "no": 22,
+        "speaker": "A",
+        "text": "We’ll have to wait for another one then."
+      },
+      {
+        "no": 23,
+        "speaker": "Q",
+        "text": "I’m on my way to the regional conference."
+      },
+      {
+        "no": 24,
+        "speaker": "A",
+        "text": "How long will you be gone?"
+      },
+      {
+        "no": 25,
+        "speaker": "Q",
+        "text": "this microwave should probably be replaced."
+      },
+      {
+        "no": 26,
+        "speaker": "A",
+        "text": "Oh, I was hoping you could fix it."
+      },
+      {
+        "no": 27,
+        "speaker": "Q",
+        "text": "I can’t open this window latch."
+      },
+      {
+        "no": 28,
+        "speaker": "A",
+        "text": "Let me take a look."
+      },
+      {
+        "no": 29,
+        "speaker": "Q",
+        "text": "Your report has to be at least 10 pages long."
+      },
+      {
+        "no": 30,
+        "speaker": "A",
+        "text": "I’ve written more than that already."
+      },
+      {
+        "no": 31,
+        "speaker": "Q",
+        "text": "You’ll get your first paycheck tomorrow."
+      },
+      {
+        "no": 32,
+        "speaker": "A",
+        "text": "I’d better open a bank account, then."
+      },
+      {
+        "no": 33,
+        "speaker": "Q",
+        "text": "I’ll introduce you to the new receptionist."
+      },
+      {
+        "no": 34,
+        "speaker": "A",
+        "text": "thanks, but we’ve already met."
+      },
+      {
+        "no": 35,
+        "speaker": "Q",
+        "text": "that shipment of supplies should arrive tonight."
+      },
+      {
+        "no": 36,
+        "speaker": "A",
+        "text": "Good. We’re almost out of plastic bags."
+      },
+      {
+        "no": 37,
+        "speaker": "Q",
+        "text": "It seems awfully cold here this morning."
+      },
+      {
+        "no": 38,
+        "speaker": "A",
+        "text": "Have you checked the thermostat?"
+      },
+      {
+        "no": 39,
+        "speaker": "Q",
+        "text": "the copy machine is making a strange noise."
+      },
+      {
+        "no": 40,
+        "speaker": "A",
+        "text": "I think it needs to be repaired."
+      },
+      {
+        "no": 41,
+        "speaker": "Q",
+        "text": "I noticed some typos on the menu."
+      },
+      {
+        "no": 42,
+        "speaker": "A",
+        "text": "Can you show me where they are?"
+      },
+      {
+        "no": 43,
+        "speaker": "Q",
+        "text": "this key doesn’t fit the door to the storage room."
+      },
+      {
+        "no": 44,
+        "speaker": "A",
+        "text": "try this one."
+      },
+      {
+        "no": 45,
+        "speaker": "Q",
+        "text": "the new business proposal looks good."
+      },
+      {
+        "no": 46,
+        "speaker": "A",
+        "text": "Actually, I noticed a few problems."
+      },
+      {
+        "no": 47,
+        "speaker": "Q",
+        "text": "We’ve been using fewer ink cartridges since we’ve purchased the new printer."
+      },
+      {
+        "no": 48,
+        "speaker": "A",
+        "text": "Yes, they seem to last longer."
+      },
+      {
+        "no": 49,
+        "speaker": "Q",
+        "text": "I had trouble finding a parking space."
+      },
+      {
+        "no": 50,
+        "speaker": "A",
+        "text": "I hope you didn’t have to walk too far."
+      },
+      {
+        "no": 51,
+        "speaker": "Q",
+        "text": "these reports should be revised before they are printed."
+      },
+      {
+        "no": 52,
+        "speaker": "A",
+        "text": "Kate said she’d do that."
+      },
+      {
+        "no": 53,
+        "speaker": "Q",
+        "text": "It looks like the technician is still busy."
+      },
+      {
+        "no": 54,
+        "speaker": "A",
+        "text": "Let’s come back later."
+      },
+      {
+        "no": 55,
+        "speaker": "Q",
+        "text": "I know a shortcut to the airport."
+      },
+      {
+        "no": 56,
+        "speaker": "A",
+        "text": "Do you want to lead the way?"
+      },
+      {
+        "no": 57,
+        "speaker": "Q",
+        "text": "the application is due on Monday."
+      },
+      {
+        "no": 58,
+        "speaker": "A",
+        "text": "It will be ready by then."
+      },
+      {
+        "no": 59,
+        "speaker": "Q",
+        "text": "We just advertised the new job opening."
+      },
+      {
+        "no": 60,
+        "speaker": "A",
+        "text": "And I think a few people have already applied."
+      }
+    ],
+    "lineCount": 60,
+    "wordCount": 426
+  },
+  {
+    "id": "dp2-1-11",
+    "book": 1,
+    "unit": 11,
+    "title": "Alternative Questions",
+    "slug": "alternative-questions",
+    "audioFileName": "11. 선택의문문.mp3",
+    "cdnName": "DP2-11-Alternative.mp3",
+    "localPath": "Dictation Part 2/MP3/11. 선택의문문.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "Q",
+        "text": "Should we take a break or continue?"
+      },
+      {
+        "no": 2,
+        "speaker": "A",
+        "text": "I’d like to stop for some coffee."
+      },
+      {
+        "no": 3,
+        "speaker": "Q",
+        "text": "Would Mr. Park prefer to meet me today or later in the week?"
+      },
+      {
+        "no": 4,
+        "speaker": "A",
+        "text": "Friday would be best."
+      },
+      {
+        "no": 5,
+        "speaker": "Q",
+        "text": "Do you want my home or work number?"
+      },
+      {
+        "no": 6,
+        "speaker": "A",
+        "text": "Could I have both?"
+      },
+      {
+        "no": 7,
+        "speaker": "Q",
+        "text": "Are your movie tickets for 6 P.M. or 7?"
+      },
+      {
+        "no": 8,
+        "speaker": "A",
+        "text": "I am not sure. I'll have to check."
+      },
+      {
+        "no": 9,
+        "speaker": "Q",
+        "text": "Which would you prefer, soup or salad?"
+      },
+      {
+        "no": 10,
+        "speaker": "A",
+        "text": "Neither, I'm full."
+      },
+      {
+        "no": 11,
+        "speaker": "Q",
+        "text": "Which pants do you like better, the blue or the black?"
+      },
+      {
+        "no": 12,
+        "speaker": "A",
+        "text": "they both look nice."
+      },
+      {
+        "no": 13,
+        "speaker": "Q",
+        "text": "Should I e-mail the revision to you or to Josh?"
+      },
+      {
+        "no": 14,
+        "speaker": "A",
+        "text": "I like to look it over."
+      },
+      {
+        "no": 15,
+        "speaker": "Q",
+        "text": "Do you want your invoice now or should I send it to your office?"
+      },
+      {
+        "no": 16,
+        "speaker": "A",
+        "text": "I prefer to take it with me."
+      },
+      {
+        "no": 17,
+        "speaker": "Q",
+        "text": "Is Mr. Chan going to make a speech or did he decide against it?"
+      },
+      {
+        "no": 18,
+        "speaker": "A",
+        "text": "He hasn’t told me yet."
+      },
+      {
+        "no": 19,
+        "speaker": "Q",
+        "text": "Should we start the meeting now, or wait for thomas?"
+      },
+      {
+        "no": 20,
+        "speaker": "A",
+        "text": "We have a lot to get through, so let’s just begin."
+      },
+      {
+        "no": 21,
+        "speaker": "Q",
+        "text": "Can you come to dinner with us or do you have to work late?"
+      },
+      {
+        "no": 22,
+        "speaker": "A",
+        "text": "I'd love to go."
+      },
+      {
+        "no": 23,
+        "speaker": "Q",
+        "text": "Would you like to eat inside or out on the patio?"
+      },
+      {
+        "no": 24,
+        "speaker": "A",
+        "text": "It doesn’t matter to me."
+      },
+      {
+        "no": 25,
+        "speaker": "Q",
+        "text": "Can you fix the printer or are you leaving soon?"
+      },
+      {
+        "no": 26,
+        "speaker": "A",
+        "text": "Oh, I have some time now."
+      },
+      {
+        "no": 27,
+        "speaker": "Q",
+        "text": "Would you like a red or white wine?"
+      },
+      {
+        "no": 28,
+        "speaker": "A",
+        "text": "I don’t have a preference."
+      },
+      {
+        "no": 29,
+        "speaker": "Q",
+        "text": "Should we buy a new copier or keep the old one?"
+      },
+      {
+        "no": 30,
+        "speaker": "A",
+        "text": "that depends on the price."
+      }
+    ],
+    "lineCount": 30,
+    "wordCount": 241
+  }
+];
+}
