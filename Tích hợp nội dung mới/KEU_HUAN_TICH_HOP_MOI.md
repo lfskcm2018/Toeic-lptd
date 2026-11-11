@@ -22,6 +22,9 @@
 - Nội dung: 10 test, nhiều part, có script / câu hỏi / dictation-like content.
 - Mức độ phù hợp cho LPTD: trung bình – cao.
 - Vai trò trong kế hoạch: nguồn audio / câu hỏi / test source.
+- **Nhánh hiện tại:** `lptd-source-hacker-1`.
+- **File nguồn dữ liệu:** `Tích hợp nội dung mới/Hacker 1/hacker-1-source.json`.
+- **Trạng thái:** bắt đầu thực hiện tích hợp vào web app GAS riêng.
 
 ### 2.2 `Dictation Part 2`
 
