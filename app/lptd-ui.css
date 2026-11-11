@@ -472,3 +472,23 @@
   .lptd-blank { min-width: 64px; max-width: 160px; }
   .lptd-doc { width: 100%; }
 }
+
+/* Dòng mã đồng bộ Drive (Shadowing, GAS) */
+.lptd-drive-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed rgb(var(--border));
+  font-size: 13px;
+}
+.lptd-drive-row code {
+  background: rgb(var(--accent) / .10);
+  color: rgb(var(--accent));
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+}

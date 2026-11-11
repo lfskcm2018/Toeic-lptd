@@ -574,3 +574,13 @@ Da hoan thanh Approach A (popup ngoai iframe):
 - Xac minh E2E tren GAS @8: popup mo, target sentence hien thi, START_RECORDING/RECORDING_ERROR/RECOGNITION_ERROR round-trip hoat dong.
 - Gioi han moi truong test tu dong: mic bi tu dong tu choi (khong co phan cung/permission prompt) -> loi 'Permission denied' la do moi truong,
   khong phai loi code. Nguoi dung that chon 'Cho phep' trong prompt -> ghi am & cham % hoat dong.
+
+### Bổ sung 11/11/2026 — Lưu Drive + mã đồng bộ
+
+- Deployment @9: `AKfycbzaa2wxbAjA3p0fywgpGxFbZCuvjnHd2HxoiisVhMdrI6lM3I3DhV7KFYllzOJdTASz`.
+- Mỗi bản ghi tự lưu Google Drive (`saveUserRecording`), ghi đè file cũ cùng câu (trash file cũ).
+- `getUserRecordings(userId, day, unit)` trả URL cả unit trong 1 round-trip; UI hiện link ☁ Drive.
+- Mã đồng bộ (localStorage `toeic_lptd_uid`) để nghe lại trên thiết bị khác (nhập cùng mã).
+- Khóa Drive: `day = book`, `itemIndex = unit * 100 + line`; Properties key `recording:{uid}:{day}:{idx}`.
+- Cần chạy `authorizeLptdDrive()` một lần trong Script Editor để cấp quyền Drive.
+- Hướng dẫn cho AI/dev: `op/AI-GUIDE-SHADOWING-AUDIO.md`.

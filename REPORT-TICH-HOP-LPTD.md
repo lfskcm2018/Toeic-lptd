@@ -300,3 +300,12 @@ Bước tiếp theo duy nhất mang tính bắt buộc là **deploy thử trên 
 - Giai phap: Approach A - popup top-level Recording Engine + postMessage (GitHub Pages).
 - Deployment @8: `AKfycbyM8huBU37okqYAvNajHt52sNrGKgV-SsL278b270rdXxz52VX0PGN-ZO4XlMKXrzTN`.
 - Xac minh E2E: popup mo, target sentence hien thi, postMessage round-trip hoat dong.
+
+## Cập nhật 11/11/2026 — Lưu bản ghi lên Google Drive
+
+- `saveUserRecording` / `getUserRecording` / `getUserRecordings` trong `op/gas-standalone/Code.gs` (khóa `recording:{uid}:{day}:{idx}`, day = book, idx = unit*100 + line).
+- Ghi đè thông minh: ghi lại cùng câu → file Drive cũ bị `setTrashed(true)`, file mới `ANYONE_WITH_LINK`.
+- UI: link ☁ Drive từng câu + khối "mã đồng bộ" (📋 Sao chép / 🔑 Đổi mã) để nghe lại trên thiết bị khác.
+- Deployment @9: `AKfycbzaa2wxbAjA3p0fywgpGxFbZCuvjnHd2HxoiisVhMdrI6lM3I3DhV7KFYllzOJdTASz`.
+- Lần đầu phải chạy `authorizeLptdDrive()` trong Script Editor và Allow quyền Drive.
+- Guide cho AI/dev khác: `op/AI-GUIDE-SHADOWING-AUDIO.md`.

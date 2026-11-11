@@ -10,3 +10,4 @@ Thumbs.db
 
 # Thư mục sao lưu cục bộ (không commit)
 backup_*/
+~$*

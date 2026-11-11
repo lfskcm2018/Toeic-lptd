@@ -123,6 +123,31 @@ function getLptdUnit(book, unit) {
 
 /* ---------- API lưu/lấy bản ghi âm Shadowing ---------- */
 
+/**
+ * Chạy MỘT LẦN trong Script Editor (chọn hàm → Run → Allow) để cấp quyền
+ * Drive cho script. Sau đó web app mới lưu được bản ghi lên Drive.
+ */
+function authorizeLptdDrive() {
+  try {
+    var root = DriveApp.getRootFolder();
+    Logger.log('Drive OK: ' + root.getName());
+    return true;
+  } catch (e) {
+    Logger.log('LỖI Drive: ' + e.message);
+    return false;
+  }
+}
+
+/**
+ * Quy ước khóa lưu bản ghi LPTD (dùng chung với UI):
+ *   day        = book   (1..4)
+ *   itemIndex  = unit * 100 + lineIndex   (unit 1..40, line 0..~10)
+ * Ví dụ LPTD 2, Unit 17, câu 3 → day=2, itemIndex=1703.
+ */
+function lptdRecordingKey_(userId, day, itemIndex) {
+  return 'recording:' + String(userId || 'anonymous') + ':' + Number(day) + ':' + Number(itemIndex);
+}
+
 /** Lưu bản ghi âm (.webm base64) lên Google Drive, trả URL phát lại. */
 function saveUserRecording(userId, day, itemIndex, audioBase64, mimeType) {
   var uid = String(userId || 'anonymous');
@@ -151,9 +176,13 @@ function saveUserRecording(userId, day, itemIndex, audioBase64, mimeType) {
   var fileId = file.getId();
 
   // Lưu metadata vào PropertiesService (key: recording:{uid}:{d}:{idx})
-  var metaKey = 'recording:' + uid + ':' + d + ':' + idx;
+  var metaKey = lptdRecordingKey_(uid, d, idx);
   var meta = {};
   try { meta = JSON.parse(PropertiesService.getScriptProperties().getProperty(metaKey) || '{}'); } catch (e) {}
+  /* Ghi đè: dọn file cũ của cùng câu để Drive không bị đầy. */
+  if (meta.fileId && meta.fileId !== fileId) {
+    try { DriveApp.getFileById(meta.fileId).setTrashed(true); } catch (e) {}
+  }
   meta.url = fileUrl;
   meta.fileId = fileId;
   meta.fileName = fileName;
@@ -171,10 +200,36 @@ function getUserRecording(userId, day, itemIndex) {
   var uid = String(userId || 'anonymous');
   var d = Number(day);
   var idx = Number(itemIndex);
-  var metaKey = 'recording:' + uid + ':' + d + ':' + idx;
+  var metaKey = lptdRecordingKey_(uid, d, idx);
   var meta = {};
   try { meta = JSON.parse(PropertiesService.getScriptProperties().getProperty(metaKey) || '{}'); } catch (e) {}
   return { url: String(meta.url || ''), fileId: String(meta.fileId || ''), fileName: String(meta.fileName || '') };
+}
+
+/**
+ * Lấy TẤT CẢ URL bản ghi của 1 unit — một round-trip cho cả unit.
+ * Trả: { "<lineIndex>": { url, ts } }
+ */
+function getUserRecordings(userId, day, unit) {
+  var uid = String(userId || 'anonymous');
+  var d = Number(day);
+  var u = Number(unit);
+  var prefix = 'recording:' + uid + ':' + d + ':';
+  var out = {};
+  try {
+    var all = PropertiesService.getScriptProperties().getProperties() || {};
+    Object.keys(all).forEach(function (key) {
+      if (key.indexOf(prefix) !== 0) return;
+      var idx = Number(key.slice(prefix.length));
+      if (!isFinite(idx)) return;
+      if (Math.floor(idx / 100) !== u) return;
+      try {
+        var meta = JSON.parse(all[key] || '{}');
+        if (meta && meta.url) out[idx % 100] = { url: String(meta.url), ts: String(meta.ts || '') };
+      } catch (e) {}
+    });
+  } catch (e) {}
+  return out;
 }
 
 /* ---------- Kiểm tra nhanh trong Script Editor ---------- */

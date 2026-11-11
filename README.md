@@ -175,3 +175,7 @@ Không ghi lẫn vào tiến độ Hackers/ETS.
 - Fix Approach A: ghi am & cham % chuyen sang popup top-level `Recording Engine`
   (`https://lfskcm2018.github.io/Toeic-lptd/recording-engine/`), giao tiep qua `postMessage`.
 - Local mode khong bi anh huong.
+
+## Tài liệu cho AI/Dev
+
+- `op/AI-GUIDE-SHADOWING-AUDIO.md` — hướng dẫn tích hợp audio + ghi âm shadowing (popup Recording Engine, postMessage, lưu Drive) cho module mới.
