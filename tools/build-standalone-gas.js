@@ -6,7 +6,7 @@
    Hackers / ETS.
 
    Sinh:
-     op/gas-standalone/Index.html    (shell + include)
+     op/gas-standalone/Index.html    (shell + include + hằng số URL Recording Engine)
      op/gas-standalone/Styles.html   (core.css + lptd-ui.css + override)
      op/gas-standalone/LptdUI.html   (lptd-data.js + lptd-ui.js + auto-open)
      op/gas-standalone/LptdData.gs   (copy từ op/app/LptdData.gs)
@@ -104,6 +104,13 @@ function buildIndex() {
     </div>
   </main>
 </div>
+
+<script>
+/* URL Recording Engine — popup ghi âm NGOÀI iframe GAS (bypass Permissions Policy
+   chặn micro). Giá trị do Code.gs bơm vào từ Script Property LPTD_RECORDING_ENGINE_URL
+   (xem lptdRecordingEngineUrl_ trong Code.gs). */
+window.LPTD_RECORDING_ENGINE_URL = '<?!= RECORDING_ENGINE_URL ?>';
+</script>
 
 <?!= include('LptdUI'); ?>
 <script>

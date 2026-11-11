@@ -1,87 +1,12 @@
-﻿"FullName","Name","Length"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\app","app",
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110","backup_20261110",
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\data","data",
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\gas-standalone","gas-standalone",
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\integration","integration",
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\recording-engine","recording-engine",
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\tools","tools",
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\.gitignore",".gitignore","0"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\index.html","index.html","6551"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\KẾ HOẠCH KHẮC PHỤC LỖI MICROPHONE TRÊN WEB APP GAS.docx","KẾ HOẠCH KHẮC PHỤC LỖI MICROPHONE TRÊN WEB APP GAS.docx","24826"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\PLAN-TICH-HOP-LPTD.md","PLAN-TICH-HOP-LPTD.md","19193"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\README.md","README.md","6492"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\REPORT-TICH-HOP-LPTD.md","REPORT-TICH-HOP-LPTD.md","10835"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\app\Code.lptd.gs","Code.lptd.gs","5261"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\app\lptd-data.js","lptd-data.js","8770"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\app\lptd-lessons-data.js","lptd-lessons-data.js","253909"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\app\lptd-ui.css","lptd-ui.css","12468"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\app\lptd-ui.js","lptd-ui.js","51358"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\app\LptdData.gs","LptdData.gs","253775"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\app\LptdUI.html","LptdUI.html","73081"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\app","app",
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\data","data",
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\gas-standalone","gas-standalone",
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\integration","integration",
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\tools","tools",
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\app_Code.gs","app_Code.gs","25903"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\app_core.js","app_core.js","51667"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\app_Index.html","app_Index.html","6898"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\index.html","index.html","6551"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\PLAN-TICH-HOP-LPTD.md","PLAN-TICH-HOP-LPTD.md","19193"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\README.md","README.md","6492"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\README_BACKUP.md","README_BACKUP.md","1798"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\recording_engine_engine.js","recording_engine_engine.js","7735"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\recording_engine_index.html","recording_engine_index.html","1739"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\recording_engine_style.css","recording_engine_style.css","3653"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\REPORT-TICH-HOP-LPTD.md","REPORT-TICH-HOP-LPTD.md","10835"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\app\Code.lptd.gs","Code.lptd.gs","5261"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\app\lptd-data.js","lptd-data.js","8770"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\app\lptd-lessons-data.js","lptd-lessons-data.js","253909"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\app\lptd-ui.css","lptd-ui.css","12468"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\app\lptd-ui.js","lptd-ui.js","51358"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\app\LptdData.gs","LptdData.gs","253775"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\app\LptdUI.html","LptdUI.html","73081"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\data\lptd-cdn-manifest.csv","lptd-cdn-manifest.csv","41270"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\data\lptd-lessons.json","lptd-lessons.json","326437"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\data\lptd-stats.json","lptd-stats.json","2566"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\gas-standalone\.clasp.json",".clasp.json","276"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\gas-standalone\appsscript.json","appsscript.json","209"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\gas-standalone\Code.gs","Code.gs","4648"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\gas-standalone\Index.html","Index.html","2798"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\gas-standalone\LptdData.gs","LptdData.gs","253775"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\gas-standalone\LptdUI.html","LptdUI.html","61230"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\gas-standalone\Styles.html","Styles.html","33475"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\integration\CHECKLIST-TRIEN-KHAI.md","CHECKLIST-TRIEN-KHAI.md","4614"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\integration\PATCH-GAS.md","PATCH-GAS.md","4595"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\integration\PATCH-local-study.md","PATCH-local-study.md","3367"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\tools\build-gas-ui.js","build-gas-ui.js","2341"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\tools\build-lptd-data.js","build-lptd-data.js","14098"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\tools\build-standalone-gas.js","build-standalone-gas.js","7532"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\tools\serve-lptd.js","serve-lptd.js","4340"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\tools\test-gas-lptd.js","test-gas-lptd.js","4008"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\tools\validate-lptd.js","validate-lptd.js","10668"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\backup_20261110\tools\verify-cdn.js","verify-cdn.js","5048"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\data\lptd-cdn-manifest.csv","lptd-cdn-manifest.csv","41270"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\data\lptd-lessons.json","lptd-lessons.json","326437"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\data\lptd-stats.json","lptd-stats.json","2566"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\gas-standalone\.clasp.json",".clasp.json","276"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\gas-standalone\appsscript.json","appsscript.json","209"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\gas-standalone\Code.gs","Code.gs","6891"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\gas-standalone\Index.html","Index.html","4933"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\gas-standalone\LptdData.gs","LptdData.gs","253775"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\gas-standalone\LptdUI.html","LptdUI.html","61230"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\gas-standalone\Styles.html","Styles.html","33475"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\integration\CHECKLIST-TRIEN-KHAI.md","CHECKLIST-TRIEN-KHAI.md","4614"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\integration\PATCH-GAS.md","PATCH-GAS.md","4595"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\integration\PATCH-local-study.md","PATCH-local-study.md","3367"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\recording-engine\engine.js","engine.js","7735"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\recording-engine\index.html","index.html","1739"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\recording-engine\style.css","style.css","3653"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\tools\build-gas-ui.js","build-gas-ui.js","2341"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\tools\build-lptd-data.js","build-lptd-data.js","14098"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\tools\build-standalone-gas.js","build-standalone-gas.js","7532"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\tools\serve-lptd.js","serve-lptd.js","4340"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\tools\test-gas-lptd.js","test-gas-lptd.js","4008"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\tools\validate-lptd.js","validate-lptd.js","10668"
-"E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC\op\tools\verify-cdn.js","verify-cdn.js","5048"
+﻿# Junk từ redirect sai ('> nul' trên Windows tạo file tên 'nul')
+nul
+**/nul
+
+# Hệ điều hành / editor
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
+
+# Thư mục sao lưu cục bộ (không commit)
+backup_*/

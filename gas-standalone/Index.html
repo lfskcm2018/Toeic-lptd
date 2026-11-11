@@ -52,76 +52,14 @@
   </main>
 </div>
 
-<?!= include('LptdUI'); ?>
-
-<!-- ===== Recording Engine (dùng popup, không dùng iframe để tránh sandbox) ===== -->
 <script>
-(function () {
-  'use strict';
-
-  // Nguồn URL Recording Engine (GitHub Pages)
-  // URL: https://lfskcm2018.github.io/Toeic-lptd/recording-engine/
-  var RECORDING_ENGINE_URL = 'https://lfskcm2018.github.io/Toeic-lptd/recording-engine/';
-
-  // Biến lưu cửa sổ popup (nếu có)
-  var reWin = null;
-
-  /**
-   * Mở popup chứa Recording Engine.
-   * Nếu đã có popup sẵn, thì focus lại.
-   * @param {string} sessionId - ID phiên ghi âm (dùng để nhận thức trước)
-   * @param {number} itemIndex - Số đơn vị hiện tại (LPTD 1-4, 1-40)
-   */
-  function openRecordingEngine(sessionId, itemIndex) {
-    if (reWin && !reWin.closed) {
-      reWin.focus();
-      return reWin;
-    }
-
-    var url = RECORDING_ENGINE_URL;
-    if (sessionId != null) {
-      url += (url.indexOf('?') === -1 ? '?' : '&') + 'sessionId=' + encodeURIComponent(sessionId);
-    }
-    if (itemIndex != null) {
-      url += (url.indexOf('?') === -1 ? '?' : '&') + 'itemIndex=' + encodeURIComponent(itemIndex);
-    }
-
-    try {
-      reWin = window.open(url, '_blank', 'width=900,height=700,resizable=yes,scrollbars=yes,status=yes');
-    } catch (e) {
-      alert('Không mở được Recording Engine: ' + e.message);
-      return null;
-    }
-
-    // Đợi popup khởi động xong (timeout)
-    setTimeout(function () {
-      if (reWin && !reWin.closed) {
-        reWin.focus();
-        // Gửi lệnh bắt đầu ghi âm ngay sau khi popup xuất hiện
-        setTimeout(function () {
-          if (reWin && !reWin.closed) {
-            reWin.postMessage({
-              type: 'START_RECORDING',
-              sessionId: sessionId,
-              itemIndex: itemIndex
-            }, '*');
-          }
-        }, 600);
-      }
-    }, 400);
-
-    return reWin;
-  }
-
-  // Expose để LptdUI.html / LptdData.gs gọi
-  window.RE = {
-    open: openRecordingEngine,
-    isOpen: function () { return reWin ? !reWin.closed : false; }
-  };
-
-})();
+/* URL Recording Engine — popup ghi âm NGOÀI iframe GAS (bypass Permissions Policy
+   chặn micro). Giá trị do Code.gs bơm vào từ Script Property LPTD_RECORDING_ENGINE_URL
+   (xem lptdRecordingEngineUrl_ trong Code.gs). */
+window.LPTD_RECORDING_ENGINE_URL = '<?!= RECORDING_ENGINE_URL ?>';
 </script>
 
+<?!= include('LptdUI'); ?>
 <script>
 (function () {
   'use strict';

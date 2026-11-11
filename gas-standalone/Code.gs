@@ -8,6 +8,7 @@
    Cấu hình tùy chọn (Project Settings → Script properties):
      LPTD_AUDIO_CDN_BASE = https://toeic-audio.netlify.app/audio/lptd
      LPTD_DOCS_CDN_BASE  = (để trống nếu chưa có PDF trên CDN)
+     LPTD_RECORDING_ENGINE_URL = https://lfskcm2018.github.io/Toeic-lptd/recording-engine/
 
    Deploy: Deploy → New deployment → Web app
      Execute as: Me
@@ -15,11 +16,14 @@
    ========================================================= */
 
 var LPTD_DEFAULT_CDN_BASE = 'https://toeic-audio.netlify.app/audio/lptd';
+var LPTD_DEFAULT_RECORDING_ENGINE_URL = 'https://lfskcm2018.github.io/Toeic-lptd/recording-engine/';
 
 /** Trang web app. */
 function doGet() {
-  return HtmlService.createTemplateFromFile('Index')
-    .evaluate()
+  var template = HtmlService.createTemplateFromFile('Index');
+  /* URL popup ghi âm (Recording Engine) — ghi đè được bằng Script Property. */
+  template.RECORDING_ENGINE_URL = lptdRecordingEngineUrl_();
+  return template.evaluate()
     .setTitle('LPTD 1–4 — Dictation & Shadowing')
     .addMetaTag('viewport', 'width=device-width, initial-scale=1')
     /* Cho phép nhúng iframe (Google Sites / app khác). Bỏ dòng này nếu không cần. */
@@ -48,6 +52,12 @@ function lptdCdnBase_() {
 /** Base CDN tài liệu PDF (tùy chọn). Trả '' nếu chưa cấu hình. */
 function lptdDocsBase_() {
   return String(lptdProp_('LPTD_DOCS_CDN_BASE', '')).replace(/\/+$/, '');
+}
+
+/** URL trang Recording Engine (popup ghi âm ngoài iframe GAS). */
+function lptdRecordingEngineUrl_() {
+  var url = String(lptdProp_('LPTD_RECORDING_ENGINE_URL', LPTD_DEFAULT_RECORDING_ENGINE_URL)).trim();
+  return url || LPTD_DEFAULT_RECORDING_ENGINE_URL;
 }
 
 /* ---------- Dữ liệu ---------- */
@@ -177,6 +187,7 @@ function debugLptd() {
   });
   Logger.log('Audio CDN: ' + lptdCdnBase_());
   Logger.log('Docs CDN : ' + (lptdDocsBase_() || '(chưa cấu hình — PDF sẽ bị ẩn)'));
+  Logger.log('Recording Engine: ' + lptdRecordingEngineUrl_());
 
   ['LPTD1U01.mp3', 'LPTD2U20.mp3', 'LPTD3U40.mp3', 'LPTD4U40.mp3'].forEach(function (name) {
     var url = lptdCdnBase_() + '/' + name;
