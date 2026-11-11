@@ -4,83 +4,265 @@
   <base target="_top">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LPTD 1–4 — Dictation &amp; Shadowing</title>
-  <?!= include('Styles'); ?>
+  <title>LPTD — Dictation Part 2</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #2563eb;
+      --border: #e2e8f0;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8; --border: #334155; }
+    }
+    html, body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+    .app-shell { max-width: 900px; margin: 0 auto; padding: 16px; }
+    header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .logo { font-size: 28px; }
+    h1 { margin: 0 0 4px 0; font-size: 20px; }
+    .sub { margin: 0; color: var(--muted); font-size: 14px; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .tab { padding: 8px 14px; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 20px; cursor: pointer; font-size: 14px; }
+    .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
+    .tab:hover { filter: brightness(1.05); }
+    .loading, .error { padding: 32px; text-align: center; color: var(--muted); border: 1px dashed var(--border); border-radius: 12px; background: var(--card); }
+    .error { color: #dc2626; border-color: #fca5a5; background: #fef2f2; }
+    .stats { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .stat { flex: 1; min-width: 140px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+    .stat .num { font-size: 20px; font-weight: 700; display: block; }
+    .stat .lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .library { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; transition: transform .1s, box-shadow .1s; }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.06); border-color: var(--accent); }
+    .card .icon { font-size: 22px; margin-bottom: 2px; }
+    .card .title { font-weight: 600; font-size: 15px; }
+    .card .count { font-size: 12px; color: var(--muted); }
+    .card .open { margin-top: 6px; align-self: flex-start; padding: 6px 12px; border: 1px solid var(--accent); background: transparent; color: var(--accent); border-radius: 6px; font-size: 13px; cursor: pointer; font-weight: 600; }
+    .card .open:hover { background: var(--accent); color: #fff; }
+
+    /* Unit view */
+    .unit-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .unit-header h2 { margin: 0; font-size: 18px; }
+    .unit-sub { color: var(--muted); font-size: 13px; margin: 0; }
+    .btn { padding: 8px 14px; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 8px; cursor: pointer; font-size: 14px; }
+    .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn:hover { filter: brightness(1.05); }
+    .btn:disabled { opacity: .5; cursor: not-allowed; }
+    .back { margin-bottom: 16px; }
+    .audio-row { margin: 14px 0; padding: 14px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    audio { width: 260px; height: 40px; }
+    .lines-list { margin-top: 16px; }
+    .line-item { padding: 10px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; }
+    .line-item:last-child { border-bottom: none; }
+    .line-no { font-weight: 700; color: var(--accent); min-width: 24px; font-size: 13px; }
+    .line-speaker { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); width: 40px; flex-shrink: 0; }
+    .line-text { flex: 1; }
+    .line-text.q { color: var(--text); }
+    .line-text.a { color: #059669; }
+    .cdn-link { margin-top: 10px; font-size: 12px; color: var(--muted); word-break: break-all; }
+    .hidden { display: none !important; }
+    .loading-spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 6px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
 </head>
 <body>
 <div class="app-shell">
-  <main class="main">
-    <header class="main-header">
-      <div class="logo-icon">🎧</div>
-      <div style="flex:1;min-width:0">
-        <div class="header-title" id="headerTitle">LPTD 1–4</div>
-        <div class="header-sub" id="headerSub">Listening Practice Through Dictation</div>
-      </div>
-      <div class="header-right">
-        <button type="button" class="btn btn-outline btn-sm" id="btnTheme" title="Sáng / Tối" aria-label="Đổi giao diện sáng tối">🌙</button>
-      </div>
-    </header>
-
-    <div class="main-body">
-      <div class="container">
-
-        <div class="hero">
-          <div class="hero-row">
-            <div>
-              <h1 id="heroTitle">Listening Practice Through Dictation</h1>
-              <p id="heroSub">LPTD 1–4 · 160 unit · Nghe – chép chính tả – shadowing</p>
-            </div>
-            <span class="badge accent" id="heroStatus">⏳ Đang tải</span>
-          </div>
-          <div class="hero-badges">
-            <span class="badge" id="heroDictationBadge">📝 Dictation</span>
-            <span class="badge" id="heroShadowingBadge">🗣️ Shadowing</span>
-            <span class="badge" id="heroBadgeCount">🎧 160 unit · 4 cuốn</span>
-          </div>
-        </div>
-
-        <div id="modeBody">
-          <section class="card lptd-loading">
-            <div class="lptd-loading-icon">🎧</div>
-            <b>Đang tải dữ liệu LPTD…</b>
-            <span class="lptd-muted">160 unit · 4 cuốn · audio phát trực tiếp từ CDN</span>
-          </section>
-        </div>
-
-      </div>
+  <header>
+    <div class="logo">🎧</div>
+    <div>
+      <h1 id="pageTitle">Dictation Part 2</h1>
+      <p class="sub" id="pageSub">TOEIC Part 2 — Nghe – chép chính tả – shadowing</p>
     </div>
-  </main>
+  </header>
+
+  <div class="tabs">
+    <button type="button" class="tab active" id="tabDp2">Dictation Part 2</button>
+    <button type="button" class="tab" id="tabLptd">LPTD 1–4</button>
+  </div>
+
+  <div id="heroStats" class="stats hidden">
+    <div class="stat"><span class="num" id="statUnits">–</span><span class="lbl">Bài học</span></div>
+    <div class="stat"><span class="num" id="statLines">–</span><span class="lbl">Câu hỏi</span></div>
+    <div class="stat"><span class="num" id="statWords">–</span><span class="lbl">Từ vựng</span></div>
+  </div>
+
+  <div id="dp2Library" class="library"></div>
+  <div id="dp2UnitView" class="hidden"></div>
+
+  <div id="lptdNotice" class="loading hidden">
+    <strong>LPTD 1–4:</strong> dữ liệu 160 unit nằm trong dự án tổng (<code>app/</code>). Web app này hiện chỉ tích hợp Dictation Part 2.
+  </div>
+
+  <div id="errorBox" class="error hidden">
+    <div class="loading-spinner"></div><span id="errorMsg">Đang tải dữ liệu…</span>
+  </div>
 </div>
 
 <script>
-/* URL Recording Engine — popup ghi âm NGOÀI iframe GAS (bypass Permissions Policy
-   chặn micro). Giá trị do Code.gs bơm vào từ Script Property LPTD_RECORDING_ENGINE_URL
-   (xem lptdRecordingEngineUrl_ trong Code.gs). */
-window.LPTD_RECORDING_ENGINE_URL = '<?!= RECORDING_ENGINE_URL ?>';
-</script>
-
-<?!= include('LptdUI'); ?>
-<script>
 (function () {
   'use strict';
-  /* Theme sáng/tối — độc lập, chỉ lưu localStorage trình duyệt. */
-  var KEY = 'toeic_lptd_theme';
-  var btn = document.getElementById('btnTheme');
-  function apply(theme) {
-    if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    else document.documentElement.removeAttribute('data-theme');
-    if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+
+  var $ = function (sel) { return document.querySelector(sel); };
+  var $$ = function (sel) { return Array.from(document.querySelectorAll(sel)); };
+
+  var tabDp2 = $('#tabDp2');
+  var tabLptd = $('#tabLptd');
+  var libBox = $('#dp2Library');
+  var unitBox = $('#dp2UnitView');
+  var statsBox = $('#heroStats');
+  var errBox = $('#errorBox');
+  var errMsg = $('#errorMsg');
+
+  var state = { lessons: [], current: null };
+
+  function showError(msg) {
+    errBox.classList.remove('hidden');
+    errMsg.textContent = msg || 'Lỗi không xác định';
+    libBox.innerHTML = '';
+    unitBox.innerHTML = '';
+    unitBox.classList.add('hidden');
+    statsBox.classList.add('hidden');
   }
-  var saved = null;
-  try { saved = localStorage.getItem(KEY); } catch (e) {}
-  apply(saved === 'dark' ? 'dark' : 'light');
-  if (btn) {
-    btn.addEventListener('click', function () {
-      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      apply(next);
-      try { localStorage.setItem(KEY, next); } catch (e) {}
+
+  function showLoading() {
+    errBox.classList.remove('hidden');
+    errMsg.innerHTML = '<span class="loading-spinner"></span>Đang tải dữ liệu Dictation Part 2…';
+    libBox.innerHTML = '';
+    unitBox.innerHTML = '';
+    unitBox.classList.add('hidden');
+    statsBox.classList.add('hidden');
+  }
+
+  function renderStats(meta) {
+    if (!meta) return;
+    statsBox.classList.remove('hidden');
+    $('#statUnits').textContent = meta.totals.units;
+    $('#statLines').textContent = meta.totals.lines.toLocaleString('vi-VN');
+    $('#statWords').textContent = meta.totals.words.toLocaleString('vi-VN');
+  }
+
+  function renderLibrary() {
+    libBox.innerHTML = '';
+    state.lessons.forEach(function (u) {
+      var card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML =
+        '<div class="icon">📝</div>' +
+        '<div class="title">' + escapeHtml(u.title) + '</div>' +
+        '<div class="count">' + u.lineCount + ' câu · ' + u.wordCount + ' từ · <b>' + u.audioFileName + '</b></div>' +
+        '<button type="button" class="open" data-id="' + u.id + '">Mở bài học</button>';
+      card.querySelector('.open').addEventListener('click', function () { openUnit(u.id); });
+      libBox.appendChild(card);
     });
   }
+
+  function openUnit(id) {
+    var u = state.lessons.find(function (x) { return x.id === id; });
+    if (!u) return;
+    state.current = u;
+    libBox.classList.add('hidden');
+    unitBox.classList.remove('hidden');
+
+    var linesHtml = u.lines.map(function (ln, i) {
+      var speaker = ln.speaker || 'Q';
+      var cls = speaker === 'A' ? 'a' : 'q';
+      var label = speaker === 'A' ? 'A' : 'Q';
+      return '<div class="line-item">' +
+        '<div class="line-no">' + (i + 1) + '</div>' +
+        '<div class="line-speaker">' + label + '</div>' +
+        '<div class="line-text ' + cls + '">' + escapeHtml(ln.text) + '</div>' +
+        '</div>';
+    }).join('');
+
+    unitBox.innerHTML =
+      '<div class="unit-header">' +
+      '<button type="button" class="btn back" onclick="window.app.backToLibrary()">← Về thư viện</button>' +
+      '<div style="flex:1;min-width:0">' +
+      '<h2 style="margin:0 0 4px 0;font-size:17px">' + escapeHtml(u.title) + '</h2>' +
+      '<p class="unit-sub" style="margin:0">' + u.audioFileName + ' · ' + u.lineCount + ' câu · ' + u.wordCount + ' từ</p>' +
+      '</div>' +
+      '</div>' +
+
+      '<div class="audio-row">' +
+      '<audio id="dp2Audio" controls preload="metadata" src="' + escapeHtml(u.cdnUrl) + '"></audio>' +
+      '<div style="font-size:13px;color:var(--muted)"><b>Audio CDN:</b><br>' + escapeHtml(u.cdnUrl) + '</div>' +
+      '</div>' +
+
+      '<div class="lines-list">' + linesHtml + '</div>' +
+
+      '<div class="cdn-link" style="margin-top:14px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--muted)">' +
+      'Local: <code>' + escapeHtml(u.localPath) + '</code><br>' +
+      'CDN name: <code>' + escapeHtml(u.cdnName) + '</code>' +
+      '</div>';
+  }
+
+  window.app = {
+    backToLibrary: function () {
+      state.current = null;
+      libBox.classList.remove('hidden');
+      unitBox.classList.add('hidden');
+      var audio = $('#dp2Audio');
+      if (audio) { audio.pause(); audio.src = ''; }
+    },
+  };
+
+  function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function loadData() {
+    showLoading();
+    if (typeof google !== 'undefined' && google.script && google.script.run) {
+      google.script.run
+        .withSuccessHandler(function (res) {
+          if (!res || !res.dp2Lessons) {
+            showError('Dữ liệu DP2 không có trong phản hồi server.');
+            return;
+          }
+          state.lessons = res.dp2Lessons;
+          renderStats(res.dp2Meta || res.meta || {});
+          renderLibrary();
+          errBox.classList.add('hidden');
+        })
+        .withFailureHandler(function (err) {
+          showError('Không gọi được getLptdBootstrap(): ' + (err && err.message ? err.message : String(err)));
+        })
+        .getLptdBootstrap();
+    } else {
+      showError('Chạy ngoài môi trường GAS — không thể gọi google.script.run.');
+    }
+  }
+
+  tabDp2.addEventListener('click', function () {
+    tabDp2.classList.add('active');
+    tabLptd.classList.remove('active');
+    $('#lptdNotice').classList.add('hidden');
+    if (state.lessons.length === 0) loadData();
+    else { libBox.classList.remove('hidden'); unitBox.classList.add('hidden'); errBox.classList.add('hidden'); }
+  });
+
+  tabLptd.addEventListener('click', function () {
+    tabLptd.classList.add('active');
+    tabDp2.classList.remove('active');
+    $('#lptdNotice').classList.remove('hidden');
+    libBox.innerHTML = '';
+    unitBox.innerHTML = '';
+    unitBox.classList.add('hidden');
+    statsBox.classList.add('hidden');
+    errBox.classList.add('hidden');
+  });
+
+  // Auto-start DP2
+  loadData();
 })();
 </script>
 </body>
