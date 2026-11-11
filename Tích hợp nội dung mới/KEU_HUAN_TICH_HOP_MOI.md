@@ -44,6 +44,8 @@
 - Mức độ phù hợp cho LPTD: rất cao.
 - Vai trò trong kế hoạch: content bổ sung / đối chiếu cho course dictation & shadowing.
 
+> **Ý kiến hiện tại của người dùng:** 4 nguồn tài liệu này sẽ là **nhánh của dự án tổng** `E:\CÁ NHÂN\03. Quyet.nv\29. Học chép chính tả TOEIC`.
+
 ## 3. Kết luận khảo sát
 
 - `750+` và `600+`: phù hợp mạnh để xây dựng nội dung dictation/shadowing cho web app riêng.
