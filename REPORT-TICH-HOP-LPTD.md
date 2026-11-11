@@ -306,6 +306,7 @@ Bước tiếp theo duy nhất mang tính bắt buộc là **deploy thử trên 
 - `saveUserRecording` / `getUserRecording` / `getUserRecordings` trong `op/gas-standalone/Code.gs` (khóa `recording:{uid}:{day}:{idx}`, day = book, idx = unit*100 + line).
 - Ghi đè thông minh: ghi lại cùng câu → file Drive cũ bị `setTrashed(true)`, file mới `ANYONE_WITH_LINK`.
 - UI: link ☁ Drive từng câu + khối "mã đồng bộ" (📋 Sao chép / 🔑 Đổi mã) để nghe lại trên thiết bị khác.
-- Deployment @9: `AKfycbzaa2wxbAjA3p0fywgpGxFbZCuvjnHd2HxoiisVhMdrI6lM3I3DhV7KFYllzOJdTASz`.
+- Deployment mới nhất @10: `AKfycbxlnVOgdkGbOKQ_tWcEFa_t9TX41hNgjUNiAuemt13xjSa7QzD6puUmdZTltlkOu7En`.
+- Bản ghi lưu trong thư mục Drive `LPTD Recordings` (tự tạo), file `REC_<uid>_D<book>_I<unit*100+line>.webm`.
 - Lần đầu phải chạy `authorizeLptdDrive()` trong Script Editor và Allow quyền Drive.
 - Guide cho AI/dev khác: `op/AI-GUIDE-SHADOWING-AUDIO.md`.

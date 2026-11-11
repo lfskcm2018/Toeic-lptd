@@ -277,8 +277,16 @@ Nút "🗣 Chấm %" trong GAS: gửi `START_RECOGNITION` (không ghi audio) →
 
 ```js
 function authorizeLptdDrive() {            // chạy 1 lần trong Script Editor
-  try { DriveApp.getRootFolder(); return { ok: true }; }
-  catch (e) { return { ok: false, error: e.message }; }
+  try { DriveApp.getRootFolder(); return true; }
+  catch (e) { return false; }
+}
+
+function lptdRecordingFolder_() {           // thư mục "LPTD Recordings" (tự tạo) hoặc RECORDING_FOLDER_ID
+  var props = PropertiesService.getScriptProperties();
+  var id = props.getProperty('RECORDING_FOLDER_ID');
+  if (id) { try { return DriveApp.getFolderById(id); } catch (e) {} }
+  var it = DriveApp.getFoldersByName('LPTD Recordings');
+  return it.hasNext() ? it.next() : DriveApp.createFolder('LPTD Recordings');
 }
 
 function saveUserRecording(userId, day, itemIndex, audioBase64, mimeType) {

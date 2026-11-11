@@ -148,6 +148,26 @@ function lptdRecordingKey_(userId, day, itemIndex) {
   return 'recording:' + String(userId || 'anonymous') + ':' + Number(day) + ':' + Number(itemIndex);
 }
 
+/**
+ * Thư mục Drive chứa bản ghi (mặc định "LPTD Recordings" ở My Drive).
+ * Có thể chỉ định thư mục khác: Script Property RECORDING_FOLDER_ID = <folderId>.
+ */
+function lptdRecordingFolder_() {
+  var props = PropertiesService.getScriptProperties();
+  var settings = {};
+  try { settings = JSON.parse(props.getProperty('RECORDING_SETTINGS') || '{}'); } catch (e) { settings = {}; }
+  var folderId = settings.RECORDING_FOLDER_ID || props.getProperty('RECORDING_FOLDER_ID') || '';
+  if (folderId) {
+    try { return DriveApp.getFolderById(folderId); } catch (e) {}
+  }
+  var name = 'LPTD Recordings';
+  var it = DriveApp.getFoldersByName(name);
+  var folder = it.hasNext() ? it.next() : DriveApp.createFolder(name);
+  settings.RECORDING_FOLDER_ID = folder.getId();
+  props.setProperty('RECORDING_SETTINGS', JSON.stringify(settings));
+  return folder;
+}
+
 /** Lưu bản ghi âm (.webm base64) lên Google Drive, trả URL phát lại. */
 function saveUserRecording(userId, day, itemIndex, audioBase64, mimeType) {
   var uid = String(userId || 'anonymous');
@@ -158,16 +178,7 @@ function saveUserRecording(userId, day, itemIndex, audioBase64, mimeType) {
   var bytes = Utilities.base64Decode(audioBase64);
   var blob = Utilities.newBlob(bytes, mimeType || 'audio/webm', fileName);
 
-  var settings = {};
-  try { settings = JSON.parse(PropertiesService.getScriptProperties().getProperty('RECORDING_SETTINGS') || '{}'); } catch (e) {}
-  var recFolderId = settings.RECORDING_FOLDER_ID || '';
-  var folder = null;
-  if (recFolderId) {
-    try { folder = DriveApp.getFolderById(recFolderId); } catch (e) { folder = null; }
-  }
-  if (!folder) {
-    folder = DriveApp.getRootFolder();
-  }
+  var folder = lptdRecordingFolder_();
 
   var file = folder.createFile(blob);
   file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
