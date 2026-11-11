@@ -301,25 +301,33 @@ function getUserRecordings(userId, day, unit) {
   return out;
 }
 
-/* ---------- Kiểm tra nhanh trong Script Editor ---------- */
 function debugLptd() {
-  var meta = LPTD_LESSONS_META();
-  Logger.log('=== LPTD standalone ===');
-  Logger.log('Tổng unit: ' + meta.totals.units + ' | câu: ' + meta.totals.lines + ' | từ: ' + meta.totals.words);
+  var meta = LPTD_LESSONS_META() || {};
+  var lessons = [];
+  try { lessons = LPTD_LESSONS() || []; } catch (e) {}
+  Logger.log('=== Hacker 1 LPTD standalone ===');
+  var totals = meta.totals || {};
+  var units = (totals.units != null ? totals.units : (meta.lessonCount != null ? meta.lessonCount : lessons.length));
+  var lines = (totals.lines != null ? totals.lines : (meta.totalLines != null ? meta.totalLines : 0));
+  var words = (totals.words != null ? totals.words : (meta.totalWords != null ? meta.totalWords : 0));
+  Logger.log('Tổng unit: ' + units + ' | câu: ' + lines + ' | từ: ' + words);
+  if (meta.tests) Logger.log('Tests: ' + meta.tests + ' | Parts: ' + JSON.stringify(meta.parts || []));
   (meta.books || []).forEach(function (b) {
     Logger.log('Cuốn ' + b.book + ': ' + b.units + ' unit, ' + b.lines + ' câu, ' + b.words + ' từ');
   });
   Logger.log('Audio CDN: ' + lptdCdnBase_());
-  Logger.log('Docs CDN : ' + (lptdDocsBase_() || '(chưa cấu hình — PDF sẽ bị ẩn)'));
+  Logger.log('Docs CDN : ' + (lptdDocsBase_() || '(chưa cấu hình - PDF sẽ bị ẩn)'));
   Logger.log('Recording Engine: ' + lptdRecordingEngineUrl_());
 
-  ['LPTD1U01.mp3', 'LPTD2U20.mp3', 'LPTD3U40.mp3', 'LPTD4U40.mp3'].forEach(function (name) {
+  var samples = (lessons.slice(0, 3).map(function (l) { return l.cdnName || l.audioFileName; }).filter(Boolean));
+  if (!samples.length) samples = ['HACKER1_T01_P12.mp3', 'HACKER1_T05_P3.mp3', 'HACKER1_T10_P4.mp3'];
+  samples.forEach(function (name) {
     var url = lptdCdnBase_() + '/' + name;
     try {
       var res = UrlFetchApp.fetch(url, { method: 'get', headers: { Range: 'bytes=0-0' }, muteHttpExceptions: true });
-      Logger.log('  ' + url + ' → HTTP ' + res.getResponseCode());
+      Logger.log('  ' + url + ' -> HTTP ' + res.getResponseCode());
     } catch (e) {
-      Logger.log('  ' + url + ' → LỖI: ' + e.message);
+      Logger.log('  ' + url + ' -> LỖI: ' + e.message);
     }
   });
 }
