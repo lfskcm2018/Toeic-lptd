@@ -179,3 +179,10 @@ Không ghi lẫn vào tiến độ Hackers/ETS.
 ## Tài liệu cho AI/Dev
 
 - `op/AI-GUIDE-SHADOWING-AUDIO.md` — hướng dẫn tích hợp audio + ghi âm shadowing (popup Recording Engine, postMessage, lưu Drive) cho module mới.
+
+## Audio Player nổi (tab Dictation)
+
+- Thanh player cố định đáy màn hình: **Play/Pause/Resume**, **Stop** (dừng + tua về 0:00), **seek + thời gian**, **tốc độ 0.5–2.0x**, **âm lượng + mute**.
+- Lưu tốc độ/âm lượng/mute trong localStorage (`toeic_lptd_speed`, `toeic_lptd_volume`, `toeic_lptd_mute`).
+- Không phát song song: player tự tạm dừng audio của core (Hackers/ETS) khi phát và ngược lại;
+  chuyển unit/đóng module luôn dừng audio (không phát ngầm).
