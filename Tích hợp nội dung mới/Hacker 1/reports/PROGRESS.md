@@ -49,3 +49,18 @@
 ## Build log
 - `reports/build-last.log` (lần build gần nhất).
 - `reports/data-quality-scan.json` (quét chất lượng).
+
+## Triển khai GAS (tự động)
+- Project: **Hacker 1 - TOEIC 1000 LC Dictation** (clasp, lfskcm2018@gmail.com)
+- Script ID: 1WJIc2K-xMIw2w0ebtokx04BLkv2qTO5vwUQpEGQXXuooVZVDhsUzVSfi
+- Đã clasp push 6 file: Code.gs, Hacker1Data.gs, Index.html, Styles.html, LptdUI.html, ppsscript.json.
+- Deployment @1: AKfycbxntTCymj9UaiJVj57qalm8jVpZt0umW7hdCuibe5YM3QHyr1aesn7prT_4Sk-iBAy8
+- Web app URL: https://script.google.com/macros/s/AKfycbxntTCymj9UaiJVj57qalm8jVpZt0umW7hdCuibe5YM3QHyr1aesn7prT_4Sk-iBAy8/exec
+- **Cần cấu hình (Script Properties):** LPTD_AUDIO_CDN_BASE=https://toeic-audio.netlify.app/audio/hacker1 (mặc định code đã trỏ đúng; nên set rõ trong Properties). Kiểm tra quyền truy cập Web app và uthorizeLptdDrive()/Recording Engine nếu dùng ghi âm.
+- **Dữ liệu (local test PASS):** 30 lessons, 205 lines, 2737 words, scan 0 issue.
+
+## Netlify (audio CDN)
+- Staging sẵn sàng: _deploy_audio/audio/hacker1/ (30 mp3, đúng cdnName) và udio-cdn/ + manifest.
+- Netlify CLI trong môi trường **chưa xác thực** (
+etlify status: Not logged in / no NETLIFY_AUTH_TOKEN) → chưa thể auto-deploy lên 	oeic-audio.netlify.app.
+- Cần upload để URL hoạt động: https://toeic-audio.netlify.app/audio/hacker1/<cdnName> (vd. HACKER1_T01_P12.mp3).
