@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TOEIC Recording Engine</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="re-app">
+    <div class="re-header">
+      <div class="re-title">🎙 TOEIC Recording Engine</div>
+      <div class="re-status" id="reStatus">Sẵn sàng</div>
+    </div>
+
+    <div class="re-target" id="reTarget" hidden>
+      <div class="re-target-label">Câu cần đọc (shadowing)</div>
+      <div class="re-target-text" id="reTargetText">—</div>
+    </div>
+
+    <div class="re-controls">
+      <button class="btn btn-primary" id="btnStart" type="button">🎙 Bắt đầu ghi âm</button>
+      <button class="btn btn-outline" id="btnStop" type="button" disabled>⏹ Dừng</button>
+      <button class="btn btn-outline" id="btnPlay" type="button" disabled>▶ Nghe lại bản ghi</button>
+      <button class="btn btn-outline" id="btnSend" type="button" disabled>📤 Gửi về ứng dụng chính</button>
+      <button class="btn btn-outline" id="btnReRecord" type="button" disabled>🔄 Ghi lại</button>
+    </div>
+
+    <div class="re-waveform" id="reWaveform" hidden></div>
+
+    <div class="re-transcript" id="reTranscript" hidden>
+      <div class="re-target-label">Máy nghe được (transcript)</div>
+      <div class="re-transcript-text" id="reTranscriptText">—</div>
+    </div>
+
+    <div class="re-info" id="reInfo">
+      <div>Chưa có bản ghi nào. Trang này tự nhận lệnh ghi âm từ ứng dụng chính.</div>
+    </div>
+
+    <div class="re-hint">
+      <p>• Trang này chạy <b>độc lập</b> (không nằm trong iframe GAS) → có quyền truy cập micro đầy đủ.</p>
+      <p>• Ghi xong, bản ghi + transcript được <b>tự động gửi</b> về ứng dụng chính qua <code>postMessage</code>.</p>
+      <p>• Lần đầu sử dụng, trình duyệt sẽ hỏi cấp quyền micro — chọn <b>Cho phép (Allow)</b>.</p>
+    </div>
+  </div>
+
+  <script src="engine.js"></script>
+</body>
+</html>
