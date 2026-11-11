@@ -40,7 +40,7 @@ function LPTD_LESSONS() {
     "title": "When Questions",
     "slug": "when-questions",
     "audioFileName": "01. When 의문문.mp3",
-    "cdnName": "DP2-01-When.mp3",
+    "cdnName": "01. When 의문문.mp3",
     "localPath": "Dictation Part 2/MP3/01. When 의문문.mp3",
     "lines": [
       {
@@ -204,7 +204,7 @@ function LPTD_LESSONS() {
     "title": "Where Questions",
     "slug": "where-questions",
     "audioFileName": "02. Where 의문문.mp3",
-    "cdnName": "DP2-02-Where.mp3",
+    "cdnName": "02. Where 의문문.mp3",
     "localPath": "Dictation Part 2/MP3/02. Where 의문문.mp3",
     "lines": [
       {
@@ -368,7 +368,7 @@ function LPTD_LESSONS() {
     "title": "Who Questions",
     "slug": "who-questions",
     "audioFileName": "03. Who 의문문.mp3",
-    "cdnName": "DP2-03-Who.mp3",
+    "cdnName": "03. Who 의문문.mp3",
     "localPath": "Dictation Part 2/MP3/03. Who 의문문.mp3",
     "lines": [
       {
@@ -672,7 +672,7 @@ function LPTD_LESSONS() {
     "title": "Why Questions",
     "slug": "why-questions",
     "audioFileName": "04. Why 의문문.mp3",
-    "cdnName": "DP2-04-Why.mp3",
+    "cdnName": "04. Why 의문문.mp3",
     "localPath": "Dictation Part 2/MP3/04. Why 의문문.mp3",
     "lines": [
       {
@@ -896,7 +896,7 @@ function LPTD_LESSONS() {
     "title": "Which Questions",
     "slug": "which-questions",
     "audioFileName": "05. Which 의문문.mp3",
-    "cdnName": "DP2-05-Which.mp3",
+    "cdnName": "05. Which 의문문.mp3",
     "localPath": "Dictation Part 2/MP3/05. Which 의문문.mp3",
     "lines": [
       {
@@ -1020,7 +1020,7 @@ function LPTD_LESSONS() {
     "title": "What Questions",
     "slug": "what-questions",
     "audioFileName": "06. What 의문문.mp3",
-    "cdnName": "DP2-06-What.mp3",
+    "cdnName": "06. What 의문문.mp3",
     "localPath": "Dictation Part 2/MP3/06. What 의문문.mp3",
     "lines": [
       {
@@ -1224,7 +1224,7 @@ function LPTD_LESSONS() {
     "title": "How Questions",
     "slug": "how-questions",
     "audioFileName": "07. How 의문문.mp3",
-    "cdnName": "DP2-07-How.mp3",
+    "cdnName": "07. How 의문문.mp3",
     "localPath": "Dictation Part 2/MP3/07. How 의문문.mp3",
     "lines": [
       {
@@ -1478,7 +1478,7 @@ function LPTD_LESSONS() {
     "title": "General Tag Indirect Questions",
     "slug": "general-tag-indirect-questions",
     "audioFileName": "08. 일반, 부가. 간접 의문문.mp3",
-    "cdnName": "DP2-08-GeneralTagIndirect.mp3",
+    "cdnName": "08. 일반, 부가. 간접 의문문.mp3",
     "localPath": "Dictation Part 2/MP3/08. 일반, 부가. 간접 의문문.mp3",
     "lines": [
       {
@@ -1862,7 +1862,7 @@ function LPTD_LESSONS() {
     "title": "Suggestion Offer Questions",
     "slug": "suggestion-offer-questions",
     "audioFileName": "09. 권유, 제안 의문문.mp3",
-    "cdnName": "DP2-09-SuggestionOffer.mp3",
+    "cdnName": "09. 권유, 제안 의문문.mp3",
     "localPath": "Dictation Part 2/MP3/09. 권유, 제안 의문문.mp3",
     "lines": [
       {
@@ -2096,7 +2096,7 @@ function LPTD_LESSONS() {
     "title": "Declarative Sentences",
     "slug": "declarative-sentences",
     "audioFileName": "10. 평서문.mp3",
-    "cdnName": "DP2-10-Declarative.mp3",
+    "cdnName": "10. 평서문.mp3",
     "localPath": "Dictation Part 2/MP3/10. 평서문.mp3",
     "lines": [
       {
@@ -2410,7 +2410,7 @@ function LPTD_LESSONS() {
     "title": "Alternative Questions",
     "slug": "alternative-questions",
     "audioFileName": "11. 선택의문문.mp3",
-    "cdnName": "DP2-11-Alternative.mp3",
+    "cdnName": "11. 선택의문문.mp3",
     "localPath": "Dictation Part 2/MP3/11. 선택의문문.mp3",
     "lines": [
       {
