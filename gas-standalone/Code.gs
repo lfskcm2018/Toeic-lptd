@@ -210,10 +210,16 @@ function saveUserRecording(userId, day, itemIndex, audioBase64, mimeType) {
   var uid = String(userId || 'anonymous');
   var d = Number(day);
   var idx = Number(itemIndex);
-  var fileName = 'REC_' + uid + '_D' + String(d).padStart(2, '0') + '_I' + String(idx).padStart(2, '0') + '.webm';
+  var mime = String(mimeType || 'audio/webm');
+  var ext = 'webm';
+  if (/wav/i.test(mime)) ext = 'wav';
+  else if (/mp4|m4a|aac/i.test(mime)) ext = 'm4a';
+  else if (/ogg|opus/i.test(mime)) ext = 'ogg';
+  else if (/mpeg|mp3/i.test(mime)) ext = 'mp3';
+  var fileName = 'REC_' + uid + '_D' + String(d).padStart(2, '0') + '_I' + String(idx).padStart(2, '0') + '.' + ext;
 
   var bytes = Utilities.base64Decode(audioBase64);
-  var blob = Utilities.newBlob(bytes, mimeType || 'audio/webm', fileName);
+  var blob = Utilities.newBlob(bytes, mime, fileName);
 
   var folder = lptdRecordingFolder_();
 
@@ -252,6 +258,20 @@ function getUserRecording(userId, day, itemIndex) {
   var meta = {};
   try { meta = JSON.parse(PropertiesService.getScriptProperties().getProperty(metaKey) || '{}'); } catch (e) {}
   return { url: String(meta.url || ''), fileId: String(meta.fileId || ''), fileName: String(meta.fileName || '') };
+}
+
+/** Xoá 1 bản ghi (trash file Drive + xoá metadata) — dùng khi người học muốn ghi lại/xoá. */
+function lptdDeleteRecording(userId, day, itemIndex) {
+  var uid = String(userId || 'anonymous');
+  var d = Number(day);
+  var idx = Number(itemIndex);
+  var props = PropertiesService.getScriptProperties();
+  var key = lptdRecordingKey_(uid, d, idx);
+  var meta = {};
+  try { meta = JSON.parse(props.getProperty(key) || '{}'); } catch (e) {}
+  if (meta.fileId) { try { DriveApp.getFileById(meta.fileId).setTrashed(true); } catch (e) {} }
+  try { props.deleteProperty(key); } catch (e) {}
+  return { deleted: true };
 }
 
 /**

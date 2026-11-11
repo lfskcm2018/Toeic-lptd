@@ -577,8 +577,8 @@ Da hoan thanh Approach A (popup ngoai iframe):
 
 ### Bổ sung 11/11/2026 — Lưu Drive + mã đồng bộ
 
-- Deployment mới nhất **@10**: `AKfycbxlnVOgdkGbOKQ_tWcEFa_t9TX41hNgjUNiAuemt13xjSa7QzD6puUmdZTltlkOu7En`
-  (=/@9 `AKfycbzaa...` nội dung Drive, thêm thư mục Drive `LPTD Recordings`).
+- Deployment mới nhất **@13**: `AKfycbyBtbIBaQCopgUEGvj9smruaNO7z5cTKjpnsUz7QoQ6wluomKorxe1zqOtqMu0VvLFa`
+  (@12 `AKfycbysxqhT...` là bản Drive đã cấp quyền; @11 `AKfycbwic8...` player nổi).
 - Mỗi bản ghi tự lưu Google Drive (`saveUserRecording`), ghi đè file cũ cùng câu (trash file cũ).
 - `getUserRecordings(userId, day, unit)` trả URL cả unit trong 1 round-trip; UI hiện link ☁ Drive.
 - Mã đồng bộ (localStorage `toeic_lptd_uid`) để nghe lại trên thiết bị khác (nhập cùng mã).

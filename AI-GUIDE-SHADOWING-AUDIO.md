@@ -381,18 +381,72 @@ Sau deploy:
 Lần đầu dùng `DriveApp`, script chưa có quyền Drive → `saveUserRecording` lỗi
 "Authorization is required" / `authorizeLptdDrive()` trả `false`.
 
-Cách cấp quyền:
-1. Mở https://script.google.com → chọn project **"LPTD 1-4 Standalone"**.
-2. Chọn hàm `authorizeLptdDrive` → bấm **Run**.
-3. Google hỏi quyền (Drive) → **Allow / Cho phép**.
-4. Nếu đã tạo deployment trước đó: **Deploy → Manage deployments → Edit → New version → Deploy**
-   (để deployment nhận scope mới).
+### 7.1 Khai báo scope trong manifest (BẮT BUỘC)
+
+Nếu `appsscript.json` không liệt kê `oauthScopes`, trình soạn thảo **có thể không hiện
+hộp thoại xin quyền** (dùng bản ủy quyền cũ) → chạy hàm vẫn lỗi
+`You do not have permission to call DriveApp.getRootFolder`.
+
+```json
+{
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/script.external_request"
+  ]
+}
+```
+
+Sau khi sửa manifest phải **push** (`clasp push`) rồi **hard reload** Script Editor
+(Ctrl+Shift+R) mới có hiệu lực.
+
+### 7.2 Cách xin quyền chắc chắn (khi editor không hiện prompt)
+
+Thêm hàm chẩn đoán vào `Code.gs`:
+
+```js
+function lptdAuthDiagnostics() {
+  var out = {};
+  var info = ScriptApp.getAuthorizationInfo(ScriptApp.AuthMode.FULL);
+  out.status = String(info.getAuthorizationStatus());          // REQUIRED / NOT_REQUIRED
+  out.authUrl = out.status.indexOf('REQUIRED') === 0 ? info.getAuthorizationUrl() : '';
+  var token = ScriptApp.getOAuthToken();
+  var j = JSON.parse(UrlFetchApp.fetch(
+    'https://oauth2.googleapis.com/tokeninfo?access_token=' + encodeURIComponent(token)
+  ).getContentText());
+  out.scopes = j.scope;                                        // phải có .../auth/drive
+  try { out.driveRoot = DriveApp.getRootFolder().getName(); } catch (e) { out.driveError = e.message; }
+  Logger.log(JSON.stringify(out, null, 2));
+  return out;
+}
+```
+
+Luồng chuẩn:
+1. Run `lptdAuthDiagnostics` → đọc log.
+2. Nếu `status: "REQUIRED"` → mở `authUrl` (đúng tài khoản deploy) → **Allow**.
+3. **Granular consent**: Google hiện danh sách quyền có checkbox → **phải TÍCH ô Drive**
+   ("See, edit, create, and delete all of your Google Drive files"). Không tích = không cấp.
+4. Nếu consent screen báo app chưa xác minh: **Advanced** → **Go to ... (unsafe)** → **Allow**.
+5. Run lại → kỳ vọng `status: "NOT_REQUIRED"`, `hasDriveScope: true`, `driveRoot: "My Drive"`.
+
+### 7.3 Bắt buộc deploy version mới
+
+Deployment tạo **trước** khi có scope Drive vẫn giữ bản ủy quyền cũ (dù editor đã Allow).
+Sau khi cấp quyền: **clasp deploy** (hoặc Deploy → Manage deployments → Edit → New version → Deploy).
+Nếu không, web app vẫn báo "You do not have permission to call DriveApp...".
+
+### 7.4 Hàm phụ trợ
+
+- `authorizeLptdDrive()` — chạy 1 lần, trả `true/false`.
+- `lptdAuthDiagnostics()` — kiểm tra trạng thái + scope thực tế.
+- `lptdDeleteRecording(userId, day, itemIndex)` — trash file Drive + xoá metadata.
+- `lptdRecordingFolder_()` — thư mục `LPTD Recordings` (tự tạo) / `RECORDING_FOLDER_ID`.
 
 > Lỗi thường gặp:
 > - `Incorrect function` khi xoá file tên `nul` trên Windows → dùng
 >   `cmd /c del /f /q "\\?\<đường-dẫn-tuyệt-đối>\nul"`.
 > - Popup bị chặn → hướng dẫn người dùng cho phép popup cho `script.google.com`.
 > - Chrome đã từ chối mic trước đó → `chrome://settings/content/microphone` → Allow / Reset.
+> - Tài khoản Google Workspace bị admin chặn scope Drive → cần admin cho phép hoặc dùng Gmail cá nhân.
 
 ---
 
