@@ -90,7 +90,30 @@ function lptdLessonsWithUrls_(cdnBase) {
 function getLptdBootstrap() {
   var cdnBase = lptdCdnBase_();
   var lessons = lptdLessonsWithUrls_(cdnBase);
+<<<<<<< Updated upstream
   var meta = LPTD_LESSONS_META();
+=======
+  var meta = LPTD_LESSONS_META() || {};
+
+  /* Dictation Part 2 (tuỳ chọn; Hacker 1 standalone không có) */
+  var dp2CdnBase = 'https://toeic-audio.netlify.app/audio/dictation-part2';
+  var dp2Lessons = [];
+  var dp2Meta = {};
+  try {
+    if (typeof DP2_LESSONS_META === 'function') dp2Meta = DP2_LESSONS_META() || {};
+    if (typeof DP2_LESSONS === 'function') {
+      dp2Lessons = DP2_LESSONS().map(function (u) {
+        return {
+          id: u.id, book: u.book, unit: u.unit, title: u.title, slug: u.slug,
+          audioFileName: u.audioFileName, cdnName: u.cdnName, localPath: u.localPath,
+          lines: u.lines, lineCount: u.lineCount, wordCount: u.wordCount,
+          cdnUrl: dp2CdnBase + '/' + u.cdnName,
+        };
+      });
+    }
+  } catch (e) {}
+
+>>>>>>> Stashed changes
   return {
     configured: true,
     cdnBase: cdnBase,
@@ -100,7 +123,6 @@ function getLptdBootstrap() {
     lessons: lessons,
   };
 }
-
 /** Tương thích: chỉ trả danh sách unit (kèm cdnUrl). */
 function getLptdLessons() {
   return lptdLessonsWithUrls_(lptdCdnBase_());
