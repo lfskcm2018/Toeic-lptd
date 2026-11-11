@@ -62,6 +62,7 @@
     .mode-tab { padding: 10px 16px; border: none; background: transparent; color: var(--muted); cursor: pointer; font-size: 14px; font-weight: 500; border-bottom: 2px solid transparent; }
     .mode-tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
     .mode-tab:hover { color: var(--accent); }
+    .mode-tab:disabled { opacity: .5; cursor: not-allowed; }
 
     .btn { padding: 8px 14px; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; }
     .btn:hover { filter: brightness(1.05); }
@@ -118,8 +119,9 @@
     @keyframes blink { 50% { opacity: .4; } }
 
     /* Messages */
-    .loading, .error { padding: 32px; text-align: center; color: var(--muted); border: 1px dashed var(--border); border-radius: 12px; background: var(--card); }
+    .loading, .error, .setup { padding: 32px; text-align: center; color: var(--muted); border: 1px dashed var(--border); border-radius: 12px; background: var(--card); }
     .error { color: var(--danger); border-color: #fca5a5; background: #fef2f2; }
+    .setup { color: var(--warning); border-color: #fde68a; background: #fffbeb; }
     .loading-spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 6px; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .hint { font-size: 12px; color: var(--muted); margin: 8px 0; padding: 6px 10px; background: var(--card); border-radius: 6px; border-left: 3px solid var(--accent); }
@@ -128,6 +130,7 @@
 
     .cdn-link { font-size: 11px; color: var(--muted); word-break: break-all; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
     .score-chip { font-size: 12px; font-weight: 600; }
+    .code-block { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; }
   </style>
 </head>
 <body>
@@ -162,9 +165,18 @@
     <strong>LPTD 1–4:</strong> dữ liệu 160 unit nằm trong dự án tổng (<code>app/</code>). Web app này hiện chỉ tích hợp Dictation Part 2.
   </div>
 
-  <!-- Error -->
+  <!-- Error / Setup -->
   <div id="errorBox" class="error hidden">
     <div class="loading-spinner"></div><span id="errorMsg">Đang tải dữ liệu…</span>
+  </div>
+  <div id="setupBox" class="setup hidden">
+    <strong>⚠️ Chưa cấu hình CDN âm thanh Dictation Part 2.</strong><br>
+    File MP3 chỉ tồn tại cục bộ, chưa có trên CDN. Để phát audio, bạn cần:<br>
+    1. Upload 11 file MP3 trong <code class="code-block">Tích hợp nội dung mới/Dictation Part 2/MP3/</code> lên một CDN (Netlify, GitHub Pages, v.v.)<br>
+    2. Mở Script Editor → Project Settings → Script properties → Thêm key <code class="code-block">DP2_AUDIO_CDN_BASE</code> với giá trị là base URL của CDN (ví dụ: <code class="code-block">https://your-cdn.com/audio/dictation-part2</code>)<br>
+    3. Redeploy web app qua clasp.<br>
+    <br>
+    <button type="button" class="btn btn-primary" id="btnOpenScriptEditor">Mở Script Editor</button>
   </div>
 </div>
 
@@ -179,14 +191,14 @@
   var state = {
     lessons: [],
     current: null,
-    mode: 'dictation',   // 'dictation' | 'shadowing'
+    mode: 'dictation',
     audio: null,
     progress: {},
     recBlobs: {},
-    isGas: typeof google !== 'undefined' && google.script && google.script.run
+    isGas: typeof google !== 'undefined' && google.script && google.script.run,
+    dp2AudioConfigured: false,
   };
 
-  /* ---------- Helpers ---------- */
   function escapeHtml(s) {
     if (s == null) return '';
     return String(s)
@@ -195,13 +207,6 @@
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
-  }
-
-  function fmtTime(sec) {
-    if (!isFinite(sec) || sec < 0) return '0:00';
-    var m = Math.floor(sec / 60);
-    var s = Math.floor(sec % 60);
-    return m + ':' + (s < 10 ? '0' : '') + s;
   }
 
   function normalizeWord(w) {
@@ -256,7 +261,6 @@
     return sp ? '<span class="spk-badge">' + escapeHtml(sp) + '</span> ' : '';
   }
 
-  /* ---------- State / Progress ---------- */
   function progressKey(lesson) { return 'dp2-' + lesson.book + '-' + lesson.unit; }
   function loadProgress() {
     try { return JSON.parse(localStorage.getItem('dp2_progress') || '{}'); } catch (e) { return {}; }
@@ -274,7 +278,6 @@
     return pct + '% · ' + (done ? '✅ Điền từ' : '⬜ Điền từ') + ' · ' + (shadowDone ? '✅ Luyện nói' : '⬜ Luyện nói');
   }
 
-  /* ---------- Audio ---------- */
   function stopAudio() {
     if (state.audio) {
       try { state.audio.pause(); } catch (e) {}
@@ -282,14 +285,6 @@
     }
   }
 
-  function initAudio(src) {
-    stopAudio();
-    var audio = new Audio(src);
-    state.audio = audio;
-    return audio;
-  }
-
-  /* ---------- Library ---------- */
   function showError(msg) {
     var box = $('#errorBox');
     var msgEl = $('#errorMsg');
@@ -299,6 +294,17 @@
     $('#dp2UnitView').innerHTML = '';
     $('#dp2UnitView').classList.add('hidden');
     $('#heroStats').classList.add('hidden');
+    $('#setupBox').classList.add('hidden');
+  }
+
+  function showSetup(msg) {
+    var box = $('#setupBox');
+    box.classList.remove('hidden');
+    $('#dp2Library').innerHTML = '';
+    $('#dp2UnitView').innerHTML = '';
+    $('#dp2UnitView').classList.add('hidden');
+    $('#heroStats').classList.add('hidden');
+    $('#errorBox').classList.add('hidden');
   }
 
   function showLoading() {
@@ -310,6 +316,7 @@
     $('#dp2UnitView').innerHTML = '';
     $('#dp2UnitView').classList.add('hidden');
     $('#heroStats').classList.add('hidden');
+    $('#setupBox').classList.add('hidden');
   }
 
   function renderStats(meta) {
@@ -336,7 +343,6 @@
     });
   }
 
-  /* ---------- Unit view ---------- */
   function openUnit(id) {
     var u = state.lessons.find(function (x) { return x.id === id; });
     if (!u) return;
@@ -359,6 +365,27 @@
         '</div>';
     }).join('');
 
+    var audioHtml = '';
+    if (state.dp2AudioConfigured && u.audioUrl) {
+      audioHtml =
+        '<div class="audio-row">' +
+        '<audio id="dp2Audio" controls preload="metadata" src="' + escapeHtml(u.audioUrl) + '"></audio>' +
+        '<div class="audio-controls">' +
+        '<button type="button" class="btn btn-success btn-small" id="dp2Replay">🔁 Phát lại 3x</button>' +
+        '</div>' +
+        '<div style="font-size:12px;color:var(--muted);margin-left:auto"><b>Audio CDN:</b></div>' +
+        '</div>' +
+        '<div class="cdn-link" style="margin-top:6px">' + escapeHtml(u.audioUrl) + '</div>';
+    } else {
+      audioHtml =
+        '<div class="setup" style="margin:12px 0;padding:14px;text-align:left">' +
+        '<strong>⚠️ Audio chưa có URL</strong><br>' +
+        'Chưa cấu hình <code class="code-block">DP2_AUDIO_CDN_BASE</code> trong Script Properties.<br>' +
+        'Bạn vẫn có thể xem câu hỏi/đáp án và luyện nói (nếu có micro).<br>' +
+        '<small>File MP3: ' + escapeHtml(u.localPath) + '</small>' +
+        '</div>';
+    }
+
     $('#dp2UnitView').innerHTML =
       '<div class="unit-header">' +
       '<button type="button" class="btn back" id="dp2Back">← Về thư viện</button>' +
@@ -368,14 +395,7 @@
       '</div>' +
       '</div>' +
 
-      '<div class="audio-row">' +
-      '<audio id="dp2Audio" controls preload="metadata" src="' + escapeHtml(u.cdnUrl) + '"></audio>' +
-      '<div class="audio-controls">' +
-      '<button type="button" class="btn btn-success btn-small" id="dp2Replay">🔁 Phát lại 3x</button>' +
-      '</div>' +
-      '<div style="font-size:12px;color:var(--muted);margin-left:auto"><b>Audio CDN:</b></div>' +
-      '</div>' +
-      '<div class="cdn-link" style="margin-top:6px">' + escapeHtml(u.cdnUrl) + '</div>' +
+      audioHtml +
 
       '<div class="mode-tabs">' +
       '<button type="button" class="mode-tab active" data-mode="dictation">📝 Nghe &amp; điền từ <span style="opacity:.7">(Dictation)</span></button>' +
@@ -387,32 +407,32 @@
       '<div id="dp2Progress" class="hint" style="margin-top:10px"></div>' +
 
       '<div class="cdn-link" style="margin-top:12px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;color:var(--muted)">' +
-      'Local: <code>' + escapeHtml(u.localPath) + '</code><br>' +
-      'CDN name: <code>' + escapeHtml(u.cdnName) + '</code>' +
+      'Local: <code class="code-block">' + escapeHtml(u.localPath) + '</code><br>' +
+      'CDN name: <code class="code-block">' + escapeHtml(u.cdnName) + '</code>' +
       '</div>';
 
-    // Wire up
     $('#dp2Back').addEventListener('click', backToLibrary);
-    var audio = $('#dp2Audio');
-    if (audio) {
-      audio.addEventListener('ended', function () { /* loop handled by replay btn */ });
-    }
-    $('#dp2Replay').addEventListener('click', function () {
-      var a = $('#dp2Audio');
-      if (!a) return;
-      a.currentTime = 0;
-      a.play().catch(function () {});
-      var count = 0;
-      var handler = function () {
-        count++;
-        if (count < 3) { a.currentTime = 0; a.play().catch(function () {}); }
-        else { a.removeEventListener('ended', handler); }
-      };
-      a.addEventListener('ended', handler);
-      a.play().catch(function () {});
-    });
 
-    // Mode tabs
+    if (state.dp2AudioConfigured && u.audioUrl) {
+      var audio = $('#dp2Audio');
+      if (audio) {
+        $('#dp2Replay').addEventListener('click', function () {
+          var a = $('#dp2Audio');
+          if (!a) return;
+          a.currentTime = 0;
+          a.play().catch(function () {});
+          var count = 0;
+          var handler = function () {
+            count++;
+            if (count < 3) { a.currentTime = 0; a.play().catch(function () {}); }
+            else { a.removeEventListener('ended', handler); }
+          };
+          a.addEventListener('ended', handler);
+          a.play().catch(function () {});
+        });
+      }
+    }
+
     $$('.mode-tab').forEach(function (tab) {
       tab.addEventListener('click', function () {
         $$('.mode-tab').forEach(function (t) { t.classList.toggle('active', t === tab); });
@@ -449,7 +469,6 @@
     updateProgressUI();
   }
 
-  /* ---------- Dictation ---------- */
   function renderDictation(body, u) {
     var html = '<div style="margin-bottom:8px"><b>📝 Dictation</b> — nghe audio và điền từ vào ô trống (tự sinh mỗi 4 từ). Nhấn <kbd>Enter</kbd> để kiểm tra. Điểm đạt: <b>≥ 70%</b>.</div>' +
       '<div class="card-list">';
@@ -472,12 +491,9 @@
       '</div>';
     body.innerHTML = html;
 
-    var checkBtn = $('#dp2Check');
-    if (checkBtn) checkBtn.addEventListener('click', checkDictation);
-    var showBtn = $('#dp2Show');
-    if (showBtn) showBtn.addEventListener('click', showAnswers);
-    var hintBtn = $('#dp2Hint');
-    if (hintBtn) hintBtn.addEventListener('click', toggleHints);
+    $('#dp2Check').addEventListener('click', checkDictation);
+    $('#dp2Show').addEventListener('click', showAnswers);
+    $('#dp2Hint').addEventListener('click', toggleHints);
 
     $$('.lptd-blank').forEach(function (inp) {
       inp.addEventListener('keydown', function (e) {
@@ -515,7 +531,6 @@
     var chip = $('#dp2Score');
     if (chip) chip.innerHTML = '<small>Dictation:</small> ' + correct + '/' + total + ' (' + score + '%) ' + (score >= 70 ? '🎉' : '🔁');
 
-    // Mark progress
     var key = progressKey(u);
     state.progress[key] = state.progress[key] || {};
     state.progress[key].dictationDone = true;
@@ -549,17 +564,15 @@
     });
   }
 
-  /* ---------- Shadowing ---------- */
   function renderShadowing(body, u) {
     var html = '<div style="margin-bottom:8px"><b>🗣️ Shadowing</b> — 1️⃣ nghe cả unit → 2️⃣ 🎙 ghi âm đọc lại từng câu → 3️⃣ ▶ nghe bản ghi → 4️⃣ 🗣 chấm độ chính xác.</div>';
     html += '<div class="shadow-list">';
     u.lines.forEach(function (ln, i) {
-      var best = '';
       var key = progressKey(u);
       var p = state.progress[key] || {};
       var sh = p.shadowing || {};
       var lineBest = sh[String(i)];
-      if (lineBest != null) best = ' · tốt nhất: <b>' + lineBest + '%</b>';
+      var best = lineBest != null ? ' · tốt nhất: <b>' + lineBest + '%</b>' : '';
       html += '<div class="shadow-card" id="dp2-sc-' + i + '">' +
         '<div class="shadow-top">' +
         '<div class="q-number">' + (i + 1) + '</div>' +
@@ -614,10 +627,8 @@
     reRequest('assess', line);
   }
 
-  /* ---------- Recording Engine (popup) ---------- */
   var RE_URL_FALLBACK = 'https://lfskcm2018.github.io/Toeic-lptd/recording-engine/';
   function reUrl() {
-    // Try to get from Code.gs property if available; otherwise fallback
     var u = global.DP2_RECORDING_ENGINE_URL || RE_URL_FALLBACK;
     return String(u).trim() || RE_URL_FALLBACK;
   }
@@ -635,9 +646,10 @@
       state.recWin = null;
       state.recWinReady = false;
       if (state.rePending || state.recording != null) {
-        var btn = $$('[data-rec="' + (state.recording != null ? state.recording : state.rePending.line) + '"]')[0];
+        var idx = (state.recording != null ? state.recording : state.rePending.line);
+        var btn = $$('[data-rec="' + idx + '"]')[0];
         if (btn) btn.textContent = '🎙 Ghi âm';
-        var ind = $$('[data-recind="' + (state.recording != null ? state.recording : state.rePending.line) + '"]')[0];
+        var ind = $$('[data-recind="' + idx + '"]')[0];
         if (ind) ind.classList.remove('on');
       }
       state.rePending = null;
@@ -708,7 +720,6 @@
         '<div class="acc-bar"><div class="acc-fill" style="width:' + pct + '%"></div></div>' +
         '<div style="font-size:12px;color:var(--muted);margin-top:4px">Đã nhận: "' + escapeHtml(transcript || '') + '"</div>';
     }
-    // Save progress
     var u = state.current;
     var key = progressKey(u);
     state.progress[key] = state.progress[key] || {};
@@ -797,11 +808,9 @@
   }
 
   function setHint(msg, isWarn) {
-    // Simple hint: use browser status or console; could add a hint element
     console.log((isWarn ? '⚠️ ' : '✅ ') + msg);
   }
 
-  /* ---------- Boot ---------- */
   function loadData() {
     showLoading();
     if (state.isGas) {
@@ -812,10 +821,16 @@
             return;
           }
           state.lessons = res.dp2Lessons;
+          state.dp2AudioConfigured = res.dp2AudioConfigured || false;
           renderStats(res.dp2Meta || res.meta || {});
           state.progress = loadProgress();
           renderLibrary();
-          $('#errorBox').classList.add('hidden');
+          if (!state.dp2AudioConfigured) {
+            showSetup('Chưa cấu hình CDN âm thanh Dictation Part 2.');
+          } else {
+            $('#errorBox').classList.add('hidden');
+            $('#setupBox').classList.add('hidden');
+          }
         })
         .withFailureHandler(function (err) {
           showError('Không gọi được getLptdBootstrap(): ' + (err && err.message ? err.message : String(err)));
@@ -833,7 +848,7 @@
     tabLptd.classList.remove('active');
     $('#lptdNotice').classList.add('hidden');
     if (state.lessons.length === 0) loadData();
-    else { $('#dp2Library').classList.remove('hidden'); $('#dp2UnitView').classList.add('hidden'); $('#errorBox').classList.add('hidden'); }
+    else { $('#dp2Library').classList.remove('hidden'); $('#dp2UnitView').classList.add('hidden'); $('#errorBox').classList.add('hidden'); $('#setupBox').classList.add('hidden'); }
   });
   tabLptd.addEventListener('click', function () {
     tabLptd.classList.add('active');
@@ -844,6 +859,12 @@
     $('#dp2UnitView').classList.add('hidden');
     $('#heroStats').classList.add('hidden');
     $('#errorBox').classList.add('hidden');
+    $('#setupBox').classList.add('hidden');
+  });
+
+  $('#btnOpenScriptEditor').addEventListener('click', function () {
+    var scriptId = '1aFmqiWSStp1F7RIOCwmc4_-PC8iVkBMgq6kEKyB0SlHGAznkQYAgww5P';
+    window.open('https://script.google.com/home/projects/' + scriptId, '_blank');
   });
 
   if (typeof global.addEventListener === 'function') {

@@ -17,6 +17,7 @@
 
 var LPTD_DEFAULT_CDN_BASE = 'https://toeic-audio.netlify.app/audio/lptd';
 var LPTD_DEFAULT_RECORDING_ENGINE_URL = 'https://lfskcm2018.github.io/Toeic-lptd/recording-engine/';
+var DP2_DEFAULT_CDN_BASE = ''; // Chưa có CDN cho Dictation Part 2 — cần cấu hình Script Property DP2_AUDIO_CDN_BASE
 
 /** Trang web app. */
 function doGet() {
@@ -92,7 +93,7 @@ function getLptdBootstrap() {
   var meta = LPTD_LESSONS_META();
 
   /* Dữ liệu Dictation Part 2 (nguồn nội dung mới) */
-  var dp2CdnBase = 'https://toeic-audio.netlify.app/audio/dictation-part2';
+  var dp2CdnBase = lptdProp_('DP2_AUDIO_CDN_BASE', DP2_DEFAULT_CDN_BASE);
   var dp2Lessons = DP2_LESSONS().map(function (u) {
     return {
       id: u.id,
@@ -106,7 +107,8 @@ function getLptdBootstrap() {
       lines: u.lines,
       lineCount: u.lineCount,
       wordCount: u.wordCount,
-      cdnUrl: dp2CdnBase + '/' + u.cdnName,
+      cdnUrl: dp2CdnBase ? (dp2CdnBase.replace(/\/+$/, '') + '/' + u.cdnName) : '',
+      audioUrl: dp2CdnBase ? (dp2CdnBase.replace(/\/+$/, '') + '/' + u.cdnName) : '',
     };
   });
   var dp2Meta = DP2_LESSONS_META();
@@ -122,6 +124,7 @@ function getLptdBootstrap() {
     dp2Meta: dp2Meta,
     dp2LessonCount: dp2Lessons.length,
     dp2Lessons: dp2Lessons,
+    dp2AudioConfigured: !!dp2CdnBase,
   };
 }
 
@@ -142,9 +145,9 @@ function getDp2Books() {
   return meta.books || [];
 }
 
-/** Tương thích: chỉ trả danh sách unit DP2 (kèm cdnUrl). */
+/** Tương thích: chỉ trả danh sách unit DP2 (kèm cdnUrl/audioUrl). */
 function getDp2Lessons() {
-  var dp2CdnBase = 'https://toeic-audio.netlify.app/audio/dictation-part2';
+  var dp2CdnBase = lptdProp_('DP2_AUDIO_CDN_BASE', DP2_DEFAULT_CDN_BASE);
   return DP2_LESSONS().map(function (u) {
     return {
       id: u.id,
@@ -158,12 +161,13 @@ function getDp2Lessons() {
       lines: u.lines,
       lineCount: u.lineCount,
       wordCount: u.wordCount,
-      cdnUrl: dp2CdnBase + '/' + u.cdnName,
+      cdnUrl: dp2CdnBase ? (dp2CdnBase.replace(/\/+$/, '') + '/' + u.cdnName) : '',
+      audioUrl: dp2CdnBase ? (dp2CdnBase.replace(/\/+$/, '') + '/' + u.cdnName) : '',
     };
   });
 }
 
-/** Lấy 1 unit theo book/unit. */
+/** Lấy 1 unit theo book/unit (LPTD). */
 function getLptdUnit(book, unit) {
   var id = 'lptd-' + Number(book) + '-' + ('0' + Number(unit)).slice(-2);
   var list = lptdLessonsWithUrls_(lptdCdnBase_());
@@ -171,6 +175,13 @@ function getLptdUnit(book, unit) {
     if (list[i].id === id) return list[i];
   }
   return null;
+}
+
+/** Lấy URL audio cho 1 file MP3 của Dictation Part 2 (cần cấu hình DP2_AUDIO_CDN_BASE). */
+function getDp2AudioUrl(cdnName) {
+  var dp2CdnBase = lptdProp_('DP2_AUDIO_CDN_BASE', DP2_DEFAULT_CDN_BASE);
+  if (!dp2CdnBase) return '';
+  return dp2CdnBase.replace(/\/+$/, '') + '/' + cdnName;
 }
 
 /* ---------- API lưu/lấy bản ghi âm Shadowing ---------- */
