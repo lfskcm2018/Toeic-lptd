@@ -51,6 +51,18 @@
 - `Hacker 1`: phù hợp làm nguồn test / audio / script, chưa phải là dictation workbook thuần túy.
 - Tổng thể: các nguồn mới đều có tài liệu PDF + audio MP3, nhưng cần transform sang format LPTD lesson: `id`, `book`, `unit`, `title`, `slug`, `audioFileName`, `cdnName`, `localPath`, `lines`, `lineCount`, `wordCount`.
 
+## 10. Cấu trúc thư mục nguồn dữ liệu
+
+| Nguồn tài liệu | Thư mục con trong `Tích hợp nội dung mới` |
+|---|---|
+| `Hacker 1` | `Tích hợp nội dung mới/Hacker 1/` |
+| `Dictation Part 2` | `Tích hợp nội dung mới/Dictation Part 2/` |
+| `750+` | `Tích hợp nội dung mới/750+/` |
+| `600+` | `Tích hợp nội dung mới/600+/` |
+
+Khi AI khảo sát để thêm dữ liệu, file dữ liệu của từng nguồn tài liệu phải được lưu đúng vào folder con tương ứng của chính nguồn đó.  
+Không được gộp file dữ liệu của nhiều nguồn vào một thư mục chung trong giai đoạn xây dựng web app riêng.
+
 ## 4. Kế hoạch xây dựng web app GAS riêng
 
 ### 4.1 Cấu hình bắt đầu
