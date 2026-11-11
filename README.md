@@ -168,3 +168,10 @@ Không ghi lẫn vào tiến độ Hackers/ETS.
 | Bấm LPTD nhưng hiện DAY | Core render đè khi tải chậm | Đã tự phục hồi bằng MutationObserver; tải lại trang nếu cần |
 | Audio 404 trên GAS | Sai `LPTD_AUDIO_CDN_BASE` | Kiểm tra Settings; mặc định `.../audio/lptd` |
 | LPTD không xuất hiện trên GAS | Thiếu include | Thêm `<?!= include('LptdUI'); ?>` sau `JavaScript` |
+
+## Mic fix (Shadowing)
+
+- GAS web app chay trong iframe sandbox khong co `allow="microphone"` -> Chrome chan micro.
+- Fix Approach A: ghi am & cham % chuyen sang popup top-level `Recording Engine`
+  (`https://lfskcm2018.github.io/Toeic-lptd/recording-engine/`), giao tiep qua `postMessage`.
+- Local mode khong bi anh huong.

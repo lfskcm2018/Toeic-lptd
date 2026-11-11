@@ -558,3 +558,19 @@ Nếu phát hiện lỗi sau deploy:
 - Mic phải ở trang độc lập (GitHub Pages/Cloudflare/Vercel)
 - Giao tiếp qua `window.postMessage()` từ web app → thư con
 - Tất cả các lỗi `Permission denied` đều phải xử lý trong React/front-end UI (không yêu cầu mic từ server) — làm việc trong `recording-engine/` (agent)
+
+## 10. Trang thai trien khai (11/11/2026)
+
+Da hoan thanh Approach A (popup ngoai iframe):
+
+- Recording Engine v2 tai `op/recording-engine/` (engine.js/index.html/style.css), chay tren GitHub Pages:
+  `https://lfskcm2018.github.io/Toeic-lptd/recording-engine/` (HTTP 200, xac minh 11/11/2026).
+- GAS app standalone deployment @8: `AKfycbyM8huBU37okqYAvNajHt52sNrGKgV-SsL278b270rdXxz52VX0PGN-ZO4XlMKXrzTN`
+  (Mic fix v8 - popup recording engine + postMessage (Approach A)).
+- `op/app/lptd-ui.js`: toggleRecord/assessLine GAS branch mo popup engine qua `window.RE`, nhan blob + transcript qua postMessage,
+  cham diem bang exactMatch, luu tien do. Local mode giu nguyen getUserMedia.
+- `op/gas-standalone/Code.gs`: doGet bom `RECORDING_ENGINE_URL` tu Script Property `LPTD_RECORDING_ENGINE_URL` (fallback GitHub Pages).
+- `op/tools/build-standalone-gas.js`: sinh Index.html kem hang so `window.LPTD_RECORDING_ENGINE_URL` -> rebuild khong mat RE.
+- Xac minh E2E tren GAS @8: popup mo, target sentence hien thi, START_RECORDING/RECORDING_ERROR/RECOGNITION_ERROR round-trip hoat dong.
+- Gioi han moi truong test tu dong: mic bi tu dong tu choi (khong co phan cung/permission prompt) -> loi 'Permission denied' la do moi truong,
+  khong phai loi code. Nguoi dung that chon 'Cho phep' trong prompt -> ghi am & cham % hoat dong.

@@ -147,3 +147,21 @@ Không ảnh hưởng Sheet, Drive, tiến độ Hackers/ETS.
 - Nếu bản GAS cũ chỉ có `getLptdLessons()`, UI tự fallback.
 - `cdnUrl` được server gắn sẵn cho từng unit; UI không tự đoán URL.
 - Tiến độ lưu localStorage trình duyệt (`toeic_lptd_progress`), không ghi Sheet.
+
+## Mic fix (Approach A) - popup Recording Engine
+
+### Script Property moi (tuy chon)
+
+- `LPTD_RECORDING_ENGINE_URL` = URL trang Recording Engine (mac dinh `https://lfskcm2018.github.io/Toeic-lptd/recording-engine/`).
+  Ghi de khi hosting engine o cho khac (Netlify/Vercel/...).
+
+### Deployment hien tai
+
+- @8 `AKfycbyM8huBU37okqYAvNajHt52sNrGKgV-SsL278b270rdXxz52VX0PGN-ZO4XlMKXrzTN` - Mic fix v8 (popup + postMessage).
+- Engine hosted on GitHub Pages: `https://lfskcm2018.github.io/Toeic-lptd/recording-engine/`.
+
+### Ghi chu
+
+- Web app GAS chay trong iframe sandbox khong co `allow="microphone"` -> getUserMedia/Web Speech bi Chrome chan.
+- Fix: ghi am & cham % chuyen sang popup top-level (Recording Engine), giao tiep qua postMessage.
+- Local mode khong bi anh huong (trang top-level, mic hoat dong truc tiep).

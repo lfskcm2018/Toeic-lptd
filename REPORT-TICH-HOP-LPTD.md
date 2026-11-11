@@ -293,3 +293,10 @@ Phần tích hợp LPTD đã hoàn chỉnh ở mức mã nguồn và kiểm th�
 - Có tài liệu patch local, patch GAS và checklist go-live.
 
 Bước tiếp theo duy nhất mang tính bắt buộc là **deploy thử trên Apps Script thật** theo `op/integration/PATCH-GAS.md`.
+
+## Cap nhat: Khac phuc loi microphone (Shadowing) - 11/11/2026
+
+- Nguyen nhan: GAS web app trong iframe sandbox chan micro (Permissions Policy).
+- Giai phap: Approach A - popup top-level Recording Engine + postMessage (GitHub Pages).
+- Deployment @8: `AKfycbyM8huBU37okqYAvNajHt52sNrGKgV-SsL278b270rdXxz52VX0PGN-ZO4XlMKXrzTN`.
+- Xac minh E2E: popup mo, target sentence hien thi, postMessage round-trip hoat dong.
