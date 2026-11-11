@@ -1,0 +1,606 @@
+1. TEST 01 (p.2-4)
+2. TEST 02 (p.5-7)
+3. TEST 03 (p.8-10)
+4. TEST 04 (p.11-13)
+5. TEST 05 (p.14-16)
+6. TEST 06 (p.17-19)
+7. TEST 07 (p.20-22)
+8. TEST 08 (p.23-25)
+9. TEST 09 (p.26-28)
+10. TEST 10 (p.29-31)
+
+-- 1 of 31 --
+
+2
+1.
+2.
+3.
+Q:
+A:
+4.
+Q:
+A:
+01. One of the women is pointing to a notepad.
+02. The woman is facing away from a screen.
+03. Q: What did Thomas need help with?
+A: Assembling a new desk.
+04. Q: When did you purchase this painting?
+A: I’ve had it for three years now.
+TEST 01 	| 	Part 1 	2
+
+-- 2 of 31 --
+
+3
+W: Sam, 1)
+with a special seasonal collection of greeting cards. 2)
+.
+M: OK. 3) 	how you’d like the cards
+to look? Or 4) 	?
+W: 5) 	the colors of autumn, such as
+red, orange, and yellow, I don’t have a preference. Please 6)
+.
+W: Sam, 1) our company is going to expand its product offerings this fall with a special seasonal collection of greeting
+cards. 2) I’d like you to design them.
+M: OK. 3) Do you currently have an opinion about how you’d like the cards to look? Or 4) will I have the final say over their
+appearance?
+W: 5) Aside from wanting them to incorporate the colors of autumn, such as red, orange, and yellow, I don’t have a
+preference. Please 6) show me your drafts next Friday.
+TEST 01 	| 	Part 3
+
+-- 3 of 31 --
+
+4
+Can I have everyone’s attention for a moment? There will be a 1)
+. It will be held from 3 p.m. to 4 p.m. in . . . uhm . . . in
+Conference Room 1. During that time, we are going to 2)
+. As was noted in a memo earlier this week, our
+company will soon 3) 	. Since
+I’m the director of the personnel department, 4)
+for you all in detail. You’ll also 5)
+you may have. Also, can you all 6)
+at 3 o’clock? Thanks.
+Can I have everyone’s attention for a moment? There will be a 1) mandatory departmental meeting this afternoon. It will be
+held from 3 p.m. to 4 p.m. in . . . uhm . . . in Conference Room 1. During that time, we are going to 2) have an informational
+session regarding your pension plans. As was noted in a memo earlier this week, our company will soon 3) restructure its
+policy for employee retirement benefits. Since I’m the director of the personnel department, 4) it’s my duty to explain the
+changes for you all in detail. You’ll also 5) have a chance to bring forth any questions or concerns you may have. Also, can
+you all 6) be sure to arrive promptly at 3 o’clock? Thanks.
+TEST 01 	| 	Part 4
+
+-- 4 of 31 --
+
+5
+1.
+2.
+3.
+Q:
+A:
+4.
+Q:
+A:
+01. He’s leaning over on top of a roof.
+02. Some bushes are being trimmed.
+03. Q: Do you want me to review the product report?
+A: That’s OK. It should be fine.
+04. Q: Should I hand out the applications now or wait until later?
+A: Whichever you prefer.
+TEST 02 	| 	Part 1 	2
+
+-- 5 of 31 --
+
+6
+W: 1) 	Diamond Bank. This is Carly Simon speaking.
+How can I assist you?
+M: I’m 2) 	. Could you help
+with that?
+W: 3) 	. You can use Web services from 5 p.m. today.
+M: But I 4) 	before noon. Is there any other way for me to do that?
+W: Our 5) 	you to do that.
+M: Really? 6) 	?
+W: Simply search for Diamond Bank in the Orpheus Application Store and click Install.
+W: 1) Thank you for calling Diamond Bank. This is Carly Simon speaking. How can I assist you?
+M: I’m 2) having trouble logging on to your online banking service. Could you help with that?
+W: 3) Our site is undergoing maintenance work. You can use Web services from 5 p.m. today.
+M: But I 4) have to make a wire transfer before noon. Is there any other way for me to do that?
+W: Our 5) mobile application will allow you to do that.
+M: Really? 6) How can I download it?
+W: Simply search for Diamond Bank in the Orpheus Application Store and click Install.
+TEST 02 	| 	Part 3
+
+-- 6 of 31 --
+
+7
+Attention shoppers. We’re happy to 1)
+on Monday, February 8. If you’re 2)
+, Eclectic Unlimited is the best shop for you. At Eclectic, we
+3)
+and occasions. On our opening day, we will be 4)
+and the first 30 5) 	Eclectic T-shirts.
+6) 	! See you all on Monday.
+Attention shoppers. We’re happy to 1) announce the opening of our new store on Monday, February 8. If you’re 2) looking
+for unusual gift items for your loved ones and friends, Eclectic Unlimited is the best shop for you. At Eclectic, we 3) sell
+innovative, elegant, and unique products for all ages and occasions. On our opening day, we will be 4) offering a 50 percent
+discount on selected items and the first 30 5) visitors will receive free Eclectic T-shirts. 6) Don’t miss this big event! See you
+all on Monday.
+TEST 02 	| 	Part 4
+
+-- 7 of 31 --
+
+8
+1.
+2.
+3.
+Q:
+A:
+4.
+Q:
+A:
+01. He is handing a watch to a trainer.
+02. Some plants have been placed in pots.
+03. Q: Can you meet out for a meal around 7 o’clock?
+A: Sure, I’ll see you then.
+04. Q: Would you mind distributing these flyers this weekend?
+A: To whom should I give them?
+TEST 03 	| 	Part 1 	2
+
+-- 8 of 31 --
+
+9
+W: Tom, I’m going to take a break before we 1)
+. I need to make a phone call, and 2)
+the other people in the lecture hall.
+M: Actually, 3) 	, so you won’t have that
+much time. Is it something that can’t wait?
+W: Well, 4) 	an agent at the
+chauffeur company saying that our driver will be a bit late picking us up this evening.
+M: Hmm . . . 5)
+back at the hotel tonight, and we don’t want to miss that. So, 6)
+after all.
+W: Tom, I’m going to take a break before we 1) begin our next presentation to the trade show guests. I need to make a
+phone call, and 2) I don’t want to disturb the other people in the lecture hall.
+M: Actually, 3) we’re starting in about five minutes, so you won’t have that much time. Is it something that can’t wait?
+W: Well, 4) I just received a text message from an agent at the chauffeur company saying that our driver will be a bit late
+picking us up this evening.
+M: Hmm . . . 5) We’re supposed to review today’s events with our director back at the hotel tonight, and we don’t want to
+miss that. So, 6) you’d better go into the corridor and place the call after all.
+TEST 03 	| 	Part 3
+
+-- 9 of 31 --
+
+10
+This message is for Nicholas Spader. 1) 	the
+Boston Literature Review to let you know that 2)
+one of the winners for our annual book awards. First, 3) 	.
+Our magazine reviews . . . ah . . . over 300 novels every year, so 4)
+. I also want to let you know that
+5) 	in June to honor
+you as well as the two authors who placed above you and the one just below you. At the
+event, 6) 	of $5,000. Again,
+congratulations!
+This message is for Nicholas Spader. 1) I’m calling on behalf of the Boston Literature Review to let you know that 2) your
+book has been selected as one of the winners for our annual book awards. First, 3) let me congratulate you. Our magazine
+reviews . . . ah . . . over 300 novels every year, so 4) it is a major accomplishment to receive the honor. I also want to let you
+know that 5) you’re invited to a ceremony that will be held in June to honor you as well as the two authors who placed above
+you and the one just below you. At the event, 6) you’ll be given a medal and cash prize of $5,000. Again, congratulations!
+TEST 03 	| 	Part 4
+
+-- 10 of 31 --
+
+11
+1.
+2.
+3.
+Q:
+A:
+4.
+Q:
+A:
+01. The women are seated next to each other.
+02. Some chairs are being lined up across the beach.
+03. Q: Which room should we host the meeting in?
+A: Do you have a preference?
+04. Q: When will the partnership be announced?
+A: Not until later this month.
+TEST 04 	| 	Part 1 	2
+
+-- 11 of 31 --
+
+12
+M: Our new bakery location in Brooklyn is not profitable enough. 1)
+, Ms. Shah? You come highly recommended by a former client.
+W: Well, I think it’d really 2) 	.
+M: Hmm. But I’m not really sure how getting people to talk about the bakery online would
+3) 	.
+W: Well, 4) 	who follow your page once it
+launches.
+M: I see. I think that would be 5) 	as well.
+W: Yes. It’s 6) 	.
+M: Our new bakery location in Brooklyn is not profitable enough. 1) Do you have any ideas on how to promote the shop,
+Ms. Shah? You come highly recommended by a former client.
+W: Well, I think it’d really 2) benefit your business to make use of a social media page.
+M: Hmm. But I’m not really sure how getting people to talk about the bakery online would 3) help attract a wider customer
+base.
+W: Well, 4) you could offer discounts as rewards to people who follow your page once it launches.
+M: I see. I think that would be 5) helpful for retaining existing customers as well.
+W: Yes. It’s 6) an excellent way to ensure customer loyalty.
+TEST 04 	| 	Part 3
+
+-- 12 of 31 --
+
+13
+1) 	? Look no further! Aquafix provides
+everything you need. Aquafix has the largest 2)
+your swimming pool. This June, we’re
+selling water pumps, heaters, filters, and cleaners at discounted prices. 3)
+? We are pleased to announce that we now
+4) 	at www.aquafix.com. 5)
+and have items delivered right to your doorstep!
+6)
+living in the Phoenix area and have your orders delivered by the next day.
+1) Worried about keeping your pool clean? Look no further! Aquafix provides everything you need. Aquafix has the largest
+2) selection of equipment and supplies in the region to sanitize your swimming pool. This June, we’re selling water pumps,
+heaters, filters, and cleaners at discounted prices. 3) Can’t come to our store? We are pleased to announce that we now
+4) offer all of our items online at www.aquafix.com. 5) Spare yourself the trouble and have items delivered right to your
+doorstep! 6) Take advantage of our priority delivery services available to customers living in the Phoenix area and have
+your orders delivered by the next day.
+TEST 04 	| 	Part 4
+
+-- 13 of 31 --
+
+14
+1.
+2.
+3.
+Q:
+A:
+4.
+Q:
+A:
+01. Some people are participating in a race.
+02. She’s holding onto the handle of a cart.
+03. Q: Do you have time today, or should I come back tomorrow?
+A: Tomorrow, if you can.
+04. Q: When will the staff be informed about the takeover?
+A: During the monthly meeting.
+TEST 05 	| 	Part 1 	2
+
+-- 14 of 31 --
+
+15
+M: Hello. 1) 	for my family.
+2) 	some of your models?
+W: Right this way, sir. 3) 	?
+M: Well, I have a large family, 4) 	.
+Apart from that, safety and comtort are my major concerns.
+W: 5) 	. Our Eleganti model seats 10 people
+comfortably. 6)
+.
+M: Hello. 1) I’m interested in buying a new vehicle for my family. 2) Could you show me some of your models?
+W: Right this way, sir. 3) What kind of vehicle are you looking for?
+M: Well, I have a large family, 4) so we need at least seven seats. Apart from that, safety and comfort are my major
+concerns.
+W: 5) It sounds like you need a van. Our Eleganti model seats 10 people comfortably. 6) It has anti-lock brakes, a sunroof,
+and a built-in stereo and DVD player.
+TEST 05 	| 	Part 3
+
+-- 15 of 31 --
+
+16
+Brenda, it’s Calvin Walters. 1)
+. After considering your recommendations, I 2)
+a caption to make the advertisement more interesting.
+The 3) 	.
+I 4) 	and gave it to your secretary this morning. Please
+5) 	.
+I hope to finish the project by Monday, January 9 and show it to our client on the next day.
+6) 	. Thanks.
+Brenda, it’s Calvin Walters. 1) I’m calling to update you about the progress of the project. After considering your
+recommendations, I 2) created a logo and came up with a caption to make the advertisement more interesting. The
+3) advertisement uses colors that consumers should find appealing. I 4) printed a copy of the draft and gave it to your
+secretary this morning. Please 5) check it and give me comments so I can make the necessary revisions. I hope to finish
+the project by Monday, January 9 and show it to our client on the next day. 6) Let me know if you have any questions.
+Thanks.
+TEST 05 	| 	Part 4
+
+-- 16 of 31 --
+
+17
+1.
+2.
+3.
+Q:
+A:
+4.
+Q:
+A:
+01. They’re lined up alongside a bus.
+02. Rocks have been piled on the side of a road.
+03. Q: Which television screen do you think shows a clearer image?
+A: I really can’t tell the difference.
+04. Q: You’ll need a valid identification card and a recent bank statement to register.
+A: They’re both right here.
+TEST 06 	| 	Part 1 	2
+
+-- 17 of 31 --
+
+18
+M: This is the two-bedroom apartment 1) 	.
+It is 2) 	.
+W: This is really nice and it’s 3) 	.
+What is the monthly rent?
+M: 4) 	.
+W: I see. Well, it’s in a really great neighborhood, 5)
+. Can I discuss it with my husband over the weekend?
+6) 	.
+M: This is the two-bedroom apartment 1) that’s available now. It is 2) quite spacious and comfortable, and comes fully
+furnished.
+W: This is really nice and it’s 3) close to the train station. What is the monthly rent?
+M: 4) It costs $2,000 per month.
+W: I see. Well, it’s in a really great neighborhood, 5) but it’s a bit out of my price range. Can I discuss it with my husband
+over the weekend? 6) I’ll let you know my decision by Monday.
+TEST 06 	| 	Part 3
+
+-- 18 of 31 --
+
+19
+1) 	this brief training session. Today, I’ll be 2)
+. First of all, try to determine their
+needs by listening carefully to their specifications. Also, 3)
+when discussing a product or service.
+Lastly, 4) 	.
+You can do this by 5) 	.
+By following these tips, 6) 	strong
+relationships with customers.
+1) Thanks for coming to this brief training session. Today, I’ll be 2) discussing the most effective way of dealing with
+clients. First of all, try to determine their needs by listening carefully to their specifications. Also, 3) keep your explanations
+simple and avoid using technical terms when discussing a product or service. Lastly, 4) be sure to make your clients feel
+comfortable and at ease. You can do this by 5) using a welcoming tone of voice and smiling. By following these tips, 6) you
+should be able to create strong relationships with customers.
+TEST 06 	| 	Part 4
+
+-- 19 of 31 --
+
+20
+1.
+2.
+3.
+Q:
+A:
+4.
+Q:
+A:
+01. Trees are casting shadows on the ground.
+02. Some paintings are being taken down from the wall.
+03. Q: Can I use this coupon, or is it no longer valid?
+A: It appears to have expired.
+04. Q: Quality control needs to improve at our plant.
+A: Measures have already been implemented.
+TEST 07 	| 	Part 1 	2
+
+-- 20 of 31 --
+
+21
+W: 	I want to quickly 1) 	.
+M1: I’ll be showing the guests to their seats from 6 p.m.
+M2: And I’m 2) 	at 6:20 p.m.
+W: 	Hmm. 3) 	. If people are arriving only 20 minutes earlier,
+then they won’t have enough time to get situated. 4) 	.
+M2: Then, how does 6:45 sound?
+W: 	That seems more reasonable.
+M1: Yeah. 5) 	, which made our servers’ work harder.
+M2: Hopefully, 6) 	.
+W: I want to quickly 1) go over everyone’s duties in relation to the schedule for tomorrow’s banquet.
+M1: I’ll be showing the guests to their seats from 6 p.m.
+M2: And I’m 2) in charge of making sure serving staff get the dinner course out at 6:20 p.m.
+W: Hmm. 3) Let’s push that back. If people are arriving only 20 minutes earlier, then they won’t have enough time to get
+situated. 4) There’s just no way.
+M2: Then, how does 6:45 sound?
+W: That seems more reasonable.
+M1: Yeah. 5) The schedule at our event last year was a bit tight, which made our servers’ work harder.
+M2: Hopefully, 6) this timeframe will be more suitable.
+TEST 07 	| 	Part 3
+
+-- 21 of 31 --
+
+22
+The annual Scranton Culture and Art Fair was held last weekend, and 1)
+. Guests were able to
+2) 	from nearly 400 vendors. For many people, however,
+3)
+, Maria Hernandez. Ms. Hernandez was born and raised
+in Scranton but immigrated to Paris, France a decade ago to 4)
+. Upon arriving at the fair, she 5)
+a large group of people, so she 6)
+that organizers quickly set up for her.
+The annual Scranton Culture and Art Fair was held last weekend, and 1) the popular event drew visitors from all over the
+state. Guests were able to 2) buy artwork and other merchandise from nearly 400 vendors. For many people, however,
+3) the highlight of this year’s fair was the surprise appearance of the renowned painter, Maria Hernandez. Ms. Hernandez
+was born and raised in Scranton but immigrated to Paris, France a decade ago to 4) pursue a career as an artist. Upon
+arriving at the fair, she 5) attracted the attention of a large group of people, so she 6) decided to sign autographs at a table
+that organizers quickly set up for her.
+TEST 07 	| 	Part 4
+
+-- 22 of 31 --
+
+23
+1.
+2.
+3.
+Q:
+A:
+4.
+Q:
+A:
+01. They are surrounded by flowers.
+02. Some railings are being attached to the structure.
+03. Q: Has the director briefed the new staff?
+A: He’s doing it now.
+04. Q: When did the customers start to get in line for the sale?
+A: From five in the morning.
+TEST 08 	| 	Part 1 	2
+
+-- 23 of 31 --
+
+24
+M: Excuse me. 1) 	. I was wondering if 2)
+. It seems like every
+space in the parking lot is reserved.
+W: Yes, it’s 3) 	a space in the lot. The
+managers have their spaces reserved, and 4)
+. Regular employees usually have to leave
+their vehicles at the parking garage near the train station.
+M: That’s too far to walk, though. 5) 	?
+W: Oh, I take the bus. Several buses stop at the station and come directly here. 6)
+, if you’d like.
+M: Excuse me. 1) I’m new here at the office. I was wondering if 2) you could help me figure out where I can park my car. It
+seems like every space in the parking lot is reserved.
+W: Yes, it’s 3) actually quite difficult to find a space in the lot. The managers have their spaces reserved, and 4) we make
+sure to keep a few spots open for visitors. Regular employees usually have to leave their vehicles at the parking
+garage near the train station.
+M: That’s too far to walk, though. 5) How can I get to the office from there?
+W: Oh, I take the bus. Several buses stop at the station and come directly here. 6) I have a bus schedule I can give you,
+if you’d like.
+TEST 08 	| 	Part 3
+
+-- 24 of 31 --
+
+25
+This is Mary Webb with the traffic report. It has been 1)
+.
+2) 	leading to the
+Dayton business district. Southbound vehicles may take Highway 9, where 3)
+. Also, the City Transit Authority announced that
+repairs on Highway 39 will start this Friday and continue until Tuesday next week.
+4) 	. 5)
+, you may also check www.netd.com.
+6) 	in 30 minutes.
+This is Mary Webb with the traffic report. It has been 1) raining heavily since late last night and some streets are starting
+to flood. 2) Expect heavy traffic congestion on roadways leading to the Dayton business district. Southbound vehicles
+may take Highway 9, where 3) traffic flow is light to moderate. Also, the City Transit Authority announced that repairs on
+Highway 39 will start this Friday and continue until Tuesday next week. 4) Commuters are urged to use alternate routes.
+5) For more details about the highway construction, you may also check www.netd.com. 6) Stay tuned for our next report
+coming up in 30 minutes.
+TEST 08 	| 	Part 4
+
+-- 25 of 31 --
+
+26
+1.
+2.
+3.
+Q:
+A:
+4.
+Q:
+A:
+1. He’s typing on a keyboard.
+2. The vase has been emptied of flowers.
+3. Q: The building is going to have some renovations done.
+A: I’ll notify the staff.
+4. Q: You can hold the interviews in conference room B.
+A: Thanks for reserving it.
+TEST 09 	| 	Part 1 	2
+
+-- 26 of 31 --
+
+27
+M: The safety inspection for our packaging facility went well. 1)
+today?
+W: I’ve already seen it. 2)
+. Well, there was one thing . . . 3)
+the main conveyor belt?
+M: There haven’t been any problems with it in years, but 4) 	.
+W: 5) 	. Maybe we’d better have a professional mechanic
+see if it needs to be replaced.
+M: Sure. I’ll give Oscar Fisher a call and 6) 	.
+M: The safety inspection for our packaging facility went well. 1) Will you have time to review the report summary today?
+W: I’ve already seen it. 2) Seems like we received favorable feedback overall. Well, there was one thing . . . 3) What did you
+think about the inspector’s comments regarding the main conveyor belt?
+M: There haven’t been any problems with it in years, but 4) I guess we should check it again.
+W: 5) I couldn’t agree more. Maybe we’d better have a professional mechanic see if it needs to be replaced.
+M: Sure. I’ll give Oscar Fisher a call and 6) ask him to come by sometime this week.
+TEST 09 	| 	Part 3
+
+-- 27 of 31 --
+
+28
+Hello, everyone. This is Alex Hawkins, 1) 	Union Stadium
+for a special benefit show this Friday night at nine. 2)
+, as 3)
+from world-class dancers and actors. Moreover, I will be
+conducting a mini-concert. 4)
+the Cole Charity Foundation. 5)
+on Friday, because even a little bit of help 6)
+.
+Hello, everyone. This is Alex Hawkins, 1) inviting you to come out to Union Stadium for a special benefit show this Friday
+night at nine. 2) You’re guaranteed to be entertained, as 3) you will have a chance to see a variety of performances from
+world-class dancers and actors. Moreover, I will be conducting a mini-concert. 4) All of the funds raised during the event
+will benefit the Cole Charity Foundation. 5) Please come out and support our cause on Friday, because even a little bit of
+help 6) can go a long way.
+TEST 09 	| 	Part 4
+
+-- 28 of 31 --
+
+29
+1.
+2.
+3.
+Q:
+A:
+4.
+Q:
+A:
+01. He’s relaxing on a sofa.
+02. The man is working on the platform.
+03. Q: Would Ms. Garner like to attend an art exhibit?
+A: No, she’s too busy these days.
+04. Q: Do you feel like waiting for the elevator or taking the stairs?
+A: The stairs sound better.
+TEST 10 	| 	Part 1 	2
+
+-- 29 of 31 --
+
+30
+M: 	Thank you both for 1)
+.
+W1: No problem, Peter. 2) 	.
+W2: Yeah. Uhm . . . 3) 	though.
+W1: Right. It’s that 4) 	.
+M: 	Oh, really? Shouldn’t we call Ed Thompson? He’s 5)
+.
+W2: I think he’s on vacation and will return tomorrow.
+M: 	Oh, that’s right. 6) 	as soon as he gets back.
+M: Thank you both for 1) helping me set up everything for our boss’s retirement party.
+W1: No problem, Peter. 2) Glad we could give you a hand.
+W2: Yeah. Uhm . . . 3) there’s one issue left to address though.
+W1: Right. It’s that 4) the stage microphone’s no longer working.
+M: Oh, really? Shouldn’t we call Ed Thompson? He’s 5) in charge of maintenance and repair tasks.
+W2: I think he’s on vacation and will return tomorrow.
+M: Oh, that’s right. 6) I’ll get in touch with him as soon as he gets back.
+TEST 10 	| 	Part 3
+
+-- 30 of 31 --
+
+31
+Good evening, everyone. 1)
+, I’d like to thank you all for attending the 33rd anniversary of Elegance
+and Style. 2)
+, we would not have achieved the level of success we have in the
+industry. Of course, I’d like to 3) 	,
+Alana Switch, who produced superb clothing for both our formal and ready-to-wear lines.
+4)
+this company, I thank you for your 5) 	.
+For this occasion, 6)
+from a jazz band. Thank you and enjoy the rest of
+the evening.
+Good evening, everyone. 1) On behalf of the company’s board of directors, I’d like to thank you all for attending the
+33rd anniversary of Elegance and Style. 2) Without the ongoing support of our cherished customers, we would not have
+achieved the level of success we have in the industry. Of course, I’d like to 3) express my sincere appreciation to our
+excellent designer, Alana Switch, who produced superb clothing for both our formal and ready-to-wear lines. 4) And to
+all the employees who make up this company, I thank you for your 5) reliable service, endless hours, and unwavering
+devotion. For this occasion, 6) a special dinner has been prepared with a live performance from a jazz band. Thank you
+and enjoy the rest of the evening.
+TEST 10 	| 	Part 4
+
+-- 31 of 31 --
+
