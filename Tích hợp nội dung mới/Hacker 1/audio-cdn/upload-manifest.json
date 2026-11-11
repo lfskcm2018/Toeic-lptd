@@ -1,0 +1,212 @@
+[
+  {
+    "cdnName": "HACKER1_T01_P12.mp3",
+    "audioFileName": "TEST01_Part1-2.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST01_Part1-2.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T01_P12.mp3",
+    "bytes": 1149189
+  },
+  {
+    "cdnName": "HACKER1_T01_P3.mp3",
+    "audioFileName": "TEST01_Part3.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST01_Part3.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T01_P3.mp3",
+    "bytes": 1550106
+  },
+  {
+    "cdnName": "HACKER1_T01_P4.mp3",
+    "audioFileName": "TEST01_Part4.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST01_Part4.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T01_P4.mp3",
+    "bytes": 2185822
+  },
+  {
+    "cdnName": "HACKER1_T02_P12.mp3",
+    "audioFileName": "TEST02_Part1-2.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST02_Part1-2.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T02_P12.mp3",
+    "bytes": 1187951
+  },
+  {
+    "cdnName": "HACKER1_T02_P3.mp3",
+    "audioFileName": "TEST02_Part3.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST02_Part3.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T02_P3.mp3",
+    "bytes": 1894504
+  },
+  {
+    "cdnName": "HACKER1_T02_P4.mp3",
+    "audioFileName": "TEST02_Part4.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST02_Part4.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T02_P4.mp3",
+    "bytes": 1679673
+  },
+  {
+    "cdnName": "HACKER1_T03_P12.mp3",
+    "audioFileName": "TEST03_Part1-2.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST03_Part1-2.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T03_P12.mp3",
+    "bytes": 1185443
+  },
+  {
+    "cdnName": "HACKER1_T03_P3.mp3",
+    "audioFileName": "TEST03_Part3.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST03_Part3.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T03_P3.mp3",
+    "bytes": 2029087
+  },
+  {
+    "cdnName": "HACKER1_T03_P4.mp3",
+    "audioFileName": "TEST03_Part4.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST03_Part4.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T03_P4.mp3",
+    "bytes": 2100140
+  },
+  {
+    "cdnName": "HACKER1_T04_P12.mp3",
+    "audioFileName": "TEST04_Part1-2.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST04_Part1-2.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T04_P12.mp3",
+    "bytes": 1127766
+  },
+  {
+    "cdnName": "HACKER1_T04_P3.mp3",
+    "audioFileName": "TEST04_Part3.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST04_Part3.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T04_P3.mp3",
+    "bytes": 2130652
+  },
+  {
+    "cdnName": "HACKER1_T04_P4.mp3",
+    "audioFileName": "TEST04_Part4.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST04_Part4.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T04_P4.mp3",
+    "bytes": 2168686
+  },
+  {
+    "cdnName": "HACKER1_T05_P12.mp3",
+    "audioFileName": "TEST05_Part1-2.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST05_Part1-2.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T05_P12.mp3",
+    "bytes": 1223479
+  },
+  {
+    "cdnName": "HACKER1_T05_P3.mp3",
+    "audioFileName": "TEST05_Part3.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST05_Part3.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T05_P3.mp3",
+    "bytes": 1685107
+  },
+  {
+    "cdnName": "HACKER1_T05_P4.mp3",
+    "audioFileName": "TEST05_Part4.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST05_Part4.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T05_P4.mp3",
+    "bytes": 1859814
+  },
+  {
+    "cdnName": "HACKER1_T06_P12.mp3",
+    "audioFileName": "TEST06_Part1-2.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST06_Part1-2.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T06_P12.mp3",
+    "bytes": 1272380
+  },
+  {
+    "cdnName": "HACKER1_T06_P3.mp3",
+    "audioFileName": "TEST06_Part3.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST06_Part3.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T06_P3.mp3",
+    "bytes": 1456902
+  },
+  {
+    "cdnName": "HACKER1_T06_P4.mp3",
+    "audioFileName": "TEST06_Part4.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST06_Part4.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T06_P4.mp3",
+    "bytes": 1771625
+  },
+  {
+    "cdnName": "HACKER1_T07_P12.mp3",
+    "audioFileName": "TEST07_Part1-2.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST07_Part1-2.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T07_P12.mp3",
+    "bytes": 1223479
+  },
+  {
+    "cdnName": "HACKER1_T07_P3.mp3",
+    "audioFileName": "TEST07_Part3.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST07_Part3.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T07_P3.mp3",
+    "bytes": 2015713
+  },
+  {
+    "cdnName": "HACKER1_T07_P4.mp3",
+    "audioFileName": "TEST07_Part4.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST07_Part4.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T07_P4.mp3",
+    "bytes": 2028670
+  },
+  {
+    "cdnName": "HACKER1_T08_P12.mp3",
+    "audioFileName": "TEST08_Part1-2.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST08_Part1-2.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T08_P12.mp3",
+    "bytes": 1100181
+  },
+  {
+    "cdnName": "HACKER1_T08_P3.mp3",
+    "audioFileName": "TEST08_Part3.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST08_Part3.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T08_P3.mp3",
+    "bytes": 1958035
+  },
+  {
+    "cdnName": "HACKER1_T08_P4.mp3",
+    "audioFileName": "TEST08_Part4.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST08_Part4.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T08_P4.mp3",
+    "bytes": 2197525
+  },
+  {
+    "cdnName": "HACKER1_T09_P12.mp3",
+    "audioFileName": "TEST09_Part1-2.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST09_Part1-2.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T09_P12.mp3",
+    "bytes": 1141977
+  },
+  {
+    "cdnName": "HACKER1_T09_P3.mp3",
+    "audioFileName": "TEST09_Part3.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST09_Part3.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T09_P3.mp3",
+    "bytes": 1946750
+  },
+  {
+    "cdnName": "HACKER1_T09_P4.mp3",
+    "audioFileName": "TEST09_Part4.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST09_Part4.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T09_P4.mp3",
+    "bytes": 1719380
+  },
+  {
+    "cdnName": "HACKER1_T10_P12.mp3",
+    "audioFileName": "TEST10_Part1-2.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST10_Part1-2.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T10_P12.mp3",
+    "bytes": 1191714
+  },
+  {
+    "cdnName": "HACKER1_T10_P3.mp3",
+    "audioFileName": "TEST10_Part3.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST10_Part3.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T10_P3.mp3",
+    "bytes": 1696810
+  },
+  {
+    "cdnName": "HACKER1_T10_P4.mp3",
+    "audioFileName": "TEST10_Part4.mp3",
+    "source": "Hacker 1\\Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)\\TEST10_Part4.mp3",
+    "dest": "op\\Tích hợp nội dung mới\\Hacker 1\\audio-cdn\\HACKER1_T10_P4.mp3",
+    "bytes": 2355932
+  }
+]

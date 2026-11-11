@@ -62,36 +62,21 @@
       {
         "no": 1,
         "speaker": "W",
-        "text": "Sam, 1) with a special seasonal collection of greeting cards. 2) ."
+        "text": "Sam, 1) our company is going to expand its product offerings this fall with a special seasonal collection of greeting cards. 2) I'd like you to design them."
       },
       {
         "no": 2,
         "speaker": "M",
-        "text": "OK. 3) how you'd like the cards to look? Or 4) ?"
+        "text": "OK. 3) Do you currently have an opinion about how you'd like the cards to look? Or 4) will I have the final say over their appearance?"
       },
       {
         "no": 3,
         "speaker": "W",
-        "text": "5) the colors of autumn, such as red, orange, and yellow, I don't have a preference. Please 6) ."
-      },
-      {
-        "no": 4,
-        "speaker": "W",
-        "text": "Sam, 1) our company is going to expand its product offerings this fall with a special seasonal collection of greeting cards. 2) I'd like you to design them."
-      },
-      {
-        "no": 5,
-        "speaker": "M",
-        "text": "OK. 3) Do you currently have an opinion about how you'd like the cards to look? Or 4) will I have the final say over their appearance?"
-      },
-      {
-        "no": 6,
-        "speaker": "W",
         "text": "5) Aside from wanting them to incorporate the colors of autumn, such as red, orange, and yellow, I don't have a preference. Please 6) show me your drafts next Friday."
       }
     ],
-    "lineCount": 6,
-    "wordCount": 128
+    "lineCount": 3,
+    "wordCount": 85
   },
   {
     "id": "hacker1-t01-p4",
@@ -218,76 +203,41 @@
       {
         "no": 1,
         "speaker": "W",
-        "text": "1) Diamond Bank. This is Carly Simon speaking. How can I assist you?"
+        "text": "1) Thank you for calling Diamond Bank. This is Carly Simon speaking. How can I assist you?"
       },
       {
         "no": 2,
         "speaker": "M",
-        "text": "I'm 2) . Could you help with that?"
+        "text": "I'm 2) having trouble logging on to your online banking service. Could you help with that?"
       },
       {
         "no": 3,
         "speaker": "W",
-        "text": "3) . You can use Web services from 5 p.m. today."
+        "text": "3) Our site is undergoing maintenance work. You can use Web services from 5 p.m. today."
       },
       {
         "no": 4,
         "speaker": "M",
-        "text": "But I 4) before noon. Is there any other way for me to do that?"
+        "text": "But I 4) have to make a wire transfer before noon. Is there any other way for me to do that?"
       },
       {
         "no": 5,
         "speaker": "W",
-        "text": "Our 5) you to do that."
+        "text": "Our 5) mobile application will allow you to do that."
       },
       {
         "no": 6,
         "speaker": "M",
-        "text": "Really? 6) ?"
+        "text": "Really? 6) How can I download it?"
       },
       {
         "no": 7,
         "speaker": "W",
         "text": "Simply search for Diamond Bank in the Orpheus Application Store and click Install."
-      },
-      {
-        "no": 8,
-        "speaker": "W",
-        "text": "1) Thank you for calling Diamond Bank. This is Carly Simon speaking. How can I assist you?"
-      },
-      {
-        "no": 9,
-        "speaker": "M",
-        "text": "I'm 2) having trouble logging on to your online banking service. Could you help with that?"
-      },
-      {
-        "no": 10,
-        "speaker": "W",
-        "text": "3) Our site is undergoing maintenance work. You can use Web services from 5 p.m. today."
-      },
-      {
-        "no": 11,
-        "speaker": "M",
-        "text": "But I 4) have to make a wire transfer before noon. Is there any other way for me to do that?"
-      },
-      {
-        "no": 12,
-        "speaker": "W",
-        "text": "Our 5) mobile application will allow you to do that."
-      },
-      {
-        "no": 13,
-        "speaker": "M",
-        "text": "Really? 6) How can I download it?"
-      },
-      {
-        "no": 14,
-        "speaker": "W",
-        "text": "Simply search for Diamond Bank in the Orpheus Application Store and click Install."
       }
     ],
-    "lineCount": 14,
-    "wordCount": 169
+    "lineCount": 7,
+    "wordCount": 100
   },
   {
     "id": "hacker1-t02-p4",
@@ -587,7 +537,7 @@
       {
         "no": 1,
         "speaker": "",
-        "text": "1) ?"
+        "text": "1) Worried about keeping your pool clean?"
       },
       {
         "no": 2,
@@ -602,7 +552,7 @@
       {
         "no": 4,
         "speaker": "",
-        "text": "Aquafix has the largest 2) your swimming pool."
+        "text": "Aquafix has the largest 2) selection of equipment and supplies in the region to sanitize your swimming pool."
       },
       {
         "no": 5,
@@ -612,91 +562,26 @@
       {
         "no": 6,
         "speaker": "",
-        "text": "3) ?"
+        "text": "3) Can't come to our store?"
       },
       {
         "no": 7,
         "speaker": "",
-        "text": "We are pleased to announce that we now 4) at www."
+        "text": "We are pleased to announce that we now 4) offer all of our items online at www.aquafix.com."
       },
       {
         "no": 8,
         "speaker": "",
-        "text": "aquafix."
+        "text": "5) Spare yourself the trouble and have items delivered right to your doorstep!"
       },
       {
         "no": 9,
         "speaker": "",
-        "text": "com."
-      },
-      {
-        "no": 10,
-        "speaker": "",
-        "text": "5) and have items delivered right to your doorstep!"
-      },
-      {
-        "no": 11,
-        "speaker": "",
-        "text": "6) living in the Phoenix area and have your orders delivered by the next day."
-      },
-      {
-        "no": 12,
-        "speaker": "",
-        "text": "1) Worried about keeping your pool clean?"
-      },
-      {
-        "no": 13,
-        "speaker": "",
-        "text": "Look no further!"
-      },
-      {
-        "no": 14,
-        "speaker": "",
-        "text": "Aquafix provides everything you need."
-      },
-      {
-        "no": 15,
-        "speaker": "",
-        "text": "Aquafix has the largest 2) selection of equipment and supplies in the region to sanitize your swimming pool."
-      },
-      {
-        "no": 16,
-        "speaker": "",
-        "text": "This June, we're selling water pumps, heaters, filters, and cleaners at discounted prices."
-      },
-      {
-        "no": 17,
-        "speaker": "",
-        "text": "3) Can't come to our store?"
-      },
-      {
-        "no": 18,
-        "speaker": "",
-        "text": "We are pleased to announce that we now 4) offer all of our items online at www."
-      },
-      {
-        "no": 19,
-        "speaker": "",
-        "text": "aquafix."
-      },
-      {
-        "no": 20,
-        "speaker": "",
-        "text": "com."
-      },
-      {
-        "no": 21,
-        "speaker": "",
-        "text": "5) Spare yourself the trouble and have items delivered right to your doorstep!"
-      },
-      {
-        "no": 22,
-        "speaker": "",
         "text": "6) Take advantage of our priority delivery services available to customers living in the Phoenix area and have your orders delivered by the next day."
       }
     ],
-    "lineCount": 22,
-    "wordCount": 179
+    "lineCount": 9,
+    "wordCount": 107
   },
   {
     "id": "hacker1-t05-p12",
@@ -761,46 +646,26 @@
       {
         "no": 1,
         "speaker": "M",
-        "text": "Hello. 1) for my family. 2) some of your models?"
+        "text": "Hello. 1) I'm interested in buying a new vehicle for my family. 2) Could you show me some of your models?"
       },
       {
         "no": 2,
         "speaker": "W",
-        "text": "Right this way, sir. 3) ?"
+        "text": "Right this way, sir. 3) What kind of vehicle are you looking for?"
       },
       {
         "no": 3,
         "speaker": "M",
-        "text": "Well, I have a large family, 4) . Apart from that, safety and comtort are my major concerns."
+        "text": "Well, I have a large family, 4) so we need at least seven seats. Apart from that, safety and comfort are my major concerns."
       },
       {
         "no": 4,
         "speaker": "W",
-        "text": "5) . Our Eleganti model seats 10 people comfortably. 6) ."
-      },
-      {
-        "no": 5,
-        "speaker": "M",
-        "text": "Hello. 1) I'm interested in buying a new vehicle for my family. 2) Could you show me some of your models?"
-      },
-      {
-        "no": 6,
-        "speaker": "W",
-        "text": "Right this way, sir. 3) What kind of vehicle are you looking for?"
-      },
-      {
-        "no": 7,
-        "speaker": "M",
-        "text": "Well, I have a large family, 4) so we need at least seven seats. Apart from that, safety and comfort are my major concerns."
-      },
-      {
-        "no": 8,
-        "speaker": "W",
         "text": "5) It sounds like you need a van. Our Eleganti model seats 10 people comfortably. 6) It has anti-lock brakes, a sunroof, and a built-in stereo and DVD player."
       }
     ],
-    "lineCount": 8,
-    "wordCount": 132
+    "lineCount": 4,
+    "wordCount": 87
   },
   {
     "id": "hacker1-t05-p4",
@@ -823,27 +688,27 @@
       {
         "no": 2,
         "speaker": "",
-        "text": "1) ."
+        "text": "1) I'm calling to update you about the progress of the project."
       },
       {
         "no": 3,
         "speaker": "",
-        "text": "After considering your recommendations, I 2) a caption to make the advertisement more interesting."
+        "text": "After considering your recommendations, I 2) created a logo and came up with a caption to make the advertisement more interesting."
       },
       {
         "no": 4,
         "speaker": "",
-        "text": "The 3) ."
+        "text": "The 3) advertisement uses colors that consumers should find appealing."
       },
       {
         "no": 5,
         "speaker": "",
-        "text": "I 4) and gave it to your secretary this morning."
+        "text": "I 4) printed a copy of the draft and gave it to your secretary this morning."
       },
       {
         "no": 6,
         "speaker": "",
-        "text": "Please 5) ."
+        "text": "Please 5) check it and give me comments so I can make the necessary revisions."
       },
       {
         "no": 7,
@@ -853,61 +718,16 @@
       {
         "no": 8,
         "speaker": "",
-        "text": "6) ."
+        "text": "6) Let me know if you have any questions."
       },
       {
         "no": 9,
         "speaker": "",
         "text": "Thanks."
-      },
-      {
-        "no": 10,
-        "speaker": "",
-        "text": "Brenda, it's Calvin Walters."
-      },
-      {
-        "no": 11,
-        "speaker": "",
-        "text": "1) I'm calling to update you about the progress of the project."
-      },
-      {
-        "no": 12,
-        "speaker": "",
-        "text": "After considering your recommendations, I 2) created a logo and came up with a caption to make the advertisement more interesting."
-      },
-      {
-        "no": 13,
-        "speaker": "",
-        "text": "The 3) advertisement uses colors that consumers should find appealing."
-      },
-      {
-        "no": 14,
-        "speaker": "",
-        "text": "I 4) printed a copy of the draft and gave it to your secretary this morning."
-      },
-      {
-        "no": 15,
-        "speaker": "",
-        "text": "Please 5) check it and give me comments so I can make the necessary revisions."
-      },
-      {
-        "no": 16,
-        "speaker": "",
-        "text": "I hope to finish the project by Monday, January 9 and show it to our client on the next day."
-      },
-      {
-        "no": 17,
-        "speaker": "",
-        "text": "6) Let me know if you have any questions."
-      },
-      {
-        "no": 18,
-        "speaker": "",
-        "text": "Thanks."
       }
     ],
-    "lineCount": 18,
-    "wordCount": 167
+    "lineCount": 9,
+    "wordCount": 108
   },
   {
     "id": "hacker1-t06-p12",
@@ -1009,12 +829,12 @@
       {
         "no": 1,
         "speaker": "",
-        "text": "1) this brief training session."
+        "text": "1) Thanks for coming to this brief training session."
       },
       {
         "no": 2,
         "speaker": "",
-        "text": "Today, I'll be 2) ."
+        "text": "Today, I'll be 2) discussing the most effective way of dealing with clients."
       },
       {
         "no": 3,
@@ -1024,61 +844,26 @@
       {
         "no": 4,
         "speaker": "",
-        "text": "Also, 3) when discussing a product or service."
+        "text": "Also, 3) keep your explanations simple and avoid using technical terms when discussing a product or service."
       },
       {
         "no": 5,
         "speaker": "",
-        "text": "Lastly, 4) ."
+        "text": "Lastly, 4) be sure to make your clients feel comfortable and at ease."
       },
       {
         "no": 6,
         "speaker": "",
-        "text": "You can do this by 5) ."
+        "text": "You can do this by 5) using a welcoming tone of voice and smiling."
       },
       {
         "no": 7,
         "speaker": "",
-        "text": "By following these tips, 6) strong relationships with customers."
-      },
-      {
-        "no": 8,
-        "speaker": "",
-        "text": "1) Thanks for coming to this brief training session."
-      },
-      {
-        "no": 9,
-        "speaker": "",
-        "text": "Today, I'll be 2) discussing the most effective way of dealing with clients."
-      },
-      {
-        "no": 10,
-        "speaker": "",
-        "text": "First of all, try to determine their needs by listening carefully to their specifications."
-      },
-      {
-        "no": 11,
-        "speaker": "",
-        "text": "Also, 3) keep your explanations simple and avoid using technical terms when discussing a product or service."
-      },
-      {
-        "no": 12,
-        "speaker": "",
-        "text": "Lastly, 4) be sure to make your clients feel comfortable and at ease."
-      },
-      {
-        "no": 13,
-        "speaker": "",
-        "text": "You can do this by 5) using a welcoming tone of voice and smiling."
-      },
-      {
-        "no": 14,
-        "speaker": "",
         "text": "By following these tips, 6) you should be able to create strong relationships with customers."
       }
     ],
-    "lineCount": 14,
-    "wordCount": 146
+    "lineCount": 7,
+    "wordCount": 95
   },
   {
     "id": "hacker1-t07-p12",
@@ -1143,26 +928,26 @@
       {
         "no": 1,
         "speaker": "W",
-        "text": "I want to quickly 1) ."
+        "text": "I want to quickly 1) go over everyone's duties in relation to the schedule for tomorrow's banquet."
       },
       {
         "no": 2,
-        "speaker": "M",
+        "speaker": "M1",
         "text": "I'll be showing the guests to their seats from 6 p.m."
       },
       {
         "no": 3,
-        "speaker": "M",
-        "text": "And I'm 2) at 6:20 p.m."
+        "speaker": "M2",
+        "text": "And I'm 2) in charge of making sure serving staff get the dinner course out at 6:20 p.m."
       },
       {
         "no": 4,
         "speaker": "W",
-        "text": "Hmm. 3) . If people are arriving only 20 minutes earlier, then they won't have enough time to get situated. 4) ."
+        "text": "Hmm. 3) Let's push that back. If people are arriving only 20 minutes earlier, then they won't have enough time to get situated. 4) There's just no way."
       },
       {
         "no": 5,
-        "speaker": "M",
+        "speaker": "M2",
         "text": "Then, how does 6:45 sound?"
       },
       {
@@ -1172,57 +957,17 @@
       },
       {
         "no": 7,
-        "speaker": "M",
-        "text": "Yeah. 5) , which made our servers' work harder."
-      },
-      {
-        "no": 8,
-        "speaker": "M",
-        "text": "Hopefully, 6) ."
-      },
-      {
-        "no": 9,
-        "speaker": "W",
-        "text": "I want to quickly 1) go over everyone's duties in relation to the schedule for tomorrow's banquet."
-      },
-      {
-        "no": 10,
-        "speaker": "M",
-        "text": "I'll be showing the guests to their seats from 6 p.m."
-      },
-      {
-        "no": 11,
-        "speaker": "M",
-        "text": "And I'm 2) in charge of making sure serving staff get the dinner course out at 6:20 p.m."
-      },
-      {
-        "no": 12,
-        "speaker": "W",
-        "text": "Hmm. 3) Let's push that back. If people are arriving only 20 minutes earlier, then they won't have enough time to get situated. 4) There's just no way."
-      },
-      {
-        "no": 13,
-        "speaker": "M",
-        "text": "Then, how does 6:45 sound?"
-      },
-      {
-        "no": 14,
-        "speaker": "W",
-        "text": "That seems more reasonable."
-      },
-      {
-        "no": 15,
-        "speaker": "M",
+        "speaker": "M1",
         "text": "Yeah. 5) The schedule at our event last year was a bit tight, which made our servers' work harder."
       },
       {
-        "no": 16,
-        "speaker": "M",
+        "no": 8,
+        "speaker": "M2",
         "text": "Hopefully, 6) this timeframe will be more suitable."
       }
     ],
-    "lineCount": 16,
-    "wordCount": 176
+    "lineCount": 8,
+    "wordCount": 110
   },
   {
     "id": "hacker1-t07-p4",
@@ -1240,56 +985,31 @@
       {
         "no": 1,
         "speaker": "",
-        "text": "The annual Scranton Culture and Art Fair was held last weekend, and 1) ."
+        "text": "The annual Scranton Culture and Art Fair was held last weekend, and 1) the popular event drew visitors from all over the state."
       },
       {
         "no": 2,
         "speaker": "",
-        "text": "Guests were able to 2) from nearly 400 vendors."
+        "text": "Guests were able to 2) buy artwork and other merchandise from nearly 400 vendors."
       },
       {
         "no": 3,
         "speaker": "",
-        "text": "For many people, however, 3) , Maria Hernandez."
+        "text": "For many people, however, 3) the highlight of this year's fair was the surprise appearance of the renowned painter, Maria Hernandez."
       },
       {
         "no": 4,
         "speaker": "",
-        "text": "Ms. Hernandez was born and raised in Scranton but immigrated to Paris, France a decade ago to 4) ."
+        "text": "Ms. Hernandez was born and raised in Scranton but immigrated to Paris, France a decade ago to 4) pursue a career as an artist."
       },
       {
         "no": 5,
         "speaker": "",
-        "text": "Upon arriving at the fair, she 5) a large group of people, so she 6) that organizers quickly set up for her."
-      },
-      {
-        "no": 6,
-        "speaker": "",
-        "text": "The annual Scranton Culture and Art Fair was held last weekend, and 1) the popular event drew visitors from all over the state."
-      },
-      {
-        "no": 7,
-        "speaker": "",
-        "text": "Guests were able to 2) buy artwork and other merchandise from nearly 400 vendors."
-      },
-      {
-        "no": 8,
-        "speaker": "",
-        "text": "For many people, however, 3) the highlight of this year's fair was the surprise appearance of the renowned painter, Maria Hernandez."
-      },
-      {
-        "no": 9,
-        "speaker": "",
-        "text": "Ms. Hernandez was born and raised in Scranton but immigrated to Paris, France a decade ago to 4) pursue a career as an artist."
-      },
-      {
-        "no": 10,
-        "speaker": "",
         "text": "Upon arriving at the fair, she 5) attracted the attention of a large group of people, so she 6) decided to sign autographs at a table that organizers quickly set up for her."
       }
     ],
-    "lineCount": 10,
-    "wordCount": 187
+    "lineCount": 5,
+    "wordCount": 115
   },
   {
     "id": "hacker1-t08-p12",
@@ -1354,46 +1074,26 @@
       {
         "no": 1,
         "speaker": "M",
-        "text": "Excuse me. 1) . I was wondering if 2) . It seems like every space in the parking lot is reserved."
+        "text": "Excuse me. 1) I'm new here at the office. I was wondering if 2) you could help me figure out where I can park my car. It seems like every space in the parking lot is reserved."
       },
       {
         "no": 2,
         "speaker": "W",
-        "text": "Yes, it's 3) a space in the lot. The managers have their spaces reserved, and 4) . Regular employees usually have to leave their vehicles at the parking garage near the train station."
+        "text": "Yes, it's 3) actually quite difficult to find a space in the lot. The managers have their spaces reserved, and 4) we make sure to keep a few spots open for visitors. Regular employees usually have to leave their vehicles at the parking garage near the train station."
       },
       {
         "no": 3,
         "speaker": "M",
-        "text": "That's too far to walk, though. 5) ?"
+        "text": "That's too far to walk, though. 5) How can I get to the office from there?"
       },
       {
         "no": 4,
         "speaker": "W",
-        "text": "Oh, I take the bus. Several buses stop at the station and come directly here. 6) , if you'd like."
-      },
-      {
-        "no": 5,
-        "speaker": "M",
-        "text": "Excuse me. 1) I'm new here at the office. I was wondering if 2) you could help me figure out where I can park my car. It seems like every space in the parking lot is reserved."
-      },
-      {
-        "no": 6,
-        "speaker": "W",
-        "text": "Yes, it's 3) actually quite difficult to find a space in the lot. The managers have their spaces reserved, and 4) we make sure to keep a few spots open for visitors. Regular employees usually have to leave their vehicles at the parking garage near the train station."
-      },
-      {
-        "no": 7,
-        "speaker": "M",
-        "text": "That's too far to walk, though. 5) How can I get to the office from there?"
-      },
-      {
-        "no": 8,
-        "speaker": "W",
         "text": "Oh, I take the bus. Several buses stop at the station and come directly here. 6) I have a bus schedule I can give you, if you'd like."
       }
     ],
-    "lineCount": 8,
-    "wordCount": 211
+    "lineCount": 4,
+    "wordCount": 129
   },
   {
     "id": "hacker1-t08-p4",
@@ -1441,26 +1141,16 @@
       {
         "no": 7,
         "speaker": "",
-        "text": "5) For more details about the highway construction, you may also check www."
+        "text": "5) For more details about the highway construction, you may also check www.netd.com."
       },
       {
         "no": 8,
         "speaker": "",
-        "text": "netd."
-      },
-      {
-        "no": 9,
-        "speaker": "",
-        "text": "com."
-      },
-      {
-        "no": 10,
-        "speaker": "",
         "text": "6) Stay tuned for our next report coming up in 30 minutes."
       }
     ],
-    "lineCount": 10,
-    "wordCount": 108
+    "lineCount": 8,
+    "wordCount": 106
   },
   {
     "id": "hacker1-t09-p12",
@@ -1661,76 +1351,41 @@
       {
         "no": 1,
         "speaker": "M",
-        "text": "Thank you both for 1) ."
+        "text": "Thank you both for 1) helping me set up everything for our boss's retirement party."
       },
       {
         "no": 2,
-        "speaker": "W",
-        "text": "No problem, Peter. 2) ."
+        "speaker": "W1",
+        "text": "No problem, Peter. 2) Glad we could give you a hand."
       },
       {
         "no": 3,
-        "speaker": "W",
-        "text": "Yeah. Uhm . . . 3) though."
+        "speaker": "W2",
+        "text": "Yeah. Uhm . . . 3) there's one issue left to address though."
       },
       {
         "no": 4,
-        "speaker": "W",
-        "text": "Right. It's that 4) ."
+        "speaker": "W1",
+        "text": "Right. It's that 4) the stage microphone's no longer working."
       },
       {
         "no": 5,
         "speaker": "M",
-        "text": "Oh, really? Shouldn't we call Ed Thompson? He's 5) ."
+        "text": "Oh, really? Shouldn't we call Ed Thompson? He's 5) in charge of maintenance and repair tasks."
       },
       {
         "no": 6,
-        "speaker": "W",
+        "speaker": "W2",
         "text": "I think he's on vacation and will return tomorrow."
       },
       {
         "no": 7,
         "speaker": "M",
-        "text": "Oh, that's right. 6) as soon as he gets back."
-      },
-      {
-        "no": 8,
-        "speaker": "M",
-        "text": "Thank you both for 1) helping me set up everything for our boss's retirement party."
-      },
-      {
-        "no": 9,
-        "speaker": "W",
-        "text": "No problem, Peter. 2) Glad we could give you a hand."
-      },
-      {
-        "no": 10,
-        "speaker": "W",
-        "text": "Yeah. Uhm . . . 3) there's one issue left to address though."
-      },
-      {
-        "no": 11,
-        "speaker": "W",
-        "text": "Right. It's that 4) the stage microphone's no longer working."
-      },
-      {
-        "no": 12,
-        "speaker": "M",
-        "text": "Oh, really? Shouldn't we call Ed Thompson? He's 5) in charge of maintenance and repair tasks."
-      },
-      {
-        "no": 13,
-        "speaker": "W",
-        "text": "I think he's on vacation and will return tomorrow."
-      },
-      {
-        "no": 14,
-        "speaker": "M",
         "text": "Oh, that's right. 6) I'll get in touch with him as soon as he gets back."
       }
     ],
-    "lineCount": 14,
-    "wordCount": 142
+    "lineCount": 7,
+    "wordCount": 90
   },
   {
     "id": "hacker1-t10-p4",

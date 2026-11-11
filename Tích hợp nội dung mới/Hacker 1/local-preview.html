@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hacker 1 — Local Preview</title>
+  <style>
+    :root { --bg:#0b1020; --card:#141b34; --muted:#93a0c0; --text:#e8edff; --accent:#5eead4; --line:#243055; }
+    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
+    header{position:sticky;top:0;background:rgba(11,16,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:14px 18px;z-index:2}
+    h1{margin:0;font-size:18px} .sub{color:var(--muted);font-size:13px;margin-top:4px}
+    .wrap{display:grid;grid-template-columns:320px 1fr;gap:14px;padding:14px}
+    .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+    .panel h2{margin:0;padding:12px 14px;font-size:14px;border-bottom:1px solid var(--line);color:var(--muted)}
+    .list{max-height:calc(100vh - 120px);overflow:auto}
+    .item{padding:10px 14px;border-bottom:1px solid var(--line);cursor:pointer}
+    .item:hover{background:#192247}.item.active{background:#1d2a57;border-left:3px solid var(--accent)}
+    .item .t{font-weight:600;font-size:14px}.item .m{color:var(--muted);font-size:12px;margin-top:3px}
+    .content{padding:14px;max-height:calc(100vh - 120px);overflow:auto}
+    .meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+    .badge{background:#1b2548;border:1px solid var(--line);color:var(--muted);padding:4px 8px;border-radius:999px;font-size:12px}
+    audio{width:100%;margin:8px 0 14px}
+    .line{padding:10px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:#101735}
+    .spk{display:inline-block;min-width:28px;color:var(--accent);font-weight:700;margin-right:6px}
+    .no{color:var(--muted);font-size:12px;margin-right:6px}
+    .hint{color:var(--muted);font-size:13px}
+    .err{color:#fca5a5}
+    @media(max-width:900px){.wrap{grid-template-columns:1fr}.list,.content{max-height:none}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Hacker 1 — Local Preview (kiểm tra dữ liệu & audio)</h1>
+    <div class="sub" id="summary">Đang tải dữ liệu…</div>
+  </header>
+  <div class="wrap">
+    <div class="panel">
+      <h2>Danh sách 30 track</h2>
+      <div class="list" id="list"></div>
+    </div>
+    <div class="panel">
+      <h2>Chi tiết lesson</h2>
+      <div class="content" id="content"><p class="hint">Chọn một track để xem nội dung và phát audio local.</p></div>
+    </div>
+  </div>
+
+  <script src="hacker-1-lessons-data.js"></script>
+  <script>
+    (function(){
+      const data = (window.HACKER1_LESSONS || []).slice().sort((a,b)=>a.unit-b.unit);
+      const meta = window.HACKER1_LESSONS_META || {};
+      const list = document.getElementById('list');
+      const content = document.getElementById('content');
+      const summary = document.getElementById('summary');
+      if (!data.length) {
+        summary.innerHTML = '<span class="err">Không tải được HACKER1_LESSONS. Hãy mở file này qua HTTP server trong workspace.</span>';
+        return;
+      }
+      summary.textContent = `${meta.lessonCount||data.length} lesson · ${meta.totalLines||''} lines · ${meta.totalWords||''} words · ${meta.workbook||'Hacker 1'}`;
+
+      function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])); }
+      function audioSrc(l){
+        // localPath relative to workspace root; this file lives in "Tích hợp nội dung mới/Hacker 1/"
+        return '../../' + l.localPath.split('/').map(encodeURIComponent).join('/');
+      }
+
+      let active = null;
+      function renderList(){
+        list.innerHTML = data.map(l => `
+          <div class="item ${active===l.id?'active':''}" data-id="${esc(l.id)}">
+            <div class="t">${esc(l.title)}</div>
+            <div class="m">#${l.unit} · ${l.lineCount} lines · ${l.wordCount} words · ${esc(l.audioFileName)}</div>
+          </div>`).join('');
+        list.querySelectorAll('.item').forEach(el=>el.addEventListener('click',()=>{
+          active = el.getAttribute('data-id'); renderList(); renderDetail(data.find(x=>x.id===active));
+        }));
+      }
+      function renderDetail(l){
+        if(!l){ content.innerHTML='<p class="hint">Chọn một track.</p>'; return; }
+        const src = audioSrc(l);
+        content.innerHTML = `
+          <div class="meta">
+            <span class="badge">${esc(l.id)}</span>
+            <span class="badge">Test ${l.test} · Part ${esc(l.part)}</span>
+            <span class="badge">${l.lineCount} lines</span>
+            <span class="badge">${l.wordCount} words</span>
+            <span class="badge">cdn: ${esc(l.cdnName)}</span>
+          </div>
+          <div class="hint">Audio local: <code>${esc(l.localPath)}</code></div>
+          <audio controls preload="none" src="${esc(src)}"></audio>
+          <div class="hint">Nếu audio không phát khi mở file trực tiếp, chạy HTTP server tại thư mục gốc workspace.</div>
+          <hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+          ${l.lines.map(x=>`<div class="line"><span class="no">${x.no}.</span>${x.speaker?`<span class="spk">${esc(x.speaker)}:</span>`:''}<span>${esc(x.text)}</span></div>`).join('')}
+        `;
+      }
+      renderList();
+      if (data[0]) { active = data[0].id; renderList(); renderDetail(data[0]); }
+    })();
+  </script>
+</body>
+</html>

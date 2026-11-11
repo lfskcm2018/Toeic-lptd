@@ -13,30 +13,39 @@
       --text: #0f172a;
       --muted: #64748b;
       --accent: #2563eb;
+      --success: #059669;
+      --warning: #d97706;
+      --danger: #dc2626;
       --border: #e2e8f0;
     }
     @media (prefers-color-scheme: dark) {
       :root { --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8; --border: #334155; }
     }
     html, body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
-    .app-shell { max-width: 900px; margin: 0 auto; padding: 16px; }
-    header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
-    .logo { font-size: 28px; }
+    .app-shell { max-width: 900px; margin: 0 auto; padding: 16px; min-height: 100vh; }
+
+    /* Header */
+    header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .logo { font-size: 26px; }
     h1 { margin: 0 0 4px 0; font-size: 20px; }
     .sub { margin: 0; color: var(--muted); font-size: 14px; }
-    .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-    .tab { padding: 8px 14px; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 20px; cursor: pointer; font-size: 14px; }
-    .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
-    .tab:hover { filter: brightness(1.05); }
-    .loading, .error { padding: 32px; text-align: center; color: var(--muted); border: 1px dashed var(--border); border-radius: 12px; background: var(--card); }
-    .error { color: #dc2626; border-color: #fca5a5; background: #fef2f2; }
-    .stats { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
-    .stat { flex: 1; min-width: 140px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+    .tab { padding: 8px 14px; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 20px; cursor: pointer; font-size: 14px; transition: all .2s; }
+    .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; box-shadow: 0 2px 6px rgba(37,99,235,.25); }
+    .tab:hover:not(.active) { filter: brightness(1.05); border-color: var(--accent); }
+
+    /* Stats */
+    .stats { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .stat { flex: 1; min-width: 130px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
     .stat .num { font-size: 20px; font-weight: 700; display: block; }
     .stat .lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
-    .library { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; transition: transform .1s, box-shadow .1s; }
-    .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.06); border-color: var(--accent); }
+
+    /* Library */
+    .library { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; transition: transform .15s, box-shadow .15s, border-color .15s; }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.08); border-color: var(--accent); }
     .card .icon { font-size: 22px; margin-bottom: 2px; }
     .card .title { font-weight: 600; font-size: 15px; }
     .card .count { font-size: 12px; color: var(--muted); }
@@ -44,28 +53,81 @@
     .card .open:hover { background: var(--accent); color: #fff; }
 
     /* Unit view */
+    .hidden { display: none !important; }
     .unit-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
     .unit-header h2 { margin: 0; font-size: 18px; }
     .unit-sub { color: var(--muted); font-size: 13px; margin: 0; }
-    .btn { padding: 8px 14px; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 8px; cursor: pointer; font-size: 14px; }
-    .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .mode-tabs { display: flex; gap: 4px; margin: 12px 0; border-bottom: 1px solid var(--border); }
+    .mode-tab { padding: 10px 16px; border: none; background: transparent; color: var(--muted); cursor: pointer; font-size: 14px; font-weight: 500; border-bottom: 2px solid transparent; }
+    .mode-tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+    .mode-tab:hover { color: var(--accent); }
+
+    .btn { padding: 8px 14px; border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; }
     .btn:hover { filter: brightness(1.05); }
     .btn:disabled { opacity: .5; cursor: not-allowed; }
-    .back { margin-bottom: 16px; }
-    .audio-row { margin: 14px 0; padding: 14px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-    audio { width: 260px; height: 40px; }
-    .lines-list { margin-top: 16px; }
-    .line-item { padding: 10px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; }
+    .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn.success { background: var(--success); color: #fff; border-color: var(--success); }
+    .btn.outline { border-color: var(--border); }
+    .btn.small { padding: 4px 10px; font-size: 12px; }
+    .back { margin-bottom: 12px; }
+
+    /* Audio player */
+    .audio-row { margin: 12px 0; padding: 14px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    audio { width: 220px; height: 36px; }
+    .audio-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+    /* Lines */
+    .lines-list { margin-top: 8px; }
+    .line-item { padding: 10px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; position: relative; }
     .line-item:last-child { border-bottom: none; }
-    .line-no { font-weight: 700; color: var(--accent); min-width: 24px; font-size: 13px; }
-    .line-speaker { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); width: 40px; flex-shrink: 0; }
-    .line-text { flex: 1; }
+    .line-no { font-weight: 700; color: var(--accent); min-width: 24px; font-size: 13px; flex-shrink: 0; }
+    .line-speaker { font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); width: 36px; flex-shrink: 0; padding-top: 2px; }
+    .line-text { flex: 1; font-size: 14px; }
     .line-text.q { color: var(--text); }
-    .line-text.a { color: #059669; }
-    .cdn-link { margin-top: 10px; font-size: 12px; color: var(--muted); word-break: break-all; }
-    .hidden { display: none !important; }
+    .line-text.a { color: var(--success); }
+    .blank-input { border: 1px solid var(--border); border-radius: 4px; padding: 2px 6px; font-family: inherit; font-size: 13px; background: #fff; min-width: 40px; text-align: center; }
+    .blank-input.correct { border-color: var(--success); background: #f0fdf4; color: var(--success); font-weight: 600; }
+    .blank-input.wrong { border-color: var(--danger); background: #fef2f2; color: var(--danger); font-weight: 600; }
+    .spk-badge { font-size: 10px; padding: 1px 5px; border-radius: 3px; background: var(--border); color: var(--muted); margin-right: 4px; }
+
+    /* Status chips */
+    .q-status { font-size: 12px; margin-top: 4px; min-height: 16px; }
+    .q-status.ok { color: var(--success); font-weight: 600; }
+    .q-status.no { color: var(--warning); font-weight: 600; }
+    .q-answer { margin-top: 6px; padding: 8px; background: #f1f5f9; border-radius: 6px; font-size: 13px; }
+    .q-answer.show { display: block; }
+    .q-answer.hidden { display: none; }
+    .ans-en { margin: 0 0 4px 0; }
+
+    /* Shadowing */
+    .shadow-card { padding: 10px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+    .shadow-card:last-child { border-bottom: none; }
+    .shadow-sentence { flex: 1; font-size: 14px; }
+    .shadow-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .shadow-tools { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+    .acc-result { font-size: 13px; margin-top: 6px; padding: 8px; border-radius: 6px; }
+    .acc-result.show { display: block; }
+    .acc-result.ok { background: #f0fdf4; border: 1px solid var(--success); color: var(--success); }
+    .acc-result.mid { background: #fefbeb; border: 1px solid var(--warning); color: var(--warning); }
+    .acc-result.bad { background: #fef2f2; border: 1px solid var(--danger); color: var(--danger); }
+    .acc-bar { height: 6px; background: var(--border); border-radius: 3px; margin: 4px 0; overflow: hidden; }
+    .acc-fill { height: 100%; background: var(--accent); border-radius: 3px; }
+    .rec-indicator { font-size: 11px; color: var(--muted); display: none; }
+    .rec-indicator.on { display: inline; color: var(--danger); animation: blink 1s infinite; }
+    @keyframes blink { 50% { opacity: .4; } }
+
+    /* Messages */
+    .loading, .error { padding: 32px; text-align: center; color: var(--muted); border: 1px dashed var(--border); border-radius: 12px; background: var(--card); }
+    .error { color: var(--danger); border-color: #fca5a5; background: #fef2f2; }
     .loading-spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 6px; }
     @keyframes spin { to { transform: rotate(360deg); } }
+    .hint { font-size: 12px; color: var(--muted); margin: 8px 0; padding: 6px 10px; background: var(--card); border-radius: 6px; border-left: 3px solid var(--accent); }
+    .hint.warn { border-left-color: var(--warning); color: var(--warning); }
+    .hint.error { border-left-color: var(--danger); color: var(--danger); }
+
+    .cdn-link { font-size: 11px; color: var(--muted); word-break: break-all; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+    .score-chip { font-size: 12px; font-weight: 600; }
   </style>
 </head>
 <body>
@@ -74,7 +136,7 @@
     <div class="logo">🎧</div>
     <div>
       <h1 id="pageTitle">Dictation Part 2</h1>
-      <p class="sub" id="pageSub">TOEIC Part 2 — Nghe – chép chính tả – shadowing</p>
+      <p class="sub" id="pageSub">TOEIC Part 2 — Nghe • Chép chính tả • Luyện nói theo</p>
     </div>
   </header>
 
@@ -89,13 +151,18 @@
     <div class="stat"><span class="num" id="statWords">–</span><span class="lbl">Từ vựng</span></div>
   </div>
 
+  <!-- Library view -->
   <div id="dp2Library" class="library"></div>
+
+  <!-- Unit view -->
   <div id="dp2UnitView" class="hidden"></div>
 
+  <!-- LPTD notice -->
   <div id="lptdNotice" class="loading hidden">
     <strong>LPTD 1–4:</strong> dữ liệu 160 unit nằm trong dự án tổng (<code>app/</code>). Web app này hiện chỉ tích hợp Dictation Part 2.
   </div>
 
+  <!-- Error -->
   <div id="errorBox" class="error hidden">
     <div class="loading-spinner"></div><span id="errorMsg">Đang tải dữ liệu…</span>
   </div>
@@ -107,108 +174,19 @@
 
   var $ = function (sel) { return document.querySelector(sel); };
   var $$ = function (sel) { return Array.from(document.querySelectorAll(sel)); };
+  var global = (function () { return this; })() || window;
 
-  var tabDp2 = $('#tabDp2');
-  var tabLptd = $('#tabLptd');
-  var libBox = $('#dp2Library');
-  var unitBox = $('#dp2UnitView');
-  var statsBox = $('#heroStats');
-  var errBox = $('#errorBox');
-  var errMsg = $('#errorMsg');
-
-  var state = { lessons: [], current: null };
-
-  function showError(msg) {
-    errBox.classList.remove('hidden');
-    errMsg.textContent = msg || 'Lỗi không xác định';
-    libBox.innerHTML = '';
-    unitBox.innerHTML = '';
-    unitBox.classList.add('hidden');
-    statsBox.classList.add('hidden');
-  }
-
-  function showLoading() {
-    errBox.classList.remove('hidden');
-    errMsg.innerHTML = '<span class="loading-spinner"></span>Đang tải dữ liệu Dictation Part 2…';
-    libBox.innerHTML = '';
-    unitBox.innerHTML = '';
-    unitBox.classList.add('hidden');
-    statsBox.classList.add('hidden');
-  }
-
-  function renderStats(meta) {
-    if (!meta) return;
-    statsBox.classList.remove('hidden');
-    $('#statUnits').textContent = meta.totals.units;
-    $('#statLines').textContent = meta.totals.lines.toLocaleString('vi-VN');
-    $('#statWords').textContent = meta.totals.words.toLocaleString('vi-VN');
-  }
-
-  function renderLibrary() {
-    libBox.innerHTML = '';
-    state.lessons.forEach(function (u) {
-      var card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML =
-        '<div class="icon">📝</div>' +
-        '<div class="title">' + escapeHtml(u.title) + '</div>' +
-        '<div class="count">' + u.lineCount + ' câu · ' + u.wordCount + ' từ · <b>' + u.audioFileName + '</b></div>' +
-        '<button type="button" class="open" data-id="' + u.id + '">Mở bài học</button>';
-      card.querySelector('.open').addEventListener('click', function () { openUnit(u.id); });
-      libBox.appendChild(card);
-    });
-  }
-
-  function openUnit(id) {
-    var u = state.lessons.find(function (x) { return x.id === id; });
-    if (!u) return;
-    state.current = u;
-    libBox.classList.add('hidden');
-    unitBox.classList.remove('hidden');
-
-    var linesHtml = u.lines.map(function (ln, i) {
-      var speaker = ln.speaker || 'Q';
-      var cls = speaker === 'A' ? 'a' : 'q';
-      var label = speaker === 'A' ? 'A' : 'Q';
-      return '<div class="line-item">' +
-        '<div class="line-no">' + (i + 1) + '</div>' +
-        '<div class="line-speaker">' + label + '</div>' +
-        '<div class="line-text ' + cls + '">' + escapeHtml(ln.text) + '</div>' +
-        '</div>';
-    }).join('');
-
-    unitBox.innerHTML =
-      '<div class="unit-header">' +
-      '<button type="button" class="btn back" onclick="window.app.backToLibrary()">← Về thư viện</button>' +
-      '<div style="flex:1;min-width:0">' +
-      '<h2 style="margin:0 0 4px 0;font-size:17px">' + escapeHtml(u.title) + '</h2>' +
-      '<p class="unit-sub" style="margin:0">' + u.audioFileName + ' · ' + u.lineCount + ' câu · ' + u.wordCount + ' từ</p>' +
-      '</div>' +
-      '</div>' +
-
-      '<div class="audio-row">' +
-      '<audio id="dp2Audio" controls preload="metadata" src="' + escapeHtml(u.cdnUrl) + '"></audio>' +
-      '<div style="font-size:13px;color:var(--muted)"><b>Audio CDN:</b><br>' + escapeHtml(u.cdnUrl) + '</div>' +
-      '</div>' +
-
-      '<div class="lines-list">' + linesHtml + '</div>' +
-
-      '<div class="cdn-link" style="margin-top:14px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--muted)">' +
-      'Local: <code>' + escapeHtml(u.localPath) + '</code><br>' +
-      'CDN name: <code>' + escapeHtml(u.cdnName) + '</code>' +
-      '</div>';
-  }
-
-  window.app = {
-    backToLibrary: function () {
-      state.current = null;
-      libBox.classList.remove('hidden');
-      unitBox.classList.add('hidden');
-      var audio = $('#dp2Audio');
-      if (audio) { audio.pause(); audio.src = ''; }
-    },
+  var state = {
+    lessons: [],
+    current: null,
+    mode: 'dictation',   // 'dictation' | 'shadowing'
+    audio: null,
+    progress: {},
+    recBlobs: {},
+    isGas: typeof google !== 'undefined' && google.script && google.script.run
   };
 
+  /* ---------- Helpers ---------- */
   function escapeHtml(s) {
     if (s == null) return '';
     return String(s)
@@ -219,9 +197,614 @@
       .replace(/'/g, '&#039;');
   }
 
+  function fmtTime(sec) {
+    if (!isFinite(sec) || sec < 0) return '0:00';
+    var m = Math.floor(sec / 60);
+    var s = Math.floor(sec % 60);
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function normalizeWord(w) {
+    return String(w || '').toLowerCase().replace(/[^a-z0-9']/g, '').trim();
+  }
+
+  function exactMatch(transcript, target) {
+    var t = normalizeWord(transcript);
+    var a = normalizeWord(target);
+    if (!a) return 0;
+    var tw = t.split(/\s+/).filter(Boolean);
+    var aw = a.split(/\s+/).filter(Boolean);
+    var matches = 0;
+    for (var i = 0; i < Math.min(tw.length, aw.length); i++) {
+      if (tw[i] === aw[i]) matches++;
+    }
+    return Math.round((matches / aw.length) * 100);
+  }
+
+  function makeBlanks(sentence, every) {
+    var everyN = every || 4;
+    var tokens = String(sentence).trim().split(/\s+/);
+    var tw = 0;
+    var out = tokens.map(function (tok) {
+      var bare = tok.replace(/[^A-Za-z'\-]/g, '').replace(/^-+|-+$/g, '');
+      var isBlank = bare && (tw % everyN === everyN - 1);
+      tw += bare ? 1 : 0;
+      return { blank: !!isBlank, token: tok, answer: isBlank ? bare : '' };
+    });
+    if (!out.some(function (x) { return x.blank; })) {
+      for (var i = out.length - 1; i >= 0; i--) {
+        var bare = out[i].token.replace(/[^A-Za-z'\-]/g, '').replace(/^-+|-+$/g, '');
+        if (bare) { out[i].blank = true; out[i].answer = bare; break; }
+      }
+    }
+    return out;
+  }
+
+  function renderBlanks(text, lineIdx) {
+    var inputIndex = 0;
+    return makeBlanks(text).map(function (b) {
+      if (!b.blank) return escapeHtml(b.token);
+      var width = Math.max(4, Math.ceil(b.answer.length * 0.95));
+      var id = 'dp2-l' + lineIdx + '-b' + inputIndex;
+      return '<input id="' + id + '" class="blank-input lptd-blank" style="--len:' + width + '"' +
+        ' data-answer="' + escapeHtml(b.answer) + '" data-line="' + lineIdx + '" data-b="' + (inputIndex++) + '"' +
+        ' autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Ô điền từ">';
+    }).join(' ').replace(/\s+([,.!?;:])/g, '$1');
+  }
+
+  function spkBadge(sp) {
+    return sp ? '<span class="spk-badge">' + escapeHtml(sp) + '</span> ' : '';
+  }
+
+  /* ---------- State / Progress ---------- */
+  function progressKey(lesson) { return 'dp2-' + lesson.book + '-' + lesson.unit; }
+  function loadProgress() {
+    try { return JSON.parse(localStorage.getItem('dp2_progress') || '{}'); } catch (e) { return {}; }
+  }
+  function saveProgress() {
+    try { localStorage.setItem('dp2_progress', JSON.stringify(state.progress)); } catch (e) {}
+  }
+  function unitProgressText(lesson) {
+    var key = progressKey(lesson);
+    var p = state.progress[key] || {};
+    var done = p.dictationDone ? 1 : 0;
+    var shadowDone = p.shadowingDone ? 1 : 0;
+    var total = 2;
+    var pct = Math.round(((done + shadowDone) / total) * 100);
+    return pct + '% · ' + (done ? '✅ Điền từ' : '⬜ Điền từ') + ' · ' + (shadowDone ? '✅ Luyện nói' : '⬜ Luyện nói');
+  }
+
+  /* ---------- Audio ---------- */
+  function stopAudio() {
+    if (state.audio) {
+      try { state.audio.pause(); } catch (e) {}
+      state.audio = null;
+    }
+  }
+
+  function initAudio(src) {
+    stopAudio();
+    var audio = new Audio(src);
+    state.audio = audio;
+    return audio;
+  }
+
+  /* ---------- Library ---------- */
+  function showError(msg) {
+    var box = $('#errorBox');
+    var msgEl = $('#errorMsg');
+    box.classList.remove('hidden');
+    msgEl.textContent = msg || 'Lỗi không xác định';
+    $('#dp2Library').innerHTML = '';
+    $('#dp2UnitView').innerHTML = '';
+    $('#dp2UnitView').classList.add('hidden');
+    $('#heroStats').classList.add('hidden');
+  }
+
+  function showLoading() {
+    var box = $('#errorBox');
+    var msgEl = $('#errorMsg');
+    box.classList.remove('hidden');
+    msgEl.innerHTML = '<span class="loading-spinner"></span>Đang tải dữ liệu Dictation Part 2…';
+    $('#dp2Library').innerHTML = '';
+    $('#dp2UnitView').innerHTML = '';
+    $('#dp2UnitView').classList.add('hidden');
+    $('#heroStats').classList.add('hidden');
+  }
+
+  function renderStats(meta) {
+    if (!meta) return;
+    $('#heroStats').classList.remove('hidden');
+    $('#statUnits').textContent = meta.totals.units;
+    $('#statLines').textContent = meta.totals.lines.toLocaleString('vi-VN');
+    $('#statWords').textContent = meta.totals.words.toLocaleString('vi-VN');
+  }
+
+  function renderLibrary() {
+    var lib = $('#dp2Library');
+    lib.innerHTML = '';
+    state.lessons.forEach(function (u) {
+      var card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML =
+        '<div class="icon">📝</div>' +
+        '<div class="title">' + escapeHtml(u.title) + '</div>' +
+        '<div class="count">' + u.lineCount + ' câu · ' + u.wordCount + ' từ · <b>' + escapeHtml(u.audioFileName) + '</b></div>' +
+        '<button type="button" class="open" data-id="' + u.id + '">Mở bài học</button>';
+      card.querySelector('.open').addEventListener('click', function () { openUnit(u.id); });
+      lib.appendChild(card);
+    });
+  }
+
+  /* ---------- Unit view ---------- */
+  function openUnit(id) {
+    var u = state.lessons.find(function (x) { return x.id === id; });
+    if (!u) return;
+    state.current = u;
+    stopAudio();
+    $('#dp2Library').classList.add('hidden');
+    $('#dp2UnitView').classList.remove('hidden');
+
+    var key = progressKey(u);
+    var p = state.progress[key] || {};
+
+    var linesHtml = u.lines.map(function (ln, i) {
+      var speaker = ln.speaker || 'Q';
+      var cls = speaker === 'A' ? 'a' : 'q';
+      var label = speaker === 'A' ? 'A' : 'Q';
+      return '<div class="line-item" data-idx="' + i + '">' +
+        '<div class="line-no">' + (i + 1) + '</div>' +
+        '<div class="line-speaker">' + label + '</div>' +
+        '<div class="line-text ' + cls + '">' + escapeHtml(ln.text) + '</div>' +
+        '</div>';
+    }).join('');
+
+    $('#dp2UnitView').innerHTML =
+      '<div class="unit-header">' +
+      '<button type="button" class="btn back" id="dp2Back">← Về thư viện</button>' +
+      '<div style="flex:1;min-width:0">' +
+      '<h2 style="margin:0 0 4px 0;font-size:18px">' + escapeHtml(u.title) + '</h2>' +
+      '<p class="unit-sub" style="margin:0">' + escapeHtml(u.audioFileName) + ' · ' + u.lineCount + ' câu · ' + u.wordCount + ' từ</p>' +
+      '</div>' +
+      '</div>' +
+
+      '<div class="audio-row">' +
+      '<audio id="dp2Audio" controls preload="metadata" src="' + escapeHtml(u.cdnUrl) + '"></audio>' +
+      '<div class="audio-controls">' +
+      '<button type="button" class="btn btn-success btn-small" id="dp2Replay">🔁 Phát lại 3x</button>' +
+      '</div>' +
+      '<div style="font-size:12px;color:var(--muted);margin-left:auto"><b>Audio CDN:</b></div>' +
+      '</div>' +
+      '<div class="cdn-link" style="margin-top:6px">' + escapeHtml(u.cdnUrl) + '</div>' +
+
+      '<div class="mode-tabs">' +
+      '<button type="button" class="mode-tab active" data-mode="dictation">📝 Nghe &amp; điền từ <span style="opacity:.7">(Dictation)</span></button>' +
+      '<button type="button" class="mode-tab" data-mode="shadowing">🗣️ Luyện nói theo <span style="opacity:.7">(Shadowing)</span></button>' +
+      '</div>' +
+
+      '<div id="dp2UnitBody"></div>' +
+
+      '<div id="dp2Progress" class="hint" style="margin-top:10px"></div>' +
+
+      '<div class="cdn-link" style="margin-top:12px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;color:var(--muted)">' +
+      'Local: <code>' + escapeHtml(u.localPath) + '</code><br>' +
+      'CDN name: <code>' + escapeHtml(u.cdnName) + '</code>' +
+      '</div>';
+
+    // Wire up
+    $('#dp2Back').addEventListener('click', backToLibrary);
+    var audio = $('#dp2Audio');
+    if (audio) {
+      audio.addEventListener('ended', function () { /* loop handled by replay btn */ });
+    }
+    $('#dp2Replay').addEventListener('click', function () {
+      var a = $('#dp2Audio');
+      if (!a) return;
+      a.currentTime = 0;
+      a.play().catch(function () {});
+      var count = 0;
+      var handler = function () {
+        count++;
+        if (count < 3) { a.currentTime = 0; a.play().catch(function () {}); }
+        else { a.removeEventListener('ended', handler); }
+      };
+      a.addEventListener('ended', handler);
+      a.play().catch(function () {});
+    });
+
+    // Mode tabs
+    $$('.mode-tab').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        $$('.mode-tab').forEach(function (t) { t.classList.toggle('active', t === tab); });
+        state.mode = tab.dataset.mode;
+        renderUnitBody();
+      });
+    });
+
+    renderUnitBody();
+    updateProgressUI();
+  }
+
+  function backToLibrary() {
+    state.current = null;
+    stopAudio();
+    $('#dp2Library').classList.remove('hidden');
+    $('#dp2UnitView').classList.add('hidden');
+    $('#dp2UnitBody').innerHTML = '';
+  }
+
+  function updateProgressUI() {
+    var u = state.current;
+    if (!u) return;
+    var el = $('#dp2Progress');
+    if (el) el.textContent = 'Tiến độ: ' + unitProgressText(u);
+  }
+
+  function renderUnitBody() {
+    var u = state.current;
+    var body = $('#dp2UnitBody');
+    if (!body || !u) return;
+    if (state.mode === 'dictation') renderDictation(body, u);
+    else renderShadowing(body, u);
+    updateProgressUI();
+  }
+
+  /* ---------- Dictation ---------- */
+  function renderDictation(body, u) {
+    var html = '<div style="margin-bottom:8px"><b>📝 Dictation</b> — nghe audio và điền từ vào ô trống (tự sinh mỗi 4 từ). Nhấn <kbd>Enter</kbd> để kiểm tra. Điểm đạt: <b>≥ 70%</b>.</div>' +
+      '<div class="card-list">';
+    u.lines.forEach(function (ln, i) {
+      html += '<div class="quiz-card lptd-quiz-card" id="dp2-qc-' + i + '">' +
+        '<div class="q-number">' + (ln.no || i + 1) + '</div>' +
+        '<div class="q-body">' +
+        '<div class="q-sentence">' + spkBadge(ln.speaker) + renderBlanks(ln.text, i) + '</div>' +
+        '<div class="q-status" id="dp2-qs-' + i + '"></div>' +
+        '<div class="q-answer hidden" id="dp2-qa-' + i + '">' +
+        '<div class="ans-en">' + spkBadge(ln.speaker) + escapeHtml(ln.text) + '</div>' +
+        '</div></div></div>';
+    });
+    html += '</div>' +
+      '<div class="quiz-footer" style="margin-top:12px">' +
+      '<button type="button" class="btn btn-primary" id="dp2Check">✅ Kiểm tra đáp án</button>' +
+      '<button type="button" class="btn" id="dp2Show">👁 Xem đáp án</button>' +
+      '<button type="button" class="btn" id="dp2Hint">💡 Gợi ý</button>' +
+      '<span class="score-chip" id="dp2Score"></span>' +
+      '</div>';
+    body.innerHTML = html;
+
+    var checkBtn = $('#dp2Check');
+    if (checkBtn) checkBtn.addEventListener('click', checkDictation);
+    var showBtn = $('#dp2Show');
+    if (showBtn) showBtn.addEventListener('click', showAnswers);
+    var hintBtn = $('#dp2Hint');
+    if (hintBtn) hintBtn.addEventListener('click', toggleHints);
+
+    $$('.lptd-blank').forEach(function (inp) {
+      inp.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); checkDictation(); }
+      });
+    });
+    var first = $('.lptd-blank');
+    if (first) first.focus();
+  }
+
+  function checkDictation() {
+    var u = state.current;
+    if (!u) return;
+    var correct = 0, total = 0;
+    $$('#dp2UnitBody .lptd-blank').forEach(function (inp) {
+      total++;
+      var answer = inp.dataset.answer || '';
+      var ok = normalizeWord(inp.value) === normalizeWord(answer) && normalizeWord(inp.value) !== '';
+      inp.classList.toggle('correct', ok);
+      inp.classList.toggle('wrong', !ok);
+      if (ok) correct++;
+    });
+    var score = total ? Math.round(correct / total * 100) : 0;
+    $$('#dp2UnitBody .lptd-blank').forEach(function (inp) {
+      var lineIdx = Number(inp.dataset.line);
+      var card = $('#dp2-qc-' + lineIdx);
+      var st = $('#dp2-qs-' + lineIdx);
+      if (!card || !st) return;
+      var inputs = $$('.lptd-blank', card);
+      if (!inputs.length) { st.className = 'q-status'; st.textContent = ''; return; }
+      var allOk = inputs.every(function (x) { return x.classList.contains('correct'); });
+      st.className = 'q-status ' + (allOk ? 'ok' : 'no');
+      st.textContent = allOk ? '✔ Đúng hết' : '✘ Còn sai — xem đáp án hoặc nghe lại';
+    });
+    var chip = $('#dp2Score');
+    if (chip) chip.innerHTML = '<small>Dictation:</small> ' + correct + '/' + total + ' (' + score + '%) ' + (score >= 70 ? '🎉' : '🔁');
+
+    // Mark progress
+    var key = progressKey(u);
+    state.progress[key] = state.progress[key] || {};
+    state.progress[key].dictationDone = true;
+    state.progress[key].dictationScore = score;
+    saveProgress();
+    updateProgressUI();
+  }
+
+  function showAnswers() {
+    $$('#dp2UnitBody .q-answer').forEach(function (el) { el.classList.remove('hidden'); el.classList.add('show'); });
+    $$('#dp2UnitBody .lptd-blank').forEach(function (inp) {
+      inp.readOnly = true;
+      if (!inp.classList.contains('correct') && !inp.classList.contains('wrong')) inp.classList.add('wrong');
+    });
+    var chip = $('#dp2Score');
+    if (chip) chip.innerHTML = '<small>Đáp án:</small> đã mở — nghe lại và tự chấm.';
+  }
+
+  function toggleHints() {
+    var on = !!$('#dp2Hint').dataset.active;
+    on = !on;
+    $('#dp2Hint').dataset.active = on;
+    $('#dp2Hint').classList.toggle('active', on);
+    $$('#dp2UnitBody .lptd-blank').forEach(function (inp) {
+      if (on && !inp.value) {
+        var a = inp.dataset.answer || '';
+        inp.placeholder = a ? a.charAt(0) + '…' + a.charAt(a.length - 1) + ' (' + a.length + ')' : '';
+      } else {
+        inp.placeholder = '';
+      }
+    });
+  }
+
+  /* ---------- Shadowing ---------- */
+  function renderShadowing(body, u) {
+    var html = '<div style="margin-bottom:8px"><b>🗣️ Shadowing</b> — 1️⃣ nghe cả unit → 2️⃣ 🎙 ghi âm đọc lại từng câu → 3️⃣ ▶ nghe bản ghi → 4️⃣ 🗣 chấm độ chính xác.</div>';
+    html += '<div class="shadow-list">';
+    u.lines.forEach(function (ln, i) {
+      var best = '';
+      var key = progressKey(u);
+      var p = state.progress[key] || {};
+      var sh = p.shadowing || {};
+      var lineBest = sh[String(i)];
+      if (lineBest != null) best = ' · tốt nhất: <b>' + lineBest + '%</b>';
+      html += '<div class="shadow-card" id="dp2-sc-' + i + '">' +
+        '<div class="shadow-top">' +
+        '<div class="q-number">' + (i + 1) + '</div>' +
+        '<div class="q-body">' +
+        '<div class="shadow-sentence">' + spkBadge(ln.speaker) + escapeHtml(ln.text) + '</div>' +
+        '<div class="shadow-meta">' + ln.text.split(/\s+/).filter(Boolean).length + ' từ' + best + '</div>' +
+        '</div></div>' +
+        '<div class="shadow-tools">' +
+        '<button type="button" class="btn btn-outline btn-small" data-rec="' + i + '">🎙 Ghi âm</button>' +
+        '<button type="button" class="btn btn-outline btn-small" data-playrec="' + i + '" disabled>▶ Nghe</button>' +
+        '<button type="button" class="btn btn-outline btn-small" data-assess="' + i + '">🗣 Chấm %</button>' +
+        '<span class="rec-indicator" data-recind="' + i + '"><span class="rec-dot"></span>Đang ghi…</span>' +
+        '</div>' +
+        '<div class="acc-result hidden" data-acc="' + i + '"></div>' +
+        '</div>';
+    });
+    html += '</div>';
+    body.innerHTML = html;
+
+    $$('[data-rec]', body).forEach(function (btn) {
+      btn.addEventListener('click', function () { toggleRecord(Number(btn.dataset.rec), btn); });
+    });
+    $$('[data-playrec]', body).forEach(function (btn) {
+      btn.addEventListener('click', function () { playRecording(Number(btn.dataset.playrec)); });
+    });
+    $$('[data-assess]', body).forEach(function (btn) {
+      btn.addEventListener('click', function () { assessLine(Number(btn.dataset.assess)); });
+    });
+  }
+
+  function toggleRecord(line, btn) {
+    if (state.audio && !state.audio.paused) { try { state.audio.pause(); } catch (e) {} }
+    if (state.recording === line && state.recWin && !state.recWin.closed) {
+      try { state.recWin.postMessage({ type: 'STOP_RECORDING' }, '*'); } catch (e) {}
+      setHint('Đang kết thúc bản ghi…', false);
+      return;
+    }
+    reRequest('record', line);
+  }
+
+  function playRecording(line) {
+    var blob = state.recBlobs[line];
+    if (!blob) return;
+    var url = URL.createObjectURL(blob);
+    var audio = new Audio(url);
+    audio.onended = function () { URL.revokeObjectURL(url); };
+    audio.onerror = function () { URL.revokeObjectURL(url); };
+    audio.play().catch(function () { URL.revokeObjectURL(url); });
+  }
+
+  function assessLine(line) {
+    reRequest('assess', line);
+  }
+
+  /* ---------- Recording Engine (popup) ---------- */
+  var RE_URL_FALLBACK = 'https://lfskcm2018.github.io/Toeic-lptd/recording-engine/';
+  function reUrl() {
+    // Try to get from Code.gs property if available; otherwise fallback
+    var u = global.DP2_RECORDING_ENGINE_URL || RE_URL_FALLBACK;
+    return String(u).trim() || RE_URL_FALLBACK;
+  }
+  function reSend(msg) {
+    if (state.recWin && !state.recWin.closed) {
+      try { state.recWin.postMessage(msg, '*'); } catch (e) {}
+    }
+  }
+  function reStartPoll() {
+    if (state.rePoll) return;
+    state.rePoll = setInterval(function () {
+      if (state.recWin && !state.recWin.closed) return;
+      clearInterval(state.rePoll);
+      state.rePoll = null;
+      state.recWin = null;
+      state.recWinReady = false;
+      if (state.rePending || state.recording != null) {
+        var btn = $$('[data-rec="' + (state.recording != null ? state.recording : state.rePending.line) + '"]')[0];
+        if (btn) btn.textContent = '🎙 Ghi âm';
+        var ind = $$('[data-recind="' + (state.recording != null ? state.recording : state.rePending.line) + '"]')[0];
+        if (ind) ind.classList.remove('on');
+      }
+      state.rePending = null;
+      state.recording = null;
+    }, 1000);
+  }
+  function reOpen() {
+    if (state.recWin && !state.recWin.closed) { try { state.recWin.focus(); } catch (e) {} return state.recWin; }
+    state.recWin = null;
+    state.recWinReady = false;
+    state.recWin = window.open(reUrl(), 'lptd_recording_engine', 'width=560,height=680,resizable=yes,scrollbars=yes');
+    reStartPoll();
+    return state.recWin;
+  }
+  function reRequest(kind, line) {
+    var u = state.current;
+    if (!u || !u.lines[line]) return;
+    var target = u.lines[line].text || '';
+    state.rePending = { kind: kind, line: line, targetText: target, sessionId: 'dp2-' + Date.now() + '-' + line };
+    var w = reOpen();
+    if (!w) {
+      state.rePending = null;
+      setHint('Trình duyệt đã chặn cửa sổ bật lên — hãy cho phép popup rồi bấm lại.', true);
+      return;
+    }
+    if (kind === 'record') {
+      var btn = $$('[data-rec="' + line + '"]')[0];
+      if (btn) btn.textContent = '⏹ Dừng ghi';
+      var ind = $$('[data-recind="' + line + '"]')[0];
+      if (ind) ind.classList.add('on');
+      state.recording = line;
+      setHint('Đang ghi âm trong cửa sổ phụ — hãy đọc to câu ' + (line + 1) + '.', false);
+    } else {
+      var box = $$('[data-acc="' + line + '"]')[0];
+      if (box) {
+        box.classList.remove('hidden');
+        box.classList.add('show');
+        box.innerHTML = '<span class="lptd-muted">🗣 Đang nghe trong cửa sổ phụ… hãy đọc to câu ' + (line + 1) + '.</span>';
+      }
+      setHint('Đang nhận giọng nói trong cửa sổ phụ…', false);
+    }
+    if (state.recWinReady) reSendStart();
+  }
+  function reSendStart() {
+    if (!state.rePending) return;
+    var p = state.rePending;
+    if (p.kind === 'assess') {
+      reSend({ type: 'START_RECOGNITION', sessionId: p.sessionId, itemIndex: p.line, targetText: p.targetText });
+      return;
+    }
+    state.recording = p.line;
+    reSend({ type: 'START_RECORDING', sessionId: p.sessionId, itemIndex: p.line, targetText: p.targetText, autoSend: true });
+  }
+  function base64ToBlob(b64, mime) {
+    var bin = global.atob(String(b64 || ''));
+    var len = bin.length;
+    var bytes = new Uint8Array(len);
+    for (var i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i);
+    return new Blob([bytes], { type: mime || 'audio/webm' });
+  }
+  function applyAssessment(line, transcript, target, box) {
+    var pct = exactMatch(transcript, target);
+    if (box) {
+      box.className = 'acc-result show';
+      var cls = pct >= 80 ? 'ok' : pct >= 50 ? 'mid' : 'bad';
+      box.classList.add(cls);
+      box.innerHTML = '<div><b>Độ chính xác: ' + pct + '%</b></div>' +
+        '<div class="acc-bar"><div class="acc-fill" style="width:' + pct + '%"></div></div>' +
+        '<div style="font-size:12px;color:var(--muted);margin-top:4px">Đã nhận: "' + escapeHtml(transcript || '') + '"</div>';
+    }
+    // Save progress
+    var u = state.current;
+    var key = progressKey(u);
+    state.progress[key] = state.progress[key] || {};
+    var sh = state.progress[key].shadowing || {};
+    sh[String(line)] = pct;
+    state.progress[key].shadowing = sh;
+    state.progress[key].shadowingDone = true;
+    saveProgress();
+    updateProgressUI();
+    return pct;
+  }
+  function reHandleMessage(event) {
+    var data = event.data;
+    if (!data || typeof data.type !== 'string') return;
+    if (state.recWin && event.source !== state.recWin) return;
+    switch (data.type) {
+      case 'RE_ENGINE_READY':
+        state.recWinReady = true;
+        reSendStart();
+        break;
+      case 'RECORDING_STARTED':
+        break;
+      case 'RECORDING_READY':
+        reOnRecordingReady(data);
+        break;
+      case 'RECORDING_ERROR':
+        var idx = data.itemIndex != null ? Number(data.itemIndex) : state.recording;
+        var btn = $$('[data-rec="' + idx + '"]')[0];
+        if (btn) btn.textContent = '🎙 Ghi âm';
+        var ind = $$('[data-recind="' + idx + '"]')[0];
+        if (ind) ind.classList.remove('on');
+        state.recording = null;
+        state.rePending = null;
+        setHint('Không truy cập micro (cửa sổ phụ): ' + (data.error || 'lỗi không xác định') + ' — hãy chọn "Cho phép".', true);
+        break;
+      case 'RECOGNITION_READY':
+        reOnRecognitionReady(data);
+        break;
+      case 'RECOGNITION_ERROR':
+        if (state.rePending && state.rePending.kind === 'assess') state.rePending = null;
+        var rbox = $$('[data-acc="' + Number(data.itemIndex) + '"]')[0];
+        if (rbox) {
+          if (data.error === 'unsupported') {
+            rbox.innerHTML = '<b style="color:var(--danger)">Trình duyệt không hỗ trợ Web Speech API.</b>';
+          } else {
+            rbox.innerHTML = '<span style="color:var(--muted)">Không nhận được giọng nói. Thử lại.</span>';
+          }
+        }
+        break;
+    }
+  }
+  function reOnRecordingReady(data) {
+    var line = Number(data.itemIndex);
+    var u = state.current;
+    if (!isFinite(line) || !u || !u.lines[line]) return;
+    var blob = null;
+    try { blob = base64ToBlob(data.audioBase64, data.mimeType); } catch (e) { blob = null; }
+    if (blob && blob.size) state.recBlobs[line] = blob;
+    var btn = $$('[data-rec="' + line + '"]')[0];
+    if (btn) btn.textContent = '🎙 Ghi âm';
+    var ind = $$('[data-recind="' + line + '"]')[0];
+    if (ind) ind.classList.remove('on');
+    state.recording = null;
+    state.rePending = null;
+    var playBtn = $$('[data-playrec="' + line + '"]')[0];
+    if (playBtn) playBtn.disabled = false;
+    var transcript = String(data.transcript || '').trim();
+    if (transcript) {
+      var box = $$('[data-acc="' + line + '"]')[0];
+      applyAssessment(line, transcript, u.lines[line].text || '', box);
+      setHint('Đã nhận bản ghi + chấm điểm ✓', false);
+    } else {
+      if (blob) setHint('Đã nhận bản ghi ✓ (không có transcript để chấm %)', false);
+      var box = $$('[data-acc="' + line + '"]')[0];
+      if (box) box.innerHTML = '<span style="color:var(--muted)">Đã ghi xong nhưng không có transcript. Nhấn 🗣 Chấm % để chấm lại.</span>';
+    }
+  }
+  function reOnRecognitionReady(data) {
+    var line = Number(data.itemIndex);
+    var u = state.current;
+    if (!isFinite(line) || !u || !u.lines[line]) return;
+    state.rePending = null;
+    var box = $$('[data-acc="' + line + '"]')[0];
+    applyAssessment(line, String(data.transcript || ''), u.lines[line].text || '', box);
+    setHint('Đã chấm xong ✓', false);
+  }
+
+  function setHint(msg, isWarn) {
+    // Simple hint: use browser status or console; could add a hint element
+    console.log((isWarn ? '⚠️ ' : '✅ ') + msg);
+  }
+
+  /* ---------- Boot ---------- */
   function loadData() {
     showLoading();
-    if (typeof google !== 'undefined' && google.script && google.script.run) {
+    if (state.isGas) {
       google.script.run
         .withSuccessHandler(function (res) {
           if (!res || !res.dp2Lessons) {
@@ -230,8 +813,9 @@
           }
           state.lessons = res.dp2Lessons;
           renderStats(res.dp2Meta || res.meta || {});
+          state.progress = loadProgress();
           renderLibrary();
-          errBox.classList.add('hidden');
+          $('#errorBox').classList.add('hidden');
         })
         .withFailureHandler(function (err) {
           showError('Không gọi được getLptdBootstrap(): ' + (err && err.message ? err.message : String(err)));
@@ -242,26 +826,30 @@
     }
   }
 
+  var tabDp2 = $('#tabDp2');
+  var tabLptd = $('#tabLptd');
   tabDp2.addEventListener('click', function () {
     tabDp2.classList.add('active');
     tabLptd.classList.remove('active');
     $('#lptdNotice').classList.add('hidden');
     if (state.lessons.length === 0) loadData();
-    else { libBox.classList.remove('hidden'); unitBox.classList.add('hidden'); errBox.classList.add('hidden'); }
+    else { $('#dp2Library').classList.remove('hidden'); $('#dp2UnitView').classList.add('hidden'); $('#errorBox').classList.add('hidden'); }
   });
-
   tabLptd.addEventListener('click', function () {
     tabLptd.classList.add('active');
     tabDp2.classList.remove('active');
     $('#lptdNotice').classList.remove('hidden');
-    libBox.innerHTML = '';
-    unitBox.innerHTML = '';
-    unitBox.classList.add('hidden');
-    statsBox.classList.add('hidden');
-    errBox.classList.add('hidden');
+    $('#dp2Library').innerHTML = '';
+    $('#dp2UnitView').innerHTML = '';
+    $('#dp2UnitView').classList.add('hidden');
+    $('#heroStats').classList.add('hidden');
+    $('#errorBox').classList.add('hidden');
   });
 
-  // Auto-start DP2
+  if (typeof global.addEventListener === 'function') {
+    global.addEventListener('message', reHandleMessage);
+  }
+
   loadData();
 })();
 </script>
