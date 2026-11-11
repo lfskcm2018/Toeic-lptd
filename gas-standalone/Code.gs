@@ -90,6 +90,27 @@ function getLptdBootstrap() {
   var cdnBase = lptdCdnBase_();
   var lessons = lptdLessonsWithUrls_(cdnBase);
   var meta = LPTD_LESSONS_META();
+
+  /* Dữ liệu Dictation Part 2 (nguồn nội dung mới) */
+  var dp2CdnBase = 'https://toeic-audio.netlify.app/audio/dictation-part2';
+  var dp2Lessons = DP2_LESSONS().map(function (u) {
+    return {
+      id: u.id,
+      book: u.book,
+      unit: u.unit,
+      title: u.title,
+      slug: u.slug,
+      audioFileName: u.audioFileName,
+      cdnName: u.cdnName,
+      localPath: u.localPath,
+      lines: u.lines,
+      lineCount: u.lineCount,
+      wordCount: u.wordCount,
+      cdnUrl: dp2CdnBase + '/' + u.cdnName,
+    };
+  });
+  var dp2Meta = DP2_LESSONS_META();
+
   return {
     configured: true,
     cdnBase: cdnBase,
@@ -97,6 +118,10 @@ function getLptdBootstrap() {
     meta: meta,
     lessonCount: lessons.length,
     lessons: lessons,
+    dp2CdnBase: dp2CdnBase,
+    dp2Meta: dp2Meta,
+    dp2LessonCount: dp2Lessons.length,
+    dp2Lessons: dp2Lessons,
   };
 }
 
@@ -109,6 +134,33 @@ function getLptdLessons() {
 function getLptdBooks() {
   var meta = LPTD_LESSONS_META();
   return meta.books || [];
+}
+
+/** Danh sách cuốn Dictation Part 2. */
+function getDp2Books() {
+  var meta = DP2_LESSONS_META();
+  return meta.books || [];
+}
+
+/** Tương thích: chỉ trả danh sách unit DP2 (kèm cdnUrl). */
+function getDp2Lessons() {
+  var dp2CdnBase = 'https://toeic-audio.netlify.app/audio/dictation-part2';
+  return DP2_LESSONS().map(function (u) {
+    return {
+      id: u.id,
+      book: u.book,
+      unit: u.unit,
+      title: u.title,
+      slug: u.slug,
+      audioFileName: u.audioFileName,
+      cdnName: u.cdnName,
+      localPath: u.localPath,
+      lines: u.lines,
+      lineCount: u.lineCount,
+      wordCount: u.wordCount,
+      cdnUrl: dp2CdnBase + '/' + u.cdnName,
+    };
+  });
 }
 
 /** Lấy 1 unit theo book/unit. */
