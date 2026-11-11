@@ -139,6 +139,43 @@ function authorizeLptdDrive() {
 }
 
 /**
+ * Chẩn đoán quyền: chạy hàm này trong Script Editor rồi xem Execution log.
+ * - status NOT_REQUIRED nhưng Drive vẫn lỗi → manifest chưa nạp (F5 editor).
+ * - status REQUIRED → mở authUrl rồi Allow.
+ * - tokenInfo không có .../auth/drive → chưa được cấp scope Drive.
+ */
+function lptdAuthDiagnostics() {
+  var out = {};
+  try {
+    var info = ScriptApp.getAuthorizationInfo(ScriptApp.AuthMode.FULL);
+    out.status = String(info.getAuthorizationStatus());
+    out.authUrl = out.status.indexOf('REQUIRED') === 0 ? info.getAuthorizationUrl() : '';
+  } catch (e) {
+    out.scriptAppError = e.message;
+  }
+  try {
+    var token = ScriptApp.getOAuthToken();
+    var res = UrlFetchApp.fetch(
+      'https://oauth2.googleapis.com/tokeninfo?access_token=' + encodeURIComponent(token),
+      { muteHttpExceptions: true }
+    );
+    var j = {};
+    try { j = JSON.parse(res.getContentText()); } catch (e2) { j = { raw: res.getContentText().slice(0, 300) }; }
+    out.scopes = j.scope || j.raw || null;
+    out.hasDriveScope = !!(j.scope && j.scope.indexOf('/auth/drive') !== -1);
+  } catch (e) {
+    out.tokenError = e.message;
+  }
+  try {
+    out.driveRoot = DriveApp.getRootFolder().getName();
+  } catch (e) {
+    out.driveError = String(e.message).slice(0, 220);
+  }
+  Logger.log(JSON.stringify(out, null, 2));
+  return out;
+}
+
+/**
  * Quy ước khóa lưu bản ghi LPTD (dùng chung với UI):
  *   day        = book   (1..4)
  *   itemIndex  = unit * 100 + lineIndex   (unit 1..40, line 0..~10)
