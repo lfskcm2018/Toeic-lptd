@@ -8,7 +8,9 @@
 - 750+ là workbook dictation & shadowing, 20 ngày, 20 audio.
 - Nội dung: 20 unit, 110 câu, 804 từ.
 - Audio đã ở Netlify: `/audio/750plus/H750D01.mp3` … `H750D20.mp3`.
-- Web app GAS riêng đã deploy (cần uỷ quyền Drive).
+- Web app GAS riêng: Script ID 1vZiuqGBay036wLeVrH5y_7s6KEb9T2eeA6xmYtT_tVBpyHcwzXXVPl9t.
+- Deploy @1: AKfycbxDzTF5tpXx6aTjgak3p34Hl_OPvty6P8as_HE2SXPWX5AAMnkowQ8nAwSUEJwp1wBT.
+- Trạng thái: cần uỷ quyền Drive (chạy debugH750()) rồi deploy version mới để hết 403.
 
 ## 2. Thiết kế
 
