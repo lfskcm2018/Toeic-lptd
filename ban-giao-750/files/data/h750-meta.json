@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "h750",
+  "sourceName": "750+",
+  "officialWorkbook": "Hackers TOEIC 750+ Dictation & Shadowing Workbook",
+  "type": "dictation-shadowing-workbook",
+  "language": "en",
+  "generatedAt": "2026-11-12T15:33:36.029Z",
+  "cdnBase": "https://toeic-audio.netlify.app/audio/750plus",
+  "totals": {
+    "books": 1,
+    "units": 20,
+    "lines": 110,
+    "words": 804,
+    "days": 20,
+    "audioFiles": 20
+  },
+  "books": [
+    {
+      "book": 1,
+      "title": "750+",
+      "level": "TOEIC 750+",
+      "units": 20,
+      "lines": 110,
+      "words": 804,
+      "bookPdf": "750+/토익 750+ 받아쓰기&쉐도잉 워크북.pdf",
+      "transcriptPdf": "",
+      "extraDocs": []
+    }
+  ]
+}

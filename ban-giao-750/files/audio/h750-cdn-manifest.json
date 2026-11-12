@@ -1,0 +1,186 @@
+{
+  "base": "https://toeic-audio.netlify.app/audio/750plus",
+  "count": 20,
+  "files": [
+    {
+      "unit": 1,
+      "id": "h750-d01",
+      "title": "750+ · Day 01",
+      "cdnName": "H750D01.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D01.mp3",
+      "bytes": 5216209,
+      "sha256": "c97c9ee23ba1afbf6b96ff7a53c2369187b7304a340f6da6676c3fca13be8fd3"
+    },
+    {
+      "unit": 2,
+      "id": "h750-d02",
+      "title": "750+ · Day 02",
+      "cdnName": "H750D02.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D02.mp3",
+      "bytes": 5144320,
+      "sha256": "57385b3460e2682fb3a45068d1fa144d07325aa68608abd0cbfe493995b8421a"
+    },
+    {
+      "unit": 3,
+      "id": "h750-d03",
+      "title": "750+ · Day 03",
+      "cdnName": "H750D03.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D03.mp3",
+      "bytes": 4453015,
+      "sha256": "6f39e1a0bd83ca3f9affd4f6c3bdf6c797965b55d346403438139f50eb2a2707"
+    },
+    {
+      "unit": 4,
+      "id": "h750-d04",
+      "title": "750+ · Day 04",
+      "cdnName": "H750D04.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D04.mp3",
+      "bytes": 4533264,
+      "sha256": "4e74605f08ebe470d9b36f41d1f42dfeecf3aa33633629ae4ef6f4ff73113028"
+    },
+    {
+      "unit": 5,
+      "id": "h750-d05",
+      "title": "750+ · Day 05",
+      "cdnName": "H750D05.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D05.mp3",
+      "bytes": 5008901,
+      "sha256": "8ed3b14e23f8dce2f8ab8e35fae8e12816ebcf1afd0762233c17c9d8607093a5"
+    },
+    {
+      "unit": 6,
+      "id": "h750-d06",
+      "title": "750+ · Day 06",
+      "cdnName": "H750D06.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D06.mp3",
+      "bytes": 4616855,
+      "sha256": "5af6543bfd9eb16d0805aecf27fe4e73e5c53739bfe784b5d04d1c53002430d7"
+    },
+    {
+      "unit": 7,
+      "id": "h750-d07",
+      "title": "750+ · Day 07",
+      "cdnName": "H750D07.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D07.mp3",
+      "bytes": 5564787,
+      "sha256": "5e641d2bfa0f19cae682e12f54059e31108aa6d2aa45506c8f528dd8774e6e03"
+    },
+    {
+      "unit": 8,
+      "id": "h750-d08",
+      "title": "750+ · Day 08",
+      "cdnName": "H750D08.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D08.mp3",
+      "bytes": 5466148,
+      "sha256": "319b2e69dc8abc463d70929345a77e11b884dce24f5a0175cd848dc42b3e2642"
+    },
+    {
+      "unit": 9,
+      "id": "h750-d09",
+      "title": "750+ · Day 09",
+      "cdnName": "H750D09.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D09.mp3",
+      "bytes": 4487288,
+      "sha256": "442269dccfa02350483c80c15c1bb05c3e7c96b1caa74af619b0f708f344f7a3"
+    },
+    {
+      "unit": 10,
+      "id": "h750-d10",
+      "title": "750+ · Day 10",
+      "cdnName": "H750D10.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D10.mp3",
+      "bytes": 4965433,
+      "sha256": "478491816269a667d88280347c665e9a8bb43d79e9739bc916a3375f5d5712f4"
+    },
+    {
+      "unit": 11,
+      "id": "h750-d11",
+      "title": "750+ · Day 11",
+      "cdnName": "H750D11.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D11.mp3",
+      "bytes": 5472000,
+      "sha256": "e244b0365012644d2306a94e332750577a5313f2b13fd879b3cd606aade70d75"
+    },
+    {
+      "unit": 12,
+      "id": "h750-d12",
+      "title": "750+ · Day 12",
+      "cdnName": "H750D12.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D12.mp3",
+      "bytes": 4315089,
+      "sha256": "bb51dd596e3a5cdd873f00d549fb54a6a619329915b4c7ac8b0ff2a96e7fe668"
+    },
+    {
+      "unit": 13,
+      "id": "h750-d13",
+      "title": "750+ · Day 13",
+      "cdnName": "H750D13.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D13.mp3",
+      "bytes": 5113391,
+      "sha256": "0fb5ad1e2df4b72f270c39a3967ed80b8cccf19ea3b7515b56023d456ebadc12"
+    },
+    {
+      "unit": 14,
+      "id": "h750-d14",
+      "title": "750+ · Day 14",
+      "cdnName": "H750D14.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D14.mp3",
+      "bytes": 3286147,
+      "sha256": "244242a3b33bc85a8248ef1d3e448c1dfa8e955f2cb20dd73ffaee263d68ede5"
+    },
+    {
+      "unit": 15,
+      "id": "h750-d15",
+      "title": "750+ · Day 15",
+      "cdnName": "H750D15.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D15.mp3",
+      "bytes": 5780454,
+      "sha256": "f247e4b1541cb3243b280c6261ed2e97108aa2869931a1849658d616da5bce4e"
+    },
+    {
+      "unit": 16,
+      "id": "h750-d16",
+      "title": "750+ · Day 16",
+      "cdnName": "H750D16.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D16.mp3",
+      "bytes": 4229825,
+      "sha256": "0644a7d5de31aee96a60f31e1a8e96221f15babf9325fd897fbe6746256d7118"
+    },
+    {
+      "unit": 17,
+      "id": "h750-d17",
+      "title": "750+ · Day 17",
+      "cdnName": "H750D17.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D17.mp3",
+      "bytes": 4379455,
+      "sha256": "3409e7364c50b7a3f52a8a46dc73da395e1c17b9f2adc3dd9ffe6dee38fdc4b4"
+    },
+    {
+      "unit": 18,
+      "id": "h750-d18",
+      "title": "750+ · Day 18",
+      "cdnName": "H750D18.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D18.mp3",
+      "bytes": 5414322,
+      "sha256": "f6b81e3b35b9b1df67672f249390ebc3416f255578233a5b8f5b2a8b0ded9aa1"
+    },
+    {
+      "unit": 19,
+      "id": "h750-d19",
+      "title": "750+ · Day 19",
+      "cdnName": "H750D19.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D19.mp3",
+      "bytes": 4315089,
+      "sha256": "64a05ea20fad97c82c9035f8a774aed6c2bcdaa01b49bf415b1c2d2f74137db5"
+    },
+    {
+      "unit": 20,
+      "id": "h750-d20",
+      "title": "750+ · Day 20",
+      "cdnName": "H750D20.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/750plus/H750D20.mp3",
+      "bytes": 5310668,
+      "sha256": "0a298011453e7a60fce53b86cffbe6cc9328aefd34847e05d51132826099d490"
+    }
+  ]
+}

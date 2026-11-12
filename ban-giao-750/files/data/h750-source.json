@@ -1,0 +1,181 @@
+{
+  "sourceId": "h750",
+  "sourceName": "750+",
+  "officialWorkbook": "Hackers TOEIC 750+ Dictation & Shadowing Workbook",
+  "sourceRoot": "750+",
+  "pdf": "토익 750+ 받아쓰기&쉐도잉 워크북.pdf",
+  "pdfPages": 21,
+  "audioFiles": 20,
+  "days": 20,
+  "totals": {
+    "books": 1,
+    "units": 20,
+    "lines": 110,
+    "words": 804,
+    "days": 20,
+    "audioFiles": 20
+  },
+  "units": [
+    {
+      "id": "h750-d01",
+      "day": 1,
+      "lines": 10,
+      "words": 62,
+      "audioFileName": "D1.mp3",
+      "cdnName": "H750D01.mp3"
+    },
+    {
+      "id": "h750-d02",
+      "day": 2,
+      "lines": 10,
+      "words": 70,
+      "audioFileName": "D2.mp3",
+      "cdnName": "H750D02.mp3"
+    },
+    {
+      "id": "h750-d03",
+      "day": 3,
+      "lines": 5,
+      "words": 45,
+      "audioFileName": "D3.mp3",
+      "cdnName": "H750D03.mp3"
+    },
+    {
+      "id": "h750-d04",
+      "day": 4,
+      "lines": 5,
+      "words": 47,
+      "audioFileName": "D4.mp3",
+      "cdnName": "H750D04.mp3"
+    },
+    {
+      "id": "h750-d05",
+      "day": 5,
+      "lines": 5,
+      "words": 68,
+      "audioFileName": "D5.mp3",
+      "cdnName": "H750D05.mp3"
+    },
+    {
+      "id": "h750-d06",
+      "day": 6,
+      "lines": 5,
+      "words": 53,
+      "audioFileName": "D6.mp3",
+      "cdnName": "H750D06.mp3"
+    },
+    {
+      "id": "h750-d07",
+      "day": 7,
+      "lines": 5,
+      "words": 38,
+      "audioFileName": "D7.mp3",
+      "cdnName": "H750D07.mp3"
+    },
+    {
+      "id": "h750-d08",
+      "day": 8,
+      "lines": 5,
+      "words": 41,
+      "audioFileName": "D8.mp3",
+      "cdnName": "H750D08.mp3"
+    },
+    {
+      "id": "h750-d09",
+      "day": 9,
+      "lines": 5,
+      "words": 40,
+      "audioFileName": "D9.mp3",
+      "cdnName": "H750D09.mp3"
+    },
+    {
+      "id": "h750-d10",
+      "day": 10,
+      "lines": 5,
+      "words": 33,
+      "audioFileName": "D10.mp3",
+      "cdnName": "H750D10.mp3"
+    },
+    {
+      "id": "h750-d11",
+      "day": 11,
+      "lines": 5,
+      "words": 39,
+      "audioFileName": "D11.mp3",
+      "cdnName": "H750D11.mp3"
+    },
+    {
+      "id": "h750-d12",
+      "day": 12,
+      "lines": 5,
+      "words": 40,
+      "audioFileName": "D12.mp3",
+      "cdnName": "H750D12.mp3"
+    },
+    {
+      "id": "h750-d13",
+      "day": 13,
+      "lines": 5,
+      "words": 37,
+      "audioFileName": "D13.mp3",
+      "cdnName": "H750D13.mp3"
+    },
+    {
+      "id": "h750-d14",
+      "day": 14,
+      "lines": 5,
+      "words": 29,
+      "audioFileName": "D14.mp3",
+      "cdnName": "H750D14.mp3"
+    },
+    {
+      "id": "h750-d15",
+      "day": 15,
+      "lines": 5,
+      "words": 26,
+      "audioFileName": "D15.mp3",
+      "cdnName": "H750D15.mp3"
+    },
+    {
+      "id": "h750-d16",
+      "day": 16,
+      "lines": 5,
+      "words": 25,
+      "audioFileName": "D16.mp3",
+      "cdnName": "H750D16.mp3"
+    },
+    {
+      "id": "h750-d17",
+      "day": 17,
+      "lines": 5,
+      "words": 28,
+      "audioFileName": "D17.mp3",
+      "cdnName": "H750D17.mp3"
+    },
+    {
+      "id": "h750-d18",
+      "day": 18,
+      "lines": 5,
+      "words": 25,
+      "audioFileName": "D18.mp3",
+      "cdnName": "H750D18.mp3"
+    },
+    {
+      "id": "h750-d19",
+      "day": 19,
+      "lines": 5,
+      "words": 27,
+      "audioFileName": "D19.mp3",
+      "cdnName": "H750D19.mp3"
+    },
+    {
+      "id": "h750-d20",
+      "day": 20,
+      "lines": 5,
+      "words": 31,
+      "audioFileName": "D20.mp3",
+      "cdnName": "H750D20.mp3"
+    }
+  ],
+  "generatedAt": "2026-11-12T15:33:36.042Z"
+}

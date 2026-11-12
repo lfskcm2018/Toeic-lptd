@@ -1,0 +1,908 @@
+/**
+ * H750Data.gs — 750+ (20 unit).
+ * BẢN BÀN GIAO: KHÔNG chứa wrapper LPTD_LESSONS_META/LPTD_LESSONS.
+ */
+function H750_LESSONS_META() { return {
+  "schemaVersion": 1,
+  "sourceId": "h750",
+  "sourceName": "750+",
+  "officialWorkbook": "Hackers TOEIC 750+ Dictation & Shadowing Workbook",
+  "type": "dictation-shadowing-workbook",
+  "language": "en",
+  "generatedAt": "2026-11-12T15:33:36.029Z",
+  "cdnBase": "https://toeic-audio.netlify.app/audio/750plus",
+  "totals": {
+    "books": 1,
+    "units": 20,
+    "lines": 110,
+    "words": 804,
+    "days": 20,
+    "audioFiles": 20
+  },
+  "books": [
+    {
+      "book": 1,
+      "title": "750+",
+      "level": "TOEIC 750+",
+      "units": 20,
+      "lines": 110,
+      "words": 804,
+      "bookPdf": "750+/토익 750+ 받아쓰기&쉐도잉 워크북.pdf",
+      "transcriptPdf": "",
+      "extraDocs": []
+    }
+  ]
+}; }
+
+function H750_LESSONS() { return [
+  {
+    "id": "h750-d01",
+    "source": "h750",
+    "book": 1,
+    "unit": 1,
+    "day": 1,
+    "title": "750+ · Day 01",
+    "slug": "h750-d01",
+    "audioFileName": "D1.mp3",
+    "cdnName": "H750D01.mp3",
+    "localPath": "750+/받아쓰기 워크북/D1.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "She’s setting the table."
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "She’s pouring water into the glasses."
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "A woman is parking a vehicle."
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "A woman is riding a bicycle."
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "Some of the seats are unoccupied."
+      },
+      {
+        "no": 6,
+        "speaker": "",
+        "text": "Guests are stepping into the aisle."
+      },
+      {
+        "no": 7,
+        "speaker": "",
+        "text": "The woman is greeting a customer."
+      },
+      {
+        "no": 8,
+        "speaker": "",
+        "text": "The man is getting a haircut."
+      },
+      {
+        "no": 9,
+        "speaker": "",
+        "text": "Some skyscrapers are lined up in a row."
+      },
+      {
+        "no": 10,
+        "speaker": "",
+        "text": "A metal post is attached to a bench."
+      }
+    ],
+    "lineCount": 10,
+    "wordCount": 62
+  },
+  {
+    "id": "h750-d02",
+    "source": "h750",
+    "book": 1,
+    "unit": 2,
+    "day": 2,
+    "title": "750+ · Day 02",
+    "slug": "h750-d02",
+    "audioFileName": "D2.mp3",
+    "cdnName": "H750D02.mp3",
+    "localPath": "750+/받아쓰기 워크북/D2.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "There are some supplies in the drawers."
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "There are books on the shelves."
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "The clock is hanging on the wall."
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "The floor is covered with a carpet."
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "Cloths cover each of the tables."
+      },
+      {
+        "no": 6,
+        "speaker": "",
+        "text": "Food has been placed on plates."
+      },
+      {
+        "no": 7,
+        "speaker": "",
+        "text": "A bridge has been built over the water."
+      },
+      {
+        "no": 8,
+        "speaker": "",
+        "text": "Traffic lights are located at an intersection."
+      },
+      {
+        "no": 9,
+        "speaker": "",
+        "text": "A ramp extends from the back of a truck."
+      },
+      {
+        "no": 10,
+        "speaker": "",
+        "text": "Boxes are being loaded onto a vehicle."
+      }
+    ],
+    "lineCount": 10,
+    "wordCount": 70
+  },
+  {
+    "id": "h750-d03",
+    "source": "h750",
+    "book": 1,
+    "unit": 3,
+    "day": 3,
+    "title": "750+ · Day 03",
+    "slug": "h750-d03",
+    "audioFileName": "D3.mp3",
+    "cdnName": "H750D03.mp3",
+    "localPath": "750+/받아쓰기 워크북/D3.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "Q : Where will the company dinner be held?"
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "Q : When did you pick up the dry cleaning?"
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "Q : Who can give me directions?"
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "Q : Where should I celebrate my 18th birthday?"
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "Q : Who else has a copy of the report?"
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 45
+  },
+  {
+    "id": "h750-d04",
+    "source": "h750",
+    "book": 1,
+    "unit": 4,
+    "day": 4,
+    "title": "750+ · Day 04",
+    "slug": "h750-d04",
+    "audioFileName": "D4.mp3",
+    "cdnName": "H750D04.mp3",
+    "localPath": "750+/받아쓰기 워크북/D4.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "Q : How much will the repairs cost?"
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "Q : How did your interview go?"
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "Q : How does management plan to promote the new product?"
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "Q : How can I find the hotel’s address?"
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "Q : Which marketing strategy will they use for our new product?"
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 47
+  },
+  {
+    "id": "h750-d05",
+    "source": "h750",
+    "book": 1,
+    "unit": 5,
+    "day": 5,
+    "title": "750+ · Day 05",
+    "slug": "h750-d05",
+    "audioFileName": "D5.mp3",
+    "cdnName": "H750D05.mp3",
+    "localPath": "750+/받아쓰기 워크북/D5.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "Q : Would it be better to schedule your appointment for 9 a.m. or 2 p.m.?"
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "Q : Isn’t the contact person’s name supposed to be in this document?"
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "Q : Can you give me the report now, or are you still working on it?"
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "Q : Were you able to finish your article on time?"
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "Q : Are you available today, or should I reschedule the meeting?"
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 68
+  },
+  {
+    "id": "h750-d06",
+    "source": "h750",
+    "book": 1,
+    "unit": 6,
+    "day": 6,
+    "title": "750+ · Day 06",
+    "slug": "h750-d06",
+    "audioFileName": "D6.mp3",
+    "cdnName": "H750D06.mp3",
+    "localPath": "750+/받아쓰기 워크북/D6.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "Q : The new books are scheduled to be released next week, aren’t they?"
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "Q : The charity event is on Wednesday at 10, right?"
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "Q : This bag comes in three sizes."
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "Q : Why don’t you take the ferry?"
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "Q : The printer manual is not easy to understand, is it?"
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 53
+  },
+  {
+    "id": "h750-d07",
+    "source": "h750",
+    "book": 1,
+    "unit": 7,
+    "day": 7,
+    "title": "750+ · Day 07",
+    "slug": "h750-d07",
+    "audioFileName": "D7.mp3",
+    "cdnName": "H750D07.mp3",
+    "localPath": "750+/받아쓰기 워크북/D7.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "We aren’t going to be done with it by Friday."
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "The deadline will have to be pushed back."
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "that’s going to take a while."
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "we need another person on our team."
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "our department can give us a hand."
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 38
+  },
+  {
+    "id": "h750-d08",
+    "source": "h750",
+    "book": 1,
+    "unit": 8,
+    "day": 8,
+    "title": "750+ · Day 08",
+    "slug": "h750-d08",
+    "audioFileName": "D8.mp3",
+    "cdnName": "H750D08.mp3",
+    "localPath": "750+/받아쓰기 워크북/D8.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "Did you see the report about our recent factory inspection?"
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "we received high marks for all required safety measures."
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "our facility was much cleaner than he expected."
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "how to operate the software?"
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "You can still sign up if you are interested."
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 41
+  },
+  {
+    "id": "h750-d09",
+    "source": "h750",
+    "book": 1,
+    "unit": 9,
+    "day": 9,
+    "title": "750+ · Day 09",
+    "slug": "h750-d09",
+    "audioFileName": "D9.mp3",
+    "cdnName": "H750D09.mp3",
+    "localPath": "750+/받아쓰기 워크북/D9.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "Do you know where the paper for the printer is kept?"
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "I guess we should buy some more, then."
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "I was going to do that."
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "that makes it really easy to place an order."
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "and then purchase what we need."
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 40
+  },
+  {
+    "id": "h750-d10",
+    "source": "h750",
+    "book": 1,
+    "unit": 10,
+    "day": 10,
+    "title": "750+ · Day 10",
+    "slug": "h750-d10",
+    "audioFileName": "D10.mp3",
+    "cdnName": "H750D10.mp3",
+    "localPath": "750+/받아쓰기 워크북/D10.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "I heard storyboard creation is still behind schedule."
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "Let’s look at it then."
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "The applicant we interviewed last week accepted our job offer."
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "do equipment preparations?"
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "I’ll call him when we’re done here."
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 33
+  },
+  {
+    "id": "h750-d11",
+    "source": "h750",
+    "book": 1,
+    "unit": 11,
+    "day": 11,
+    "title": "750+ · Day 11",
+    "slug": "h750-d11",
+    "audioFileName": "D11.mp3",
+    "cdnName": "H750D11.mp3",
+    "localPath": "750+/받아쓰기 워크북/D11.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "are you giving a presentation"
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "the employee complaints survey."
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "That was addressed by a policy change last week."
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "Do you still have a lot to prepare for the presentation?"
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "some specific suggestions on how to deal with this problem."
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 39
+  },
+  {
+    "id": "h750-d12",
+    "source": "h750",
+    "book": 1,
+    "unit": 12,
+    "day": 12,
+    "title": "750+ · Day 12",
+    "slug": "h750-d12",
+    "audioFileName": "D12.mp3",
+    "cdnName": "H750D12.mp3",
+    "localPath": "750+/받아쓰기 워크북/D12.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "It’s been two years since my last one."
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "She often compliments the work you do as her assistant."
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "it’s worth approaching her about it."
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "the public relations conference that’s taking place tomorrow?"
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "she has some time to talk to me"
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 40
+  },
+  {
+    "id": "h750-d13",
+    "source": "h750",
+    "book": 1,
+    "unit": 13,
+    "day": 13,
+    "title": "750+ · Day 13",
+    "slug": "h750-d13",
+    "audioFileName": "D13.mp3",
+    "cdnName": "H750D13.mp3",
+    "localPath": "750+/받아쓰기 워크북/D13.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "I saw a new play"
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "the critics gave it great reviews."
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "I think there are still tickets for tomorrow. Why don’t you go watch it?"
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "I don’t think I can make it"
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "if I can get tickets"
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 37
+  },
+  {
+    "id": "h750-d14",
+    "source": "h750",
+    "book": 1,
+    "unit": 14,
+    "day": 14,
+    "title": "750+ · Day 14",
+    "slug": "h750-d14",
+    "audioFileName": "D14.mp3",
+    "cdnName": "H750D14.mp3",
+    "localPath": "750+/받아쓰기 워크북/D14.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "Those driving into the city should start their commutes"
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "hazardous road conditions."
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "this work will likely take until noon"
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "major streets are going to be very congested"
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "Stay tuned."
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 29
+  },
+  {
+    "id": "h750-d15",
+    "source": "h750",
+    "book": 1,
+    "unit": 15,
+    "day": 15,
+    "title": "750+ · Day 15",
+    "slug": "h750-d15",
+    "audioFileName": "D15.mp3",
+    "cdnName": "H750D15.mp3",
+    "localPath": "750+/받아쓰기 워크북/D15.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "you sent to our office."
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "we’re very interested in your study."
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "the chairman has approved the funding"
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "we can talk about some questions"
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "expected project expenses"
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 26
+  },
+  {
+    "id": "h750-d16",
+    "source": "h750",
+    "book": 1,
+    "unit": 16,
+    "day": 16,
+    "title": "750+ · Day 16",
+    "slug": "h750-d16",
+    "audioFileName": "D16.mp3",
+    "cdnName": "H750D16.mp3",
+    "localPath": "750+/받아쓰기 워크북/D16.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "I’m filling in for our regular weather reporter,"
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "on vacation this week."
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "clouds and precipitation"
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "city’s annual art expo."
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "will feature many prominent local artists."
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 25
+  },
+  {
+    "id": "h750-d17",
+    "source": "h750",
+    "book": 1,
+    "unit": 17,
+    "day": 17,
+    "title": "750+ · Day 17",
+    "slug": "h750-d17",
+    "audioFileName": "D17.mp3",
+    "cdnName": "H750D17.mp3",
+    "localPath": "750+/받아쓰기 워크북/D17.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "a very special exhibit."
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "exhibit will focus on the largest planet"
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "the museum will stay open"
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "Visitors should also note"
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "viewing it with a guide is highly encouraged."
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 28
+  },
+  {
+    "id": "h750-d18",
+    "source": "h750",
+    "book": 1,
+    "unit": 18,
+    "day": 18,
+    "title": "750+ · Day 18",
+    "slug": "h750-d18",
+    "audioFileName": "D18.mp3",
+    "cdnName": "H750D18.mp3",
+    "localPath": "750+/받아쓰기 워크북/D18.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "this business meeting"
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "special thanks to the research team"
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "What boosted our sales"
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "we’re moving up the release date"
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "the most significant decline in sales."
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 25
+  },
+  {
+    "id": "h750-d19",
+    "source": "h750",
+    "book": 1,
+    "unit": 19,
+    "day": 19,
+    "title": "750+ · Day 19",
+    "slug": "h750-d19",
+    "audioFileName": "D19.mp3",
+    "cdnName": "H750D19.mp3",
+    "localPath": "750+/받아쓰기 워크북/D19.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "now for a story from the world of entertainment . . ."
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "Celebrated singer"
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "held a free performance"
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "go on a year-long tour"
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "Tour dates are available"
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 27
+  },
+  {
+    "id": "h750-d20",
+    "source": "h750",
+    "book": 1,
+    "unit": 20,
+    "day": 20,
+    "title": "750+ · Day 20",
+    "slug": "h750-d20",
+    "audioFileName": "D20.mp3",
+    "cdnName": "H750D20.mp3",
+    "localPath": "750+/받아쓰기 워크북/D20.mp3",
+    "lines": [
+      {
+        "no": 1,
+        "speaker": "",
+        "text": "Thank you for being here today"
+      },
+      {
+        "no": 2,
+        "speaker": "",
+        "text": "This year’s event is noteworthy"
+      },
+      {
+        "no": 3,
+        "speaker": "",
+        "text": "I’m going to talk about the goal of our organization."
+      },
+      {
+        "no": 4,
+        "speaker": "",
+        "text": "preserve our environment"
+      },
+      {
+        "no": 5,
+        "speaker": "",
+        "text": "that highlights some of the environmental work"
+      }
+    ],
+    "lineCount": 5,
+    "wordCount": 31
+  }
+]; }
