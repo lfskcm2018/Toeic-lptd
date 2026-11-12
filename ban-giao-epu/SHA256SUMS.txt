@@ -11,6 +11,7 @@ f439e95f01beb6bd0c2fa29bc68e0b88a0418c9a00bf5d913c4bf91f64f4b434  op/ban-giao-ep
 8e916cb1985134547decdd164693c0c0b3fc7b073a548464d5c0da920789a04b  op/ban-giao-epu/files/data/epu-source.json
 5760479183beab2dd66871bac878b2dda39e05cc1e095dad5654392242272b06  op/ban-giao-epu/files/data/epu-track-map.js
 2a4c5a2f3775d451acc5a399d60197d1b0828bacf892843987e3ab6024028317  op/ban-giao-epu/files/data/epu-units-meta.js
+33fd5c6e65a29f7b93eb034a209753adbdfbef50157904c10e47799438d9948a  op/ban-giao-epu/files/extract/PROGRESS-EPU.md
 bef2dc0c54e4b67e5babf3705453e49e02d93724291efe2be05e3e8927cd5591  op/ban-giao-epu/files/extract/epu-mapping.txt
 809ba59d361081b2c1f4f669ab48f5a415b5818cc5ba72a842628c89e61cdbf6  op/ban-giao-epu/files/gas/Code.epu-standalone.gs
 9523601fc78c8065c9702faaae001b49a39f8be3906cd631fcc818d7ede3e48d  op/ban-giao-epu/files/gas/EPIData.epu-standalone.gs
