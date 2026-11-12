@@ -311,3 +311,20 @@ Sẽ là **book 9** sau khi đủ 50 units (Section A–E). Chưa bàn giao vào
 - Nếu tích hợp **từng nguồn một**, sau mỗi nguồn chạy E2E + regression trước khi sang nguồn tiếp theo.
 - Nếu tích hợp **tất cả cùng lúc**, vẫn nên thêm book theo thứ tự 5→8 và test từng tab.
 - Tiến độ người học dùng key `<book>-<unit>` trong `toeic_lptd_progress`, nên các nguồn mới không đụng LPTD cũ.
+
+## 6. Pronunciation Master — Intermediate & Advanced (đã deploy 13/11/2026)
+
+> Nguồn: *English Pronunciation in Use* (Cambridge) — bản Intermediate (Mark Hancock) và Advanced (Martin Hewings).
+> Bàn giao: `op/ban-giao-pm/` · Core dùng chung: `English Pronunciation in Use Intermediate [2000]/work/pm-core/`
+
+| Khóa | Script ID | Deploy | Unit | Bài tập | Audio | CDN |
+|---|---|---|---|---|---|---|
+| Intermediate | `1zfmuzM5cDmQWCaNHeMSUAChxlP3kGdKHSWkacDEPxjv4F07h6wN_tXB5` | @6 | 60 (A/B/C 20+20+20) | 195 (127 đáp án) | 360 track | `…/pm-intermediate-audio/` |
+| Advanced | `1ITbb1_OOs8viMWiXqbJ_S8B9bNCvs9UKW6s-QNM7U6QSjCb2ros6lYJK` | @3 | 60 (A/B/C/D) + E1–E5 | 76 (28 đáp án) | 386 track | `…/pm-advanced-audio/` |
+
+**Kiến trúc:** nội dung tĩnh trong `PMContent.gs` + audio CDN + tiến độ localStorage + chấm điểm ở server — **cùng pattern** với 9 nguồn đã có. Hai khóa dùng chung một core GAS nên sửa core là cả 2 cập nhật.
+
+**Lưu ý:** bản gốc của Intermediate dùng backend Google Sheets/Drive (11 sheet, vai trò STUDENT/TEACHER/ADMIN).
+Trong môi trường hiện tại **không cấp được scope Sheets/Drive cho deployer** (web app 403, API `scripts.run` lỗi storage nền tảng) nên chuyển sang pattern tĩnh. Bộ file Sheets gốc giữ ở `English Pronunciation in Use Intermediate [2000]/legacy-sheets-version/` để khôi phục khi có môi trường phù hợp.
+
+**Chưa ghép vào app tổng:** UI của Pronunciation Master khác hẳn LPTD (course map + lesson player + reference + báo cáo năng lực), cần renderer riêng nếu muốn đưa vào `LptdUI.html`. Hiện tại chạy độc lập dưới dạng 2 web app GAS.

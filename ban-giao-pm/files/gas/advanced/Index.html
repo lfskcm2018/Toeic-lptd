@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><?= config.appName ?></title>
+  <?!= include('Styles'); ?>
+</head>
+<body>
+<div class="pm-shell">
+  <header class="pm-header">
+    <div class="pm-logo">🎓</div>
+    <div class="pm-head-main">
+      <div class="pm-title" id="pmTitle"><?= config.appName ?></div>
+      <div class="pm-sub" id="pmSub">Đang tải…</div>
+    </div>
+    <button type="button" class="pm-btn pm-icon" id="pmTheme" title="Sáng / Tối">🌙</button>
+  </header>
+
+  <nav class="pm-tabs" id="pmTabs">
+    <button type="button" class="pm-tab active" data-tab="course">📚 Khóa học</button>
+    <button type="button" class="pm-tab" data-tab="reference">📖 Tài liệu tham khảo</button>
+    <button type="button" class="pm-tab" data-tab="report">📊 Báo cáo năng lực</button>
+  </nav>
+
+  <main class="pm-main" id="pmMain">
+    <div class="pm-loading">⏳ Đang tải dữ liệu…</div>
+  </main>
+
+  <footer class="pm-footer">© 2026 Nguyễn Văn Quyết · Pronunciation Master</footer>
+</div>
+
+<script>
+  window.PM_CONFIG = <?!= JSON.stringify(config) ?>;
+</script>
+<?!= include('App'); ?>
+</body>
+</html>

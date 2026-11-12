@@ -1,0 +1,450 @@
+<script>
+(function (global) {
+  'use strict';
+
+  var CFG = global.PM_CONFIG || {};
+  var PROGRESS_KEY = 'pm_progress_' + (CFG.courseId || 'default');
+
+  var S = {
+    course: null, units: [], reference: [], tab: 'course',
+    unit: null, view: 'course', progress: {}, audio: null,
+  };
+
+  /* ---------- tiện ích ---------- */
+  function q(s, r) { return (r || document).querySelector(s); }
+  function qa(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+  function pad2(n) { return String(n).padStart(2, '0'); }
+  function loadProgress() {
+    try { return JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch (e) { return {}; }
+  }
+  function saveProgress() {
+    try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(S.progress)); } catch (e) {}
+  }
+  function showLoading(t) { q('#pmMain').innerHTML = '<div class="pm-loading">' + esc(t || '⏳ Đang tải…') + '</div>'; }
+
+  /* ---------- audio ---------- */
+  function playTrack(src, btn) {
+    if (!src) return;
+    try { if (S.audio) { S.audio.pause(); } } catch (e) {}
+    qa('.pm-track.playing').forEach(function (b) { b.classList.remove('playing'); });
+    var a = new Audio(src);
+    S.audio = a;
+    if (btn) btn.classList.add('playing');
+    a.onended = function () { if (btn) btn.classList.remove('playing'); };
+    a.onerror = function () { if (btn) { btn.classList.remove('playing'); btn.textContent = '⚠️'; } };
+    a.play().catch(function () { if (btn) btn.classList.remove('playing'); });
+  }
+
+  /* ---------- render: course map ---------- */
+  function statusOf(no) {
+    var p = S.progress[String(no)];
+    if (!p) return '';
+    if (p.status === 'done') return '<span class="pm-dot done"></span>';
+    if (p.status === 'doing') return '<span class="pm-dot doing"></span>';
+    return '<span class="pm-dot"></span>';
+  }
+
+  function renderCourse() {
+    var html = '';
+    var doneCount = 0, total = S.units.length;
+    S.units.forEach(function (u) { if ((S.progress[String(u.no)] || {}).status === 'done') doneCount++; });
+    var pct = total ? Math.round(doneCount / total * 100) : 0;
+
+    html += '<section class="pm-card">'
+      + '<div class="pm-eyebrow">' + esc(S.course ? S.course.title : '') + '</div>'
+      + '<h2 class="pm-h2">' + esc(S.course ? S.course.title : '') + '</h2>'
+      + '<p class="pm-muted">' + esc(S.course ? (S.course.edition + ' · ' + S.course.level) : '') + '</p>'
+      + '<div class="pm-stats">'
+      + '<div class="pm-stat"><b>' + doneCount + '/' + total + '</b><span>unit đã hoàn thành</span></div>'
+      + '<div class="pm-stat"><b>' + pct + '%</b><span>tiến độ</span></div>'
+      + '</div>'
+      + '<div class="pm-bar"><i style="width:' + pct + '%"></i></div>'
+      + '</section>';
+
+    var secs = (S.course && S.course.sections) || [];
+    secs.forEach(function (sec) {
+      var us = S.units.filter(function (u) { return u.section === sec.code; });
+      if (!us.length) return;
+      html += '<section class="pm-section">'
+        + '<div class="pm-section-title"><h3 class="pm-h3">' + esc(sec.title) + '</h3>'
+        + '<span class="pm-muted">' + us.length + ' unit</span></div>'
+        + '<div class="pm-grid">';
+      us.forEach(function (u) {
+        html += '<button type="button" class="pm-unit" data-unit="' + u.no + '">'
+          + '<div class="no">' + statusOf(u.no) + (u.kind === 'ref' ? 'E' : 'Unit ' + pad2(u.no)) + '</div>'
+          + '<div class="t">' + esc(u.title) + '</div>'
+          + '<div class="m">' + esc(u.topic || u.objective || '') + (u.audioCount ? ' · 🎧 ' + u.audioCount : '') + '</div>'
+          + '</button>';
+      });
+      html += '</div></section>';
+    });
+    q('#pmMain').innerHTML = html;
+    qa('.pm-unit').forEach(function (b) {
+      b.addEventListener('click', function () { openUnit(Number(b.getAttribute('data-unit'))); });
+    });
+  }
+
+  /* ---------- render: unit ---------- */
+  function renderUnit() {
+    var u = S.unit;
+    if (!u) { renderCourse(); return; }
+    var base = u.cdnBase || CFG.cdnBase || '';
+    var html = '';
+    html += '<button type="button" class="pm-back" id="pmBack">← Về khóa học</button>';
+
+    html += '<section class="pm-card" style="margin-top:12px">'
+      + '<div class="pm-eyebrow">' + esc(u.section) + ' · ' + (u.kind === 'ref' ? 'Reference' : 'Unit ' + pad2(u.no)) + (u.page ? ' · sách trang ' + u.page : '') + '</div>'
+      + '<h2 class="pm-h2">' + esc(u.title) + '</h2>'
+      + (u.topic ? '<p class="pm-muted"><b>Chủ đề:</b> ' + esc(u.topic) + '</p>' : '')
+      + (u.objective ? '<p class="pm-muted"><b>Mục tiêu:</b> ' + esc(u.objective) + '</p>' : '')
+      + (u.ipa && u.ipa.length ? '<p class="pm-muted" style="font-family:Georgia,serif"><b>Âm:</b> ' + u.ipa.map(function (x) { return esc('/' + x + '/'); }).join('  ') + '</p>' : '')
+      + '</section>';
+
+    if (u.audio && u.audio.length) {
+      html += '<section class="pm-card"><h3 class="pm-h3">🎧 Audio của bài (' + u.audio.length + ' track)</h3><div class="pm-chips">';
+      u.audio.forEach(function (t) {
+        html += '<button type="button" class="pm-track" data-src="' + esc(base + '/' + t) + '">▶ ' + esc(t.replace(/\.mp3$/, '')) + '</button>';
+      });
+      html += '</div></section>';
+    }
+
+    if (u.words && u.words.length) {
+      html += '<section class="pm-card"><h3 class="pm-h3">🗂 Từ vựng</h3><div class="pm-chips">';
+      u.words.forEach(function (w) { html += '<span class="pm-chip">' + esc(w) + '</span>'; });
+      html += '</div></section>';
+    }
+
+    if (u.sentences && u.sentences.length) {
+      html += '<section class="pm-card"><h3 class="pm-h3">🎙 Nghe & nhại lại</h3>';
+      u.sentences.forEach(function (s) {
+        html += '<div class="pm-item"><div class="q">' + esc(s) + '</div>'
+          + '<button type="button" class="pm-btn sm pm-say" data-text="' + esc(s) + '">🎤 Nói</button>'
+          + '<span class="pm-muted pm-score"></span></div>';
+      });
+      html += '</section>';
+    }
+
+    if (u.transcript) {
+      html += '<section class="pm-card"><h3 class="pm-h3">📝 Transcript</h3>'
+        + '<p class="pm-muted" style="white-space:pre-wrap">' + esc(u.transcript) + '</p></section>';
+    }
+
+    if (u.exercises && u.exercises.length) {
+      html += '<section class="pm-card"><h3 class="pm-h3">📚 Bài tập (' + u.exercises.length + ')</h3>';
+      u.exercises.forEach(function (ex, i) { html += renderExercise(ex, i); });
+      html += '</section>';
+    }
+
+    html += '<section class="pm-card"><h3 class="pm-h3">✅ Tự đánh giá</h3>'
+      + '<p class="pm-muted">Sau khi học, tự đánh giá mức độ tự tin (1–5) — đây là <b>self-rating</b>, không phải điểm AI.</p>'
+      + '<div class="pm-row"><select id="pmSelfScore" class="pm-input" style="max-width:140px">'
+      + '<option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>'
+      + '<button type="button" class="pm-btn primary" id="pmSaveSelf">Lưu</button>'
+      + '<span class="pm-muted" id="pmSelfMsg"></span></div></section>';
+
+    q('#pmMain').innerHTML = html;
+
+    q('#pmBack').addEventListener('click', function () { S.view = 'course'; renderCourse(); });
+    qa('.pm-track').forEach(function (b) {
+      b.addEventListener('click', function () { playTrack(b.getAttribute('data-src'), b); });
+    });
+    qa('.pm-say').forEach(function (b) {
+      b.addEventListener('click', function () { say(b.getAttribute('data-text'), b.parentNode.querySelector('.pm-score')); });
+    });
+    qa('[data-ex]').forEach(function (b) {
+      b.addEventListener('click', function () { submit(b); });
+    });
+    qa('.pm-opt').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var wrap = b.closest('[data-ex]');
+        if (wrap.getAttribute('data-multi') === '1') {
+          b.classList.toggle('sel');
+        } else {
+          qa('.pm-opt', wrap).forEach(function (x) { x.classList.remove('sel'); });
+          b.classList.add('sel');
+        }
+      });
+    });
+    var saveSelf = q('#pmSaveSelf');
+    if (saveSelf) {
+      saveSelf.addEventListener('click', function () {
+        var v = q('#pmSelfScore').value;
+        var key = String(S.unit.no);
+        S.progress[key] = S.progress[key] || {};
+        S.progress[key].selfRating = v ? Number(v) : null;
+        S.progress[key].status = 'done';
+        S.progress[key].lastStudiedAt = new Date().toISOString();
+        saveProgress();
+        q('#pmSelfMsg').textContent = 'Đã lưu ✓';
+      });
+    }
+  }
+
+  function renderExercise(ex, i) {
+    var h = '<div class="pm-item" data-ex="' + esc(ex.id) + '" data-multi="' + (ex.type === 'multiple_select' ? '1' : '0') + '">'
+      + '<div class="q"><b>' + esc(ex.n) + '.</b> ' + esc(ex.prompt) + '</div>';
+    if (ex.type === 'dictation') {
+      h += '<textarea class="pm-ta" placeholder="Nghe và viết câu bạn nghe được…"></textarea>';
+    } else if (ex.type === 'true_false') {
+      h += (ex.options || ['Đúng', 'Sai']).map(function (o, k) {
+        return '<button type="button" class="pm-opt" data-val="' + esc(o) + '">' + esc(o) + '</button>';
+      }).join('');
+    } else if (ex.type === 'matching') {
+      h += '<div class="pm-grid">';
+      (ex.items || []).forEach(function (it) {
+        h += '<div class="pm-item"><div class="q">' + esc(it.text) + '</div><select class="pm-input pm-match" data-item="' + esc(it.id) + '"><option value="">—</option>';
+        (ex.options || []).forEach(function (o) { h += '<option value="' + esc(o.id || o) + '">' + esc(o.text || o) + '</option>'; });
+        h += '</select></div>';
+      });
+      h += '</div>';
+    } else if (ex.type === 'ordering') {
+      h += '<div class="pm-item"><ol class="pm-list pm-order"></ol>'
+        + '<div class="pm-chips pm-order-pool">';
+      (ex.items || []).forEach(function (it) {
+        h += '<button type="button" class="pm-chip pm-order-chip" data-val="' + esc(it.id || it.text) + '">' + esc(it.text) + '</button>';
+      });
+      h += '</div></div>';
+    } else {
+      (ex.options || []).forEach(function (o) {
+        h += '<button type="button" class="pm-opt" data-val="' + esc(o) + '">' + esc(o) + '</button>';
+      });
+    }
+    h += '<div class="pm-row" style="margin-top:7px"><button type="button" class="pm-btn primary sm pm-submit-ex" data-ex="' + esc(ex.id) + '">Nộp bài</button>'
+      + '<span class="pm-muted pm-ex-msg"></span></div>'
+      + '<div class="pm-fb pm-fb-box" style="display:none"></div>'
+      + '</div>';
+    return h;
+  }
+
+  /* ---------- submit exercise ---------- */
+  function collectAnswer(ex) {
+    var wrap = q('[data-ex="' + (ex.id.replace(/"/g, '\\"')) + '"]');
+    if (!wrap) return null;
+    if (ex.type === 'dictation') {
+      var ta = q('.pm-ta', wrap);
+      return ta ? ta.value : '';
+    }
+    if (ex.type === 'matching') {
+      var map = {};
+      qa('.pm-match', wrap).forEach(function (s) { map[s.getAttribute('data-item')] = s.value; });
+      return map;
+    }
+    if (ex.type === 'ordering') {
+      return qa('.pm-order li', wrap).map(function (li) { return li.getAttribute('data-val'); });
+    }
+    var sel = q('.pm-opt.sel', wrap);
+    if (!sel) return null;
+    if (ex.type === 'multiple_select') {
+      return qa('.pm-opt.sel', wrap).map(function (b) { return b.getAttribute('data-val'); });
+    }
+    return sel.getAttribute('data-val');
+  }
+
+  function submit(btn) {
+    var id = btn.getAttribute('data-ex');
+    var ex = (S.unit.exercises || []).filter(function (e) { return e.id === id; })[0];
+    if (!ex) return;
+    var answer = collectAnswer(ex);
+    var msg = btn.parentNode.querySelector('.pm-ex-msg');
+    var fb = btn.closest('[data-ex]').querySelector('.pm-fb-box');
+    if (answer == null || (Array.isArray(answer) && !answer.length)) {
+      msg.textContent = 'Hãy chọn/viết câu trả lời trước.';
+      return;
+    }
+    msg.textContent = 'Đang chấm…';
+    google.script.run.withSuccessHandler(function (res) {
+      if (!res || res.error) { msg.textContent = 'Lỗi: ' + (res && res.error); return; }
+      msg.textContent = 'Điểm: ' + res.score + '/100';
+      fb.style.display = 'block';
+      fb.className = 'pm-fb pm-fb-box ' + (res.correct ? 'ok' : 'no');
+      fb.textContent = res.feedback || '';
+      if (res.expected != null && ex.type !== 'dictation' && ex.type !== 'matching' && ex.type !== 'ordering') {
+        qa('.pm-opt', btn.closest('[data-ex]')).forEach(function (o) {
+          var v = o.getAttribute('data-val');
+          if (String(v) === String(res.expected)) o.classList.add('right');
+          else if (o.classList.contains('sel')) o.classList.add('wrong');
+        });
+      }
+      /* cập nhật tiến độ */
+      var key = String(S.unit.no);
+      S.progress[key] = S.progress[key] || {};
+      var prev = S.progress[key].bestScore || 0;
+      S.progress[key].bestScore = Math.max(prev, res.score || 0);
+      S.progress[key].status = 'doing';
+      S.progress[key].lastStudiedAt = new Date().toISOString();
+      S.progress[key].skill = S.unit.section + (ex.type || '');
+      saveProgress();
+    }).withFailureHandler(function (e) {
+      msg.textContent = 'Lỗi server: ' + (e && e.message ? e.message : e);
+    }).submitActivity({ unitNo: S.unit.no, activityId: ex.id, answer: answer });
+  }
+
+  /* ---------- reference ---------- */
+  function renderReference() {
+    var html = '<section class="pm-card"><h2 class="pm-h2">Tài liệu tham khảo</h2>';
+    if (!S.reference.length) html += '<p class="pm-muted">Chưa có nội dung tham khảo.</p>';
+    S.reference.forEach(function (r) {
+      html += '<div class="pm-section"><div class="pm-section-title"><h3 class="pm-h3">' + esc(r.ref + ' — ' + r.title) + '</h3></div>';
+      if (r.desc) html += '<p class="pm-muted">' + esc(r.desc) + '</p>';
+      if (r.groups) {
+        r.groups.forEach(function (g) {
+          html += '<p class="pm-muted" style="margin-top:8px"><b>' + esc(g.label) + '</b></p><ul class="pm-list">';
+          (g.items || []).forEach(function (it) { html += '<li>' + esc(it) + '</li>'; });
+          html += '</ul>';
+        });
+      }
+      if (r.rows) {
+        html += '<table class="pm-table"><thead><tr><th>' + esc(r.cols[0]) + '</th><th>' + esc(r.cols[1]) + '</th></tr></thead><tbody>';
+        r.rows.forEach(function (row) {
+          html += '<tr><td>' + esc(row[0]) + '</td><td>' + esc(row[1]) + '</td></tr>';
+        });
+        html += '</tbody></table>';
+      }
+      html += '</div>';
+    });
+    html += '</section>';
+    q('#pmMain').innerHTML = html;
+  }
+
+  /* ---------- report ---------- */
+  function renderReport() {
+    var bySkill = {};
+    Object.keys(S.progress).forEach(function (k) {
+      var p = S.progress[k] || {};
+      var s = p.skill || 'other';
+      bySkill[s] = bySkill[s] || { units: 0, done: 0, scores: [] };
+      bySkill[s].units++;
+      if (p.status === 'done') bySkill[s].done++;
+      if (typeof p.bestScore === 'number') bySkill[s].scores.push(p.bestScore);
+    });
+    var html = '<section class="pm-card"><h2 class="pm-h2">Báo cáo năng lực</h2>';
+    var keys = Object.keys(bySkill);
+    if (!keys.length) html += '<p class="pm-muted">Chưa có dữ liệu tiến độ.</p>';
+    else {
+      html += '<table class="pm-table"><thead><tr><th>Nhóm</th><th>Unit</th><th>Đã xong</th><th>Điểm TB</th></tr></thead><tbody>';
+      keys.sort().forEach(function (s) {
+        var b = bySkill[s];
+        var avg = b.scores.length ? Math.round(b.scores.reduce(function (a, c) { return a + c; }, 0) / b.scores.length) : '—';
+        html += '<tr><td>' + esc(s) + '</td><td>' + b.units + '</td><td>' + b.done + '</td><td>' + avg + '</td></tr>';
+      });
+      html += '</tbody></table>';
+    }
+    html += '<p class="pm-muted" style="margin-top:10px">Điểm <b>self-rating</b> là tự đánh giá của người học, không phải điểm do máy chấm.</p></section>';
+    q('#pmMain').innerHTML = html;
+  }
+
+  /* ---------- navigation ---------- */
+  function setTab(tab) {
+    S.tab = tab;
+    qa('.pm-tab').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-tab') === tab); });
+    if (tab === 'course') { S.view = 'course'; renderCourse(); }
+    else if (tab === 'reference') renderReference();
+    else renderReport();
+  }
+
+  function openUnit(no) {
+    showLoading('⏳ Đang tải bài…');
+    google.script.run.withSuccessHandler(function (res) {
+      if (!res || res.error) { showLoading('⚠️ ' + (res && res.error)); return; }
+      S.unit = res; S.view = 'unit'; renderUnit();
+    }).withFailureHandler(function (e) {
+      showLoading('⚠️ Lỗi: ' + (e && e.message ? e.message : e));
+    }).getUnit(no);
+  }
+
+  /* ---------- speech (Recording Engine popup) ---------- */
+  var RE_URL = 'https://lfskcm2018.github.io/Toeic-lptd/recording-engine/';
+  var reWin = null, reReady = false, rePending = null, rePoll = null;
+
+  function reOpen() {
+    if (reWin && !reWin.closed) { try { reWin.focus(); } catch (e) {} return reWin; }
+    reWin = null; reReady = false;
+    reWin = window.open(RE_URL, 'pm_recording_engine', 'width=560,height=680,resizable=yes,scrollbars=yes');
+    if (rePoll) clearInterval(rePoll);
+    rePoll = setInterval(function () {
+      if (reWin && !reWin.closed) return;
+      clearInterval(rePoll); rePoll = null; reWin = null; reReady = false;
+      if (rePending && rePending.el) rePending.el.textContent = 'Đã đóng cửa sổ ghi âm.';
+      rePending = null;
+    }, 1000);
+    return reWin;
+  }
+
+  function say(text, el) {
+    if (el) el.textContent = 'Đang mở cửa sổ ghi âm…';
+    var w = reOpen();
+    if (!w) { if (el) el.textContent = 'Trình duyệt chặn popup — hãy cho phép popup.'; return; }
+    rePending = { text: text, el: el };
+    if (reReady) send();
+    else if (el) el.textContent = 'Hãy đọc to câu trong cửa sổ phụ…';
+  }
+  function send() {
+    if (!rePending || !reWin) return;
+    try {
+      reWin.postMessage({ type: 'START_RECOGNITION', sessionId: 'pm-' + Date.now(), itemIndex: 0, targetText: rePending.text }, '*');
+    } catch (e) {}
+  }
+  function similar(a, b) {
+    a = String(a || '').toLowerCase().split(/\s+/).filter(Boolean);
+    b = String(b || '').toLowerCase().split(/\s+/).filter(Boolean);
+    if (!b.length) return 0;
+    var pool = b.slice(), hit = 0;
+    a.forEach(function (w) { var i = pool.indexOf(w); if (i >= 0) { hit++; pool.splice(i, 1); } });
+    return Math.round(hit / b.length * 100);
+  }
+  global.addEventListener('message', function (ev) {
+    if (!reWin || ev.source !== reWin) return;
+    var d = ev.data;
+    if (!d || typeof d.type !== 'string') return;
+    if (d.type === 'RE_ENGINE_READY') { reReady = true; send(); return; }
+    if (d.type === 'RECOGNITION_READY' && rePending) {
+      if (rePending.el) rePending.el.textContent = similar(d.transcript, rePending.text) + '% — "' + String(d.transcript || '') + '"';
+      rePending = null; return;
+    }
+    if ((d.type === 'RECOGNITION_ERROR' || d.type === 'RECORDING_ERROR') && rePending) {
+      if (rePending.el) rePending.el.textContent = 'Lỗi: ' + (d.error || 'không rõ');
+      rePending = null;
+    }
+  });
+
+  /* ---------- boot ---------- */
+  function boot() {
+    S.progress = loadProgress();
+    google.script.run.withSuccessHandler(function (res) {
+      if (!res || res.error) { showLoading('⚠️ ' + (res && res.error)); return; }
+      S.course = res.course; S.units = res.units || []; S.reference = res.reference || [];
+      q('#pmSub').textContent = (res.course ? res.course.title + ' · ' + S.units.length + ' unit' : '');
+      qa('.pm-tab').forEach(function (b) {
+        b.addEventListener('click', function () { setTab(b.getAttribute('data-tab')); });
+      });
+      var th = q('#pmTheme');
+      if (th) {
+        var apply = function (t) {
+          if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+          else document.documentElement.removeAttribute('data-theme');
+          th.textContent = t === 'dark' ? '☀️' : '🌙';
+        };
+        var saved = null;
+        try { saved = localStorage.getItem('pm_theme'); } catch (e) {}
+        apply(saved === 'dark' ? 'dark' : 'light');
+        th.addEventListener('click', function () {
+          var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          apply(next);
+          try { localStorage.setItem('pm_theme', next); } catch (e) {}
+        });
+      }
+      setTab('course');
+    }).withFailureHandler(function (e) {
+      showLoading('⚠️ Lỗi server: ' + (e && e.message ? e.message : e));
+    }).getBootstrapData();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})(window);
+</script>
