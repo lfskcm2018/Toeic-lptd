@@ -17,73 +17,25 @@
 (function (global) {
   'use strict';
 
-  var CDN_BASE = 'https://toeic-audio.netlify.app/audio/lptd';
-  var AUDIO_MODE_KEY = 'toeic_lptd_audio_mode';
-  var PROGRESS_KEY = 'toeic_lptd_progress';
+  var CDN_BASE = 'https://toeic-audio.netlify.app/audio/hacker1';
+  var AUDIO_MODE_KEY = 'hacker1_audio_mode';
+  var PROGRESS_KEY = 'hacker1_progress';
 
   var BOOKS = [
     {
       book: 1,
-      code: 'LPTD 1',
-      title: 'Listening Practice Through Dictation 1',
-      short: 'Beginner',
-      level: 'Beginner',
-      icon: '🌱',
-      accent: '#10b981',
-      units: 40,
-    },
-    {
-      book: 2,
-      code: 'LPTD 2',
-      title: 'Listening Practice Through Dictation 2',
-      short: 'Elementary',
-      level: 'Elementary',
-      icon: '🌿',
-      accent: '#3b82f6',
-      units: 40,
-    },
-    {
-      book: 3,
-      code: 'LPTD 3',
-      title: 'Listening Practice Through Dictation 3',
-      short: 'Intermediate',
-      level: 'Intermediate',
-      icon: '🌳',
-      accent: '#f59e0b',
-      units: 40,
-    },
-    {
-      book: 4,
-      code: 'LPTD 4',
-      title: 'Listening Practice Through Dictation 4',
-      short: 'Upper-intermediate',
-      level: 'Upper-intermediate',
-      icon: '🏔️',
-      accent: '#8b5cf6',
-      units: 40,
+      code: 'Hacker 1',
+      title: 'Hackers TOEIC 1000 LC — Hacker 1',
+      short: 'TOEIC LC',
+      level: '10 TEST · 30 track (Part 1-2, 3, 4)',
+      icon: '📘',
+      accent: '#0ea5e9',
+      units: 30,
     },
   ];
 
-  /* Tài liệu đính kèm theo từng cuốn (đường dẫn tương đối từ gốc dự án). */
-  var DOCS = {
-    1: [
-      { label: 'Sách LPTD 1', type: 'book', file: 'Listening Practice Through Dictation/Listening Practice Through Dictation 1/Listening Practice Through Dictation 1.pdf' },
-      { label: 'Transcript LPTD 1', type: 'transcript', file: 'Listening Practice Through Dictation/Listening Practice Through Dictation 1/Audio + Transcipt/ListeningPracticeThroughDictation_1_Transcripts.pdf' },
-    ],
-    2: [
-      { label: 'Sách LPTD 2', type: 'book', file: 'Listening Practice Through Dictation/Listening Practice Through Dictation 2/Listening Practice Through Dictation 2.pdf' },
-      { label: 'Transcript LPTD 2', type: 'transcript', file: 'Listening Practice Through Dictation/Listening Practice Through Dictation 2/Audio + Transcipt/LPTD 2_Transcripts.pdf' },
-    ],
-    3: [
-      { label: 'Sách LPTD 3', type: 'book', file: 'Listening Practice Through Dictation/Listening Practice Through Dictation 3/Listening Practice Through Dictation 3.pdf' },
-      { label: 'Transcript LPTD 3', type: 'transcript', file: 'Listening Practice Through Dictation/Listening Practice Through Dictation 3/Audio + Transcipt/LPTD 3_transcript.pdf' },
-      { label: 'Answer Key LPTD 3', type: 'answer', file: 'Listening Practice Through Dictation/Listening Practice Through Dictation 3/LPTD_3_Answer_key.pdf' },
-    ],
-    4: [
-      { label: 'Transcript LPTD 4', type: 'transcript', file: 'Listening Practice Through Dictation/Listening Practice Through Dictation 4/Audio + Transcipt/ListeningPracticeThroughDictation_4_transcript.pdf' },
-      { label: 'Transcript LPTD 4 (bản 2)', type: 'transcript', file: 'Listening Practice Through Dictation/Listening Practice Through Dictation 4/LPTD4.pdf' },
-    ],
-  };
+  /* Hacker 1 không kèm PDF trên CDN tài liệu. */
+  var DOCS = {};
 
   var isGas = typeof global.google !== 'undefined' && global.google.script && global.google.script.run;
 
@@ -194,7 +146,15 @@
     },
 
     get: function (book, unit) {
-      return this.lessonsById['lptd-' + Number(book) + '-' + this.pad2(unit)] || null;
+      /* Hacker 1 dùng id 'hacker1-tNN-pYY' (book luôn = 1) → tra theo id cũ trước,
+         sau đó fallback theo cặp book/unit. */
+      var id = 'lptd-' + Number(book) + '-' + this.pad2(unit);
+      if (this.lessonsById[id]) return this.lessonsById[id];
+      var list = this.byBook(book);
+      for (var i = 0; i < list.length; i++) {
+        if (Number(list[i].unit) === Number(unit)) return list[i];
+      }
+      return null;
     },
 
     byBook: function (book) { return this.lessonsByBook[Number(book)] || []; },
@@ -373,7 +333,10 @@
     if (sidebar) sidebar.classList.remove('open');
     if (overlay) overlay.classList.remove('show');
   }
-  function unitLabel(lesson) { return 'LPTD ' + lesson.book + ' · Unit ' + pad2(lesson.unit); }
+  function unitLabel(lesson) {
+    if (lesson && lesson.title) return 'Hacker 1 · ' + lesson.title;
+    return 'Hacker 1 · Unit ' + pad2(lesson.unit);
+  }
 
   /* ---------- CSS tự inject (bản local) ---------- */
   function ensureCss() {
@@ -439,8 +402,8 @@
     btn.id = 'btnLPTD';
     btn.type = 'button';
     btn.className = 'btn btn-outline btn-sm lptd-open';
-    btn.innerHTML = '📚 LPTD 1–4';
-    btn.title = 'Listening Practice Through Dictation';
+    btn.innerHTML = '📘 Hacker 1';
+    btn.title = 'Hackers TOEIC 1000 LC — Hacker 1';
     var anchor = doc.getElementById('btnETSLibrary');
     if (anchor && anchor.parentNode === footer) footer.insertBefore(btn, anchor);
     else footer.insertBefore(btn, footer.firstChild);
@@ -524,13 +487,14 @@
       S.progress = L.loadProgress();
       S.mistakes = loadMistakes();
       S.book = Number(S.book) || 1;
+      if (!L.bookMeta(S.book)) S.book = L.BOOKS[0].book;
       setHero(
-        'Listening Practice Through Dictation',
-        'LPTD 1–4 · 160 unit · Nghe – chép chính tả – shadowing',
+        'Hacker 1 — TOEIC 1000 LC',
+        '10 TEST · 30 track · Nghe – chép chính tả – shadowing',
         progressSummary(),
-        '🎧 160 unit · 4 cuốn · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
-        'LPTD 1–4',
-        'Listening Practice Through Dictation'
+        '🎧 30 track · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
+        'Hacker 1',
+        'Hackers TOEIC 1000 LC'
       );
       renderLibrary();
       closeSidebarMobile();
@@ -543,10 +507,10 @@
       S.open = true;
       hideCoreUI();
     }
-    setHero('Listening Practice Through Dictation', 'Không tải được dữ liệu', '⚠️ Lỗi', '🎧 LPTD', 'LPTD 1–4', 'Listening practice');
+    setHero('Hacker 1 — TOEIC 1000 LC', 'Không tải được dữ liệu', '⚠️ Lỗi', '🎧 Hacker 1', 'Hacker 1', 'Hackers TOEIC 1000 LC');
     var host = q('#modeBody');
     if (host) {
-      host.innerHTML = '<div class="empty-state"><div class="big">⚠️</div><b>Không tải được dữ liệu LPTD</b><br>' +
+      host.innerHTML = '<div class="empty-state"><div class="big">⚠️</div><b>Không tải được dữ liệu Hacker 1</b><br>' +
         esc(err && err.message ? err.message : String(err)) +
         '<br><button type="button" class="btn btn-outline btn-sm" id="lptdRetry" style="margin-top:12px">Thử lại</button></div>';
       var retry = q('#lptdRetry');
@@ -600,18 +564,18 @@
             S.lesson.title,
             unitProgressText(S.lesson),
             '🎧 ' + S.lesson.lineCount + ' câu · ' + S.lesson.wordCount + ' từ',
-            'LPTD ' + S.lesson.book + ' · U' + pad2(S.lesson.unit),
+            'Hacker 1 · ' + (S.lesson.title || ('U' + pad2(S.lesson.unit))),
             S.lesson.title
           );
           renderUnit();
         } else {
           setHero(
-            'Listening Practice Through Dictation',
-            'LPTD 1–4 · 160 unit · Nghe – chép chính tả – shadowing',
+            'Hacker 1 — TOEIC 1000 LC',
+            '10 TEST · 30 track · Nghe – chép chính tả – shadowing',
             progressSummary(),
-            '🎧 160 unit · 4 cuốn · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
-            'LPTD 1–4',
-            'Listening Practice Through Dictation'
+            '🎧 30 track · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
+            'Hacker 1',
+            'Hackers TOEIC 1000 LC'
           );
           renderLibrary();
         }
@@ -885,7 +849,7 @@
   function progressSummary() {
     var done = 0;
     L.lessons.forEach(function (u) { if (unitDone(u, 'dictation') || unitDone(u, 'shadowing')) done++; });
-    return '📚 ' + done + '/' + L.lessons.length + ' unit đã học';
+    return '📚 ' + done + '/' + L.lessons.length + ' track đã học';
   }
 
   function saveDictationProgress(lesson, score) {
@@ -956,7 +920,7 @@
     var book = L.bookMeta(S.book) || L.BOOKS[0];
     var units = L.byBook(book.book);
     var done = bookDone(book.book);
-    var total = units.length || 40;
+    var total = units.length || 30;
     var pct = total ? Math.round(done / total * 100) : 0;
 
     var html = '<div class="lptd-app">';
@@ -964,11 +928,11 @@
     html += '<section class="card lptd-hero-card">' +
       '<div class="lptd-hero-row">' +
       '<div class="lptd-hero-text">' +
-      '<h2 class="lptd-h2">📚 Listening Practice Through Dictation</h2>' +
-      '<p class="lptd-muted">160 unit · 4 cuốn · Nghe – chép chính tả – luyện nói theo</p>' +
+      '<h2 class="lptd-h2">📘 Hackers TOEIC 1000 LC — Hacker 1</h2>' +
+      '<p class="lptd-muted">10 TEST · 30 track (Part 1-2, Part 3, Part 4) · Nghe – chép chính tả – luyện nói theo</p>' +
       '</div>' +
       '<div class="lptd-hero-stats">' +
-      '<span class="badge accent">' + L.stats().units + ' unit</span>' +
+      '<span class="badge accent">' + L.stats().units + ' track</span>' +
       '<span class="badge">' + L.stats().lines.toLocaleString('vi-VN') + ' câu</span>' +
       '<span class="badge">' + L.stats().words.toLocaleString('vi-VN') + ' từ</span>' +
       '</div></div>' +
@@ -984,29 +948,32 @@
       '</span>' +
       '</div></section>';
 
-    html += '<div class="lptd-book-tabs" role="tablist" aria-label="Chọn cuốn">';
-    L.BOOKS.forEach(function (b) {
-      var bdone = bookDone(b.book);
-      var bpct = Math.round(bdone / 40 * 100);
-      html += '<button type="button" class="lptd-book-tab' + (b.book === book.book ? ' active' : '') + '" data-book="' + b.book + '" role="tab" aria-selected="' + (b.book === book.book) + '">' +
-        '<span class="lptd-book-icon" style="--lptd-accent:' + b.accent + '">' + b.icon + '</span>' +
-        '<span class="lptd-book-main"><b>' + esc(b.code) + '</b><small>' + esc(b.level) + '</small></span>' +
-        '<span class="lptd-book-progress"><span class="lptd-mini-bar"><i style="width:' + bpct + '%"></i></span><small>' + bdone + '/40</small></span>' +
-        '</button>';
-    });
-    html += '</div>';
+    if (L.BOOKS.length > 1) {
+      html += '<div class="lptd-book-tabs" role="tablist" aria-label="Chọn cuốn">';
+      L.BOOKS.forEach(function (b) {
+        var bdone = bookDone(b.book);
+        var btotal = L.byBook(b.book).length || b.units || 1;
+        var bpct = Math.round(bdone / btotal * 100);
+        html += '<button type="button" class="lptd-book-tab' + (b.book === book.book ? ' active' : '') + '" data-book="' + b.book + '" role="tab" aria-selected="' + (b.book === book.book) + '">' +
+          '<span class="lptd-book-icon" style="--lptd-accent:' + b.accent + '">' + b.icon + '</span>' +
+          '<span class="lptd-book-main"><b>' + esc(b.code) + '</b><small>' + esc(b.level) + '</small></span>' +
+          '<span class="lptd-book-progress"><span class="lptd-mini-bar"><i style="width:' + bpct + '%"></i></span><small>' + bdone + '/' + btotal + '</small></span>' +
+          '</button>';
+      });
+      html += '</div>';
+    }
 
     html += '<section class="card lptd-lib-card">' +
       '<div class="lptd-lib-toolbar">' +
-      '<input type="search" id="lptdSearch" class="lptd-search" placeholder="🔍 Tìm unit theo tên hoặc số…" value="' + esc(S.query) + '" aria-label="Tìm unit">' +
-      '<span class="lptd-muted" id="lptdLibCount">' + units.length + ' unit</span>' +
+      '<input type="search" id="lptdSearch" class="lptd-search" placeholder="🔍 Tìm track theo test/part…" value="' + esc(S.query) + '" aria-label="Tìm track">' +
+      '<span class="lptd-muted" id="lptdLibCount">' + units.length + ' track</span>' +
       '<span class="lptd-muted lptd-mistake-count">🧠 Từ sai: <b>' + mistakeCount() + '</b></span>' +
       '<button type="button" class="btn btn-outline btn-sm" id="lptdClearMistakes"' + (mistakeCount() ? '' : ' disabled') + '>Xóa từ sai</button>' +
       '</div>' +
       '<div class="lptd-book-summary">' +
       '<span class="lptd-book-pill" style="--lptd-accent:' + book.accent + '">' + book.icon + ' ' + esc(book.code) + '</span>' +
       '<span class="lptd-muted">' + esc(book.title) + ' · ' + esc(book.level) + '</span>' +
-      '<span class="lptd-progress-inline"><span class="lptd-mini-bar"><i style="width:' + pct + '%"></i></span> ' + done + '/' + total + ' unit</span>' +
+      '<span class="lptd-progress-inline"><span class="lptd-mini-bar"><i style="width:' + pct + '%"></i></span> ' + done + '/' + total + ' track</span>' +
       '</div>' +
       '<div class="lptd-unit-grid" id="lptdUnitGrid">' + unitCardsHtml(units) + '</div>' +
       '<div class="lptd-empty hidden" id="lptdSearchEmpty">Không tìm thấy unit phù hợp.</div>' +
@@ -1025,8 +992,10 @@
       var sh = unitScore(u, 'shadowing');
       var done = unitDone(u, 'dictation') || unitDone(u, 'shadowing');
       var cls = 'lptd-unit-card' + (done ? ' done' : '');
+      var m = /TEST\s*(\d+)/i.exec(u.title || '');
+      var badge = m ? 'T' + ('0' + m[1]).slice(-2) : 'U' + pad2(u.unit);
       return '<button type="button" class="' + cls + '" data-unit="' + u.unit + '" data-title="' + esc((u.title + ' unit ' + u.unit).toLowerCase()) + '">' +
-        '<span class="lptd-unit-top"><span class="lptd-unit-badge">U' + pad2(u.unit) + '</span>' +
+        '<span class="lptd-unit-top"><span class="lptd-unit-badge">' + badge + '</span>' +
         (done ? '<span class="lptd-done-dot" title="Đã hoàn thành">✓</span>' : '') + '</span>' +
         '<span class="lptd-unit-title">' + esc(u.title) + '</span>' +
         '<span class="lptd-unit-meta">' + u.lineCount + ' câu · ' + u.wordCount.toLocaleString('vi-VN') + ' từ</span>' +
@@ -1134,7 +1103,7 @@
       lesson.title,
       unitProgressText(lesson),
       '🎧 ' + lesson.lineCount + ' câu · ' + lesson.wordCount + ' từ',
-      'LPTD ' + lesson.book + ' · U' + pad2(lesson.unit),
+      'Hacker 1 · ' + (lesson.title || ('U' + pad2(lesson.unit))),
       lesson.title
     );
     renderUnit();
@@ -1169,7 +1138,7 @@
       '<button type="button" class="btn btn-outline btn-sm" id="lptdNext"' + (next ? '' : ' disabled') + '>▶</button>' +
       '</div></div>' +
       '<div class="lptd-unit-head-main">' +
-      '<div class="lptd-eyebrow">' + (book ? book.icon + ' ' + esc(book.code) : 'LPTD') + ' · Unit ' + pad2(u.unit) + '</div>' +
+      '<div class="lptd-eyebrow">' + (book ? book.icon + ' ' + esc(book.code) : 'Hacker 1') + ' · ' + esc(u.title || ('Track ' + pad2(u.unit))) + '</div>' +
       '<h2 class="lptd-h2">' + esc(u.title) + '</h2>' +
       '<div class="lptd-muted">' + u.lineCount + ' câu · ' + u.wordCount.toLocaleString('vi-VN') + ' từ · ' + esc(u.audioFileName) + '</div>' +
       '<div class="lptd-unit-progress" id="lptdUnitProgress">' + esc(unitProgressText(u)) + '</div>' +
@@ -1196,7 +1165,7 @@
       '<input class="lp-vol" id="lptdVolume" type="range" min="0" max="1" step="0.05" value="' + S.volume + '" aria-label="Âm lượng">' +
       '<button type="button" class="lp-btn" id="lptdReplay" aria-label="Phát lại 3 lần" title="Phát lại 3 lần">🔁</button>' +
       '<button type="button" class="lp-btn hidden" id="lptdFixSeek" aria-label="Chuyển sang CDN" title="Nguồn không tua được — chuyển sang CDN">⚡</button>' +
-      '<span class="lp-label" id="lptdFloatLabel">LPTD ' + u.book + ' · Unit ' + pad2(u.unit) + '</span>' +
+      '<span class="lp-label" id="lptdFloatLabel">Hacker 1 · ' + esc(u.title || ('Track ' + pad2(u.unit))) + '</span>' +
       '</div></div>';
 
     html += '<div class="mode-tabs lptd-modes">' +
@@ -1284,12 +1253,12 @@
     stopAudio();
     stopRecording();
     setHero(
-      'Listening Practice Through Dictation',
-      'LPTD 1–4 · 160 unit · Nghe – chép chính tả – shadowing',
+      'Hacker 1 — TOEIC 1000 LC',
+      '10 TEST · 30 track · Nghe – chép chính tả – shadowing',
       progressSummary(),
-      '🎧 160 unit · 4 cuốn · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
-      'LPTD 1–4',
-      'Listening Practice Through Dictation'
+      '🎧 30 track · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
+      'Hacker 1',
+      'Hackers TOEIC 1000 LC'
     );
     renderLibrary();
     scrollTop(false);
@@ -1428,7 +1397,7 @@
     S.mistakes = loadMistakes();
     var prog = q('#lptdUnitProgress');
     if (prog) prog.textContent = unitProgressText(S.lesson);
-    setHero(unitLabel(S.lesson), S.lesson.title, unitProgressText(S.lesson), '🎧 ' + S.lesson.lineCount + ' câu · ' + S.lesson.wordCount + ' từ', 'LPTD ' + S.lesson.book + ' · U' + pad2(S.lesson.unit), S.lesson.title);
+    setHero(unitLabel(S.lesson), S.lesson.title, unitProgressText(S.lesson), '🎧 ' + S.lesson.lineCount + ' câu · ' + S.lesson.wordCount + ' từ', 'Hacker 1 · ' + (S.lesson.title || ('Track ' + pad2(S.lesson.unit))), S.lesson.title);
   }
 
   function showAnswers() {
