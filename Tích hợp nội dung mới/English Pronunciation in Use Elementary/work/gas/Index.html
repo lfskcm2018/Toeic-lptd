@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EPI Elementary — Section A</title>
+  <?!= include('Styles'); ?>
+</head>
+<body>
+<div class="app-shell">
+  <main class="main">
+    <header class="main-header">
+      <div class="logo-icon">🎯</div>
+      <div style="flex:1;min-width:0">
+        <div class="header-title" id="headerTitle">English Pronunciation in Use</div>
+        <div class="header-sub" id="headerSub">Elementary · Section A — Sounds and spelling</div>
+      </div>
+      <div class="header-right">
+        <button type="button" class="btn btn-outline btn-sm" id="btnTheme" title="Sáng / Tối" aria-label="Đổi giao diện sáng tối">🌙</button>
+      </div>
+    </header>
+
+    <div class="main-body">
+      <div class="container">
+
+        <div class="hero">
+          <div class="hero-row">
+            <div>
+              <h1 id="heroTitle">English Pronunciation in Use</h1>
+              <p id="heroSub">Elementary · Section A · Units 1–10 · Sounds and spelling</p>
+            </div>
+            <span class="badge accent" id="heroStatus">🎯 Đang tải</span>
+          </div>
+          <div class="hero-badges">
+            <span class="badge" id="heroDictationBadge">📝 Dictation</span>
+            <span class="badge" id="heroShadowingBadge">🗣 Shadowing</span>
+            <span class="badge" id="heroBadgeCount">🎯 10 units</span>
+          </div>
+        </div>
+
+        <!-- ===== Nội dung EPI (render vào #modeBody) ===== -->
+        <div id="modeBody">
+          <section class="card lptd-loading">
+            <div class="lptd-loading-icon">🎯</div>
+            <b>Đang tải dữ liệu EPI Elementary…</b>
+            <span class="lptd-muted">Units 1–10 · audio phát trực tiếp từ CDN</span>
+          </section>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+window.EPI_RECORDING_ENGINE_URL = '<?!= RECORDING_ENGINE_URL ?>';
+</script>
+
+<?!= include('EPIUI'); ?>
+<script>
+(function () {
+  'use strict';
+  var KEY = 'epi_theme';
+  var btn = document.getElementById('btnTheme');
+  function apply(theme) {
+    if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    else document.documentElement.removeAttribute('data-theme');
+    if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  apply(saved === 'dark' ? 'dark' : 'light');
+  if (btn) {
+    btn.addEventListener('click', function () {
+      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      apply(next);
+      try { localStorage.setItem(KEY, next); } catch (e) {}
+    });
+  }
+})();
+</script>
+</body>
+</html>

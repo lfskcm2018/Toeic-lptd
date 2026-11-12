@@ -1,0 +1,212 @@
+<script>
+(function (global) {
+  'use strict';
+
+  /* ---------- CSS (inject vào head để không tạo nội dung ngoài #modeBody) ---------- */
+  var CSS = [
+    '.epi-unit-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}',
+    '.epi-unit-btn{padding:6px 12px;border-radius:20px;border:1px solid rgb(var(--border));background:rgb(var(--card));cursor:pointer;font-size:13px;}',
+    '.epi-unit-btn.active{background:rgb(var(--accent));color:#fff;border-color:rgb(var(--accent));}',
+    '.epi-sentence{padding:8px 10px;border:1px solid rgb(var(--border));border-radius:10px;margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}',
+    '.epi-sentence .epi-play{font-size:16px;cursor:pointer;flex-shrink:0;}',
+    '.epi-answer{margin-top:6px;color:rgb(var(--muted-foreground));font-size:12px;white-space:pre-wrap;}',
+    '.epi-ex{padding:10px 12px;border:1px solid rgb(var(--border));border-radius:10px;margin-bottom:10px;}',
+    '.epi-ex button{margin-top:6px;}',
+    '.epi-hidden{display:none;}',
+    '.epi-record-row{display:flex;align-items:center;gap:8px;margin-top:6px;}',
+    '.epi-score{font-weight:700;}',
+    '.epi-head{margin:0 0 4px;font-size:22px;line-height:1.25;color:rgb(var(--foreground));}',
+    '.epi-sub{color:rgb(var(--muted-foreground));font-size:13px;margin:0 0 10px;}',
+  ].join('\n');
+
+  function injectCss() {
+    if (document.getElementById('epiStyle')) return;
+    var s = document.createElement('style');
+    s.id = 'epiStyle';
+    s.textContent = CSS;
+    document.head.appendChild(s);
+  }
+
+  /* ---------- State ---------- */
+  var S = { units: [], selected: 0, audioBase: '' };
+
+  function q(sel) { return document.querySelector(sel); }
+  function qa(sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function host() {
+    var el = q('#modeBody');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'modeBody';
+      document.body.appendChild(el);
+    }
+    return el;
+  }
+
+  function similarity(a, b) {
+    a = String(a || '').toLowerCase().trim();
+    b = String(b || '').toLowerCase().trim();
+    if (!a || !b) return 0;
+    var aw = a.split(/\s+/), bw = b.split(/\s+/);
+    var rest = bw.slice(), matches = 0;
+    for (var i = 0; i < aw.length; i++) {
+      var idx = rest.indexOf(aw[i]);
+      if (idx !== -1) { matches++; rest.splice(idx, 1); }
+    }
+    return Math.round((matches / Math.max(aw.length, bw.length)) * 100);
+  }
+
+  function showError(msg) {
+    host().innerHTML = '<section class="card"><b>Lỗi:</b><br>' + esc(msg) + '</section>';
+  }
+
+  /* ---------- Render ---------- */
+  function renderList() {
+    var html = '';
+    S.units.forEach(function (u, i) {
+      html += '<button type="button" class="epi-unit-btn' + (i === S.selected ? ' active' : '') +
+        '" data-idx="' + i + '">Unit ' + String(u.unit).padStart(2, '0') + '</button>';
+    });
+    q('#epiUnitList').innerHTML = html;
+    qa('.epi-unit-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        S.selected = Number(b.getAttribute('data-idx'));
+        renderContent();
+      });
+    });
+  }
+
+  function renderContent() {
+    var u = S.units[S.selected];
+    if (!u) { showError('Không có unit nào.'); return; }
+
+    var html = '';
+    html += '<section class="card">'
+      + '<h2 class="epi-head">Unit ' + String(u.unit).padStart(2, '0') + ' — ' + esc(u.title) + '</h2>'
+      + '<p class="epi-sub">' + esc(u.focus) + ' · Âm: ' + esc(u.sounds) + '</p>'
+      + '<p>' + esc(u.explanation) + '</p>'
+      + '</section>';
+
+    html += '<section class="card"><h3 class="epi-head" style="font-size:18px">🎧 Nghe & nói</h3>';
+    u.sentences.forEach(function (s, idx) {
+      html += '<div class="epi-sentence">'
+        + '<button type="button" class="btn btn-outline btn-sm epi-play" data-audio="' + idx + '" title="Phát audio">▶️</button>'
+        + '<span style="flex:1;min-width:180px">' + esc(s) + '</span>'
+        + '<span class="epi-record-row">'
+        + '<button type="button" class="btn btn-outline btn-sm epi-speak" data-text="' + esc(s) + '">🎤 Nói</button>'
+        + '<span class="epi-score" id="epi-score-' + idx + '"></span>'
+        + '</span></div>';
+    });
+    html += '</section>';
+
+    html += '<section class="card"><h3 class="epi-head" style="font-size:18px">📝 Exercises</h3>';
+    u.exercises.forEach(function (ex) {
+      html += '<div class="epi-ex">'
+        + '<b>Exercise ' + esc(ex.n) + '</b><br>'
+        + esc(ex.prompt)
+        + '<div><button type="button" class="btn btn-outline btn-sm epi-reveal">Xem đáp án</button></div>'
+        + '<div class="epi-answer epi-hidden">' + esc(ex.answer) + '</div>'
+        + '</div>';
+    });
+    html += '</section>';
+
+    host().innerHTML = '<div class="lptd-app">'
+      + '<div id="epiUnitList" class="epi-unit-list"></div>'
+      + '<div id="epiContent">' + html + '</div>'
+      + '</div>';
+
+    renderList();
+    bindContent();
+  }
+
+  function bindContent() {
+    qa('.epi-play').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var idx = Number(btn.getAttribute('data-audio'));
+        var u = S.units[S.selected];
+        var src = u && u.audioTracks ? u.audioTracks[idx] : '';
+        if (!src) { alert('Chưa có audio cho câu này.'); return; }
+        btn.textContent = '⏸';
+        var audio = new Audio(src);
+        audio.onended = function () { btn.textContent = '▶️'; };
+        audio.onerror = function () { btn.textContent = '⚠️'; };
+        audio.play().catch(function () { btn.textContent = '▶️'; });
+      });
+    });
+
+    qa('.epi-reveal').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var ans = btn.parentNode.nextElementSibling;
+        if (ans) ans.classList.toggle('epi-hidden');
+      });
+    });
+
+    qa('.epi-speak').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var text = btn.getAttribute('data-text') || '';
+        var scoreEl = btn.parentNode.querySelector('.epi-score');
+        var SR = global.SpeechRecognition || global.webkitSpeechRecognition;
+        if (!SR) { if (scoreEl) scoreEl.textContent = 'Trình duyệt chưa hỗ trợ nhận diện giọng nói.'; return; }
+        var rec = new SR();
+        rec.lang = 'en-US';
+        rec.interimResults = false;
+        rec.maxAlternatives = 1;
+        if (scoreEl) scoreEl.textContent = 'Đang nghe…';
+        rec.onresult = function (e) {
+          var heard = e.results[0][0].transcript;
+          if (scoreEl) scoreEl.textContent = similarity(text, heard) + '% — "' + heard + '"';
+        };
+        rec.onerror = function (e) { if (scoreEl) scoreEl.textContent = 'Lỗi: ' + e.error; };
+        rec.start();
+      });
+    });
+  }
+
+  function apply(res) {
+    if (!res || !Array.isArray(res.lessons)) {
+      showError('Dữ liệu EPI không hợp lệ: ' + JSON.stringify(res).slice(0, 300));
+      return;
+    }
+    S.audioBase = res.cdnBase || '';
+    S.units = res.lessons;
+    S.selected = 0;
+    renderContent();
+    var st = document.getElementById('heroStatus');
+    if (st) st.textContent = '✅ Sẵn sàng';
+  }
+
+  function load() {
+    var runner = global.google && global.google.script && global.google.script.run;
+    if (!runner) { showError('Không tìm thấy google.script.run.'); return; }
+    var done = false;
+    var timer = setTimeout(function () {
+      if (done) return;
+      showError('Timeout: không nhận được dữ liệu từ server sau 12 giây.');
+    }, 12000);
+
+    runner.withSuccessHandler(function (res) {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      try { apply(res); } catch (e) { showError('Lỗi khi render: ' + (e && e.message ? e.message : String(e))); }
+    }).withFailureHandler(function (e) {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      showError('Lỗi từ server: ' + (e && e.message ? e.message : String(e)));
+    }).getEPIBootstrap();
+  }
+
+  function boot() {
+    injectCss();
+    load();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})(window);
+</script>
