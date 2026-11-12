@@ -1,27 +1,39 @@
 # Checklist triển khai & kiểm thử — Hacker 1 (GAS riêng)
 
-## A. Đã chuẩn bị / test local (PASS)
-- [x] Dữ liệu: 30 lessons, 186 lines, 2559 words (`hacker-1-meta.json`), scan 0 issue.
-- [x] GAS: `gas/Code.gs`, `gas/Hacker1Data.gs` (có `LPTD_LESSONS_META/LESSONS`), `Index.html`, `Styles.html`, `LptdUI.html`, `appsscript.json`.
-- [x] Audio staging: `audio-cdn/` 30 MP3 + manifest (mp3 gitignored). `_deploy_audio/audio/hacker1/` sẵn sàng deploy.
-- [x] Hướng dẫn: `gas/DEPLOY.md`, `README.md`, `local-preview.html`.
+## A. Chuẩn bị (đã có trong repo/thư mục)
+- [x] Dữ liệu: 30 lessons, 186 lines, 2559 words (`hacker-1-lessons.json`), scan 0 issue.
+- [x] GAS: `gas/Code.gs`, `gas/Hacker1Data.gs`, `gas/Index.html`, `gas/Styles.html`, `gas/LptdUI.html`, `gas/appsscript.json`.
+- [x] Audio staging: `audio-cdn/` + `_deploy_audio/audio/hacker1/` (30 MP3, đúng `cdnName`).
+- [x] Hướng dẫn: `gas/DEPLOY.md`, `README.md`, `reports/PROGRESS.md`.
+- [x] UI đã đổi thương hiệu riêng **Hacker 1** (bỏ LPTD 1–4, bỏ DOCS PDF).
 
-## B. Audio/CDN (Netlify toeic-audio.netlify.app)
-- [ ] Deploy/upload nội dung `_deploy_audio/` (hoặc `audio-cdn/*.mp3`) lên site sao cho URL: `https://toeic-audio.netlify.app/audio/hacker1/<cdnName>` trả 200/206.
-- [ ] Xác nhận tối thiểu: `.../HACKER1_T01_P12.mp3`, `.../HACKER1_T05_P3.mp3`, `.../HACKER1_T10_P4.mp3`.
-- [ ] Script Property `LPTD_AUDIO_CDN_BASE` = `https://toeic-audio.netlify.app/audio/hacker1`.
+## B. Audio/CDN
+- [x] Upload 30 MP3 lên Netlify (`toeic-audio.netlify.app/audio/hacker1/*`).
+- [x] URL truy cập được: HTTP 200/206, `content-type: audio/mpeg`.
+- [x] `LPTD_AUDIO_CDN_BASE=https://toeic-audio.netlify.app/audio/hacker1` (mặc định trong code; có thể set Script Property).
+- [!] Lưu ý: Netlify site dùng chung với các nguồn khác. Nếu một deploy khác ghi đè danh sách file, phải deploy lại **manifest hợp nhất** (792 file cũ + DP2 + hacker1) — script mẫu: `TEMP/deploy-merged.js`.
 
-## C. Apps Script project mới (clasp đã login)
-- [ ] Trong `gas/`: `clasp create --type webapp --title "Hacker 1 LPTD" --rootDir .` (hoặc gán scriptId mới).
-- [ ] `clasp push` (6 file). Kiểm tra `debugLptd()`.
-- [ ] Đặt Script Properties (`LPTD_AUDIO_CDN_BASE`, tuỳ chọn `LPTD_RECORDING_ENGINE_URL`).
-- [ ] Deploy Web app (Execute as Me), cấp quyền. `authorizeLptdDrive()` nếu dùng ghi âm. Deploy version mới sau đổi scope/code.
+## C. Apps Script project (đã thực hiện)
+- [x] Project riêng: **Hacker 1 - TOEIC 1000 LC Dictation**.
+- [x] Script ID: `1WJIc2K-xMIw2w0ebtokx04BLkv2qTO5vwUQpEGQXXuooVZVDhsUzVSfi`.
+- [x] `clasp push` 6 file.
+- [x] `debugLptd()` PASS: 30 unit / 186 câu / 2559 từ, 10 test, parts `1-2|3|4`, sample CDN HTTP 206.
+- [x] Deployment mới sau thay đổi code: **@4** `AKfycbzUIn85bNxDupYm3kLlnjOvVPOPkW7JdHp7ml_B8NCsDO_FX95ch7YWJILo3ZhXQPgQ`.
+- [ ] (Khi dùng ghi âm) chạy `authorizeLptdDrive()` một lần trong Script Editor.
 
-## D. Kiểm thử E2E (sau deploy)
-- [ ] Load 30 track (10 test × P1-2/3/4), không lỗi console nghiêm trọng.
-- [ ] Audio phát đúng, dictation/shadowing hoạt động.
-- [ ] Recording/Drive (nếu bật): popup, lưu, link Drive.
-- [ ] Spot-check đối chiếu audio một số lesson (Part 1-2, Part 3).
+## D. Kiểm thử thực tế (E2E trên @4)
+- [x] Load trang: 30 track hiển thị, không lỗi console (chỉ warning sandbox của GAS).
+- [x] Không còn tab LPTD 1–4; tiêu đề/hero/header/nhãn đều là **Hacker 1**.
+- [x] Đủ 10 TEST × 3 track (Part 1-2 / Part 3 / Part 4), badge `T01…T10`.
+- [x] Mở unit: nội dung 6–9 câu hiển thị, ô trống dictation render đúng.
+- [x] Audio phát đúng track (`HACKER1_T02_P3.mp3`, HTTP 206), play/seek hoạt động.
+- [x] Dictation: điền đủ → chấm 21/21 (100%), hiện đáp án.
+- [x] Shadowing: render đủ card + nút ghi âm/chấm; popup Recording Engine (chưa test micro thực tế).
+- [x] Quay lại thư viện: 30 card, tiến độ lưu localStorage (`hacker1_progress`).
+- [ ] Spot-check nội dung đối chiếu audio (Part 1-2, hội thoại Part 3).
+- [ ] Recording/Drive thực tế với micro (nếu bật).
 
-## E. Sau khi 100%
-- [ ] Báo cáo kết quả test. Chỉ khi hoàn thành 100% mới lập bước gộp vào dự án tổng; rồi lặp cho `Dictation Part 2`, `750+`, `600+`.
+## E. Lưu ý
+- Dữ liệu trích tự động từ PDF; nên spot-check đối chiếu audio (đặc biệt Part 1-2, hội thoại Part 3).
+- UI gom 30 track vào một "book" Hacker 1, sắp theo TEST/Part.
+- **Không gộp vào dự án tổng** trước khi checklist D đạt 100%.
