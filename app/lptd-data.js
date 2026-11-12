@@ -12,7 +12,7 @@
 (function (global) {
   'use strict';
 
-  var CDN_BASE = 'https://toeic-audio.netlify.app/audio/lptd';
+  var CDN_BASE = 'https://toeic-audio.pages.dev/audio/lptd';
   var AUDIO_MODE_KEY = 'toeic_lptd_audio_mode';
   var PROGRESS_KEY = 'toeic_lptd_progress';
 
@@ -56,6 +56,56 @@
       icon: '🏔️',
       accent: '#8b5cf6',
       units: 40,
+    },
+    {
+      book: 5,
+      code: 'Hacker 1',
+      title: 'Hackers TOEIC 1000 LC — Hacker 1',
+      short: 'TOEIC LC',
+      level: '10 TEST · 30 track',
+      icon: '📘',
+      accent: '#0ea5e9',
+      units: 30,
+    },
+    {
+      book: 6,
+      code: 'Dictation Part 2',
+      title: 'Dictation Part 2 — TOEIC Part 2',
+      short: 'Part 2',
+      level: '11 chuyên đề',
+      icon: '📘',
+      accent: '#0ea5e9',
+      units: 11,
+    },
+    {
+      book: 7,
+      code: '600+',
+      title: '600+ · Dictation & Shadowing',
+      short: '600+',
+      level: '20 ngày · 32 audio',
+      icon: '📘',
+      accent: '#f59e0b',
+      units: 32,
+    },
+    {
+      book: 8,
+      code: '750+',
+      title: '750+ · Dictation & Shadowing',
+      short: '750+',
+      level: '20 ngày · 20 audio',
+      icon: '📘',
+      accent: '#8b5cf6',
+      units: 20,
+    },
+    {
+      book: 9,
+      code: 'EPI Elementary',
+      title: 'English Pronunciation in Use Elementary',
+      short: 'EPI',
+      level: '50 unit + Section E · 351 audio',
+      icon: '🗣️',
+      accent: '#ec4899',
+      units: 58,
     },
   ];
 
@@ -189,7 +239,13 @@
     },
 
     get: function (book, unit) {
-      return this.lessonsById['lptd-' + Number(book) + '-' + this.pad2(unit)] || null;
+      var id = 'lptd-' + Number(book) + '-' + this.pad2(unit);
+      if (this.lessonsById[id]) return this.lessonsById[id];
+      var list = this.byBook(book);
+      for (var i = 0; i < list.length; i++) {
+        if (Number(list[i].unit) === Number(unit)) return list[i];
+      }
+      return null;
     },
 
     byBook: function (book) { return this.lessonsByBook[Number(book)] || []; },

@@ -1,0 +1,82 @@
+/**
+ * EPI_UNITS_META — metadata 50 unit + Section E của
+ * "English Pronunciation in Use Elementary" (Cambridge, Jonathan Marks, 2007)
+ *
+ * Nguồn: đọc trực tiếp từ ảnh trang Mục lục (PDF page 4-5) + trang "To the teacher" (PDF page 9).
+ * Trang in = PDF page - 1.
+ */
+
+var EPI_UNITS_META = [
+  /* ---------------- Section A — Sounds and spelling (CD A) ---------------- */
+  { unit: 1,  section: 'A', cd: 'A', title: 'How many letters, how many sounds?', focus: 'Spelling and pronunciation', sounds: [], page: 10 },
+  { unit: 2,  section: 'A', cd: 'A', title: 'Pizza for dinner', focus: '/ɪ/ and /iː/', sounds: ['ɪ', 'iː'], page: 12 },
+  { unit: 3,  section: 'A', cd: 'A', title: 'A spoonful of sugar', focus: '/ʊ/ and /uː/', sounds: ['ʊ', 'uː'], page: 14 },
+  { unit: 4,  section: 'A', cd: 'A', title: 'Father and mother', focus: '/ɑː/ and /ʌ/', sounds: ['ɑː', 'ʌ'], page: 16 },
+  { unit: 5,  section: 'A', cd: 'A', title: 'A dog in the corner', focus: '/ɒ/ and /ɔː/', sounds: ['ɒ', 'ɔː'], page: 18 },
+  { unit: 6,  section: 'A', cd: 'A', title: 'Bread and jam', focus: '/e/ and /æ/', sounds: ['e', 'æ'], page: 20 },
+  { unit: 7,  section: 'A', cd: 'A', title: "My birthday's on Thursday", focus: '/ɜː/', sounds: ['ɜː'], page: 22 },
+  { unit: 8,  section: 'A', cd: 'A', title: 'Here and there', focus: '/ɪə/ and /eə/', sounds: ['ɪə', 'eə'], page: 24 },
+  { unit: 9,  section: 'A', cd: 'A', title: 'Have a great time!', focus: '/eɪ/, /aɪ/ and /ɔɪ/', sounds: ['eɪ', 'aɪ', 'ɔɪ'], page: 26 },
+  { unit: 10, section: 'A', cd: 'A', title: 'Old town', focus: '/əʊ/ and /aʊ/', sounds: ['əʊ', 'aʊ'], page: 28 },
+  { unit: 11, section: 'A', cd: 'A', title: 'Pack your bags', focus: '/p/ and /b/', sounds: ['p', 'b'], page: 30 },
+  { unit: 12, section: 'A', cd: 'A', title: 'Twenty days', focus: '/t/ and /d/', sounds: ['t', 'd'], page: 32 },
+  { unit: 13, section: 'A', cd: 'B', title: 'Cats and dogs', focus: '/k/ and /g/', sounds: ['k', 'g'], page: 34 },
+  { unit: 14, section: 'A', cd: 'B', title: 'November the first', focus: '/f/ and /v/', sounds: ['f', 'v'], page: 36 },
+  { unit: 15, section: 'A', cd: 'B', title: 'Both together', focus: '/θ/ and /ð/', sounds: ['θ', 'ð'], page: 38 },
+  { unit: 16, section: 'A', cd: 'B', title: "It's the wrong size, isn't it?", focus: '/s/ and /z/', sounds: ['s', 'z'], page: 40 },
+  { unit: 17, section: 'A', cd: 'B', title: 'Fresh fish, usually', focus: '/ʃ/ and /ʒ/', sounds: ['ʃ', 'ʒ'], page: 42 },
+  { unit: 18, section: 'A', cd: 'B', title: 'Chips and juice', focus: '/tʃ/ and /dʒ/', sounds: ['tʃ', 'dʒ'], page: 44 },
+  { unit: 19, section: 'A', cd: 'B', title: 'My hungry uncle', focus: '/m/, /n/ and /ŋ/', sounds: ['m', 'n', 'ŋ'], page: 46 },
+  { unit: 20, section: 'A', cd: 'B', title: 'How many hours?', focus: '/h/', sounds: ['h'], page: 48 },
+  { unit: 21, section: 'A', cd: 'B', title: "That's life!", focus: '/v/', sounds: ['v'], page: 50 },
+  { unit: 22, section: 'A', cd: 'B', title: 'What terrible weather!', focus: '/r/', sounds: ['r'], page: 52 },
+  { unit: 23, section: 'A', cd: 'B', title: "What's the news?", focus: '/w/ and /j/', sounds: ['w', 'j'], page: 54 },
+  { unit: 24, section: 'A', cd: 'B', title: 'Sunglasses or umbrella?', focus: 'Consonant groups in the middle of words', sounds: [], page: 56 },
+  { unit: 25, section: 'A', cd: 'B', title: 'Train in the rain', focus: 'Consonant groups at the beginning of words', sounds: [], page: 58 },
+  { unit: 26, section: 'A', cd: 'B', title: 'Pink and orange', focus: 'Consonant groups at the end of words', sounds: [], page: 60 },
+  { unit: 27, section: 'A', cd: 'B', title: 'Last week', focus: 'Consonant groups across words', sounds: [], page: 62 },
+
+  /* ---------------- Section B — Syllables and words (CD C) ---------------- */
+  { unit: 28, section: 'B', cd: 'C', title: 'One house, two houses', focus: 'Syllables', sounds: [], page: 64 },
+  { unit: 29, section: 'B', cd: 'C', title: "Wait a minute — where's the waiter?", focus: 'Strong and weak vowels', sounds: [], page: 66 },
+  { unit: 30, section: 'B', cd: 'C', title: 'Single or return?', focus: 'Stress in two-syllable words', sounds: [], page: 68 },
+  { unit: 31, section: 'B', cd: 'C', title: 'Begin at the beginning', focus: 'Stress in longer words', sounds: [], page: 70 },
+  { unit: 32, section: 'B', cd: 'C', title: "Where's my checklist?", focus: 'Stress in compound words', sounds: [], page: 72 },
+
+  /* ---------------- Section C — Phrases, sentences and grammar (CD C) ---------------- */
+  { unit: 33, section: 'C', cd: 'C', title: 'Phrases and pauses', focus: 'Reading aloud', sounds: [], page: 74 },
+  { unit: 34, section: 'C', cd: 'C', title: 'Speak it, write it, read it', focus: 'Linking words together 1', sounds: [], page: 76 },
+  { unit: 35, section: 'C', cd: 'C', title: 'Me and you, you and me', focus: 'Linking words together 2', sounds: [], page: 78 },
+  { unit: 36, section: 'C', cd: 'C', title: 'Take me to the show, Jo', focus: 'Rhythm', sounds: [], page: 80 },
+  { unit: 37, section: 'C', cd: 'C', title: 'Hey, wait for me!', focus: 'Strong and weak forms 1: Pronouns', sounds: [], page: 82 },
+  { unit: 38, section: 'C', cd: 'C', title: "And what's his name?", focus: 'Strong and weak forms 2: Possessives, conjunctions, prepositions', sounds: [], page: 84 },
+  { unit: 39, section: 'C', cd: 'C', title: "There's a spider", focus: "Strong and weak forms 3: Articles, comparatives, 'there'", sounds: [], page: 86 },
+  { unit: 40, section: 'C', cd: 'C', title: 'Who was that?', focus: 'Strong and weak forms 4: Auxiliary verbs', sounds: [], page: 88 },
+  { unit: 41, section: 'C', cd: 'C', title: "They're here!", focus: 'Contractions', sounds: [], page: 90 },
+  { unit: 42, section: 'C', cd: 'C', title: "It's George's birthday", focus: 'Pronouncing -s endings', sounds: [], page: 92 },
+  { unit: 43, section: 'C', cd: 'C', title: 'I looked everywhere', focus: 'Pronouncing past tenses', sounds: [], page: 94 },
+
+  /* ---------------- Section D — Conversation (CD D) ---------------- */
+  { unit: 44, section: 'D', cd: 'D', title: 'Not half past two, half past three', focus: 'Intonation for old and new information', sounds: [], page: 96 },
+  { unit: 45, section: 'D', cd: 'D', title: 'And suddenly ...', focus: 'Intonation in storytelling', sounds: [], page: 98 },
+  { unit: 46, section: 'D', cd: 'D', title: "Really? That's amazing!", focus: 'Being a good listener', sounds: [], page: 100 },
+  { unit: 47, section: 'D', cd: 'D', title: 'I know when it is, but not where', focus: 'Important words in conversation 1', sounds: [], page: 102 },
+  { unit: 48, section: 'D', cd: 'D', title: "Finished? I've just started!", focus: 'Important words in conversation 2', sounds: [], page: 104 },
+  { unit: 49, section: 'D', cd: 'D', title: "No, thanks, I'm just looking", focus: 'Intonation in phrases and sentences 1', sounds: [], page: 106 },
+  { unit: 50, section: 'D', cd: 'D', title: 'Fine, thanks', focus: 'Intonation in phrases and sentences 2', sounds: [], page: 108 },
+];
+
+/* ---------------- Section E — Reference ---------------- */
+var EPI_SECTION_E_META = [
+  { id: 'E1', title: 'Chart of phonemic symbols', desc: 'Bảng âm vị (phonemic chart) kèm từ ví dụ', page: 110, cd: 'D', audioTracks: [] },
+  { id: 'E2', title: 'Guide for speakers of specific languages', desc: 'Unit nên học theo ngôn ngữ bản xứ', page: 111, cd: 'D', audioTracks: [] },
+  { id: 'E3', title: 'Sound pairs', desc: '37 cặp âm dễ nhầm — luyện nghe phân biệt', page: 113, cd: 'E', audioTracks: [] },
+  { id: 'E4', title: 'From spelling to sound', desc: 'Cách đọc chính tả → âm', page: 127, cd: 'D', audioTracks: [] },
+  { id: 'E5', title: 'The alphabet', desc: 'Cách phát âm bảng chữ cái', page: 130, cd: 'D', audioTracks: [] },
+  { id: 'E6', title: 'Pronouncing numbers', desc: 'Cách đọc số (0–100, năm, tiền, điện thoại)', page: 132, cd: 'D', audioTracks: [] },
+  { id: 'E7', title: 'Pronouncing geographical names', desc: 'Cách đọc tên địa danh', page: 135, cd: 'D', audioTracks: [] },
+  { id: 'E8', title: 'Homophones', desc: 'Từ đồng âm khác nghĩa', page: 137, cd: 'D', audioTracks: [] },
+];
+
+/* Số track audio trên mỗi CD (đếm từ file MP3 gốc) */
+var EPI_CD_TRACK_COUNT = { A: 81, B: 92, C: 85, D: 55, E: 38 };

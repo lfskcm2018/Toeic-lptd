@@ -1,0 +1,50 @@
+{
+  "title": "English Pronunciation in Use Elementary",
+  "author": "Jonathan Marks",
+  "publisher": "Cambridge University Press",
+  "year": 2007,
+  "pdf": "Marks - English Pronunciation in Use - Elementary.pdf",
+  "pages": 168,
+  "units": 50,
+  "sections": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "cds": [
+    {
+      "cd": "A",
+      "file": "CD1",
+      "units": "1–12",
+      "tracks": 81
+    },
+    {
+      "cd": "B",
+      "file": "CD2",
+      "units": "13–27",
+      "tracks": 92
+    },
+    {
+      "cd": "C",
+      "file": "CD3",
+      "units": "28–43",
+      "tracks": 85
+    },
+    {
+      "cd": "D",
+      "file": "CD4",
+      "units": "44–50 + Section E",
+      "tracks": 55
+    },
+    {
+      "cd": "E",
+      "file": "CD5",
+      "units": "E3 Sound pairs (37 cặp)",
+      "tracks": 38
+    }
+  ],
+  "extraction": "OCR (mupdf + tesseract.js) + đọc tay marker/audio từ ảnh chụp màn hình",
+  "generatedAt": "2026-11-12T21:06:13.835Z"
+}

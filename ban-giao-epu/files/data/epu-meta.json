@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 3,
+  "sourceId": "epu-elementary",
+  "sourceName": "English Pronunciation in Use Elementary",
+  "author": "Jonathan Marks",
+  "publisher": "Cambridge University Press (2007)",
+  "cdnBase": "https://lfskcm2018.github.io/Toeic-lptd/epu-audio",
+  "totals": {
+    "units": 50,
+    "sentences": 147,
+    "exercises": 173,
+    "answers": 137,
+    "words": 28,
+    "sectionE": 8,
+    "audioTracks": 351,
+    "unitAudioTracks": 288
+  },
+  "cdTrackCount": {
+    "A": 81,
+    "B": 92,
+    "C": 85,
+    "D": 55,
+    "E": 38
+  },
+  "generatedAt": "2026-11-12T21:06:13.288Z"
+}

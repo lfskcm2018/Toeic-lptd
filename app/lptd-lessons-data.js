@@ -10,7 +10,7 @@
   global.LPTD_LESSONS_META = {
     schemaVersion: 1,
     generatedAt: "2026-11-10T03:52:06.718Z",
-    cdnBase: "https://toeic-audio.netlify.app/audio/lptd",
+    cdnBase: "https://toeic-audio.pages.dev/audio/lptd",
     totals: {"books":4,"units":160,"lines":1041,"words":30555},
     books: [
       {

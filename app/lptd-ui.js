@@ -144,6 +144,16 @@
   function unitLabel(lesson) { return 'LPTD ' + lesson.book + ' · Unit ' + pad2(lesson.unit); }
 
   /* ---------- CSS tự inject (bản local) ---------- */
+  function ensureEpiCss() {
+    if (document.getElementById('epiPanelCss')) return;
+    var st = document.createElement('style');
+    st.id = 'epiPanelCss';
+    st.textContent = '.epi-tracks{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}'
+      + '.epi-ex{padding:8px 10px;border:1px solid rgb(var(--border));border-radius:10px;margin:8px 0;font-size:13px;}'
+      + '.epi-answer{margin-top:6px;color:rgb(var(--muted-foreground));font-size:12px;white-space:pre-wrap;}';
+    document.head.appendChild(st);
+  }
+
   function ensureCss() {
     if (L.isGas) return; // GAS: CSS được inline trong LptdUI.html
     if (q('link[data-lptd-css]') || q('link[href*="lptd-ui.css"]')) return;
@@ -166,7 +176,12 @@
       if (res && Array.isArray(res.lessons)) {
         if (res.cdnBase) L.CDN_BASE = String(res.cdnBase).replace(/\/+$/, '');
         if (res.docsCdnBase) L.docsCdnBase = String(res.docsCdnBase).replace(/\/+$/, '');
-        L.setLessons(res.lessons);
+        var h1 = Array.isArray(res.hacker1Lessons) ? res.hacker1Lessons : [];
+        var dp2 = Array.isArray(res.dp2Lessons) ? res.dp2Lessons : [];
+        var h600 = Array.isArray(res.h600Lessons) ? res.h600Lessons : [];
+        var h750 = Array.isArray(res.h750Lessons) ? res.h750Lessons : [];
+        var epi = Array.isArray(res.epiLessons) ? res.epiLessons : [];
+        L.setLessons(res.lessons.concat(h1).concat(dp2).concat(h600).concat(h750).concat(epi));
       } else if (Array.isArray(res)) {
         L.setLessons(res);
       } else {
@@ -200,19 +215,77 @@
 
   /* ---------- Sidebar ---------- */
   function injectSidebarButton() {
-    if (doc.getElementById('btnLPTD')) return;
+    if (doc.getElementById('lptdMenuGroup')) return;
     var footer = q('.sidebar-footer');
     if (!footer) return;
-    var btn = doc.createElement('button');
-    btn.id = 'btnLPTD';
-    btn.type = 'button';
-    btn.className = 'btn btn-outline btn-sm lptd-open';
-    btn.innerHTML = '📚 LPTD 1–4';
-    btn.title = 'Listening Practice Through Dictation';
     var anchor = doc.getElementById('btnETSLibrary');
-    if (anchor && anchor.parentNode === footer) footer.insertBefore(btn, anchor);
-    else footer.insertBefore(btn, footer.firstChild);
-    btn.addEventListener('click', function () { openLibrary(); });
+
+    var group = doc.createElement('div');
+    group.id = 'lptdMenuGroup';
+    group.className = 'lptd-menu-group';
+    group.style.display = 'flex';
+    group.style.flexDirection = 'column';
+    group.style.gap = '4px';
+    group.style.marginBottom = '6px';
+
+    var parent = doc.createElement('button');
+    parent.id = 'btnLPTD';
+    parent.type = 'button';
+    parent.className = 'btn btn-outline btn-sm lptd-open';
+    parent.innerHTML = '📚 LPTD 1–9 <span class="lptd-caret" style="float:right;opacity:.7">▾</span>';
+    parent.title = 'Listening Practice Through Dictation (9 nguồn)';
+    parent.addEventListener('click', function () {
+      var sub = doc.getElementById('lptdSubMenu');
+      if (sub) sub.style.display = (sub.style.display === 'none' ? 'flex' : 'none');
+      openLibrary();
+    });
+
+    var sub = doc.createElement('div');
+    sub.id = 'lptdSubMenu';
+    sub.style.display = 'flex';
+    sub.style.flexDirection = 'column';
+    sub.style.gap = '2px';
+    sub.style.marginLeft = '12px';
+    sub.style.paddingLeft = '10px';
+    sub.style.borderLeft = '2px solid rgba(128,128,128,.25)';
+
+    var entries = [
+      { book: null, label: 'LPTD 1–4', title: 'Listening Practice Through Dictation 1–4' },
+      { book: 5, label: 'Hacker 1', title: 'Hackers TOEIC 1000 LC — Hacker 1' },
+      { book: 6, label: 'Dictation Part 2', title: 'Dictation Part 2 — TOEIC Part 2' },
+      { book: 7, label: '600+', title: '600+ · Dictation & Shadowing' },
+      { book: 8, label: '750+', title: '750+ · Dictation & Shadowing' },
+      { book: 9, label: 'EPI Elementary', title: 'English Pronunciation in Use Elementary' },
+    ];
+
+    entries.forEach(function (e, idx) {
+      var b = doc.createElement('button');
+      b.type = 'button';
+      b.className = 'lptd-sub-item';
+      b.style.fontSize = '11px';
+      b.style.padding = '2px 6px';
+      b.style.margin = '0';
+      b.style.border = 'none';
+      b.style.background = 'transparent';
+      b.style.textAlign = 'left';
+      b.style.cursor = 'pointer';
+      b.style.color = 'inherit';
+      b.style.borderRadius = '4px';
+      b.style.width = '100%';
+      var connector = (idx === entries.length - 1) ? '└─ ' : '├─ ';
+      b.innerHTML = '<span style="opacity:.45;margin-right:2px">' + connector + '</span>📘 ' + e.label;
+      b.title = e.title;
+      b.addEventListener('mouseenter', function () { b.style.background = 'rgba(128,128,128,.12)'; });
+      b.addEventListener('mouseleave', function () { b.style.background = 'transparent'; });
+      b.addEventListener('click', function () { openLibrary(e.book); });
+      sub.appendChild(b);
+    });
+
+    group.appendChild(parent);
+    group.appendChild(sub);
+
+    if (anchor && anchor.parentNode === footer) footer.insertBefore(group, anchor);
+    else footer.appendChild(group);
   }
 
   /* ---------- Ẩn / khôi phục UI core ---------- */
@@ -220,6 +293,14 @@
     var els = [q('#playerCard'), q('.mode-tabs'), q('#quizFooter')];
     S.coreHidden = els.map(function (el) { return el ? el.classList.contains('hidden') : null; });
     els.forEach(function (el) { if (el) el.classList.add('hidden'); });
+
+    /* M10 §8.1 — app tổng có floating player ETS (#etsFloat): phải ẩn + spacer khi mở LPTD */
+    var etsFloat = q('#etsFloat'), etsSpacer = q('#etsFloatSpacer');
+    S.etsFloatHidden = etsFloat ? etsFloat.hidden : null;
+    S.etsSpacerHeight = etsSpacer ? etsSpacer.style.height : null;
+    if (etsFloat) etsFloat.hidden = true;
+    if (etsSpacer) etsSpacer.style.height = '0px';
+
     var ets = q('#btnETSLibrary'), review = q('#btnMistakeReview');
     if (ets) ets.classList.remove('active');
     if (review) review.classList.remove('active');
@@ -234,6 +315,14 @@
       if (!S.coreHidden || S.coreHidden[i] === false) el.classList.remove('hidden');
     });
     S.coreHidden = null;
+
+    /* M10 §8.1 — khôi phục floating player ETS nếu trước đó đang hiện */
+    var etsFloat = q('#etsFloat'), etsSpacer = q('#etsFloatSpacer');
+    if (etsFloat && S.etsFloatHidden === false) etsFloat.hidden = false;
+    if (etsSpacer) etsSpacer.style.height = S.etsSpacerHeight || '';
+    S.etsFloatHidden = null;
+    S.etsSpacerHeight = null;
+
     var btn = q('#btnLPTD');
     if (btn) btn.classList.remove('active');
   }
@@ -275,7 +364,7 @@
   }
 
   /* ---------- Mở / đóng module ---------- */
-  function openLibrary() {
+  function openLibrary(book) {
     if (S.busy) return;
     S.busy = true;
     ensureData(function (err) {
@@ -291,12 +380,14 @@
       stopRecording();
       S.progress = L.loadProgress();
       S.mistakes = loadMistakes();
+      if (book != null) S.book = Number(book);
       S.book = Number(S.book) || 1;
+      try { writeLS(LAST_BOOK_KEY, String(S.book)); } catch (e) {}
       setHero(
         'Listening Practice Through Dictation',
-        'LPTD 1–4 · 160 unit · Nghe – chép chính tả – shadowing',
+        'LPTD 1–9 · 311 unit · Nghe – chép chính tả – shadowing',
         progressSummary(),
-        '🎧 160 unit · 4 cuốn · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
+        '🎧 311 unit · 9 nguồn · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
         'LPTD 1–4',
         'Listening Practice Through Dictation'
       );
@@ -375,9 +466,9 @@
         } else {
           setHero(
             'Listening Practice Through Dictation',
-            'LPTD 1–4 · 160 unit · Nghe – chép chính tả – shadowing',
+            'LPTD 1–8 · 253 unit · Nghe – chép chính tả – shadowing',
             progressSummary(),
-            '🎧 160 unit · 4 cuốn · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
+            '🎧 253 unit · 8 nguồn · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
             'LPTD 1–4',
             'Listening Practice Through Dictation'
           );
@@ -972,6 +1063,27 @@
       '<button type="button" class="mode-tab' + (S.mode === 'shadowing' ? ' active' : '') + '" data-mode="shadowing">🗣️ Luyện nói theo <span style="opacity:.6">(Shadowing)</span></button>' +
       '</div>';
 
+    if (u.epi && u.epi.audioTracks && u.epi.audioTracks.length) {
+      html += '<section class="card" id="epiPanel"><div class="lptd-eyebrow">🗣️ English Pronunciation in Use Elementary</div>' +
+        '<div class="lptd-muted">CD ' + esc(u.epi.cd) + ' · track ' + u.epi.trackRange[0] + '–' + u.epi.trackRange[1] + ' · sách trang ' + u.epi.page + '</div>' +
+        '<div class="epi-tracks" id="epiTracks">';
+      u.epi.audioTracks.forEach(function (src) {
+        var nm = String(src).split('/').pop().replace('.mp3', '');
+        html += '<button type="button" class="btn btn-outline btn-sm epi-track-btn" data-src="' + esc(src) + '">▶ ' + esc(nm) + '</button>';
+      });
+      html += '</div>';
+      if (u.epi.exercises && u.epi.exercises.length) {
+        html += '<div class="lptd-muted" style="margin-top:10px">📝 Bài tập (' + u.epi.exercises.length + ')</div>';
+        u.epi.exercises.forEach(function (ex, i) {
+          html += '<div class="epi-ex"><b>Exercise ' + esc(ex.n) + '</b><br>' + esc(ex.prompt) +
+            (ex.answer ? '<div><button type="button" class="btn btn-outline btn-sm epi-reveal" data-ex="' + i + '">Xem đáp án</button></div>' +
+              '<div class="epi-answer lptd-hidden" id="epi-ans-' + i + '">' + esc(ex.answer) + '</div>' : '') +
+            '</div>';
+        });
+      }
+      html += '</section>';
+    }
+
     html += '<div id="lptdUnitBody"></div>';
 
     if (docs.length) {
@@ -1041,6 +1153,19 @@
     var vol = q('#lptdVolume');
     if (vol) vol.addEventListener('input', function () { setVolume(vol.value); });
 
+    qa('.epi-track-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var a = new Audio(b.getAttribute('data-src'));
+        a.play().catch(function () {});
+      });
+    });
+    qa('.epi-reveal').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var el = document.getElementById('epi-ans-' + b.getAttribute('data-ex'));
+        if (el) el.classList.toggle('lptd-hidden');
+      });
+    });
+
     syncVolumeUI();
     renderUnitBody();
   }
@@ -1053,9 +1178,9 @@
     stopRecording();
     setHero(
       'Listening Practice Through Dictation',
-      'LPTD 1–4 · 160 unit · Nghe – chép chính tả – shadowing',
+      'LPTD 1–8 · 253 unit · Nghe – chép chính tả – shadowing',
       progressSummary(),
-      '🎧 160 unit · 4 cuốn · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
+      '🎧 253 unit · 8 nguồn · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
       'LPTD 1–4',
       'Listening Practice Through Dictation'
     );
@@ -1375,7 +1500,8 @@
     var data = event.data;
     if (!data || typeof data.type !== 'string') return;
     /* chỉ nhận tin từ đúng popup engine đã mở */
-    if (S.reWin && event.source !== S.reWin) return;
+    /* M10 §8.2 — siết postMessage: chỉ nhận từ đúng popup engine (chống nhiễu RE của core) */
+    if (!S.reWin || event.source !== S.reWin) return;
 
     switch (data.type) {
       case 'RE_ENGINE_READY':

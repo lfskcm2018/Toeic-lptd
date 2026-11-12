@@ -1,0 +1,459 @@
+<script>
+(function (global) {
+  'use strict';
+
+  /* ---------- CSS ---------- */
+  var CSS = [
+    '.epi-wrap{display:grid;grid-template-columns:260px 1fr;gap:18px;align-items:start;}',
+    '@media(max-width:860px){.epi-wrap{grid-template-columns:1fr;}}',
+    '.epi-side{position:sticky;top:8px;max-height:82vh;overflow:auto;border:1px solid rgb(var(--border));border-radius:12px;padding:10px;background:rgb(var(--card));}',
+    '.epi-side h4{margin:10px 4px 6px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:rgb(var(--muted-foreground));}',
+    '.epi-ubtn{display:flex;gap:8px;align-items:baseline;width:100%;text-align:left;padding:6px 8px;border-radius:8px;border:1px solid transparent;background:transparent;cursor:pointer;font-size:13px;color:rgb(var(--foreground));}',
+    '.epi-ubtn:hover{background:rgb(var(--muted));}',
+    '.epi-ubtn.active{background:rgb(var(--accent));color:#fff;border-color:rgb(var(--accent));}',
+    '.epi-ubtn .n{font-weight:700;opacity:.75;min-width:26px;}',
+    '.epi-ubtn .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}',
+    '.epi-head{margin:0 0 4px;font-size:21px;line-height:1.25;color:rgb(var(--foreground));}',
+    '.epi-sub{color:rgb(var(--muted-foreground));font-size:13px;margin:0 0 10px;}',
+    '.epi-ipa{font-family:Georgia,"Times New Roman",serif;font-size:15px;color:rgb(var(--accent));font-weight:700;}',
+    '.epi-chips{display:flex;flex-wrap:wrap;gap:6px;}',
+    '.epi-chip{border:1px solid rgb(var(--border));border-radius:16px;padding:3px 10px;font-size:12px;background:rgb(var(--card));cursor:pointer;}',
+    '.epi-chip:hover{border-color:rgb(var(--accent));color:rgb(var(--accent));}',
+    '.epi-chip.static{cursor:default;}',
+    '.epi-chip.static:hover{border-color:rgb(var(--border));color:inherit;}',
+    '.epi-sentence{padding:8px 10px;border:1px solid rgb(var(--border));border-radius:10px;margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}',
+    '.epi-sentence .epi-play{font-size:16px;cursor:pointer;flex-shrink:0;}',
+    '.epi-answer{margin-top:6px;color:rgb(var(--muted-foreground));font-size:12px;white-space:pre-wrap;}',
+    '.epi-ex{padding:10px 12px;border:1px solid rgb(var(--border));border-radius:10px;margin-bottom:10px;}',
+    '.epi-hidden{display:none;}',
+    '.epi-record-row{display:flex;align-items:center;gap:8px;margin-top:6px;}',
+    '.epi-score{font-weight:700;}',
+    '.epi-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}',
+    '.epi-tab{padding:6px 12px;border-radius:18px;border:1px solid rgb(var(--border));background:rgb(var(--card));cursor:pointer;font-size:13px;}',
+    '.epi-tab.active{background:rgb(var(--accent));color:#fff;border-color:rgb(var(--accent));}',
+    '.epi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;}',
+    '.epi-pair{border:1px solid rgb(var(--border));border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:8px;}',
+    '.epi-pair .ipa{font-family:Georgia,serif;font-weight:700;font-size:14px;color:rgb(var(--accent));}',
+    '.epi-list{margin:0;padding-left:18px;font-size:13px;line-height:1.7;}',
+    '.epi-group{margin-bottom:14px;}',
+    '.epi-group h5{margin:0 0 6px;font-size:13px;color:rgb(var(--foreground));}',
+    '.epi-note{font-size:12px;color:rgb(var(--muted-foreground));margin:6px 0 0;}',
+    '.epi-audio-list{display:flex;flex-wrap:wrap;gap:6px;}',
+    '.epi-audio-btn{font-size:12px;padding:4px 9px;border-radius:14px;border:1px solid rgb(var(--border));background:rgb(var(--card));cursor:pointer;}',
+    '.epi-audio-btn.playing{border-color:rgb(var(--accent));color:rgb(var(--accent));}',
+  ].join('\n');
+
+  function injectCss() {
+    if (document.getElementById('epiStyle')) return;
+    var s = document.createElement('style');
+    s.id = 'epiStyle';
+    s.textContent = CSS;
+    document.head.appendChild(s);
+  }
+
+  /* ---------- State ---------- */
+  var S = {
+    units: [], sectionE: [], cdnBase: '',
+    tab: 'A', selected: null, selectedE: 'E1',
+    reWin: null, reWinReady: false, rePending: null, rePoll: null,
+    audio: null,
+  };
+
+  var RE_URL_FALLBACK = 'https://lfskcm2018.github.io/Toeic-lptd/recording-engine/';
+
+  function q(sel) { return document.querySelector(sel); }
+  function qa(sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  function host() {
+    var el = q('#modeBody');
+    if (!el) { el = document.createElement('div'); el.id = 'modeBody'; document.body.appendChild(el); }
+    return el;
+  }
+  function reUrl() {
+    var u = global.LPTD_RECORDING_ENGINE_URL || global.EPI_RECORDING_ENGINE_URL || RE_URL_FALLBACK;
+    return String(u || '').trim() || RE_URL_FALLBACK;
+  }
+
+  /* ---------- Recording Engine (popup top-level) ---------- */
+  function reOpen() {
+    if (S.reWin && !S.reWin.closed) { try { S.reWin.focus(); } catch (e) {} return S.reWin; }
+    S.reWin = null; S.reWinReady = false;
+    S.reWin = global.open(reUrl(), 'epi_recording_engine', 'width=560,height=680,resizable=yes,scrollbars=yes');
+    reStartPoll();
+    return S.reWin;
+  }
+  function reSend(msg) { if (S.reWin && !S.reWin.closed) { try { S.reWin.postMessage(msg, '*'); } catch (e) {} } }
+  function reStartPoll() {
+    if (S.rePoll) return;
+    S.rePoll = setInterval(function () {
+      if (S.reWin && !S.reWin.closed) return;
+      reStopPoll();
+      S.reWin = null; S.reWinReady = false;
+      if (S.rePending) {
+        var el = document.getElementById('epi-score-' + S.rePending.idx);
+        if (el) el.textContent = 'Đã đóng cửa sổ ghi âm — bấm Nói để mở lại';
+        S.rePending = null;
+      }
+    }, 1000);
+  }
+  function reStopPoll() { if (S.rePoll) { clearInterval(S.rePoll); S.rePoll = null; } }
+
+  function reErrorText(err) {
+    if (err === 'not-allowed') return 'Chưa được cấp quyền micro: bấm biểu tượng 🔒 ở thanh địa chỉ của cửa sổ ghi âm, chọn “Cho phép”, rồi bấm Nói lại.';
+    if (err === 'unsupported') return 'Trình duyệt không hỗ trợ nhận diện giọng nói — hãy dùng Chrome hoặc Edge.';
+    if (err === 'no-speech') return 'Không nghe thấy giọng nói — hãy bấm Nói và đọc to câu.';
+    if (err === 'network') return 'Lỗi mạng khi nhận diện giọng nói — kiểm tra kết nối rồi thử lại.';
+    return 'Lỗi nhận diện: ' + err;
+  }
+
+  function inlineRecognize(idx, targetText) {
+    var el = document.getElementById('epi-score-' + idx);
+    var SR = global.SpeechRecognition || global.webkitSpeechRecognition;
+    if (!SR) { if (el) el.textContent = 'Trình duyệt không hỗ trợ nhận diện giọng nói.'; return; }
+    if (el) el.textContent = 'Đang nghe trực tiếp…';
+    try {
+      var rec = new SR();
+      rec.lang = 'en-US'; rec.interimResults = false; rec.maxAlternatives = 1;
+      rec.onresult = function (e) {
+        var heard = e.results[0][0].transcript;
+        if (el) el.textContent = similarity(heard, targetText) + '% — "' + heard + '"';
+      };
+      rec.onerror = function (e) { if (el) el.textContent = reErrorText(e.error); };
+      rec.start();
+    } catch (e) { if (el) el.textContent = 'Lỗi: ' + (e && e.message ? e.message : String(e)); }
+  }
+
+  function reRequest(idx, targetText) {
+    S.rePending = { idx: idx, targetText: targetText, sessionId: 'epi-' + Date.now() + '-' + idx };
+    var el = document.getElementById('epi-score-' + idx);
+    if (el) el.textContent = 'Đang mở cửa sổ ghi âm…';
+    var w = reOpen();
+    if (!w) {
+      S.rePending = null;
+      if (el) el.textContent = 'Trình duyệt chặn popup — đang thử nhận diện trực tiếp…';
+      inlineRecognize(idx, targetText); return;
+    }
+    if (el) el.textContent = 'Hãy đọc to câu trong cửa sổ phụ…';
+    if (S.reWinReady) reSendStart();
+  }
+  function reSendStart() {
+    if (!S.rePending) return;
+    var p = S.rePending;
+    reSend({ type: 'START_RECOGNITION', sessionId: p.sessionId, itemIndex: p.idx, targetText: p.targetText });
+  }
+  function reHandleMessage(event) {
+    var data = event.data;
+    if (!data || typeof data.type !== 'string') return;
+    if (!S.reWin || event.source !== S.reWin) return;
+    var el = S.rePending ? document.getElementById('epi-score-' + S.rePending.idx) : null;
+    if (data.type === 'RE_ENGINE_READY') { S.reWinReady = true; reSendStart(); return; }
+    if (data.type === 'RECOGNITION_READY') {
+      var target = S.rePending ? S.rePending.targetText : '';
+      var pct = similarity(data.transcript, target);
+      if (el) el.textContent = pct + '% — "' + String(data.transcript || '') + '"';
+      S.rePending = null; return;
+    }
+    if (data.type === 'RECOGNITION_ERROR') { if (el) el.textContent = reErrorText(data.error || 'không rõ'); S.rePending = null; return; }
+    if (data.type === 'RECORDING_ERROR') { if (el) el.textContent = 'Lỗi micro: ' + (data.error || 'không rõ'); S.rePending = null; }
+  }
+
+  function similarity(said, target) {
+    said = String(said || '').toLowerCase().trim().split(/\s+/).filter(Boolean);
+    target = String(target || '').toLowerCase().trim().split(/\s+/).filter(Boolean);
+    if (!target.length) return 0;
+    var copy = target.slice(), matched = 0;
+    said.forEach(function (w) { var ix = copy.indexOf(w); if (ix !== -1) { matched++; copy.splice(ix, 1); } });
+    return Math.round(matched / target.length * 100);
+  }
+
+  /* ---------- Audio ---------- */
+  function play(src, btn) {
+    if (!src) return;
+    try { if (S.audio) { S.audio.pause(); } } catch (e) {}
+    qa('.epi-audio-btn.playing').forEach(function (b) { b.classList.remove('playing'); });
+    var a = new Audio(src);
+    S.audio = a;
+    if (btn) btn.classList.add('playing');
+    a.onended = function () { if (btn) btn.classList.remove('playing'); };
+    a.onerror = function () { if (btn) { btn.classList.remove('playing'); btn.textContent = '⚠️'; } };
+    a.play().catch(function () { if (btn) btn.classList.remove('playing'); });
+  }
+
+  function showError(msg) {
+    host().innerHTML = '<section class="card"><b>Lỗi:</b><br>' + esc(msg) + '</section>';
+  }
+
+  /* ---------- Render ---------- */
+  var SECTION_LABEL = {
+    A: 'A · Sounds and spelling',
+    B: 'B · Syllables and words',
+    C: 'C · Phrases, sentences and grammar',
+    D: 'D · Conversation',
+    E: 'E · Reference',
+  };
+
+  function renderTabs() {
+    var html = '';
+    ['A', 'B', 'C', 'D', 'E'].forEach(function (t) {
+      var n = t === 'E' ? S.sectionE.length : S.units.filter(function (u) { return u.section === t; }).length;
+      html += '<button type="button" class="epi-tab' + (S.tab === t ? ' active' : '') +
+        '" data-tab="' + t + '">' + esc(SECTION_LABEL[t]) + ' (' + n + ')</button>';
+    });
+    return html;
+  }
+
+  function renderSidebar() {
+    if (S.tab === 'E') {
+      var h = '<h4>Section E</h4>';
+      S.sectionE.forEach(function (e) {
+        h += '<button type="button" class="epi-ubtn' + (S.selectedE === e.ref ? ' active' : '') +
+          '" data-e="' + esc(e.ref) + '"><span class="n">' + esc(e.ref) + '</span><span class="t">' + esc(e.title) + '</span></button>';
+      });
+      return h;
+    }
+    var html = '<h4>' + esc(SECTION_LABEL[S.tab]) + '</h4>';
+    S.units.forEach(function (u, i) {
+      if (u.section !== S.tab) return;
+      html += '<button type="button" class="epi-ubtn' + (S.selected === i ? ' active' : '') +
+        '" data-idx="' + i + '"><span class="n">' + String(u.unit).padStart(2, '0') + '</span><span class="t">' + esc(u.title) + '</span></button>';
+    });
+    return html;
+  }
+
+  function audioPanel(u) {
+    if (!u.audioTracks || !u.audioTracks.length) return '';
+    var h = '<section class="card"><h3 class="epi-head" style="font-size:17px">🎧 Audio của unit (' + u.audioTracks.length + ' track)</h3>';
+    h += '<div class="epi-audio-list" id="epiAudioList">';
+    u.audioTracks.forEach(function (src, i) {
+      var name = src.split('/').pop().replace('.mp3', '');
+      h += '<button type="button" class="epi-audio-btn" data-src="' + esc(src) + '">▶ ' + esc(name) + '</button>';
+    });
+    h += '<button type="button" class="epi-audio-btn" id="epiPlayAll" data-all="1">▶▶ Nghe tuần tự</button>';
+    h += '</div><p class="epi-note">CD' + esc(u.cd) + ' · track ' + u.trackRange[0] + '–' + u.trackRange[1] +
+      ' — marker âm thanh trong sách: <b>' + esc(u.cd) + u.trackRange[0] + '</b>…<b>' + esc(u.cd) + u.trackRange[1] + '</b></p></section>';
+    return h;
+  }
+
+  function renderUnit() {
+    var u = S.units[S.selected];
+    if (!u) { showError('Không có unit nào.'); return; }
+    var html = '';
+    html += '<section class="card">'
+      + '<h2 class="epi-head">Unit ' + String(u.unit).padStart(2, '0') + ' — ' + esc(u.title) + '</h2>'
+      + '<p class="epi-sub">' + esc(u.focus) + '</p>';
+    if (u.sounds && u.sounds.length) {
+      html += '<p class="epi-ipa">' + u.sounds.map(function (s) { return esc('/' + s + '/'); }).join('  ') + '</p>';
+    }
+    html += '<p class="epi-note">Sách trang ' + u.page + ' · CD ' + esc(u.cd) + ' · track ' + u.trackRange[0] + '–' + u.trackRange[1] + '</p>';
+    html += '</section>';
+
+    html += audioPanel(u);
+
+    if (u.words && u.words.length) {
+      html += '<section class="card"><h3 class="epi-head" style="font-size:17px">🗂 Từ vựng</h3><div class="epi-chips">';
+      u.words.forEach(function (w) { html += '<span class="epi-chip static">' + esc(w) + '</span>'; });
+      html += '</div></section>';
+    }
+
+    html += '<section class="card"><h3 class="epi-head" style="font-size:17px">🎙 Nghe & nói (shadowing)</h3>';
+    if (!u.sentences.length) {
+      html += '<p class="epi-note">Unit này tập trung vào âm/nhóm âm — dùng phần “Audio của unit” để nghe mẫu.</p>';
+    } else {
+      u.sentences.forEach(function (s, idx) {
+        html += '<div class="epi-sentence">'
+          + '<span style="flex:1;min-width:180px">' + esc(s) + '</span>'
+          + '<span class="epi-record-row">'
+          + '<button type="button" class="btn btn-outline btn-sm epi-speak" data-idx="' + idx + '" data-text="' + esc(s) + '">🎤 Nói</button>'
+          + '<span class="epi-score" id="epi-score-' + idx + '"></span>'
+          + '</span></div>';
+      });
+      html += '<p class="epi-sub" style="margin-top:10px">🎤 Nói: mở cửa sổ ghi âm phụ — chọn “Cho phép” micro khi trình duyệt hỏi (chỉ cần làm 1 lần).<br>Nghe mẫu ở khung “Audio của unit” phía trên (theo thứ tự track).</p>';
+    }
+    html += '</section>';
+
+    html += '<section class="card"><h3 class="epi-head" style="font-size:17px">📝 Exercises</h3>';
+    if (!u.exercises.length) {
+      html += '<p class="epi-note">Bài tập của unit này nằm ở Section E / phần đọc kèm sách.</p>';
+    } else {
+      u.exercises.forEach(function (ex, i) {
+        html += '<div class="epi-ex">'
+          + '<b>Exercise ' + esc(ex.n) + '</b><br>' + esc(ex.prompt)
+          + (ex.answer ? '<div><button type="button" class="btn btn-outline btn-sm epi-reveal" data-ex="' + i + '">Xem đáp án</button></div>'
+            + '<div class="epi-answer epi-hidden" id="epi-ans-' + i + '">' + esc(ex.answer) + '</div>' : '')
+          + '</div>';
+      });
+    }
+    html += '</section>';
+
+    return html;
+  }
+
+  function renderSectionE() {
+    var e = null;
+    S.sectionE.forEach(function (x) { if (x.ref === S.selectedE) e = x; });
+    if (!e) return '<section class="card">Chưa có dữ liệu Section E.</section>';
+    var html = '<section class="card">'
+      + '<h2 class="epi-head">' + esc(e.ref) + ' — ' + esc(e.title) + '</h2>'
+      + '<p class="epi-sub">' + esc(e.desc) + '</p>';
+    if (e.audioTracks && e.audioTracks.length) {
+      html += '<div class="epi-audio-list">';
+      e.audioTracks.forEach(function (src) {
+        var name = src.split('/').pop().replace('.mp3', '');
+        html += '<button type="button" class="epi-audio-btn" data-src="' + esc(src) + '">▶ ' + esc(name) + '</button>';
+      });
+      html += '</div>';
+    }
+    html += '</section>';
+
+    if (e.pairs) {
+      html += '<section class="card"><h3 class="epi-head" style="font-size:17px">🔊 37 cặp âm dễ nhầm (CD5)</h3><div class="epi-grid">';
+      e.pairs.forEach(function (p) {
+        html += '<div class="epi-pair">'
+          + '<button type="button" class="btn btn-outline btn-sm epi-audio-btn" data-src="' + esc(p.audio) + '" title="Nghe">▶</button>'
+          + '<span class="ipa">' + esc(p.a) + '</span><span>↔</span><span class="ipa">' + esc(p.b) + '</span>'
+          + '<span class="epi-note" style="margin-left:auto">#' + p.n + '</span>'
+          + '</div>';
+      });
+      html += '</div></section>';
+    }
+
+    if (e.groups && e.groups.length) {
+      html += '<section class="card">';
+      e.groups.forEach(function (g) {
+        html += '<div class="epi-group"><h5>' + esc(g.label) + (g.symbol ? ' — <span class="epi-ipa">' + esc(g.symbol) + '</span>' : '') + '</h5><ul class="epi-list">';
+        g.items.forEach(function (it) { html += '<li>' + esc(it) + '</li>'; });
+        html += '</ul></div>';
+      });
+      html += '</section>';
+    }
+
+    return html;
+  }
+
+  function render() {
+    var html = '<div class="epi-tabs">' + renderTabs() + '</div><div class="epi-wrap">'
+      + '<aside class="epi-side" id="epiSide">' + renderSidebar() + '</aside>'
+      + '<div id="epiContent">' + (S.tab === 'E' ? renderSectionE() : renderUnit()) + '</div></div>';
+    host().innerHTML = html;
+    bind();
+  }
+
+  function bind() {
+    qa('.epi-tab').forEach(function (b) {
+      b.addEventListener('click', function () {
+        S.tab = b.getAttribute('data-tab');
+        if (S.tab !== 'E') {
+          var idx = S.units.findIndex(function (u) { return u.section === S.tab; });
+          if (idx >= 0) S.selected = idx;
+        }
+        render();
+      });
+    });
+    qa('.epi-ubtn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (b.getAttribute('data-e')) { S.selectedE = b.getAttribute('data-e'); }
+        else { S.selected = Number(b.getAttribute('data-idx')); }
+        render();
+      });
+    });
+    qa('.epi-audio-btn').forEach(function (b) {
+      b.addEventListener('click', function () { play(b.getAttribute('data-src'), b); });
+    });
+    var playAll = document.getElementById('epiPlayAll');
+    if (playAll) {
+      playAll.addEventListener('click', function () {
+        var u = S.units[S.selected];
+        if (!u || !u.audioTracks || !u.audioTracks.length) return;
+        var i = 0;
+        var step = function () {
+          if (i >= u.audioTracks.length) { playAll.classList.remove('playing'); return; }
+          var src = u.audioTracks[i++];
+          var a = new Audio(src);
+          S.audio = a;
+          a.onended = function () { setTimeout(step, 350); };
+          a.onerror = function () { setTimeout(step, 350); };
+          a.play().catch(function () { setTimeout(step, 350); });
+        };
+        playAll.classList.add('playing');
+        step();
+      });
+    }
+    qa('.epi-play').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var idx = Number(b.getAttribute('data-audio'));
+        var u = S.units[S.selected];
+        var src = u && u.audioTracks ? u.audioTracks[idx] : '';
+        if (!src) { alert('Chưa có audio cho câu này.'); return; }
+        play(src, null);
+      });
+    });
+    qa('.epi-reveal').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var el = document.getElementById('epi-ans-' + b.getAttribute('data-ex'));
+        if (el) el.classList.toggle('epi-hidden');
+      });
+    });
+    qa('.epi-speak').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var text = b.getAttribute('data-text') || '';
+        var idx = Number(b.getAttribute('data-idx'));
+        reRequest(idx, text);
+      });
+    });
+  }
+
+  function apply(res) {
+    if (!res || !Array.isArray(res.lessons)) {
+      showError('Dữ liệu EPI không hợp lệ: ' + JSON.stringify(res).slice(0, 300));
+      return;
+    }
+    S.cdnBase = res.cdnBase || '';
+    S.units = res.lessons;
+    S.sectionE = res.sectionE || [];
+    S.tab = 'A';
+    S.selected = 0;
+    S.selectedE = S.sectionE.length ? S.sectionE[0].ref : 'E1';
+    render();
+    var st = document.getElementById('heroStatus');
+    if (st) st.textContent = '✅ Sẵn sàng';
+    var sub = document.getElementById('heroSub');
+    if (sub) sub.textContent = 'Elementary · ' + S.units.length + ' unit (A–D) + Section E ' + S.sectionE.length + ' mục · ' + (res.meta && res.meta.totals ? res.meta.totals.audioTracks : 351) + ' track audio';
+    var cnt = document.getElementById('heroBadgeCount');
+    if (cnt) cnt.textContent = '🎯 ' + S.units.length + ' unit';
+    var hdr = document.getElementById('headerSub');
+    if (hdr) hdr.textContent = 'Elementary · 50 unit + Section E';
+  }
+
+  function load() {
+    var runner = global.google && global.google.script && global.google.script.run;
+    if (!runner) { showError('Không tìm thấy google.script.run.'); return; }
+    var done = false;
+    var timer = setTimeout(function () {
+      if (done) return;
+      showError('Timeout: không nhận được dữ liệu từ server sau 15 giây.');
+    }, 15000);
+
+    runner.withSuccessHandler(function (res) {
+      if (done) return;
+      done = true; clearTimeout(timer);
+      try { apply(res); } catch (e) { showError('Lỗi khi render: ' + (e && e.message ? e.message : String(e))); }
+    }).withFailureHandler(function (e) {
+      if (done) return;
+      done = true; clearTimeout(timer);
+      showError('Lỗi từ server: ' + (e && e.message ? e.message : String(e)));
+    }).getEPIBootstrap();
+  }
+
+  function boot() {
+    injectCss();
+    global.addEventListener('message', reHandleMessage);
+    load();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})(window);
+</script>
