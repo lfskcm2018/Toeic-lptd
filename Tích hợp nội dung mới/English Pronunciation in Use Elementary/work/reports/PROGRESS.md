@@ -30,14 +30,29 @@
 | Khoảng trắng ~600px | `include('EPIUI')` nằm **sau** `</div>` đóng `.app-shell` (cao 100dvh) → nội dung bị đẩy xuống dưới 1 màn hình | Render trong `#modeBody` (nằm trong `.container`) |
 | Hero badge kẹt "Đang tải" | Không cập nhật sau khi load | Set `✅ Sẵn sàng` khi render xong |
 
-## 4. E2E đã kiểm chứng (trình duyệt)
+## 4. Bug nút “Nói” — đã sửa
+
+| Triệu chứng | Nguyên nhân | Cách sửa |
+|---|---|---|
+| “Lỗi: not-allowed” | GAS web app chạy trong **iframe sandbox không có `allow="microphone"`** → Chrome chặn Web Speech API | Dùng **Recording Engine** (popup top-level trên GitHub Pages) — cùng cơ chế với module LPTD: `START_RECOGNITION` ↔ `RECOGNITION_READY` |
+
+- Popup: `https://lfskcm2018.github.io/Toeic-lptd/recording-engine/` (mở bằng `window.open`, giao tiếp `postMessage`).
+- Nút Nói gửi `START_RECOGNITION { sessionId, itemIndex, targetText }`; app nhận `RECOGNITION_READY { transcript }` → chấm % so với từ đích.
+- Thông báo lỗi tiếng Việt rõ ràng (not-allowed → hướng dẫn cấp quyền micro trong cửa sổ phụ).
+- Fallback: nếu popup bị chặn → thử Web Speech trực tiếp trong trang.
+- Vòng gửi/nhận đã kiểm chứng end-to-end bằng trình duyệt.
+
+---
+
+## 5. E2E đã kiểm chứng (trình duyệt)
+
 
 - Khoảng cách hero → danh sách unit: **18px** (trước: ~600px).
 - Console: **0 lỗi**.
 - Bấm ▶: `GET .../CD1-Track01.mp3` → **HTTP 206**; `CD1-Track17.mp3` → **206**.
 - Đổi unit (Unit 01 → Unit 03): tiêu đề, số câu, số exercise đổi đúng.
 
-## 5. Chưa xong / cần làm tiếp
+## 6. Chưa xong / cần làm tiếp
 
 - Audio mapping CD1 → Unit 1–10 là **ước lượng ban đầu** (chưa đối chiếu từng track với sách).
 - OCR phonetic symbols còn lỗi (iː/ɪ, æ, ʌ, ɜː…) → cần review thủ công.

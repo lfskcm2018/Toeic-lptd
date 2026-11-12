@@ -28,7 +28,11 @@
   }
 
   /* ---------- State ---------- */
-  var S = { units: [], selected: 0, audioBase: '' };
+  var S = { units: [], selected: 0, audioBase: '', reWin: null, reWinReady: false, rePending: null, rePoll: null };
+
+  /* Recording Engine (popup top-level) — vì GAS iframe sandbox chặn microphone.
+     Đây chính là cơ chế LPTD dùng: https://lfskcm2018.github.io/Toeic-lptd/recording-engine/ */
+  var RE_URL_FALLBACK = 'https://lfskcm2018.github.io/Toeic-lptd/recording-engine/';
 
   function q(sel) { return document.querySelector(sel); }
   function qa(sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
@@ -47,17 +51,139 @@
     return el;
   }
 
-  function similarity(a, b) {
-    a = String(a || '').toLowerCase().trim();
-    b = String(b || '').toLowerCase().trim();
-    if (!a || !b) return 0;
-    var aw = a.split(/\s+/), bw = b.split(/\s+/);
-    var rest = bw.slice(), matches = 0;
-    for (var i = 0; i < aw.length; i++) {
-      var idx = rest.indexOf(aw[i]);
-      if (idx !== -1) { matches++; rest.splice(idx, 1); }
+  function reUrl() {
+    var u = global.LPTD_RECORDING_ENGINE_URL || global.EPI_RECORDING_ENGINE_URL || RE_URL_FALLBACK;
+    return String(u || '').trim() || RE_URL_FALLBACK;
+  }
+
+  function reOpen() {
+    if (S.reWin && !S.reWin.closed) { try { S.reWin.focus(); } catch (e) {} return S.reWin; }
+    S.reWin = null; S.reWinReady = false;
+    S.reWin = global.open(reUrl(), 'epi_recording_engine', 'width=560,height=680,resizable=yes,scrollbars=yes');
+    reStartPoll();
+    return S.reWin;
+  }
+
+  function reSend(msg) {
+    if (S.reWin && !S.reWin.closed) { try { S.reWin.postMessage(msg, '*'); } catch (e) {} }
+  }
+
+  function reStartPoll() {
+    if (S.rePoll) return;
+    S.rePoll = setInterval(function () {
+      if (S.reWin && !S.reWin.closed) return;
+      reStopPoll();
+      S.reWin = null; S.reWinReady = false;
+      if (S.rePending) {
+        var el = document.getElementById('epi-score-' + S.rePending.idx);
+        if (el) el.textContent = 'Đã đóng cửa sổ ghi âm — bấm Nói để mở lại';
+        S.rePending = null;
+      }
+    }, 1000);
+  }
+
+  function reStopPoll() { if (S.rePoll) { clearInterval(S.rePoll); S.rePoll = null; } }
+
+  /* Thông báo lỗi dễ hiểu cho người học. */
+  function reErrorText(err) {
+    if (err === 'not-allowed') {
+      return 'Chưa được cấp quyền micro: hãy bấm biểu tượng 🔒 ở thanh địa chỉ của cửa sổ ghi âm, chọn “Cho phép”, rồi bấm Nói lại.';
     }
-    return Math.round((matches / Math.max(aw.length, bw.length)) * 100);
+    if (err === 'unsupported') {
+      return 'Trình duyệt không hỗ trợ nhận diện giọng nói — hãy dùng Chrome hoặc Edge.';
+    }
+    if (err === 'no-speech') {
+      return 'Không nghe thấy giọng nói — hãy bấm Nói và đọc to câu.';
+    }
+    if (err === 'network') {
+      return 'Lỗi mạng khi nhận diện giọng nói — kiểm tra kết nối rồi thử lại.';
+    }
+    return 'Lỗi nhận diện: ' + err;
+  }
+
+  /* Fallback: Web Speech trực tiếp trong trang (chạy được nếu mở app ngoài iframe GAS). */
+  function inlineRecognize(idx, targetText) {
+    var el = document.getElementById('epi-score-' + idx);
+    var SR = global.SpeechRecognition || global.webkitSpeechRecognition;
+    if (!SR) { if (el) el.textContent = 'Trình duyệt không hỗ trợ nhận diện giọng nói.'; return; }
+    if (el) el.textContent = 'Đang nghe trực tiếp…';
+    try {
+      var rec = new SR();
+      rec.lang = 'en-US';
+      rec.interimResults = false;
+      rec.maxAlternatives = 1;
+      rec.onresult = function (e) {
+        var heard = e.results[0][0].transcript;
+        if (el) el.textContent = similarity(heard, targetText) + '% — "' + heard + '"';
+      };
+      rec.onerror = function (e) { if (el) el.textContent = reErrorText(e.error); };
+      rec.start();
+    } catch (e) {
+      if (el) el.textContent = 'Lỗi: ' + (e && e.message ? e.message : String(e));
+    }
+  }
+
+  /* Bấm Nói → mở popup engine, yêu cầu nhận diện, nhận transcript về chấm %. */
+  function reRequest(idx, targetText) {
+    S.rePending = { idx: idx, targetText: targetText, sessionId: 'epi-' + Date.now() + '-' + idx };
+    var el = document.getElementById('epi-score-' + idx);
+    if (el) el.textContent = 'Đang mở cửa sổ ghi âm…';
+    var w = reOpen();
+    if (!w) {
+      S.rePending = null;
+      if (el) el.textContent = 'Trình duyệt chặn popup — đang thử nhận diện trực tiếp…';
+      inlineRecognize(idx, targetText);
+      return;
+    }
+    if (el) el.textContent = 'Hãy đọc to câu trong cửa sổ phụ…';
+    if (S.reWinReady) reSendStart();
+  }
+
+  function reSendStart() {
+    if (!S.rePending) return;
+    var p = S.rePending;
+    reSend({ type: 'START_RECOGNITION', sessionId: p.sessionId, itemIndex: p.idx, targetText: p.targetText });
+  }
+
+  function reHandleMessage(event) {
+    var data = event.data;
+    if (!data || typeof data.type !== 'string') return;
+    if (!S.reWin || event.source !== S.reWin) return;
+    var el = S.rePending ? document.getElementById('epi-score-' + S.rePending.idx) : null;
+    if (data.type === 'RE_ENGINE_READY') {
+      S.reWinReady = true;
+      reSendStart();
+      return;
+    }
+    if (data.type === 'RECOGNITION_READY') {
+      var target = S.rePending ? S.rePending.targetText : '';
+      var pct = similarity(data.transcript, target);
+      if (el) el.textContent = pct + '% — "' + String(data.transcript || '') + '"';
+      S.rePending = null;
+      return;
+    }
+    if (data.type === 'RECOGNITION_ERROR') {
+      if (el) el.textContent = reErrorText(data.error || 'không rõ');
+      S.rePending = null;
+      return;
+    }
+    if (data.type === 'RECORDING_ERROR') {
+      if (el) el.textContent = 'Lỗi micro: ' + (data.error || 'không rõ');
+      S.rePending = null;
+    }
+  }
+
+  /* Chấm %: so từ đã nói với từ đích (cùng cách module LPTD chấm). */
+  function similarity(said, target) {
+    said = String(said || '').toLowerCase().trim().split(/\s+/).filter(Boolean);
+    target = String(target || '').toLowerCase().trim().split(/\s+/).filter(Boolean);
+    if (!target.length) return 0;
+    var copy = target.slice(), matched = 0;
+    said.forEach(function (w) {
+      var ix = copy.indexOf(w);
+      if (ix !== -1) { matched++; copy.splice(ix, 1); }
+    });
+    return Math.round(matched / target.length * 100);
   }
 
   function showError(msg) {
@@ -97,10 +223,11 @@
         + '<button type="button" class="btn btn-outline btn-sm epi-play" data-audio="' + idx + '" title="Phát audio">▶️</button>'
         + '<span style="flex:1;min-width:180px">' + esc(s) + '</span>'
         + '<span class="epi-record-row">'
-        + '<button type="button" class="btn btn-outline btn-sm epi-speak" data-text="' + esc(s) + '">🎤 Nói</button>'
+        + '<button type="button" class="btn btn-outline btn-sm epi-speak" data-idx="' + idx + '" data-text="' + esc(s) + '">🎤 Nói</button>'
         + '<span class="epi-score" id="epi-score-' + idx + '"></span>'
         + '</span></div>';
     });
+    html += '<p class="epi-sub" style="margin-top:10px">🎤 Nói: mở cửa sổ ghi âm phụ — hãy chọn “Cho phép” micro khi trình duyệt hỏi (chỉ cần làm 1 lần).</p>';
     html += '</section>';
 
     html += '<section class="card"><h3 class="epi-head" style="font-size:18px">📝 Exercises</h3>';
@@ -148,20 +275,12 @@
     qa('.epi-speak').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var text = btn.getAttribute('data-text') || '';
+        var idx = Number(btn.getAttribute('data-idx'));
         var scoreEl = btn.parentNode.querySelector('.epi-score');
-        var SR = global.SpeechRecognition || global.webkitSpeechRecognition;
-        if (!SR) { if (scoreEl) scoreEl.textContent = 'Trình duyệt chưa hỗ trợ nhận diện giọng nói.'; return; }
-        var rec = new SR();
-        rec.lang = 'en-US';
-        rec.interimResults = false;
-        rec.maxAlternatives = 1;
-        if (scoreEl) scoreEl.textContent = 'Đang nghe…';
-        rec.onresult = function (e) {
-          var heard = e.results[0][0].transcript;
-          if (scoreEl) scoreEl.textContent = similarity(text, heard) + '% — "' + heard + '"';
-        };
-        rec.onerror = function (e) { if (scoreEl) scoreEl.textContent = 'Lỗi: ' + e.error; };
-        rec.start();
+        /* GAS iframe sandbox không có allow="microphone" → Web Speech bị chặn (not-allowed).
+           Dùng Recording Engine (popup top-level) — cùng cơ chế với module LPTD. */
+        reRequest(idx, text);
+        if (scoreEl && !scoreEl.textContent) scoreEl.textContent = 'Đang mở cửa sổ ghi âm…';
       });
     });
   }
@@ -203,6 +322,7 @@
 
   function boot() {
     injectCss();
+    global.addEventListener('message', reHandleMessage);
     load();
   }
 
