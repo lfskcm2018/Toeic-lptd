@@ -1,0 +1,309 @@
+{
+  "sourceId": "h600",
+  "sourceName": "600+",
+  "officialWorkbook": "한권으로 끝내는 해커스 토익 600+ 받아쓰기&쉐도잉 워크북",
+  "sourceRoot": "600+",
+  "pdf": "한권으로끝내는해커스토익_600+_받아쓰기쉐도잉워크북. (1).pdf",
+  "pdfPages": 33,
+  "audioFiles": 32,
+  "days": 20,
+  "totals": {
+    "books": 1,
+    "units": 32,
+    "lines": 179,
+    "words": 1342,
+    "days": 20,
+    "audioFiles": 32
+  },
+  "units": [
+    {
+      "id": "h600-d01",
+      "day": 1,
+      "audioPart": 0,
+      "lines": 10,
+      "words": 68,
+      "audioFileName": "šŪžÆž˛ąâ_DAY01.mp3",
+      "cdnName": "H600D01.mp3"
+    },
+    {
+      "id": "h600-d02",
+      "day": 2,
+      "audioPart": 0,
+      "lines": 10,
+      "words": 75,
+      "audioFileName": "šŪžÆž˛ąâ_DAY02.mp3",
+      "cdnName": "H600D02.mp3"
+    },
+    {
+      "id": "h600-d03",
+      "day": 3,
+      "audioPart": 0,
+      "lines": 6,
+      "words": 53,
+      "audioFileName": "šŪžÆž˛ąâ_DAY03.mp3",
+      "cdnName": "H600D03.mp3"
+    },
+    {
+      "id": "h600-d04",
+      "day": 4,
+      "audioPart": 0,
+      "lines": 6,
+      "words": 49,
+      "audioFileName": "šŪžÆž˛ąâ_DAY04.mp3",
+      "cdnName": "H600D04.mp3"
+    },
+    {
+      "id": "h600-d05",
+      "day": 5,
+      "audioPart": 0,
+      "lines": 6,
+      "words": 48,
+      "audioFileName": "šŪžÆž˛ąâ_DAY05.mp3",
+      "cdnName": "H600D05.mp3"
+    },
+    {
+      "id": "h600-d06",
+      "day": 6,
+      "audioPart": 0,
+      "lines": 6,
+      "words": 58,
+      "audioFileName": "šŪžÆž˛ąâ_DAY06.mp3",
+      "cdnName": "H600D06.mp3"
+    },
+    {
+      "id": "h600-d07",
+      "day": 7,
+      "audioPart": 0,
+      "lines": 6,
+      "words": 58,
+      "audioFileName": "šŪžÆž˛ąâ_DAY07.mp3",
+      "cdnName": "H600D07.mp3"
+    },
+    {
+      "id": "h600-d08",
+      "day": 8,
+      "audioPart": 0,
+      "lines": 6,
+      "words": 53,
+      "audioFileName": "šŪžÆž˛ąâ_DAY08.mp3",
+      "cdnName": "H600D08.mp3"
+    },
+    {
+      "id": "h600-d09a",
+      "day": 9,
+      "audioPart": 1,
+      "lines": 6,
+      "words": 44,
+      "audioFileName": "šŪžÆž˛ąâ_DAY09_1.mp3",
+      "cdnName": "H600D09A.mp3"
+    },
+    {
+      "id": "h600-d09b",
+      "day": 9,
+      "audioPart": 2,
+      "lines": 5,
+      "words": 38,
+      "audioFileName": "šŪžÆž˛ąâ_DAY09_2.mp3",
+      "cdnName": "H600D09B.mp3"
+    },
+    {
+      "id": "h600-d10a",
+      "day": 10,
+      "audioPart": 1,
+      "lines": 5,
+      "words": 39,
+      "audioFileName": "šŪžÆž˛ąâ_DAY10_1.mp3",
+      "cdnName": "H600D10A.mp3"
+    },
+    {
+      "id": "h600-d10b",
+      "day": 10,
+      "audioPart": 2,
+      "lines": 5,
+      "words": 38,
+      "audioFileName": "šŪžÆž˛ąâ_DAY10_2.mp3",
+      "cdnName": "H600D10B.mp3"
+    },
+    {
+      "id": "h600-d11a",
+      "day": 11,
+      "audioPart": 1,
+      "lines": 5,
+      "words": 48,
+      "audioFileName": "šŪžÆž˛ąâ_DAY11_1.mp3",
+      "cdnName": "H600D11A.mp3"
+    },
+    {
+      "id": "h600-d11b",
+      "day": 11,
+      "audioPart": 2,
+      "lines": 5,
+      "words": 59,
+      "audioFileName": "šŪžÆž˛ąâ_DAY11_2.mp3",
+      "cdnName": "H600D11B.mp3"
+    },
+    {
+      "id": "h600-d12a",
+      "day": 12,
+      "audioPart": 1,
+      "lines": 5,
+      "words": 31,
+      "audioFileName": "šŪžÆž˛ąâ_DAY12_1.mp3",
+      "cdnName": "H600D12A.mp3"
+    },
+    {
+      "id": "h600-d12b",
+      "day": 12,
+      "audioPart": 2,
+      "lines": 5,
+      "words": 37,
+      "audioFileName": "šŪžÆž˛ąâ_DAY12_2.mp3",
+      "cdnName": "H600D12B.mp3"
+    },
+    {
+      "id": "h600-d13a",
+      "day": 13,
+      "audioPart": 1,
+      "lines": 4,
+      "words": 33,
+      "audioFileName": "šŪžÆž˛ąâ_DAY13_1.mp3",
+      "cdnName": "H600D13A.mp3"
+    },
+    {
+      "id": "h600-d13b",
+      "day": 13,
+      "audioPart": 2,
+      "lines": 6,
+      "words": 50,
+      "audioFileName": "šŪžÆž˛ąâ_DAY13_2.mp3",
+      "cdnName": "H600D13B.mp3"
+    },
+    {
+      "id": "h600-d14a",
+      "day": 14,
+      "audioPart": 1,
+      "lines": 5,
+      "words": 36,
+      "audioFileName": "šŪžÆž˛ąâ_DAY14_1.mp3",
+      "cdnName": "H600D14A.mp3"
+    },
+    {
+      "id": "h600-d14b",
+      "day": 14,
+      "audioPart": 2,
+      "lines": 5,
+      "words": 43,
+      "audioFileName": "šŪžÆž˛ąâ_DAY14_2.mp3",
+      "cdnName": "H600D14B.mp3"
+    },
+    {
+      "id": "h600-d15a",
+      "day": 15,
+      "audioPart": 1,
+      "lines": 4,
+      "words": 30,
+      "audioFileName": "šŪžÆž˛ąâ_DAY15_1.mp3",
+      "cdnName": "H600D15A.mp3"
+    },
+    {
+      "id": "h600-d15b",
+      "day": 15,
+      "audioPart": 2,
+      "lines": 6,
+      "words": 40,
+      "audioFileName": "šŪžÆž˛ąâ_DAY15_2.mp3",
+      "cdnName": "H600D15B.mp3"
+    },
+    {
+      "id": "h600-d16a",
+      "day": 16,
+      "audioPart": 1,
+      "lines": 4,
+      "words": 27,
+      "audioFileName": "šŪžÆž˛ąâ_DAY16_1.mp3",
+      "cdnName": "H600D16A.mp3"
+    },
+    {
+      "id": "h600-d16b",
+      "day": 16,
+      "audioPart": 2,
+      "lines": 5,
+      "words": 29,
+      "audioFileName": "šŪžÆž˛ąâ_DAY16_2.mp3",
+      "cdnName": "H600D16B.mp3"
+    },
+    {
+      "id": "h600-d17a",
+      "day": 17,
+      "audioPart": 1,
+      "lines": 4,
+      "words": 29,
+      "audioFileName": "šŪžÆž˛ąâ_DAY17_1.mp3",
+      "cdnName": "H600D17A.mp3"
+    },
+    {
+      "id": "h600-d17b",
+      "day": 17,
+      "audioPart": 2,
+      "lines": 5,
+      "words": 36,
+      "audioFileName": "šŪžÆž˛ąâ_DAY17_2.mp3",
+      "cdnName": "H600D17B.mp3"
+    },
+    {
+      "id": "h600-d18a",
+      "day": 18,
+      "audioPart": 1,
+      "lines": 5,
+      "words": 28,
+      "audioFileName": "šŪžÆž˛ąâ_DAY18_1.mp3",
+      "cdnName": "H600D18A.mp3"
+    },
+    {
+      "id": "h600-d18b",
+      "day": 18,
+      "audioPart": 2,
+      "lines": 6,
+      "words": 28,
+      "audioFileName": "šŪžÆž˛ąâ_DAY18_2.mp3",
+      "cdnName": "H600D18B.mp3"
+    },
+    {
+      "id": "h600-d19a",
+      "day": 19,
+      "audioPart": 1,
+      "lines": 5,
+      "words": 27,
+      "audioFileName": "šŪžÆž˛ąâ_DAY19_1.mp3",
+      "cdnName": "H600D19A.mp3"
+    },
+    {
+      "id": "h600-d19b",
+      "day": 19,
+      "audioPart": 2,
+      "lines": 6,
+      "words": 35,
+      "audioFileName": "šŪžÆž˛ąâ_DAY19_2.mp3",
+      "cdnName": "H600D19B.mp3"
+    },
+    {
+      "id": "h600-d20a",
+      "day": 20,
+      "audioPart": 1,
+      "lines": 6,
+      "words": 35,
+      "audioFileName": "šŪžÆž˛ąâ_DAY20_1.mp3",
+      "cdnName": "H600D20A.mp3"
+    },
+    {
+      "id": "h600-d20b",
+      "day": 20,
+      "audioPart": 2,
+      "lines": 6,
+      "words": 40,
+      "audioFileName": "šŪžÆž˛ąâ_DAY20_2.mp3",
+      "cdnName": "H600D20B.mp3"
+    }
+  ],
+  "generatedAt": "2026-11-12T14:41:22.055Z"
+}

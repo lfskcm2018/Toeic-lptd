@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "h600",
+  "sourceName": "600+",
+  "officialWorkbook": "한권으로 끝내는 해커스 토익 600+ 받아쓰기&쉐도잉 워크북",
+  "type": "dictation-shadowing-workbook",
+  "language": "en",
+  "generatedAt": "2026-11-12T14:41:22.054Z",
+  "cdnBase": "https://toeic-audio.netlify.app/audio/600plus",
+  "totals": {
+    "books": 1,
+    "units": 32,
+    "lines": 179,
+    "words": 1342,
+    "days": 20,
+    "audioFiles": 32
+  },
+  "books": [
+    {
+      "book": 1,
+      "title": "600+",
+      "level": "TOEIC 600+",
+      "units": 32,
+      "lines": 179,
+      "words": 1342,
+      "bookPdf": "600+/한권으로끝내는해커스토익_600+_받아쓰기쉐도잉워크북. (1).pdf",
+      "transcriptPdf": "",
+      "extraDocs": []
+    }
+  ]
+}
