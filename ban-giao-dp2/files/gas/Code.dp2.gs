@@ -37,7 +37,7 @@ function dp2LessonsWithUrls_(cdnBase) {
   return DP2_LESSONS().map(function (u) {
     return {
       id: u.id,
-      book: u.book,
+      book: DP2_BOOK,
       unit: u.unit,
       title: u.title,
       titleKo: u.titleKo || '',
