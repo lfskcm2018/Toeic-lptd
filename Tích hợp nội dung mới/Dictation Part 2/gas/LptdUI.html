@@ -1317,7 +1317,7 @@
 
     u.lines.forEach(function (ln, i) {
       html += '<div class="quiz-card lptd-quiz-card" id="lptd-qc-' + i + '">' +
-        '<div class="q-number">' + (ln.no || i + 1) + '</div>' +
+        '<div class="q-number">' + (Math.floor(i / 2) + 1) + '</div>' +
         '<div class="q-body">' +
         '<div class="q-sentence">' + spkBadge(ln.speaker) + renderBlanks(ln.text, i) + '</div>' +
         '<div class="q-status" id="lptd-qs-' + i + '"></div>' +
@@ -1769,7 +1769,7 @@
       var best = lines[String(i)];
       html += '<div class="shadow-card lptd-shadow-card" id="lptd-sc-' + i + '">' +
         '<div class="shadow-top">' +
-        '<div class="q-number">' + (ln.no || i + 1) + '</div>' +
+        '<div class="q-number">' + (Math.floor(i / 2) + 1) + '</div>' +
         '<div class="q-body">' +
         '<div class="shadow-sentence">' + spkBadge(ln.speaker) + escMl(ln.text) + '</div>' +
         '<div class="lptd-muted lptd-shadow-meta">' + ln.text.split(/\s+/).filter(Boolean).length + ' từ' +
