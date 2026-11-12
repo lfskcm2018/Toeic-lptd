@@ -1,0 +1,4 @@
+﻿# Ban sao MP3 de upload CDN (khong commit)
+_deploy_audio/
+audio-cdn/*.mp3
+
