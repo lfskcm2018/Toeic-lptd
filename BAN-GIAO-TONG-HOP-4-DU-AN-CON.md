@@ -293,7 +293,18 @@ Backup nguồn (không commit, gitignored):
 
 ---
 
-## 11. Ghi chú cho AI tổng
+## 11. Dự án con tiếp theo — English Pronunciation in Use (đang làm dở)
+
+| Nguồn | Folder | Nhánh | Trạng thái |
+|---|---|---|---|
+| EPI Elementary (Cambridge) | `op/Tích hợp nội dung mới/English Pronunciation in Use Elementary/work/` | `lptd-source-epu` | MVP Section A (Units 1–10) + CD1 audio — E2E PASS, **chưa merge** |
+
+Sẽ là **book 9** sau khi đủ 50 units (Section A–E). Chưa bàn giao vào dự án tổng.
+
+---
+
+## 12. Ghi chú cho AI tổng
+
 
 - Mỗi nguồn đã có **web app GAS riêng** (đã deploy, cần uỷ quyền Drive để recording). Dùng để đối chiếu UI/hành vi, **không** copy nguyên `LptdUI.html` vào dự án tổng (bản standalone auto-open + rebrand).
 - Khi tích hợp, **không sửa** `app/Code.gs`, `app/Index.html`, `app/core.js` nếu không cần; chỉ sửa `LptdServer.gs`, `lptd-data.js`, `lptd-ui.js`, rebuild `LptdUI.html`.
