@@ -8,7 +8,9 @@
 - 600+ là workbook dictation & shadowing, 20 ngày, 32 audio.
 - Nội dung: 32 unit, 179 câu, 1.342 từ.
 - Audio đã ở Netlify: `/audio/600plus/H600D01.mp3` … `H600D20B.mp3`.
-- Web app GAS riêng đã deploy (cần uỷ quyền Drive).
+- Web app GAS riêng: Script ID 1mcLxn7uOuHt2wdw5mw87JPbYJFKLo-C6A590yQvyt5JrIGfOTkNYZHCc.
+- Deploy mới nhất @4: AKfycbw5nvzt-CdcHDIG-JmKjv-iiUCDfrE5BLXqRSsMy9oclpXjo_GAO5-SBO1pAuBGeUA3vA (đã sửa lỗi cú pháp bundle + nhãn lặp).
+- Trạng thái: cần uỷ quyền Drive (chạy debugH600()) rồi deploy version mới để hết 403.
 
 ## 2. Thiết kế
 

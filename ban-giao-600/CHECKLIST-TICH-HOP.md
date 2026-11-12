@@ -21,7 +21,7 @@
 - [ ] `clasp push`.
 
 ## D. Deploy & E2E
-- [ ] Tạo deployment mới.
+- [ ] Tạo deployment mới (sau uỷ quyền).
 - [ ] 7 tab (LPTD 1–4, Hacker 1, DP2, 600+).
 - [ ] 600+ 32 unit, audio 206, dictation, shadowing.
 - [ ] Regression: LPTD 160 + Hacker 1 30 + DP2 11 không đổi.
