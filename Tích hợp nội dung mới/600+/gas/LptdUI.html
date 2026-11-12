@@ -334,7 +334,7 @@
     if (overlay) overlay.classList.remove('show');
   }
   function unitLabel(lesson) {
-    if (lesson && lesson.title) return '600+ · ' + lesson.title;
+    if (lesson && lesson.title) return lesson.title;
     return '600+ · Unit ' + pad2(lesson.unit);
   }
 
@@ -490,7 +490,7 @@
       if (!L.bookMeta(S.book)) S.book = L.BOOKS[0].book;
       setHero(
         '600+',
-        '20 ngày · 32 audio · 20 ngày · 32 audio · Nghe – chép chính tả – shadowing',
+        '20 ngày · 32 audio · Nghe – chép chính tả – shadowing',
         progressSummary(),
         '🎧 20 ngày · 32 audio · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
         '600+',
@@ -571,7 +571,7 @@
         } else {
           setHero(
             '600+',
-            '20 ngày · 32 audio · 20 ngày · 32 audio · Nghe – chép chính tả – shadowing',
+            '20 ngày · 32 audio · Nghe – chép chính tả – shadowing',
             progressSummary(),
             '🎧 20 ngày · 32 audio · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
             '600+',
@@ -929,7 +929,7 @@
       '<div class="lptd-hero-row">' +
       '<div class="lptd-hero-text">' +
       '<h2 class="lptd-h2">📘 TOEIC Part 2 — 600+</h2>' +
-      '<p class="lptd-muted">20 ngày · 32 audio · 20 ngày · 32 audio (Part 2) · Nghe – chép chính tả – luyện nói theo</p>' +
+      '<p class="lptd-muted">20 ngày · 32 audio · Nghe – chép chính tả – luyện nói theo</p>' +
       '</div>' +
       '<div class="lptd-hero-stats">' +
       '<span class="badge accent">' + L.stats().units + ' track</span>' +
@@ -1254,7 +1254,7 @@
     stopRecording();
     setHero(
       '600+',
-      '20 ngày · 32 audio · 20 ngày · 32 audio · Nghe – chép chính tả – shadowing',
+      '20 ngày · 32 audio · Nghe – chép chính tả – shadowing',
       progressSummary(),
       '🎧 20 ngày · 32 audio · ' + L.stats().words.toLocaleString('vi-VN') + ' từ',
       '600+',
