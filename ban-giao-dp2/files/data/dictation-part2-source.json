@@ -1,0 +1,180 @@
+{
+  "sourceId": "dictation-part-2",
+  "sourceName": "Dictation Part 2",
+  "workbook": "파트2 출제표현 정리집 (TOEIC Part 2 expression collection)",
+  "pdfFile": "파트2 출제표현 정리집.pdf",
+  "pdfPages": 64,
+  "audioRoot": "Dictation Part 2/MP3",
+  "totals": {
+    "books": 1,
+    "units": 11,
+    "lines": 476,
+    "words": 3166
+  },
+  "tests": 0,
+  "sections": [
+    {
+      "unit": 1,
+      "title": "When Questions",
+      "titleKo": "When",
+      "slug": "when-questions",
+      "pairs": 15,
+      "lines": 30
+    },
+    {
+      "unit": 2,
+      "title": "Where Questions",
+      "titleKo": "Where",
+      "slug": "where-questions",
+      "pairs": 15,
+      "lines": 30
+    },
+    {
+      "unit": 3,
+      "title": "Who Questions",
+      "titleKo": "Who",
+      "slug": "who-questions",
+      "pairs": 29,
+      "lines": 58
+    },
+    {
+      "unit": 4,
+      "title": "Why Questions",
+      "titleKo": "Why",
+      "slug": "why-questions",
+      "pairs": 21,
+      "lines": 42
+    },
+    {
+      "unit": 5,
+      "title": "Which Questions",
+      "titleKo": "Which",
+      "slug": "which-questions",
+      "pairs": 11,
+      "lines": 22
+    },
+    {
+      "unit": 6,
+      "title": "What Questions",
+      "titleKo": "What",
+      "slug": "what-questions",
+      "pairs": 19,
+      "lines": 38
+    },
+    {
+      "unit": 7,
+      "title": "How Questions",
+      "titleKo": "How",
+      "slug": "how-questions",
+      "pairs": 24,
+      "lines": 48
+    },
+    {
+      "unit": 8,
+      "title": "General, Tag & Indirect Questions",
+      "titleKo": "일반·부가·간접 의문문",
+      "slug": "general-tag-indirect-questions",
+      "pairs": 37,
+      "lines": 74
+    },
+    {
+      "unit": 9,
+      "title": "Suggestions & Offers",
+      "titleKo": "권유·제안 의문문",
+      "slug": "suggestions-offers",
+      "pairs": 22,
+      "lines": 44
+    },
+    {
+      "unit": 10,
+      "title": "Declarative Sentences",
+      "titleKo": "평서문",
+      "slug": "declarative-sentences",
+      "pairs": 30,
+      "lines": 60
+    },
+    {
+      "unit": 11,
+      "title": "Alternative Questions",
+      "titleKo": "선택 의문문",
+      "slug": "alternative-questions",
+      "pairs": 15,
+      "lines": 30
+    }
+  ],
+  "files": [
+    {
+      "type": "pdf",
+      "path": "파트2 출제표현 정리집.pdf",
+      "bytes": 369606,
+      "sha256": "ba46b2ee034d24fa4c8a45caffcd6a6b6263648694d632476c8bcd05981b4a56"
+    },
+    {
+      "type": "mp3",
+      "path": "Dictation Part 2/MP3/01. When 의문문.mp3",
+      "bytes": 1661804,
+      "sha256": "5df2b4c22403f1dd30097ddcc62c51c7b506bef19b5976c63b8a1eea306642f2"
+    },
+    {
+      "type": "mp3",
+      "path": "Dictation Part 2/MP3/02. Where 의문문.mp3",
+      "bytes": 1579048,
+      "sha256": "32861955852dbeab1cbeac4bce0c482f115b33ba3a5dfd94af0c221abd24a6d1"
+    },
+    {
+      "type": "mp3",
+      "path": "Dictation Part 2/MP3/03. Who 의문문.mp3",
+      "bytes": 3035218,
+      "sha256": "48e969ddb03ed9c0cfaeed3a8f9c04e78069780ebbba4a2dfb4d714756828820"
+    },
+    {
+      "type": "mp3",
+      "path": "Dictation Part 2/MP3/04. Why 의문문.mp3",
+      "bytes": 2439626,
+      "sha256": "100bd3f3f77e7e1dc37586375a1cc72168f6683159922cb30ee322f32090252a"
+    },
+    {
+      "type": "mp3",
+      "path": "Dictation Part 2/MP3/05. Which 의문문.mp3",
+      "bytes": 1187003,
+      "sha256": "3f1d6cd4c70a697ac9231d45dee7dd474f6399ea64990b58ba236d42ac97352f"
+    },
+    {
+      "type": "mp3",
+      "path": "Dictation Part 2/MP3/06. What 의문문.mp3",
+      "bytes": 2101497,
+      "sha256": "0ef821caceae73183bd24fe493bb309b58b4ba56777432c9198b522f953b9aec"
+    },
+    {
+      "type": "mp3",
+      "path": "Dictation Part 2/MP3/07. How 의문문.mp3",
+      "bytes": 2654457,
+      "sha256": "a019ad3ef988cb50c1f88242ad318cfba78c191b3ede211db7ee76c59f7b4f18"
+    },
+    {
+      "type": "mp3",
+      "path": "Dictation Part 2/MP3/08. 일반, 부가. 간접 의문문.mp3",
+      "bytes": 4158274,
+      "sha256": "d825491d00b5fe78db8cd913dfae3ae753278b23244e01b1fc30bf102ba72e26"
+    },
+    {
+      "type": "mp3",
+      "path": "Dictation Part 2/MP3/09. 권유, 제안 의문문.mp3",
+      "bytes": 2595107,
+      "sha256": "f4710f4a0b2049d01feb633356aee23e1a8038ec01152b765edb6980121b9487"
+    },
+    {
+      "type": "mp3",
+      "path": "Dictation Part 2/MP3/10. 평서문.mp3",
+      "bytes": 3548472,
+      "sha256": "130252201d555fd63b0ca1c1796b7218e920173193b711d09147913a465cbc4b"
+    },
+    {
+      "type": "mp3",
+      "path": "Dictation Part 2/MP3/11. 선택의문문.mp3",
+      "bytes": 1723244,
+      "sha256": "ea7cd43f4edc6ae1b9c73ae12c0c6a9dd6e01625eff92c72dc525ef556883a08"
+    }
+  ],
+  "generatedAt": "2026-11-12T13:49:28.167Z"
+}

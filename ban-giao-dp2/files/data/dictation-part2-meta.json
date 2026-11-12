@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "dictation-part-2",
+  "sourceName": "Dictation Part 2",
+  "workbook": "파트2 출제표현 정리집 (TOEIC Part 2 expression collection)",
+  "generatedAt": "2026-11-12T13:49:28.165Z",
+  "cdnBase": "https://toeic-audio.netlify.app/audio/dictation-part2",
+  "totals": {
+    "books": 1,
+    "units": 11,
+    "lines": 476,
+    "words": 3166
+  },
+  "books": [
+    {
+      "book": 1,
+      "title": "Dictation Part 2",
+      "level": "TOEIC Part 2",
+      "units": 11,
+      "lines": 476,
+      "words": 3166,
+      "bookPdf": "Dictation Part 2/파트2 출제표현 정리집.pdf",
+      "transcriptPdf": "",
+      "extraDocs": []
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "base": "https://toeic-audio.netlify.app/audio/dictation-part2",
+  "count": 11,
+  "files": [
+    {
+      "unit": 1,
+      "title": "When Questions",
+      "cdnName": "DP2U01.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/dictation-part2/DP2U01.mp3",
+      "bytes": 1661804,
+      "sha256": "5df2b4c22403f1dd30097ddcc62c51c7b506bef19b5976c63b8a1eea306642f2"
+    },
+    {
+      "unit": 2,
+      "title": "Where Questions",
+      "cdnName": "DP2U02.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/dictation-part2/DP2U02.mp3",
+      "bytes": 1579048,
+      "sha256": "32861955852dbeab1cbeac4bce0c482f115b33ba3a5dfd94af0c221abd24a6d1"
+    },
+    {
+      "unit": 3,
+      "title": "Who Questions",
+      "cdnName": "DP2U03.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/dictation-part2/DP2U03.mp3",
+      "bytes": 3035218,
+      "sha256": "48e969ddb03ed9c0cfaeed3a8f9c04e78069780ebbba4a2dfb4d714756828820"
+    },
+    {
+      "unit": 4,
+      "title": "Why Questions",
+      "cdnName": "DP2U04.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/dictation-part2/DP2U04.mp3",
+      "bytes": 2439626,
+      "sha256": "100bd3f3f77e7e1dc37586375a1cc72168f6683159922cb30ee322f32090252a"
+    },
+    {
+      "unit": 5,
+      "title": "Which Questions",
+      "cdnName": "DP2U05.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/dictation-part2/DP2U05.mp3",
+      "bytes": 1187003,
+      "sha256": "3f1d6cd4c70a697ac9231d45dee7dd474f6399ea64990b58ba236d42ac97352f"
+    },
+    {
+      "unit": 6,
+      "title": "What Questions",
+      "cdnName": "DP2U06.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/dictation-part2/DP2U06.mp3",
+      "bytes": 2101497,
+      "sha256": "0ef821caceae73183bd24fe493bb309b58b4ba56777432c9198b522f953b9aec"
+    },
+    {
+      "unit": 7,
+      "title": "How Questions",
+      "cdnName": "DP2U07.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/dictation-part2/DP2U07.mp3",
+      "bytes": 2654457,
+      "sha256": "a019ad3ef988cb50c1f88242ad318cfba78c191b3ede211db7ee76c59f7b4f18"
+    },
+    {
+      "unit": 8,
+      "title": "General, Tag & Indirect Questions",
+      "cdnName": "DP2U08.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/dictation-part2/DP2U08.mp3",
+      "bytes": 4158274,
+      "sha256": "d825491d00b5fe78db8cd913dfae3ae753278b23244e01b1fc30bf102ba72e26"
+    },
+    {
+      "unit": 9,
+      "title": "Suggestions & Offers",
+      "cdnName": "DP2U09.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/dictation-part2/DP2U09.mp3",
+      "bytes": 2595107,
+      "sha256": "f4710f4a0b2049d01feb633356aee23e1a8038ec01152b765edb6980121b9487"
+    },
+    {
+      "unit": 10,
+      "title": "Declarative Sentences",
+      "cdnName": "DP2U10.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/dictation-part2/DP2U10.mp3",
+      "bytes": 3548472,
+      "sha256": "130252201d555fd63b0ca1c1796b7218e920173193b711d09147913a465cbc4b"
+    },
+    {
+      "unit": 11,
+      "title": "Alternative Questions",
+      "cdnName": "DP2U11.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/dictation-part2/DP2U11.mp3",
+      "bytes": 1723244,
+      "sha256": "ea7cd43f4edc6ae1b9c73ae12c0c6a9dd6e01625eff92c72dc525ef556883a08"
+    }
+  ]
+}
