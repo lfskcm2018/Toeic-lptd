@@ -1,0 +1,169 @@
+{
+  "sourceId": "hacker-1",
+  "sourceName": "Hacker 1",
+  "officialWorkbook": "Hackers_Toeic_1000_1_LC_3rd_workbook",
+  "type": "test-workbook",
+  "language": "en",
+  "sourceRoot": "Hacker 1",
+  "pages": 31,
+  "tests": 10,
+  "audioFiles": 30,
+  "audioRoot": "Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)",
+  "parts": [
+    {
+      "test": 1,
+      "part": "Part 1-2",
+      "audioFile": "TEST01_Part1-2.mp3"
+    },
+    {
+      "test": 1,
+      "part": "Part 3",
+      "audioFile": "TEST01_Part3.mp3"
+    },
+    {
+      "test": 1,
+      "part": "Part 4",
+      "audioFile": "TEST01_Part4.mp3"
+    },
+    {
+      "test": 2,
+      "part": "Part 1-2",
+      "audioFile": "TEST02_Part1-2.mp3"
+    },
+    {
+      "test": 2,
+      "part": "Part 3",
+      "audioFile": "TEST02_Part3.mp3"
+    },
+    {
+      "test": 2,
+      "part": "Part 4",
+      "audioFile": "TEST02_Part4.mp3"
+    },
+    {
+      "test": 3,
+      "part": "Part 1-2",
+      "audioFile": "TEST03_Part1-2.mp3"
+    },
+    {
+      "test": 3,
+      "part": "Part 3",
+      "audioFile": "TEST03_Part3.mp3"
+    },
+    {
+      "test": 3,
+      "part": "Part 4",
+      "audioFile": "TEST03_Part4.mp3"
+    },
+    {
+      "test": 4,
+      "part": "Part 1-2",
+      "audioFile": "TEST04_Part1-2.mp3"
+    },
+    {
+      "test": 4,
+      "part": "Part 3",
+      "audioFile": "TEST04_Part3.mp3"
+    },
+    {
+      "test": 4,
+      "part": "Part 4",
+      "audioFile": "TEST04_Part4.mp3"
+    },
+    {
+      "test": 5,
+      "part": "Part 1-2",
+      "audioFile": "TEST05_Part1-2.mp3"
+    },
+    {
+      "test": 5,
+      "part": "Part 3",
+      "audioFile": "TEST05_Part3.mp3"
+    },
+    {
+      "test": 5,
+      "part": "Part 4",
+      "audioFile": "TEST05_Part4.mp3"
+    },
+    {
+      "test": 6,
+      "part": "Part 1-2",
+      "audioFile": "TEST06_Part1-2.mp3"
+    },
+    {
+      "test": 6,
+      "part": "Part 3",
+      "audioFile": "TEST06_Part3.mp3"
+    },
+    {
+      "test": 6,
+      "part": "Part 4",
+      "audioFile": "TEST06_Part4.mp3"
+    },
+    {
+      "test": 7,
+      "part": "Part 1-2",
+      "audioFile": "TEST07_Part1-2.mp3"
+    },
+    {
+      "test": 7,
+      "part": "Part 3",
+      "audioFile": "TEST07_Part3.mp3"
+    },
+    {
+      "test": 7,
+      "part": "Part 4",
+      "audioFile": "TEST07_Part4.mp3"
+    },
+    {
+      "test": 8,
+      "part": "Part 1-2",
+      "audioFile": "TEST08_Part1-2.mp3"
+    },
+    {
+      "test": 8,
+      "part": "Part 3",
+      "audioFile": "TEST08_Part3.mp3"
+    },
+    {
+      "test": 8,
+      "part": "Part 4",
+      "audioFile": "TEST08_Part4.mp3"
+    },
+    {
+      "test": 9,
+      "part": "Part 1-2",
+      "audioFile": "TEST09_Part1-2.mp3"
+    },
+    {
+      "test": 9,
+      "part": "Part 3",
+      "audioFile": "TEST09_Part3.mp3"
+    },
+    {
+      "test": 9,
+      "part": "Part 4",
+      "audioFile": "TEST09_Part4.mp3"
+    },
+    {
+      "test": 10,
+      "part": "Part 1-2",
+      "audioFile": "TEST10_Part1-2.mp3"
+    },
+    {
+      "test": 10,
+      "part": "Part 3",
+      "audioFile": "TEST10_Part3.mp3"
+    },
+    {
+      "test": 10,
+      "part": "Part 4",
+      "audioFile": "TEST10_Part4.mp3"
+    }
+  ],
+  "notes": [
+    "The source is a TOEIC LC 1000 third-workbook style test workbook with listening scripts.",
+    "It contains 10 tests with listening/dictation-like content and answer/script material.",
+    "Integration into the standalone LPTD web app is in progress on branch lptd-source-hacker-1."
+  ]
+}

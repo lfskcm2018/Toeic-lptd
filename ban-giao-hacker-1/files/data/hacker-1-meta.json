@@ -1,0 +1,18 @@
+{
+  "sourceId": "hacker-1",
+  "sourceName": "Hacker 1",
+  "workbook": "Hackers TOEIC 1000 1 LC 3rd workbook",
+  "type": "test-workbook",
+  "tests": 10,
+  "lessonCount": 30,
+  "totalLines": 186,
+  "totalWords": 2559,
+  "audioRoot": "Hacker 1/Hackers_Toeic_1000_1_LC_3rd_workbook(mp3)",
+  "pdfFile": "Hackers_Toeic_1000_1_LC_3rd_workbook_(PDF).pdf",
+  "parts": [
+    "1-2",
+    "3",
+    "4"
+  ],
+  "generatedAt": "2026-11-11T09:03:00.651Z"
+}

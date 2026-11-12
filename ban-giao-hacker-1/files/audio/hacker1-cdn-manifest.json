@@ -1,0 +1,246 @@
+{
+  "base": "https://toeic-audio.netlify.app/audio/hacker1",
+  "count": 30,
+  "files": [
+    {
+      "unit": 1,
+      "title": "TEST 01 · Part 1-2",
+      "cdnName": "HACKER1_T01_P12.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T01_P12.mp3",
+      "bytes": 1149189,
+      "sha256": "6dc8146a7d1982bb666a99304552324a2fbe9d848996ccf85c5989ccfe9355d7"
+    },
+    {
+      "unit": 2,
+      "title": "TEST 01 · Part 3",
+      "cdnName": "HACKER1_T01_P3.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T01_P3.mp3",
+      "bytes": 1550106,
+      "sha256": "6228658c43bf7568fee74afed7b2935600739d7b9d806758bcbba95569fc0e0b"
+    },
+    {
+      "unit": 3,
+      "title": "TEST 01 · Part 4",
+      "cdnName": "HACKER1_T01_P4.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T01_P4.mp3",
+      "bytes": 2185822,
+      "sha256": "91ad0c00c6f49fc2372ae7e4ff924ce0059b3ac39036a92474d5e48bdb2258ba"
+    },
+    {
+      "unit": 4,
+      "title": "TEST 02 · Part 1-2",
+      "cdnName": "HACKER1_T02_P12.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T02_P12.mp3",
+      "bytes": 1187951,
+      "sha256": "4d5eae00698f5d12220a93dc9f97f7641a6a108a04b4f17f8a1629ae57a50f86"
+    },
+    {
+      "unit": 5,
+      "title": "TEST 02 · Part 3",
+      "cdnName": "HACKER1_T02_P3.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T02_P3.mp3",
+      "bytes": 1894504,
+      "sha256": "46fecf3331c1528cee759902c96185b1a90015f781d4bf81513e4a145cca367d"
+    },
+    {
+      "unit": 6,
+      "title": "TEST 02 · Part 4",
+      "cdnName": "HACKER1_T02_P4.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T02_P4.mp3",
+      "bytes": 1679673,
+      "sha256": "439989bbf232f131ecc68891f0ff845575e5d83fd9a69d4e0dfd480a7a49e98d"
+    },
+    {
+      "unit": 7,
+      "title": "TEST 03 · Part 1-2",
+      "cdnName": "HACKER1_T03_P12.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T03_P12.mp3",
+      "bytes": 1185443,
+      "sha256": "cce7293fcea58f8fe8bce8a3c86873e52aa4531b33f76ee5044c82947ee4b8cb"
+    },
+    {
+      "unit": 8,
+      "title": "TEST 03 · Part 3",
+      "cdnName": "HACKER1_T03_P3.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T03_P3.mp3",
+      "bytes": 2029087,
+      "sha256": "54f8213756812b265bfb0a1c90417fe47e9ffb1bbe3856abcbf0e721e7481d6a"
+    },
+    {
+      "unit": 9,
+      "title": "TEST 03 · Part 4",
+      "cdnName": "HACKER1_T03_P4.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T03_P4.mp3",
+      "bytes": 2100140,
+      "sha256": "bcdf6526d1a39cd433f4c0ff1c088aad0528596db89878112e7f7d6432368b0e"
+    },
+    {
+      "unit": 10,
+      "title": "TEST 04 · Part 1-2",
+      "cdnName": "HACKER1_T04_P12.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T04_P12.mp3",
+      "bytes": 1127766,
+      "sha256": "05e4a419195f8308b30a3a13d389cb60550f546aa7360722adc70d6570fa6579"
+    },
+    {
+      "unit": 11,
+      "title": "TEST 04 · Part 3",
+      "cdnName": "HACKER1_T04_P3.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T04_P3.mp3",
+      "bytes": 2130652,
+      "sha256": "1c66cfaa8a6026dfec6650682a5d31bd662a66818793bf15cd91c4af71192aa5"
+    },
+    {
+      "unit": 12,
+      "title": "TEST 04 · Part 4",
+      "cdnName": "HACKER1_T04_P4.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T04_P4.mp3",
+      "bytes": 2168686,
+      "sha256": "9d04043174ebf7ee6a7e921ce5a3ccfd04b53ac3534c9baec4f385aac75edfa9"
+    },
+    {
+      "unit": 13,
+      "title": "TEST 05 · Part 1-2",
+      "cdnName": "HACKER1_T05_P12.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T05_P12.mp3",
+      "bytes": 1223479,
+      "sha256": "3dca099a3dc0ba7c9afe7540b1a01fef2174e03096b804ca5dd4af7af468bda2"
+    },
+    {
+      "unit": 14,
+      "title": "TEST 05 · Part 3",
+      "cdnName": "HACKER1_T05_P3.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T05_P3.mp3",
+      "bytes": 1685107,
+      "sha256": "88c296b5457595ffa61f255580ba626cac0a05f0ee2a02293b13a25bec777d76"
+    },
+    {
+      "unit": 15,
+      "title": "TEST 05 · Part 4",
+      "cdnName": "HACKER1_T05_P4.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T05_P4.mp3",
+      "bytes": 1859814,
+      "sha256": "ce3f284c6432f6275e55fd668e7bd6dc65e52fa8529628087ee7867ad026574c"
+    },
+    {
+      "unit": 16,
+      "title": "TEST 06 · Part 1-2",
+      "cdnName": "HACKER1_T06_P12.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T06_P12.mp3",
+      "bytes": 1272380,
+      "sha256": "a722e348ae1c6576c6cd7181e09e04ffebb8558d99167796aa6a07fb6603eda7"
+    },
+    {
+      "unit": 17,
+      "title": "TEST 06 · Part 3",
+      "cdnName": "HACKER1_T06_P3.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T06_P3.mp3",
+      "bytes": 1456902,
+      "sha256": "5555dc359110a8fea5c9491a4c1b18314ff9fd1d53182ff6cbd2abec4a584bc8"
+    },
+    {
+      "unit": 18,
+      "title": "TEST 06 · Part 4",
+      "cdnName": "HACKER1_T06_P4.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T06_P4.mp3",
+      "bytes": 1771625,
+      "sha256": "002ecf463db7dbe1fd6342edee4246e92546d9ed005236f48ca16a985f50e66e"
+    },
+    {
+      "unit": 19,
+      "title": "TEST 07 · Part 1-2",
+      "cdnName": "HACKER1_T07_P12.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T07_P12.mp3",
+      "bytes": 1223479,
+      "sha256": "d51e04cbc19e436ef6778eae78bf65778e4f8bfc8b6a23b02f2a15763c89e8f8"
+    },
+    {
+      "unit": 20,
+      "title": "TEST 07 · Part 3",
+      "cdnName": "HACKER1_T07_P3.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T07_P3.mp3",
+      "bytes": 2015713,
+      "sha256": "df8faf90b462db7e8bf7abfa043c318ab4e234e7970a629e56449a7056850519"
+    },
+    {
+      "unit": 21,
+      "title": "TEST 07 · Part 4",
+      "cdnName": "HACKER1_T07_P4.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T07_P4.mp3",
+      "bytes": 2028670,
+      "sha256": "e8fbb56df90b8339c30b76589b5799926c5230cfe8145d4d818911e8156df19a"
+    },
+    {
+      "unit": 22,
+      "title": "TEST 08 · Part 1-2",
+      "cdnName": "HACKER1_T08_P12.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T08_P12.mp3",
+      "bytes": 1100181,
+      "sha256": "19989c41c6a47c476262618bb406a9af9fe827c2e7a1177b5cc3c8f8a9356186"
+    },
+    {
+      "unit": 23,
+      "title": "TEST 08 · Part 3",
+      "cdnName": "HACKER1_T08_P3.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T08_P3.mp3",
+      "bytes": 1958035,
+      "sha256": "db709fe79f1ce9a9a192af3b2291a40018b7612dd4a583aa2e0b3c1f80b02907"
+    },
+    {
+      "unit": 24,
+      "title": "TEST 08 · Part 4",
+      "cdnName": "HACKER1_T08_P4.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T08_P4.mp3",
+      "bytes": 2197525,
+      "sha256": "496cdc34a64244231ddfaea5c10e7d5d2326348e748401e29a83fa8b8c67f8a8"
+    },
+    {
+      "unit": 25,
+      "title": "TEST 09 · Part 1-2",
+      "cdnName": "HACKER1_T09_P12.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T09_P12.mp3",
+      "bytes": 1141977,
+      "sha256": "511d33cb2c1aae1c4ec8c33fe49880cd3b9448ea59de8d7770fc542ea0321412"
+    },
+    {
+      "unit": 26,
+      "title": "TEST 09 · Part 3",
+      "cdnName": "HACKER1_T09_P3.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T09_P3.mp3",
+      "bytes": 1946750,
+      "sha256": "1665de71400b5dc3b7eceb911abcf47910fe4818c578dbd8040be1325ba6140e"
+    },
+    {
+      "unit": 27,
+      "title": "TEST 09 · Part 4",
+      "cdnName": "HACKER1_T09_P4.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T09_P4.mp3",
+      "bytes": 1719380,
+      "sha256": "1789c283db2d353e48a9c683303802abb8ba7310d20f254d3894e888eed2c56f"
+    },
+    {
+      "unit": 28,
+      "title": "TEST 10 · Part 1-2",
+      "cdnName": "HACKER1_T10_P12.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T10_P12.mp3",
+      "bytes": 1191714,
+      "sha256": "7ad1ed6ba27fe19454a158e9f9d994ecc4e9c4e929adb04bdf3a747acf701ec9"
+    },
+    {
+      "unit": 29,
+      "title": "TEST 10 · Part 3",
+      "cdnName": "HACKER1_T10_P3.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T10_P3.mp3",
+      "bytes": 1696810,
+      "sha256": "f14b8652945e9690d7a1564e84034115076651791edc47540bd26950ab7c4e55"
+    },
+    {
+      "unit": 30,
+      "title": "TEST 10 · Part 4",
+      "cdnName": "HACKER1_T10_P4.mp3",
+      "url": "https://toeic-audio.netlify.app/audio/hacker1/HACKER1_T10_P4.mp3",
+      "bytes": 2355932,
+      "sha256": "57a0ebea4baec48693a9ae7e715dea8a68f9eedbbda0ffc6702899a3cdc2a849"
+    }
+  ]
+}
